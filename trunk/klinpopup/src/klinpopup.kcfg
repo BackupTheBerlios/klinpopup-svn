@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+  <kcfgfile name="klinpopuprc"/>
+  <group name="Preferences">
+    <entry name="DisplaySender" type="Bool">
+            <label>Display sender name</label>
+            <default>true</default>
+    </entry>
+    <entry name="DisplayMachine" type="Bool">
+            <label>Display sender machine</label>
+            <default>false</default>
+    </entry>
+    <entry name="DisplayIP" type="Bool">
+            <label>Display sender IP</label>
+            <default>false</default>
+    </entry>
+    <entry name="TimeFormat" type="Int">
+            <label>Displayed time format</label>
+            <default>0</default>
+    </entry>
+    <entry name="ToggleSignaling" type="Int">
+            <label>Toggle Signaling</label>
+            <default>0</default>
+    </entry>
+    <entry name="SoundURL" type="String">
+            <label>Sound URL</label>
+            <default>/usr/share/sounds/KDE_Chimes_2.ogg</default>
+    </entry>
+    <entry name="RunDocked" type="Bool">
+            <label>Run docked</label>
+            <default>false</default>
+    </entry>
+    <entry name="TimerInterval" type="Int">
+            <label>TimerInterval</label>
+            <default>5</default>
+    </entry>
+    <entry name="MakePopupView" type="Int">
+            <label>Viewmode for message creation</label>
+            <default>0</default>
+    </entry>
+    <entry name="SmbclientBin" type="String">
+            <label>smbclient-Bin</label>
+            <default>/usr/bin/smbclient</default>
+    </entry>
+    <entry name="Encoding" type="Int">
+            <label>Encoding</label>
+            <default>0</default>
+    </entry>
+  </group>
+</kcfg>

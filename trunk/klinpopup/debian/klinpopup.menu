@@ -1,0 +1,8 @@
+?package(klinpopup):\
+	needs="X11"\
+	section="Apps/Net"\
+	hints="KDE"\
+	title="KLinPopup"\
+        icon32x32=/usr/share/pixmaps/klinpopup32.xpm \
+	icon16x16=/usr/share/pixmaps/klinpopup16.xpm \
+        command="/usr/bin/klinpopup"
