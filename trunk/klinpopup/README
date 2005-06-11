@@ -6,6 +6,11 @@ Features:
 -adjustable new message signaling (e.g. sound, tray pix, activate window)
 Wow!
 
+To build from svn you must do a
+make -f Makefile.cvs
+
+Then follow the instructions in INSTALL.
+
 For this to work you must configure samba correctly (e.g. name resolution).
 Add or change the line smb.conf:
 message command = sh -c '_PATH_TO_/receivepopup.sh "%f" "%m" "%I" "%s"' &
