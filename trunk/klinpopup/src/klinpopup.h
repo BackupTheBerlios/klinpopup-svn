@@ -47,7 +47,7 @@
 /**
  * @short Main window class
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.1rc2
+ * @version 0.3.1rc3
  */
 class KLinPopup : public KMainWindow
 {

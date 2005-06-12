@@ -1,5 +1,5 @@
 #
-# spec file for package klinpopup (Version 0.3.1rc2)
+# spec file for package klinpopup (Version 0.3.1rc3)
 #
 # Copyright (c) 2004 Gerd Fleischer
 # This file and all modifications and additions to the pristine
@@ -17,7 +17,7 @@ URL:          http://www.gerdfleischer.de/wireless.html
 License:      GPL
 Group:        Productivity/Networking/Samba
 Summary:      Send and Receive Messages via SMB
-Version:      0.3.1rc2
+Version:      0.3.1rc3
 Release:      1
 Requires:     /usr/bin/smbclient
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
