@@ -95,11 +95,11 @@ msgstr "&Continuar"
 
 #: klinpopup.cpp:446
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: klinpopup.cpp:449
 msgid "Message %1/%2 - %3 Unread"
-msgstr ""
+msgstr "Mensaje 1%/%2 - %3 Sin leer"
 
 #: klinpopup.cpp:542
 msgid "New message"
@@ -107,7 +107,7 @@ msgstr "Nuevo Mensaje"
 
 #: klinpopup.cpp:562
 msgid "Reply to %1"
-msgstr ""
+msgstr "Contestar a %1"
 
 #: klinpopup.cpp:678
 msgid "Settings"
@@ -126,9 +126,8 @@ msgid "NO GROUP"
 msgstr "SIN GRUPO"
 
 #: makepopup.cpp:146 makepopup.cpp:224
-#, fuzzy
 msgid "From:"
-msgstr "Form1"
+msgstr "De:"
 
 #: makepopup.cpp:154
 msgid "Group:"
@@ -136,7 +135,7 @@ msgstr "Grupo:"
 
 #: makepopup.cpp:161 makepopup.cpp:230
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 #: makepopup.cpp:184 makepopup.cpp:235
 msgid "Message text"
@@ -144,11 +143,11 @@ msgstr "Texto del mensaje:"
 
 #: makepopup.cpp:210
 msgid "Groups/Hosts"
-msgstr ""
+msgstr "Grupos/Anfitriones"
 
 #: makepopup.cpp:211
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #: makepopup.cpp:279
 msgid "Message sent!"
@@ -159,27 +158,24 @@ msgid "Success"
 msgstr "Enviado"
 
 #: makepopup.cpp:288
-#, fuzzy
 msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
 msgstr ""
-"Mensaje no enviado!\n"
-"Editar/Intentar de nuevo?"
+"El mensaje no pudo ser enviado a %1!!\n"
+"¿Editar/Intentar de nuevo?"
 
 #: makepopup.cpp:339
 msgid "Please state an addressee!"
 msgstr "Por favor introduzca una dirección"
 
 #: makepopup.cpp:365 makepopup.cpp:551
-#, fuzzy
 msgid "Whole workgroup"
 msgstr "Grupos de trabajo disponibles"
 
 #: makepopup.cpp:474 makepopup.cpp:476 makepopup.cpp:499
-#, fuzzy
 msgid "own"
-msgstr "(propio)"
+msgstr "propio"
 
 #: makepopup.cpp:595
 msgid "Choose sender"
@@ -191,7 +187,7 @@ msgstr "Esta opción le permite personalizar los valores del remitente."
 
 #: makepopup.cpp:598
 msgid "Available workgroups"
-msgstr "Grupos de trabajo disponibles"
+msgstr "Grupos de trabajo entero"
 
 #: makepopup.cpp:599
 msgid "Which workgroups are available in the network."
@@ -199,7 +195,7 @@ msgstr "Que grupos de trabajo están disponibles en la red."
 
 #: makepopup.cpp:600 makepopup.cpp:603
 msgid "Addressee(s) of this message"
-msgstr ""
+msgstr "Dirección(es) de este mensaje"
 
 #: makepopup.cpp:601 makepopup.cpp:604
 msgid "Which computer shall receive this message?"
@@ -289,9 +285,9 @@ msgstr "Prefs"
 
 #. i18n: file prefs.ui line 50
 #: rc.cpp:37 rc.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Messa&ges"
-msgstr "&Mensajes"
+msgstr "Mensa&jes"
 
 #. i18n: file prefs.ui line 69
 #: rc.cpp:40 rc.cpp:268
@@ -303,13 +299,13 @@ msgstr "Remitente actual"
 #: rc.cpp:43 rc.cpp:271
 #, no-c-format
 msgid "Sender &name (%f)"
-msgstr "Nombre del &remitente (%f)"
+msgstr "&Nombre del remitente (%f)"
 
 #. i18n: file prefs.ui line 111
 #: rc.cpp:46 rc.cpp:274
 #, no-c-format
 msgid "Display sender name?"
-msgstr "Mostrar el nombre del remitente?"
+msgstr "¿Mostrar el nombre del remitente?"
 
 #. i18n: file prefs.ui line 114
 #: rc.cpp:49 rc.cpp:277
@@ -319,15 +315,15 @@ msgstr "Mostrar el nombre del remitente en la cabecera de los mensajes recibidos
 
 #. i18n: file prefs.ui line 130
 #: rc.cpp:52 rc.cpp:280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender ma&chine (%m)"
-msgstr "Máquina del remitente (%m)"
+msgstr "Má&quina del remitente (%m)"
 
 #. i18n: file prefs.ui line 133
 #: rc.cpp:55 rc.cpp:283
 #, no-c-format
 msgid "Display machine name?"
-msgstr "Mostrar el nombre de la máquina?"
+msgstr "¿Mostrar el nombre de la máquina?"
 
 #. i18n: file prefs.ui line 136
 #: rc.cpp:58 rc.cpp:286
@@ -337,9 +333,9 @@ msgstr "Mostrar el nombre de la máquina en la cabecera de los mensajes recibido
 
 #. i18n: file prefs.ui line 152
 #: rc.cpp:61 rc.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender &IP (%I)"
-msgstr "Remitente IP (%I)"
+msgstr "&IP del Remitente (%I)"
 
 #. i18n: file prefs.ui line 155
 #: rc.cpp:64 rc.cpp:292
@@ -451,39 +447,39 @@ msgstr "Elegir qué sonido será reproducido cuando se reciba un mensaje."
 
 #. i18n: file prefs.ui line 373
 #: rc.cpp:120 rc.cpp:348
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Message Creation"
-msgstr "Texto del mensaje:"
+msgstr "Creación del Mensaje"
 
 #. i18n: file prefs.ui line 384
 #: rc.cpp:123 rc.cpp:351
 #, no-c-format
 msgid "Viewmode:"
-msgstr ""
+msgstr "Modo de Vista"
 
 #. i18n: file prefs.ui line 390
 #: rc.cpp:126 rc.cpp:354
 #, no-c-format
 msgid "ClassicView"
-msgstr ""
+msgstr "Vista Clásica"
 
 #. i18n: file prefs.ui line 395
 #: rc.cpp:129 rc.cpp:357
 #, no-c-format
 msgid "TreeView"
-msgstr ""
+msgstr "Vista en árbol"
 
 #. i18n: file prefs.ui line 402
 #: rc.cpp:132 rc.cpp:360
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "View when writing a new message"
-msgstr "Ajustar la codificación para nuevos mensajes"
+msgstr "Vista escribinedo un mensaje nuevo"
 
 #. i18n: file prefs.ui line 405
 #: rc.cpp:135 rc.cpp:363
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
-msgstr ""
+msgstr "Qué modo de vista debe ser utilizado cuando se escriba un nuevo mensaje"
 
 #. i18n: file prefs.ui line 413
 #: rc.cpp:138 rc.cpp:366
@@ -559,9 +555,9 @@ msgstr "Duración del intervalo para la comprobación de nuevos mensajes en segu
 
 #. i18n: file prefs.ui line 584
 #: rc.cpp:178 rc.cpp:406
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Run do&cked"
-msgstr "Ejecutar minimizado"
+msgstr "Ejecutar mini&mizado"
 
 #. i18n: file prefs.ui line 587
 #: rc.cpp:181 rc.cpp:409
@@ -571,12 +567,12 @@ msgstr "Comenzar minimizado y ocultar la ventana principal al cerrar."
 
 #. i18n: file prefs.ui line 590
 #: rc.cpp:184 rc.cpp:412
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
 "window is closed."
 msgstr ""
-"Cuando esté seleccionado, comenzará minimizado en la bandeja de tareas y "
+"Cuando esté seleccionado, comenzará sólo minimizado en la bandeja de tareas y "
 "sólo se ocultará cuando la ventana esté cerrada."
 
 #. i18n: file prefs.ui line 625
@@ -655,7 +651,7 @@ msgstr "Intervalo de tiempo"
 #: rc.cpp:225
 #, no-c-format
 msgid "Viewmode for message creation"
-msgstr ""
+msgstr "Modo de vista para creación de mensajes"
 
 #. i18n: file klinpopup.kcfg line 43
 #: rc.cpp:228
