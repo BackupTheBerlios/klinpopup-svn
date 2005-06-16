@@ -1,20 +1,21 @@
 # translation of klinpopup.pot to Brazilian Portuguese
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
-# Cesar Augusto Ramina <linux225159-geral@yahoo.com.br>, 2005.
+# Cesar A. Ramina <linux225159-geral@@@@yahoo.com.br>, 2005.
+
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-12 19:29+0200\n"
-"PO-Revision-Date: 2005-06-06 19:43+0200\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@web.de>\n"
-"Language-Team: deutsch <de@li.org>\n"
+"PO-Revision-Date: 2005-06-14 15:36-0300\n"
+"Last-Translator: # Cesar A. Ramina <linux225159-geral@@@@yahoo.com.br>\n"
+"Language-Team:  <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -76,7 +77,7 @@ msgid ""
 "Please set the right path in Settings->System."
 msgstr ""
 "Impossível encontrar o executável smbclient!\n"
-"Não será posssível enviar mensagens.\n"
+"Não será possível enviar mensagens.\n"
 "Por favor coloque o caminho correto em Preferências->Sistema."
 
 #: klinpopup.cpp:361
@@ -86,7 +87,7 @@ msgid ""
 "KLinPopup."
 msgstr ""
 "Há um problema crítico com o diretório de trabalho!\n"
-"Só poderá enviar mensagens, também pode corrigir manualmente y reiniciar "
+"Só poderá enviar mensagens, também pode corrigir manualmente e reiniciar "
 "KLinPopup."
 
 #: klinpopup.cpp:365
@@ -95,11 +96,11 @@ msgstr "&Continuar"
 
 #: klinpopup.cpp:446
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: klinpopup.cpp:449
 msgid "Message %1/%2 - %3 Unread"
-msgstr ""
+msgstr "Mensagem %1/%2 - %3 Não Lida(s)"
 
 #: klinpopup.cpp:542
 msgid "New message"
@@ -107,7 +108,7 @@ msgstr "Nova Mensagem"
 
 #: klinpopup.cpp:562
 msgid "Reply to %1"
-msgstr ""
+msgstr "Responder para %1"
 
 #: klinpopup.cpp:678
 msgid "Settings"
@@ -126,9 +127,8 @@ msgid "NO GROUP"
 msgstr "SEM GRUPO"
 
 #: makepopup.cpp:146 makepopup.cpp:224
-#, fuzzy
 msgid "From:"
-msgstr "Form1"
+msgstr "De:"
 
 #: makepopup.cpp:154
 msgid "Group:"
@@ -136,7 +136,7 @@ msgstr "Grupo:"
 
 #: makepopup.cpp:161 makepopup.cpp:230
 msgid "To:"
-msgstr ""
+msgstr "Para:"
 
 #: makepopup.cpp:184 makepopup.cpp:235
 msgid "Message text"
@@ -144,11 +144,12 @@ msgstr "Texto da mensagem"
 
 #: makepopup.cpp:210
 msgid "Groups/Hosts"
-msgstr ""
+msgstr "Grupos/Servidores"
 
 #: makepopup.cpp:211
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
 #: makepopup.cpp:279
 msgid "Message sent!"
@@ -159,12 +160,11 @@ msgid "Success"
 msgstr "Enviada"
 
 #: makepopup.cpp:288
-#, fuzzy
 msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
 msgstr ""
-"Mensagem não enviada!\n"
+"Mensagem não foi enviada para %1!\n"
 "Editar/Tentar novamente?"
 
 #: makepopup.cpp:339
@@ -172,9 +172,8 @@ msgid "Please state an addressee!"
 msgstr "Por favor coloque um endereço!"
 
 #: makepopup.cpp:365 makepopup.cpp:551
-#, fuzzy
 msgid "Whole workgroup"
-msgstr "Grupos de trabalho disponíveis"
+msgstr "Todo grupo de trabalho"
 
 #: makepopup.cpp:474 makepopup.cpp:476 makepopup.cpp:499
 #, fuzzy
@@ -199,7 +198,7 @@ msgstr "Quais grupos de trabalho estão disponíveis na rede."
 
 #: makepopup.cpp:600 makepopup.cpp:603
 msgid "Addressee(s) of this message"
-msgstr ""
+msgstr "Endereço(s) desta mensagem"
 
 #: makepopup.cpp:601 makepopup.cpp:604
 msgid "Which computer shall receive this message?"
@@ -255,7 +254,7 @@ msgstr "Mensagem de:"
 #: rc.cpp:15 rc.cpp:243
 #, no-c-format
 msgid "Message time:"
-msgstr "Mensagem:"
+msgstr "Hora da Mensagem:"
 
 #. i18n: file klinpopupview_base.ui line 414
 #: rc.cpp:21 rc.cpp:249
@@ -285,13 +284,13 @@ msgstr "Quando for recebida esta mensagem."
 #: rc.cpp:34 rc.cpp:262
 #, no-c-format
 msgid "Prefs"
-msgstr "Pref"
+msgstr "Preferências"
 
 #. i18n: file prefs.ui line 50
 #: rc.cpp:37 rc.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Messa&ges"
-msgstr "&Mensagens"
+msgstr "Mensa&gens"
 
 #. i18n: file prefs.ui line 69
 #: rc.cpp:40 rc.cpp:268
@@ -319,9 +318,9 @@ msgstr "Mostrar o nome do remetente nas mensagens recebidas?"
 
 #. i18n: file prefs.ui line 130
 #: rc.cpp:52 rc.cpp:280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender ma&chine (%m)"
-msgstr "Máquina do remetente (%m)"
+msgstr "Má&quina do remetente (%m)"
 
 #. i18n: file prefs.ui line 133
 #: rc.cpp:55 rc.cpp:283
@@ -337,9 +336,9 @@ msgstr "Mostrar o nome da máquina do remetente nas mensagens recebidas?"
 
 #. i18n: file prefs.ui line 152
 #: rc.cpp:61 rc.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender &IP (%I)"
-msgstr "Remetente IP (%I)"
+msgstr "Remetente &IP (%I)"
 
 #. i18n: file prefs.ui line 155
 #: rc.cpp:64 rc.cpp:292
@@ -429,7 +428,7 @@ msgstr "Ação a realizar para nova mensagem"
 #: rc.cpp:106 rc.cpp:334
 #, no-c-format
 msgid "What to do when new messages are received."
-msgstr "Qual ação realizar quando chega nova mensagem."
+msgstr "Qual ação realizar quando chegar nova mensagem."
 
 #. i18n: file prefs.ui line 336
 #: rc.cpp:109 rc.cpp:337
@@ -458,32 +457,35 @@ msgstr "Texto da mensagem"
 #. i18n: file prefs.ui line 384
 #: rc.cpp:123 rc.cpp:351
 #, no-c-format
+#, fuzzy
 msgid "Viewmode:"
-msgstr ""
+msgstr "Tipo de Visualização:"
 
 #. i18n: file prefs.ui line 390
 #: rc.cpp:126 rc.cpp:354
 #, no-c-format
+#, fuzzy
 msgid "ClassicView"
-msgstr ""
+msgstr "Clássico"
 
 #. i18n: file prefs.ui line 395
 #: rc.cpp:129 rc.cpp:357
 #, no-c-format
 msgid "TreeView"
-msgstr ""
+msgstr "Em Árvore"
 
 #. i18n: file prefs.ui line 402
 #: rc.cpp:132 rc.cpp:360
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "View when writing a new message"
-msgstr "Ajustar a codificação para novas mensagens."
+msgstr "Ajustar a visualização para novas mensagens"
 
 #. i18n: file prefs.ui line 405
 #: rc.cpp:135 rc.cpp:363
 #, no-c-format
+#, fuzzy
 msgid "What viewmode should be used when writing new messages."
-msgstr ""
+msgstr "Qual tipo de visualização será usado para novas mensagens."
 
 #. i18n: file prefs.ui line 413
 #: rc.cpp:138 rc.cpp:366
@@ -559,9 +561,9 @@ msgstr "Duração do intervalo para novas mensagens em segundos."
 
 #. i18n: file prefs.ui line 584
 #: rc.cpp:178 rc.cpp:406
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Run do&cked"
-msgstr "Executar minimizado"
+msgstr "Exe&cutar minimizado"
 
 #. i18n: file prefs.ui line 587
 #: rc.cpp:181 rc.cpp:409
@@ -589,7 +591,7 @@ msgstr "Sistema"
 #: rc.cpp:190 rc.cpp:418
 #, no-c-format
 msgid "smbclient-Bin:"
-msgstr "Caminho do smbclient-Bin:"
+msgstr "smbclient-Bin:"
 
 #. i18n: file prefs.ui line 653
 #: rc.cpp:195 rc.cpp:423
@@ -654,8 +656,9 @@ msgstr "Intervalo de tempo"
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:225
 #, no-c-format
+#, fuzzy
 msgid "Viewmode for message creation"
-msgstr ""
+msgstr "Tipo de visualização para criação de mensages"
 
 #. i18n: file klinpopup.kcfg line 43
 #: rc.cpp:228
