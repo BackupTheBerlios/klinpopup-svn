@@ -1,3 +1,4 @@
+# translation of ru.po to 
 # translation of klinpopup.pot to russian
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
@@ -8,13 +9,13 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-12 19:29+0200\n"
-"PO-Revision-Date: 2005-06-06 19:40+0200\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@web.de>\n"
-"Language-Team: deutsch <de@li.org>\n"
+"PO-Revision-Date: 22.6.2005 14:03\n"
+"Last-Translator: Damir R. Islamov <damir@land5.nsu.ru>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -31,7 +32,7 @@ msgstr "damir@land7.nsu.ru"
 
 #: klinpopup.cpp:138
 msgid "&New"
-msgstr "Новое сообщение"
+msgstr "&Новое сообщение"
 
 #: klinpopup.cpp:142
 msgid "&Reply"
@@ -39,19 +40,19 @@ msgstr "&Ответить"
 
 #: klinpopup.cpp:146
 msgid "&First"
-msgstr "Первое сообщение"
+msgstr "&Первое сообщение"
 
 #: klinpopup.cpp:154
 msgid "&Next"
-msgstr "Следующее сообщение"
+msgstr "&Следующее сообщение"
 
 #: klinpopup.cpp:158
 msgid "&Last"
-msgstr "Последнее сообщение"
+msgstr "П&оследнее сообщение"
 
 #: klinpopup.cpp:162
 msgid "&Unread"
-msgstr "Непрочитано"
+msgstr "Непро&читано"
 
 #: klinpopup.cpp:228
 msgid ""
@@ -77,7 +78,7 @@ msgid ""
 msgstr ""
 "Не удаётся найти программу smbclient!\n"
 ".Сообщения не будут отсылаться.\n"
-"Установите правильный путь в меню Настройка->Система"
+"Установите правильный путь в меню Настройка->Система."
 
 #: klinpopup.cpp:361
 msgid ""
@@ -87,19 +88,19 @@ msgid ""
 msgstr ""
 "Обнаружены неустранимая ошибка с рабочей директорией!\n"
 "Могу только отправлять сообщения.\n"
-"Для получения устраните проблему вручную и перезапустите KLinPopup"
+"Для получения устраните проблему вручную и перезапустите KLinPopup."
 
 #: klinpopup.cpp:365
 msgid "&Continue"
-msgstr "&Продолжить"
+msgstr "Про&должить"
 
 #: klinpopup.cpp:446
 msgid "%1/%2"
-msgstr ""
+msgstr "%1/%2"
 
 #: klinpopup.cpp:449
 msgid "Message %1/%2 - %3 Unread"
-msgstr ""
+msgstr "Сообщения %1/%2 - %3 непрочитанны"
 
 #: klinpopup.cpp:542
 msgid "New message"
@@ -107,11 +108,11 @@ msgstr "Новое сообщение"
 
 #: klinpopup.cpp:562
 msgid "Reply to %1"
-msgstr ""
+msgstr "Ответить %1"
 
 #: klinpopup.cpp:678
 msgid "Settings"
-msgstr ""
+msgstr "Настройка"
 
 #: main.cpp:30
 msgid "WinPopup-Client for KDE"
@@ -126,9 +127,8 @@ msgid "NO GROUP"
 msgstr "Без группы"
 
 #: makepopup.cpp:146 makepopup.cpp:224
-#, fuzzy
 msgid "From:"
-msgstr "Форма1"
+msgstr "Отправитель:"
 
 #: makepopup.cpp:154
 msgid "Group:"
@@ -136,50 +136,47 @@ msgstr "Группа:"
 
 #: makepopup.cpp:161 makepopup.cpp:230
 msgid "To:"
-msgstr ""
+msgstr "Получатель:"
 
 #: makepopup.cpp:184 makepopup.cpp:235
-#, fuzzy
 msgid "Message text"
-msgstr "Время сообщения:"
+msgstr "Текст сообщения"
 
 #: makepopup.cpp:210
 msgid "Groups/Hosts"
-msgstr ""
+msgstr "Группы/Хосты"
 
 #: makepopup.cpp:211
 msgid "Comment"
-msgstr ""
+msgstr "Комментарии"
 
 #: makepopup.cpp:279
 msgid "Message sent!"
-msgstr "Сообщение отослано!"
+msgstr "Сообщение отправлено!"
 
 #: makepopup.cpp:279
 msgid "Success"
 msgstr "Успешно"
 
 #: makepopup.cpp:288
-#, fuzzy
 msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
 msgstr ""
-"Сообщение не может быть отослано!\n"
-"Продолжить редактирование/отослать ещё раз?"
+"Сообщение не может быть отправлено %1!\n"
+"Продолжить редактирование/отправить ещё раз?"
 
 #: makepopup.cpp:339
 msgid "Please state an addressee!"
 msgstr "Введите имя адресата!"
 
 #: makepopup.cpp:365 makepopup.cpp:551
-#, fuzzy
 msgid "Whole workgroup"
-msgstr "Доступные рабочие группы"
+msgstr "Всем из рабочей группы"
 
 #: makepopup.cpp:474 makepopup.cpp:476 makepopup.cpp:499
 msgid "own"
-msgstr ""
+msgstr "Владелец"
 
 #: makepopup.cpp:595
 msgid "Choose sender"
@@ -187,61 +184,57 @@ msgstr "Выберете отправителя"
 
 #: makepopup.cpp:596
 msgid "This box lets you customize the sender value."
-msgstr "Этот блок позволяет вам изменить имя отправителя"
+msgstr "Этот блок позволяет вам изменить имя отправителя."
 
 #: makepopup.cpp:598
-#, fuzzy
 msgid "Available workgroups"
 msgstr "Доступные рабочие группы"
 
 #: makepopup.cpp:599
 msgid "Which workgroups are available in the network."
-msgstr "Рабочие группы, которые доступны в сети"
+msgstr "Рабочие группы, которые доступны в сети."
 
 #: makepopup.cpp:600 makepopup.cpp:603
 msgid "Addressee(s) of this message"
-msgstr ""
+msgstr "Адресат(ы) этого сообщения"
 
 #: makepopup.cpp:601 makepopup.cpp:604
 msgid "Which computer shall receive this message?"
-msgstr "Какой компьютер должен получить это сообщение"
+msgstr "Какой компьютер должен получить это сообщение?"
 
 #: makepopup.cpp:606
 msgid "&Send"
-msgstr "&Отослать"
+msgstr "&Отправить"
 
 #: makepopup.cpp:607
 msgid "Alt+S"
 msgstr "Alt+S"
 
 #: makepopup.cpp:608
-#, fuzzy
 msgid "Send the message"
-msgstr "Звуки для новых сообщений"
+msgstr "Отправить сообщение"
 
 #: makepopup.cpp:609
-#, fuzzy
 msgid "Send the message and close the dialog."
-msgstr "Когда это сообщение было получено."
+msgstr "Отправить сообщение и закрыть окно."
 
 #: makepopup.cpp:611
 msgid "Alt+C"
 msgstr "Alt+С"
 
 #: makepopup.cpp:612
-#, fuzzy
 msgid "Cancel the message"
-msgstr "Ответить"
+msgstr "Отменить сообщение"
 
 #: makepopup.cpp:613
 msgid "Cancel the dialog without sending the message."
-msgstr ""
+msgstr "Отменить без отправления сообщения."
 
 #. i18n: file klinpopupui.rc line 4
 #: rc.cpp:3 rc.cpp:429
 #, no-c-format
 msgid "&Messages"
-msgstr "С&ообщения"
+msgstr "Соо&бщения"
 
 #. i18n: file klinpopupview_base.ui line 24
 #: rc.cpp:6 rc.cpp:234
@@ -271,7 +264,7 @@ msgstr "Отправитель"
 #: rc.cpp:24 rc.cpp:252
 #, no-c-format
 msgid "From whom this message was received."
-msgstr "От кого пришло сообщение"
+msgstr "От кого пришло сообщение."
 
 #. i18n: file klinpopupview_base.ui line 451
 #: rc.cpp:28 rc.cpp:256
@@ -281,21 +274,21 @@ msgstr "Когда получено"
 
 #. i18n: file klinpopupview_base.ui line 454
 #: rc.cpp:31 rc.cpp:259
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When this message was received."
 msgstr "Когда это сообщение было получено."
 
 #. i18n: file prefs.ui line 24
 #: rc.cpp:34 rc.cpp:262
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Prefs"
 msgstr "Основа настроек"
 
 #. i18n: file prefs.ui line 50
 #: rc.cpp:37 rc.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Messa&ges"
-msgstr "С&ообщения"
+msgstr "Соо&бщения"
 
 #. i18n: file prefs.ui line 69
 #: rc.cpp:40 rc.cpp:268
@@ -305,9 +298,9 @@ msgstr "Показать отправителя"
 
 #. i18n: file prefs.ui line 108
 #: rc.cpp:43 rc.cpp:271
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender &name (%f)"
-msgstr "Имя отправителя (%f)"
+msgstr "&Имя отправителя (%f)"
 
 #. i18n: file prefs.ui line 111
 #: rc.cpp:46 rc.cpp:274
@@ -323,9 +316,9 @@ msgstr "Показывать имя отправителя как часть в�
 
 #. i18n: file prefs.ui line 130
 #: rc.cpp:52 rc.cpp:280
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender ma&chine (%m)"
-msgstr "Компьютер отправителя (%m)"
+msgstr "&Компьютер отправителя (%m)"
 
 #. i18n: file prefs.ui line 133
 #: rc.cpp:55 rc.cpp:283
@@ -341,9 +334,9 @@ msgstr "Показывать имя компьютера как часть вх�
 
 #. i18n: file prefs.ui line 152
 #: rc.cpp:61 rc.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Sender &IP (%I)"
-msgstr "IP адрес отправителя (%I)"
+msgstr "&IP адрес отправителя (%I)"
 
 #. i18n: file prefs.ui line 155
 #: rc.cpp:64 rc.cpp:292
@@ -359,45 +352,45 @@ msgstr "Показывать IP адрес отправителя как час�
 
 #. i18n: file prefs.ui line 176
 #: rc.cpp:70 rc.cpp:298
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Time displaying"
-msgstr "Показать отправителя"
+msgstr "Показывать время"
 
 #. i18n: file prefs.ui line 185
 #: rc.cpp:73 rc.cpp:301
 #, no-c-format
 msgid "Date & Time"
-msgstr ""
+msgstr "Дата и время"
 
 #. i18n: file prefs.ui line 190
 #: rc.cpp:76 rc.cpp:304
 #, no-c-format
 msgid "Time"
-msgstr ""
+msgstr "Время"
 
 #. i18n: file prefs.ui line 195
 #: rc.cpp:79 rc.cpp:307
 #, no-c-format
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #. i18n: file prefs.ui line 202
 #: rc.cpp:82 rc.cpp:310
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Details for time displaying"
-msgstr "Показать отправителя"
+msgstr "Показывать подробности времени"
 
 #. i18n: file prefs.ui line 205
 #: rc.cpp:85 rc.cpp:313
 #, no-c-format
 msgid "What details to show for the time of received messages."
-msgstr ""
+msgstr "Какие подробности времени получения сообщений показывать."
 
 #. i18n: file prefs.ui line 240
 #: rc.cpp:88 rc.cpp:316
 #, no-c-format
 msgid "New message signaling"
-msgstr "Просигналить о новом сообщении"
+msgstr "Известить о новом сообщении"
 
 #. i18n: file prefs.ui line 260
 #: rc.cpp:91 rc.cpp:319
@@ -445,49 +438,49 @@ msgstr "Звук:"
 #: rc.cpp:114 rc.cpp:342
 #, no-c-format
 msgid "Sound for new messages"
-msgstr "Звуки для новых сообщений"
+msgstr "Звук для новых сообщений"
 
 #. i18n: file prefs.ui line 361
 #: rc.cpp:117 rc.cpp:345
 #, no-c-format
 msgid "Choose which sound to play when new messages are received."
-msgstr "Выберете звук для проигрывания при получении новых сообщений"
+msgstr "Выберете звук для проигрывания при получении новых сообщений."
 
 #. i18n: file prefs.ui line 373
 #: rc.cpp:120 rc.cpp:348
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Message Creation"
-msgstr "Время сообщения:"
+msgstr "Создание сообщения"
 
 #. i18n: file prefs.ui line 384
 #: rc.cpp:123 rc.cpp:351
 #, no-c-format
 msgid "Viewmode:"
-msgstr ""
+msgstr "Режим просмотра:"
 
 #. i18n: file prefs.ui line 390
 #: rc.cpp:126 rc.cpp:354
 #, no-c-format
 msgid "ClassicView"
-msgstr ""
+msgstr "Классический"
 
 #. i18n: file prefs.ui line 395
 #: rc.cpp:129 rc.cpp:357
 #, no-c-format
 msgid "TreeView"
-msgstr ""
+msgstr "Древовидный"
 
 #. i18n: file prefs.ui line 402
 #: rc.cpp:132 rc.cpp:360
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "View when writing a new message"
-msgstr "Установите кодировку новых сообщений"
+msgstr "Просмотр при сознании нового сообщения"
 
 #. i18n: file prefs.ui line 405
 #: rc.cpp:135 rc.cpp:363
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
-msgstr ""
+msgstr "Какой режим просмотра использовать при сознании нового сообщения."
 
 #. i18n: file prefs.ui line 413
 #: rc.cpp:138 rc.cpp:366
@@ -529,13 +522,13 @@ msgstr "Кодировка новых сообщений"
 #: rc.cpp:158 rc.cpp:386
 #, no-c-format
 msgid "Set the character encoding for new messages."
-msgstr "Установите кодировку новых сообщений"
+msgstr "Установите кодировку новых сообщений."
 
 #. i18n: file prefs.ui line 479
 #: rc.cpp:161 rc.cpp:389
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "S&ystem"
-msgstr "Система"
+msgstr "С&истема"
 
 #. i18n: file prefs.ui line 498
 #: rc.cpp:164 rc.cpp:392
@@ -559,29 +552,29 @@ msgstr "Интервал проверки новых сообщений"
 #: rc.cpp:175 rc.cpp:403
 #, no-c-format
 msgid "Duration for check intervall for incoming new messages in seconds."
-msgstr "Продолжительность интервала в секундах между проверками новых сообщений"
+msgstr "Продолжительность интервала в секундах между проверками новых сообщений."
 
 #. i18n: file prefs.ui line 584
 #: rc.cpp:178 rc.cpp:406
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Run do&cked"
-msgstr "Запустить свёрнутым"
+msgstr "Запустить св&ёрнутым"
 
 #. i18n: file prefs.ui line 587
 #: rc.cpp:181 rc.cpp:409
 #, no-c-format
 msgid "Start docked and hide main window when closing"
-msgstr ""
+msgstr "Запустить свёрнутым и скрывать главное окно при закрытии"
 
 #. i18n: file prefs.ui line 590
 #: rc.cpp:184 rc.cpp:412
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
 "window is closed."
 msgstr ""
 "При установленном флаге приложение запускается в свёрнутом виде только в "
-"системном лотке (без главного окна)"
+"системном лотке (без главного окна) и скрывается только при закрытии."
 
 #. i18n: file prefs.ui line 625
 #: rc.cpp:187 rc.cpp:415
@@ -591,7 +584,7 @@ msgstr "Система"
 
 #. i18n: file prefs.ui line 639
 #: rc.cpp:190 rc.cpp:418
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "smbclient-Bin:"
 msgstr "Путь к программе 'smbclient':"
 
@@ -603,33 +596,33 @@ msgstr "Путь к smbclient"
 
 #. i18n: file prefs.ui line 656
 #: rc.cpp:198 rc.cpp:426
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The Path to your smbclient binary."
-msgstr "Путь к программе smbclient (без имени файла программы)"
+msgstr "Путь к программе smbclient (без имени файла программы)."
 
 #. i18n: file klinpopup.kcfg line 7
 #: rc.cpp:201
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Display sender name"
-msgstr "Показывать имя отправителя?"
+msgstr "Показывать имя отправителя"
 
 #. i18n: file klinpopup.kcfg line 11
 #: rc.cpp:204
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Display sender machine"
 msgstr "Показывать имя компьютера отправителя"
 
 #. i18n: file klinpopup.kcfg line 15
 #: rc.cpp:207
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Display sender IP"
-msgstr "Показывать IP адрес отправителя?"
+msgstr "Показывать IP адрес отправителя"
 
 #. i18n: file klinpopup.kcfg line 19
 #: rc.cpp:210
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Displayed time format"
-msgstr "Показывать имя компьютера отправителя"
+msgstr "Формат времени"
 
 #. i18n: file klinpopup.kcfg line 23
 #: rc.cpp:213
@@ -645,7 +638,7 @@ msgstr "URL звукового файла"
 
 #. i18n: file klinpopup.kcfg line 31
 #: rc.cpp:219
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Run docked"
 msgstr "Запустить свёрнутым"
 
@@ -659,11 +652,11 @@ msgstr "Интервал проверки"
 #: rc.cpp:225
 #, no-c-format
 msgid "Viewmode for message creation"
-msgstr ""
+msgstr "Режим просмотра при создании сообщения"
 
 #. i18n: file klinpopup.kcfg line 43
 #: rc.cpp:228
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "smbclient-Bin"
 msgstr "Путь к программе 'smbclient':"
 
@@ -675,5 +668,5 @@ msgstr "Кодировка"
 
 #: systemtray.cpp:39
 msgid "&New Message"
-msgstr "Новое сообщение"
+msgstr "&Новое сообщение"
 
