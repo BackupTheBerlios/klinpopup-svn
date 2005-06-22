@@ -1,4 +1,5 @@
 # translation of ru.po to 
+# translation of ru.po to
 # translation of klinpopup.pot to russian
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-12 19:29+0200\n"
-"PO-Revision-Date: 22.6.2005 14:03\n"
+"PO-Revision-Date: 22.6.2005 14:41\n"
 "Last-Translator: Damir R. Islamov <damir@land5.nsu.ru>\n"
 "Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -294,7 +295,7 @@ msgstr "Соо&бщения"
 #: rc.cpp:40 rc.cpp:268
 #, no-c-format
 msgid "Sender displaying"
-msgstr "Показать отправителя"
+msgstr "Показать отправителя как"
 
 #. i18n: file prefs.ui line 108
 #: rc.cpp:43 rc.cpp:271
@@ -354,7 +355,7 @@ msgstr "Показывать IP адрес отправителя как час�
 #: rc.cpp:70 rc.cpp:298
 #, no-c-format
 msgid "Time displaying"
-msgstr "Показывать время"
+msgstr "Показывать время как"
 
 #. i18n: file prefs.ui line 185
 #: rc.cpp:73 rc.cpp:301
@@ -414,7 +415,7 @@ msgstr "Активировать окно"
 #: rc.cpp:100 rc.cpp:328
 #, no-c-format
 msgid "All"
-msgstr "Все"
+msgstr "Всё"
 
 #. i18n: file prefs.ui line 290
 #: rc.cpp:103 rc.cpp:331
@@ -598,7 +599,7 @@ msgstr "Путь к smbclient"
 #: rc.cpp:198 rc.cpp:426
 #, no-c-format
 msgid "The Path to your smbclient binary."
-msgstr "Путь к программе smbclient (без имени файла программы)."
+msgstr "Путь к программе smbclient."
 
 #. i18n: file klinpopup.kcfg line 7
 #: rc.cpp:201
