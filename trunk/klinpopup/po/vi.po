@@ -44,7 +44,7 @@ msgstr "Thông điệp đầu tiên"
 #: klinpopup.cpp:154
 #, fuzzy
 msgid "&Next"
-msgstr "Ti&ếp theo"
+msgstr "T&iếp theo"
 
 #: klinpopup.cpp:158
 msgid "&Last"
@@ -97,11 +97,11 @@ msgstr "T&iếp tục"
 
 #: klinpopup.cpp:446
 msgid "%1/%2"
-msgstr ""
+msgstr "%1%2"
 
 #: klinpopup.cpp:449
 msgid "Message %1/%2 - %3 Unread"
-msgstr ""
+msgstr "Thông điệp %1%2 - %3 chưa đọc"
 
 #: klinpopup.cpp:542
 #, fuzzy
@@ -111,7 +111,7 @@ msgstr "Thông điệp mới"
 #: klinpopup.cpp:562
 #, fuzzy
 msgid "Reply to %1"
-msgstr "Trả lời"
+msgstr "Trả lời %1"
 
 #: klinpopup.cpp:678
 msgid "Settings"
@@ -130,9 +130,8 @@ msgid "NO GROUP"
 msgstr "Không thuộc nhóm nào"
 
 #: makepopup.cpp:146 makepopup.cpp:224
-#, fuzzy
 msgid "From:"
-msgstr "Mẫu 1"
+msgstr "Gửi từ"
 
 #: makepopup.cpp:154
 msgid "Group:"
@@ -140,10 +139,9 @@ msgstr "Nhóm:"
 
 #: makepopup.cpp:161 makepopup.cpp:230
 msgid "To:"
-msgstr ""
+msgstr "Gửi đến"
 
 #: makepopup.cpp:184 makepopup.cpp:235
-#, fuzzy
 msgid "Message text"
 msgstr "Thông điệp"
 
@@ -156,7 +154,6 @@ msgid "Comment"
 msgstr ""
 
 #: makepopup.cpp:279
-#, fuzzy
 msgid "Message sent!"
 msgstr "Thông điệp đã gửi"
 
@@ -165,24 +162,20 @@ msgid "Success"
 msgstr "Thành công"
 
 #: makepopup.cpp:288
-#, fuzzy
 msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
 msgstr "Thông điệp đã không được gửi!Bạn muốn soạn thảo lại hay gửi thông điệp?"
 
 #: makepopup.cpp:339
-#, fuzzy
 msgid "Please state an addressee!"
-msgstr "Hãy điền đúng địa chỉ!"
+msgstr "Xin hãy điền đúng địa chỉ!"
 
 #: makepopup.cpp:365 makepopup.cpp:551
-#, fuzzy
 msgid "Whole workgroup"
-msgstr "Các nhóm làm việc"
+msgstr "Cả nhóm làm việc"
 
 #: makepopup.cpp:474 makepopup.cpp:476 makepopup.cpp:499
-#, fuzzy
 msgid "own"
 msgstr "(của bạn)"
 
@@ -195,17 +188,16 @@ msgid "This box lets you customize the sender value."
 msgstr "Hộp thoại này sẽ giúp bạn tuỳ biến tên người gửi."
 
 #: makepopup.cpp:598
-#, fuzzy
 msgid "Available workgroups"
 msgstr "Các nhóm làm việc"
 
 #: makepopup.cpp:599
 msgid "Which workgroups are available in the network."
-msgstr "Những nhóm nằm trong mạng."
+msgstr "Những nhóm thuộc trong mạng."
 
 #: makepopup.cpp:600 makepopup.cpp:603
 msgid "Addressee(s) of this message"
-msgstr ""
+msgstr "Các nơi đến của thông điệp này"
 
 #: makepopup.cpp:601 makepopup.cpp:604
 msgid "Which computer shall receive this message?"
@@ -220,17 +212,14 @@ msgid "Alt+S"
 msgstr "Alt+S"
 
 #: makepopup.cpp:608
-#, fuzzy
 msgid "Send the message"
 msgstr "Gửi thông điệp"
 
 #: makepopup.cpp:609
-#, fuzzy
 msgid "Send the message and close the dialog."
 msgstr "Gửi thông điệp và đóng hộp thoại."
 
 #: makepopup.cpp:611
-#, fuzzy
 msgid "Alt+C"
 msgstr "Alt+C"
 
@@ -252,7 +241,7 @@ msgstr "&Thông điệp"
 #: rc.cpp:6 rc.cpp:234
 #, no-c-format
 msgid "KLinPopup_base"
-msgstr "Phần căn bản của KLinPopup"
+msgstr "Phần cơ bản của KLinPopup"
 
 #. i18n: file klinpopupview_base.ui line 331
 #: rc.cpp:10 rc.cpp:238
@@ -294,7 +283,7 @@ msgstr "Thời gian khi thông điệp được nhận."
 #: rc.cpp:34 rc.cpp:262
 #, fuzzy, no-c-format
 msgid "Prefs"
-msgstr "Cấu hình căn bản"
+msgstr "Prefs"
 
 #. i18n: file prefs.ui line 50
 #: rc.cpp:37 rc.cpp:265
@@ -462,37 +451,37 @@ msgstr "Hãy chọn âm thanh sẽ phát ra khi nhận được thông điệp."
 #: rc.cpp:120 rc.cpp:348
 #, fuzzy, no-c-format
 msgid "Message Creation"
-msgstr "Thông điệp"
+msgstr "Soạn thảo thông điệp"
 
 #. i18n: file prefs.ui line 384
 #: rc.cpp:123 rc.cpp:351
 #, no-c-format
 msgid "Viewmode:"
-msgstr ""
+msgstr "Chế độ xem"
 
 #. i18n: file prefs.ui line 390
 #: rc.cpp:126 rc.cpp:354
 #, no-c-format
 msgid "ClassicView"
-msgstr ""
+msgstr "Xem dưới dạng classic (cũ)"
 
 #. i18n: file prefs.ui line 395
 #: rc.cpp:129 rc.cpp:357
 #, no-c-format
 msgid "TreeView"
-msgstr ""
+msgstr "Xem dưới dạng cây"
 
 #. i18n: file prefs.ui line 402
 #: rc.cpp:132 rc.cpp:360
 #, fuzzy, no-c-format
 msgid "View when writing a new message"
-msgstr "Xác định ký tự được mã hoá cho thông điệp mới"
+msgstr "Xem khi soạn thảo thông điệp mới"
 
 #. i18n: file prefs.ui line 405
 #: rc.cpp:135 rc.cpp:363
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
-msgstr ""
+msgstr "Chế độ xem nào sẽ dùng khi đang soạn thảo thông điệp mới"
 
 #. i18n: file prefs.ui line 413
 #: rc.cpp:138 rc.cpp:366
@@ -570,7 +559,7 @@ msgstr "Khoảng thời gian kiểm tra thông điệp mới, tính theo giây. 
 #: rc.cpp:178 rc.cpp:406
 #, fuzzy, no-c-format
 msgid "Run do&cked"
-msgstr "Giữ cố định"
+msgstr "Neo cố định"
 
 #. i18n: file prefs.ui line 587
 #: rc.cpp:181 rc.cpp:409
@@ -610,23 +599,20 @@ msgstr "Đường dẫn đến smbclient"
 #: rc.cpp:198 rc.cpp:426
 #, fuzzy, no-c-format
 msgid "The Path to your smbclient binary."
-msgstr "Đường dẫn đến smbclient (bỏ qua tên chương trình - smbclient)"
+msgstr "Đường dẫn đến smbclient"
 
 #. i18n: file klinpopup.kcfg line 7
 #: rc.cpp:201
-#, fuzzy, no-c-format
 msgid "Display sender name"
 msgstr "Bạn có muốn hiện tên người gửi?"
 
 #. i18n: file klinpopup.kcfg line 11
 #: rc.cpp:204
-#, fuzzy, no-c-format
 msgid "Display sender machine"
 msgstr "Hiện tên máy giử"
 
 #. i18n: file klinpopup.kcfg line 15
 #: rc.cpp:207
-#, fuzzy, no-c-format
 msgid "Display sender IP"
 msgstr "Hiện IP của người gửi?"
 
@@ -652,7 +638,7 @@ msgstr "Địa chỉ tập tin âm thanh"
 #: rc.cpp:219
 #, fuzzy, no-c-format
 msgid "Run docked"
-msgstr "Giữ cố định"
+msgstr "Neo cố định"
 
 #. i18n: file klinpopup.kcfg line 35
 #: rc.cpp:222
@@ -664,13 +650,13 @@ msgstr "Khoảng thời gian"
 #: rc.cpp:225
 #, no-c-format
 msgid "Viewmode for message creation"
-msgstr ""
+msgstr "Chế độ xem khi soạn thảo thông điệp"
 
 #. i18n: file klinpopup.kcfg line 43
 #: rc.cpp:228
 #, fuzzy, no-c-format
 msgid "smbclient-Bin"
-msgstr "Đường dẫn đến smbclient"
+msgstr "smbclient-Bin"
 
 #. i18n: file klinpopup.kcfg line 47
 #: rc.cpp:231
@@ -679,7 +665,6 @@ msgid "Encoding"
 msgstr "Mã hoá"
 
 #: systemtray.cpp:39
-#, fuzzy
 msgid "&New Message"
-msgstr "Thông điệp"
+msgstr "Thông điệp mới"
 
