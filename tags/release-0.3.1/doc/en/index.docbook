@@ -1,0 +1,554 @@
+<?xml version="1.0" ?>
+
+<!--
+    Copyright (c) 2005 Gerd Fleischer.
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.2
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "GNU
+    Free Documentation License".
+-->
+
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY klinpopup "<application>KLinPopup</application>">
+  <!ENTITY kappname "&klinpopup;"><!-- Do *not* replace kappname-->
+  <!ENTITY package "kde-module"><!-- kdebase, kdeadmin, etc -->
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE"><!-- change language only here -->
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &klinpopup; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname></firstname>
+<othername></othername>
+<surname>Gerd Fleischer</surname>
+<affiliation>
+<address><email>gerdfleischer@web.de</email></address>
+</affiliation>
+</author>
+</authorgroup>
+
+<copyright>
+<year>2004, 2005</year>
+<holder>Gerd Fleischer</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2005-05-08</date>
+<releaseinfo>0.3.1</releaseinfo>
+
+<abstract>
+<para>
+&klinpopup; is an application to send and receive popup messages
+like "net send" on <trademark class="registered">Windows</trademark>.
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>KLinPopup</keyword>
+<keyword>popup</keyword>
+<keyword>samba</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>
+&klinpopup; is a program with which you can send an receive windows popup messages
+like with "net send" or <trademark class="registered">Windows</trademark>.
+</para>
+</chapter>
+
+<chapter id="using-klinpopup">
+<title>Using &klinpopup;</title>
+
+<para>
+The usage of KLinPopup is pretty straightforward. Use the menu items or icons to send new messages, reply or delete them.
+</para>
+
+<sect1 id="klinpopup-features">
+<title>More &klinpopup; features</title>
+
+<itemizedlist mark="opencircle">
+<listitem>
+<para>can start docked only</para>
+</listitem>
+<listitem>
+<para>adjustable new message signaling</para>
+</listitem>
+</itemizedlist>
+
+
+</sect1>
+</chapter>
+
+<chapter id="commands">
+<title>Command Reference</title>
+
+<sect1 id="klinpopup-mainwindow">
+<title>The main &klinpopup; window</title>
+
+<sect2>
+<title>The File Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Quits &klinpopup;.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2>
+<title>The Messages Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Opens a dialog to send a new message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Reply</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Opens a dialog to reply to a message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>First</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Shows the first message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Previous</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Shows the previous message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Next</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Shows the next message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>L</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Last</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Shows the last message.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>U</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Unread</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Searches and shows the next unread message, beginning at the first.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>D</keycap></keycombo>
+</shortcut>
+<guimenu>Messages</guimenu>
+<guimenuitem>Delete</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Deletes the current message.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2>
+<title>The Settings Menu</title>
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>M</keycap></keycombo>
+</shortcut>
+<guimenu>Settings</guimenu>
+<guimenuitem>Hide Menubar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle the menubar.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show/Hide Toolbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle the toolbar.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show/Hide Statusbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle the statusbar.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure shortcuts</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Configure shortcuts.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Customize toolbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Customize the toolbar.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Configure KLinPopup</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Additional settings for KLinPopup.</action></para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect2>
+
+<sect2>
+<title>The Help Menu</title>
+
+&help.menu.documentation;
+
+</sect2>
+
+</sect1>
+<sect1 id="makepopup-dialog">
+<title>The New Message/Reply-Dialog</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guibutton>Sender</guibutton>
+</menuchoice></term>
+<listitem><para>Combobox to choose sender name.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guibutton>Group</guibutton>
+</menuchoice></term>
+<listitem><para>Combobox to choose the workgroup of the receiver (deactivated for replys).</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guibutton>Host</guibutton>
+</menuchoice></term>
+<listitem><para>Combobox or treeview to choose the host of the receiver(s) (deactivated for replys).</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guibutton>Textfield</guibutton>
+</menuchoice></term>
+<listitem><para>Field for the message text.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Alt;<keycap>S</keycap></keycombo>
+</shortcut>
+<guibutton>Send</guibutton>
+</menuchoice></term>
+<listitem><para>Send the message.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Alt;<keycap>C</keycap></keycombo>
+</shortcut>
+<guibutton>Cancel</guibutton>
+</menuchoice></term>
+<listitem><para>Cancels the dialogs without sending the message.</para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect1>
+
+<sect1 id="settings-dialog">
+<title>The Configure KLinPopup...-Dialog</title>
+
+<para>
+<variablelist>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>Sender displaying</guibutton>
+</menuchoice></term>
+<listitem><para>Select what to show as sender for received messages.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>Time displaying</guibutton>
+</menuchoice></term>
+<listitem><para>Select what details to show for the time of received messages.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>New message signaling</guibutton>
+</menuchoice></term>
+<listitem><para>Combobox to configure actions for new messages.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>Sound</guibutton>
+</menuchoice></term>
+<listitem><para>Choose the sound for new messages.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>Viewmode</guibutton>
+</menuchoice></term>
+<listitem><para>Viewmode for creation of new messages (classic with comboboxes or treeview).</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>Encoding</guibutton>
+</menuchoice></term>
+<listitem><para>Set the character encoding for new messages. Local8Bit should work for most setups.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>System</guimenu>
+<guibutton>Run docked</guibutton>
+</menuchoice></term>
+<listitem><para>If checked KLinPopup starts only docked (without mainwindow) and hides to systemtray when closing the mainwindow.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>System</guimenu>
+<guibutton>Timer interval</guibutton>
+</menuchoice></term>
+<listitem><para>Set the timer interval for new incoming messages check.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>System</guimenu>
+<guibutton>smbclient-Bin</guibutton>
+</menuchoice></term>
+<listitem><para>Set the path to your smbclient binary.</para></listitem>
+</varlistentry>
+
+</variablelist>
+</para>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+
+<title>Credits and License</title>
+
+<para>
+&klinpopup;
+</para>
+<para>
+Program copyright 2004, 2005 Gerd Fleischer <email>gerdfleischer@web.de</email>
+</para>
+<para>
+Contributors:
+<itemizedlist>
+<listitem><para>Torsten Henschel <email>thenschel@henschelsoft.de</email></para>
+</listitem>
+<listitem><para>The authors of juk, kscd, kopete</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para>
+Translators, Testing, Tips:
+<itemizedlist>
+<listitem><para>Damir R. Islamov <email>damir@land5.nsu.ru</email></para>
+</listitem>
+<listitem><para>Alexander N. Sørnes <email>alex@thehandofagony.com</email></para>
+</listitem>
+<listitem><para>Pablo Navarro <email>pablonm@ono.com</email></para>
+</listitem>
+<listitem><para>Khuc Ngoc Vinh <email>knvinh@yahoo.com</email></para>
+</listitem>
+<listitem><para>Cesar A. Ramina <email>linux225159-geral@yahoo.com.br</email></para>
+</listitem>
+<listitem><para>Pascal Solignac</para>
+</listitem>
+</itemizedlist>
+</para>
+
+<para>
+Documentation copyright 2004, 2005 Gerd Fleischer <email>gerdfleischer@web.de</email>
+</para>
+
+&underFDL;               <!-- FDL: do not remove -->
+
+&underGPL;               <!-- GPL License -->
+
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>
+
+<sect1 id="getting-klinpopup">
+<title>How to obtain &klinpopup;</title>
+
+<para>
+KLinPopup is available at <ulink url="http://www.gerdfleischer.de/klinpopup.php">The &klinpopup; home page</ulink>
+</para>
+
+</sect1>
+
+<sect1 id="requirements">
+<title>Requirements</title>
+
+<para>
+In order to successfully use &klinpopup;, you need &kde;  >=3.2.
+Also samba and smbclient should be installed and configured right (e.g. name resolution).
+To receive message the samba server should be running.
+</para>
+</sect1>
+
+<sect1 id="compilation">
+<title>Compilation and Installation</title>
+
+<para>
+In order to compile and install KLinPopup on your system, type the following in the base directory of the KLinPopup distribution:
+</para>
+
+<screen>
+% <command>./configure</command>
+% <command>make</command>
+% <command>make install</command>
+</screen>
+
+<para>
+Since KLinPopup uses <command>autoconf</command> and <command>automake</command> you should have no trouble compiling it. Should you run into problems please mail to <email>gerdfleischer@web.de</email>.
+</para>
+</sect1>
+
+<sect1 id="configuration">
+<title>Configuration</title>
+
+<para>
+You must configure samba correctly.
+Add or change this line in smb.conf:
+<screen>
+message command = sh -c '_PATH_TO_/receivepopup.sh "%f" "%m" "%I" "%s"' &#038;
+</screen>
+(of course the real path for _PATH_TO_, e.g. for SuSE /opt/kde3/bin, for Debian /usr/bin)
+</para>
+
+<para>
+Then you should create the appropriate directory where the messages go to.
+<screen>
+<command>mkdir -vp -m 0777 /var/lib/klinpopup</command>
+</screen>
+At least make sure that samba can write in this directory.
+</para>
+
+</sect1>
+
+</appendix>
+
+&documentation.index;
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+vim:tabstop=2:shiftwidth=2:expandtab
+-->
+

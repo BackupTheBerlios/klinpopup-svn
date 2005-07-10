@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+#
+# Uhm, too much complicated eh?
+#
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/kde.mk
+#DEB_OPT_FLAG=-O3 -march=i686 -mcpu=i686

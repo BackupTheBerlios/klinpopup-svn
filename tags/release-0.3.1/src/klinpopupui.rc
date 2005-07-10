@@ -1,0 +1,26 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="klinpopup" version="2">
+<MenuBar>
+  <Menu name="popup_actions"><text>&amp;Messages</text>
+    <Action name="new_popup" />
+    <Action name="reply_popup" />
+    <Action name="first_popup" />
+    <Action name="previous_popup" />
+    <Action name="next_popup" />
+    <Action name="last_popup" />
+    <Action name="unread_popup" />
+    <Action name="delete_popup" />
+  </Menu>
+</MenuBar>
+
+<ToolBar name="mainToolBar" hidden="false" noMerge="1">
+  <Action name="new_popup" />
+  <Action name="reply_popup" />
+  <Action name="first_popup" />
+  <Action name="previous_popup" />
+  <Action name="next_popup" />
+  <Action name="last_popup" />
+  <Action name="unread_popup" />
+  <Action name="delete_popup" />
+</ToolBar>
+</kpartgui>
