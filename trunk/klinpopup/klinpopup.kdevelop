@@ -3,7 +3,7 @@
   <general>
     <author>Gerd Fleischer</author>
     <email>gerdfleischer@web.de</email>
-    <version>0.3.1rc3</version>
+    <version>0.3.1</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>
@@ -76,6 +76,7 @@
     <tree>
       <hidenonprojectfiles>false</hidenonprojectfiles>
       <hidepatterns>*.o,*.lo,CVS</hidepatterns>
+      <showvcsfields>false</showvcsfields>
     </tree>
   </kdevfileview>
   <kdevdoctreeview>

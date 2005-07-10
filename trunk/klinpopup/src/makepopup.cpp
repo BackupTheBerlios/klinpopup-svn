@@ -62,9 +62,7 @@ makePopup::makePopup(QWidget *parent, const char *name, const QString &paramSend
 	  readHosts(this), readGroups(this)
 {
 	initSmbCtx();
-	kdDebug() << "initialized smbCtx" << endl;
 	setupLayout();
-	kdDebug() << "setup layout" << endl;
 
 	connect(buttonSend, SIGNAL(clicked()), this, SLOT(slotButtonSend()));
 	connect(buttonCancel, SIGNAL(clicked()), this, SLOT(finished()));
@@ -265,7 +263,6 @@ void makePopup::setupLayout()
 
 	messageText->installEventFilter(this);
 	messageText->setFocus();
-	kdDebug() << "really setup layout" << endl;
 }
 
 void makePopup::queryFinished()
@@ -447,7 +444,10 @@ void makePopup::readGroupList()
 		// get own workgoup first
 		ownGroup = QString::fromUtf8(smbCtx->workgroup, -1);
 
-		kdDebug() << "own group: " << ownGroup << " If this is WORKGROUP and you use 3.0.15preX we may have a problem." << endl;
+		kdDebug() << "own group: " << ownGroup << endl;
+		kdDebug() << "If this is WORKGROUP and you use 3.0.15/20preX we may have a problem." << endl;
+		kdDebug() << "Autodetection of own workgroup disabled." << endl;
+
 		if (ownGroup == "WORKGROUP") ownGroup = QString::null; // workaround for SAMBA 3.0.15pre2+
 
 		SMBCFILE *dirfd;
@@ -509,7 +509,7 @@ void makePopup::readHostList()
 		// next level should be the hosts
 		QString tmpGroup = "smb://";
 		tmpGroup.append(currentGroup);
-		kdDebug() << tmpGroup << endl;
+//		kdDebug() << tmpGroup << endl;
 
 		dirfd = smbCtx->opendir(smbCtx, tmpGroup);
 

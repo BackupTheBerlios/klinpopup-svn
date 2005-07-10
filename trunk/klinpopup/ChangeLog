@@ -1,3 +1,6 @@
+0.3.1
+-updated russian, spanish, brazilian portuguese and vietnamese translations
+
 0.3.1rc3
 -fixed documentation building
 
@@ -14,6 +17,11 @@
 0.3.1pre2
 -added treeview mode for makepopup
 -a lot of little code changes/fixes/new bugs
+
+0.3a
+-new translation: french (by Pascal and me, quite rough though)
+-new translation: brazilian portuguese (Thanks to Cesar A. Ramina)
+-fix a small message count bug
 
 0.3.1pre1
 -dry and rough translation to french by Pascal and me (some additional help by a native speaker would be cool ;-)
