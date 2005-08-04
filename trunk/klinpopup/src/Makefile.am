@@ -27,7 +27,7 @@ bin_SCRIPTS = receivepopup.sh
 
 # these are the headers for your project
 noinst_HEADERS = klinpopup.h klinpopupview.h systemtray.h makepopup.h \
-	popupmessage.h prefs.h
+		popupmessage.h prefs.h inotify.h inotify-syscalls.h
 
 messages: rc.cpp
 	$(EXTRACTRC) *.ui *.rc >> rc.cpp

@@ -22,6 +22,8 @@
 
 #include <kdebug.h>
 
+#include "config.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -44,6 +46,23 @@
 #include <kfileitem.h>
 #include <kstdaccel.h>
 #include <kstdaction.h>
+
+#ifdef WITH_INOTIFY
+#include "inotify.h"
+#include "inotify-syscalls.h"
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <asm/unistd.h>
+#include <errno.h>
+
+#define ALL_MASK 0xffffffff
+#define EVENTQ_SIZE 128
+
+#endif
 
 #include "klinpopup.h"
 #include "klinpopup.moc"
@@ -86,6 +105,10 @@ KLinPopup::KLinPopup()
 	checkSmbclientBin();
 
 	messageList.setAutoDelete(true);
+
+#ifdef WITH_INOTIFY
+	startWatch();
+#endif
 
 	initTimer();
 	popupFileTimer->start(1, true);
@@ -185,6 +208,10 @@ void KLinPopup::initSystemTray()
  */
 void KLinPopup::slotQuit()
 {
+#ifdef WITH_INOTIFY
+	endWatch(wd);
+#endif
+
 	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
 	kapp->quit();
 }
@@ -369,6 +396,36 @@ void KLinPopup::popupFileTimerDone()
 		if (tmpContinueQuit != KMessageBox::Yes) kapp->exit(1);
 	}
 }
+
+#ifdef WITH_INOTIFY
+int KLinPopup::startWatch()
+{
+	int fd;
+
+	fd = inotify_init();
+
+	if (fd < 0) kdDebug() << "inotify_init failed" << endl;
+
+	kdDebug() << "inotify device fd = " <<  fd << endl;
+
+	wd = inotify_add_watch (fd, "/var/lib/klinpopup", IN_CREATE);
+	if (wd < 0) kdDebug() << "inotify_add_watch failed" << endl;
+
+	return fd;
+}
+
+int KLinPopup::endWatch(int fd)
+{
+	int r;
+
+	if ( (r = close(fd)) < 0) {
+		kdDebug() << "closed inotify" << endl;
+	}
+
+	return r;
+}
+#endif
+
 
 /**
  * append and signal a new message

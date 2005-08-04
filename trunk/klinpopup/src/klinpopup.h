@@ -102,6 +102,12 @@ private:
 	void readConfig();
 	void popupHelper();
 
+#ifdef WITH_INOTIFY
+	int wd;
+	int startWatch();
+	int endWatch(int fd);
+#endif
+
 	KLinPopupView *m_view;
 
 	//config and actions

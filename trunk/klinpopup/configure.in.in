@@ -23,4 +23,7 @@ fi
 
 AC_HAVE_SMBCCTX_OPTIONS
 
-
+AC_ARG_ENABLE(inotify, AC_HELP_STRING([--enable-inotify], [build with support for inotify @<:@default=no@:>@]),
+if test $enableval="yes"; then
+    AC_DEFINE(WITH_INOTIFY, 1, [Define to 1 if klinpopup should be built with inotify support])
+fi,)
