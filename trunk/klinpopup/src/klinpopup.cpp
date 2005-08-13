@@ -24,9 +24,9 @@
 
 #include "config.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+//#include <cstdlib>
+//#include <string.h>
+//#include <time.h>
 
 #include <qtooltip.h>
 #include <qdir.h>
@@ -48,19 +48,21 @@
 #include <kstdaction.h>
 
 #ifdef WITH_INOTIFY
-#include "inotify.h"
-#include "inotify-syscalls.h"
 #include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+//#include <fstream>
+//#include <cstdio>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/ioctl.h>
 #include <sys/select.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <asm/unistd.h>
-#include <errno.h>
+#include "inotify.h"
+#include "inotify-syscalls.h"
 
-#define ALL_MASK 0xffffffff
-#define EVENTQ_SIZE 128
+//#define ALL_MASK 0xffffffff
+//#define EVENTQ_SIZE 128
 
 #endif
 
@@ -70,8 +72,37 @@
 #include "prefs.h"
 #include "makepopup.h"
 
+void selectThread::run()
+{
+	int pending;
+	int select_retval = 1;
+
+	fd_set read_fds;
+	FD_ZERO (&read_fds);
+	FD_SET (fd, &read_fds);
+
+	struct timeval timeout;
+
+	while (select_retval >= 0 && restart) {
+		timeout.tv_sec = 2;
+		timeout.tv_usec = 0;
+		select_retval = select(fd + 1, &read_fds, 0, 0, &timeout);
+		if (select_retval > 0) {
+			ioctl(fd, FIONREAD, &pending);
+			char *buffer = new char[pending];
+			read(fd, buffer, pending);
+			delete buffer;
+			newMessagesEvent *nm = new newMessagesEvent();
+			kapp->postEvent(threadOwner, nm);
+		}
+	}
+
+	kdDebug() << "thread stopped" << endl;
+}
+
 KLinPopup::KLinPopup()
 	: KMainWindow( 0, "KLinPopup" ),
+	  watchThread(0),
 	  m_view(new KLinPopupView(this)),
 	  unreadMessages(0)
 {
@@ -106,12 +137,19 @@ KLinPopup::KLinPopup()
 
 	messageList.setAutoDelete(true);
 
+	connect(kapp, SIGNAL(shutDown()), this, SLOT(slotShutdown()));
+
 #ifdef WITH_INOTIFY
 	startWatch();
 #endif
 
 	initTimer();
 	popupFileTimer->start(1, true);
+}
+
+KLinPopup::~KLinPopup()
+{
+	delete watchThread;
 }
 
 /**
@@ -125,6 +163,21 @@ bool KLinPopup::queryClose()
 	} else {
 		return true;
 	}
+}
+
+void KLinPopup::slotQuit()
+{
+	kdDebug() << "slotQuit" << endl;
+	kapp->quit();
+}
+
+void KLinPopup::slotShutdown()
+{
+#ifdef WITH_INOTIFY
+	endWatch();
+#endif
+
+	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
 }
 
 /**
@@ -143,12 +196,22 @@ void KLinPopup::focusInEvent(QFocusEvent *e)
 	}
 }
 
+bool KLinPopup::eventFilter(QObject *, QEvent *e)
+{
+	if (e->type() == (QEvent::User+1)) {
+		popupFileTimerDone();
+		return true;
+	}
+
+	return false;
+}
+
 /**
  * setup menu, shortcuts, create GUI
  */
 void KLinPopup::setupActions()
 {
-	KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
+	KStdAction::quit(kapp, SLOT(quit()), actionCollection());
 
 	m_menubarAction = KStdAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
 	m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
@@ -201,19 +264,6 @@ void KLinPopup::initSystemTray()
 	m_systemTray = new SystemTray(this, "systemTray");
 	connect(m_systemTray, SIGNAL(quitSelected()), this, SLOT(slotQuit()));
 	m_systemTray->show();
-}
-
-/**
- * save window settings etc. and exit
- */
-void KLinPopup::slotQuit()
-{
-#ifdef WITH_INOTIFY
-	endWatch(wd);
-#endif
-
-	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
-	kapp->quit();
 }
 
 /**
@@ -382,7 +432,9 @@ void KLinPopup::popupFileTimerDone()
 				}
 			}
 		}
+#ifndef WITH_INOTIFY
 		popupFileTimer->start(optTimerInterval * 1000, true);
+#endif
 	} else {
 		int tmpContinueQuit = KMessageBox::warningYesNo(this,
 														i18n("There is a serious problem with the working directory!\n"
@@ -398,31 +450,44 @@ void KLinPopup::popupFileTimerDone()
 }
 
 #ifdef WITH_INOTIFY
-int KLinPopup::startWatch()
+void KLinPopup::startWatch()
 {
-	int fd;
-
 	fd = inotify_init();
 
-	if (fd < 0) kdDebug() << "inotify_init failed" << endl;
-
-	kdDebug() << "inotify device fd = " <<  fd << endl;
-
-	wd = inotify_add_watch (fd, "/var/lib/klinpopup", IN_CREATE);
-	if (wd < 0) kdDebug() << "inotify_add_watch failed" << endl;
-
-	return fd;
+	if (fd < 0) {
+		int _errno = errno;
+		switch (_errno) {
+			case ENOSYS:
+				kdDebug() << "Inotify not supported!  You need a "
+							 "2.6.13 kernel or later with CONFIG_INOTIFY "
+							 "enabled." << endl;
+				break;
+		}
+	} else {
+		kdDebug() << "inotify device fd = " <<  fd << endl;
+		wd = inotify_add_watch (fd, POPUP_DIR, IN_MOVED_TO);
+		if (wd < 0) {
+			kdDebug() << "inotify_add_watch failed" << endl;
+		} else {
+			watchThread = new selectThread();
+			watchThread->setData(this, fd);
+			watchThread->start();
+		}
+	}
 }
 
-int KLinPopup::endWatch(int fd)
+void KLinPopup::endWatch()
 {
-	int r;
+	watchThread->stop();
+	watchThread->wait();
+//	delete watchThread;
+//	watchThread = 0;
 
-	if ( (r = close(fd)) < 0) {
-		kdDebug() << "closed inotify" << endl;
+	if (fd >=0) {
+		if (inotify_rm_watch(fd, wd) < 0) kdDebug() << "inotify_rm_watch failed" << endl;
+		int c = ::close(fd);
+		if (c == 0) fd = -1;
 	}
-
-	return r;
 }
 #endif
 

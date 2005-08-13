@@ -33,6 +33,8 @@
 #include <qtimer.h>
 #include <qstring.h>
 #include <qptrlist.h>
+#include <qthread.h>
+#include <qevent.h>
 
 #include <kuniqueapplication.h>
 #include <kmainwindow.h>
@@ -44,18 +46,40 @@
 #include "klinpopupview.h"
 #include "systemtray.h"
 
-/**
- * @short Main window class
- * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.1
- */
+class KLinPopup;
+
+class newMessagesEvent : public QCustomEvent
+{
+	public:
+		newMessagesEvent() : QCustomEvent(QEvent::User+1) {}
+};
+
+class selectThread : public QThread
+{
+	public:
+		selectThread() : QThread(), fd(0), threadOwner(0), restart(true) {}
+
+		// default destructor
+
+		void setData(KLinPopup *owner, int a) { threadOwner = owner; fd = a; }
+		void stop() { restart = false; }
+
+	protected:
+		virtual void run();
+
+	private:
+		int fd;
+		KLinPopup *threadOwner;
+		bool restart;
+};
+
 class KLinPopup : public KMainWindow
 {
 	Q_OBJECT
 public:
 	KLinPopup();
 
-	// Default Destructor
+	~KLinPopup();
 
 public slots:
 	void newPopup();
@@ -63,9 +87,12 @@ public slots:
 protected:
 	void hideEvent(QHideEvent *) { hide(); }
 	void focusInEvent(QFocusEvent *);
+//	void customEvent(QCustomEvent *);
+	bool eventFilter(QObject *, QEvent *);
 
 private slots:
 	void slotQuit();
+	void slotShutdown();
 	void popupFileTimerDone();
 	void signalNewMessage(const QString &, const QString &, const QString &, const QString &, const QString &);
 	void replyPopup();
@@ -103,9 +130,11 @@ private:
 	void popupHelper();
 
 #ifdef WITH_INOTIFY
+	int fd;
 	int wd;
-	int startWatch();
-	int endWatch(int fd);
+	selectThread *watchThread;
+	void startWatch();
+	void endWatch();
 #endif
 
 	KLinPopupView *m_view;
