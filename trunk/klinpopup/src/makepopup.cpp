@@ -446,9 +446,11 @@ void makePopup::readGroupList()
 
 		kdDebug() << "own group: " << ownGroup << endl;
 		kdDebug() << "If this is WORKGROUP and you use 3.0.15/20preX we may have a problem." << endl;
-		kdDebug() << "Autodetection of own workgroup disabled." << endl;
 
-		if (ownGroup == "WORKGROUP") ownGroup = QString::null; // workaround for SAMBA 3.0.15pre2+
+		if (ownGroup == "WORKGROUP") {
+			ownGroup = QString::null; // workaround for SAMBA 3.0.15pre2+
+			kdDebug() << "Autodetection of own workgroup disabled." << endl;
+		}
 
 		SMBCFILE *dirfd;
 		struct smbc_dirent *dirp = 0;
