@@ -33,7 +33,6 @@ static const char version[] = "0.3.2pre";
 
 static KCmdLineOptions options[] =
 {
-//    { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
 	KCmdLineLastOption
 };
 
@@ -42,28 +41,24 @@ int main(int argc, char **argv)
 	KAboutData about("klinpopup", I18N_NOOP("KLinPopup"), version, description,
 					KAboutData::License_GPL, "(C) 2004, 2005 Gerd Fleischer", 0, 0, "gerdfleischer@web.de");
 	about.addAuthor( "Gerd Fleischer", 0, "gerdfleischer@web.de" );
+
 	KCmdLineArgs::init(argc, argv, &about);
 	KCmdLineArgs::addCmdLineOptions(options);
+	KUniqueApplication::addCmdLineOptions();
+
+    if (!KUniqueApplication::start())
+		return 0;
+
 	KUniqueApplication app;
 
 	bool runDocked;
 	KConfigGroup config(KGlobal::config(), "Preferences");
 	runDocked = config.readBoolEntry("RunDocked", false);
 
-	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-	if (args->count() == 0) {
-		KLinPopup *widget = new KLinPopup;
-		if (!runDocked)
-			widget->show();
-	} else {
-		int i = 0;
-		for (; i < args->count(); i++) {
-			KLinPopup *widget = new KLinPopup;
-			if (!runDocked)
-				widget->show();
-		}
-	}
-	args->clear();
+	KLinPopup *widget = new KLinPopup;
+	app.setMainWidget(widget);
+	if (!runDocked)
+		widget->show();
 
 	return app.exec();
 }
