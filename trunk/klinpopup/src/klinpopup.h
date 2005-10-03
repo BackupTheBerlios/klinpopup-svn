@@ -54,32 +54,40 @@ class newMessagesEvent : public QCustomEvent
 		newMessagesEvent() : QCustomEvent(QEvent::User+1) {}
 };
 
+class inotifyErrorEvent : public QCustomEvent
+{
+	public:
+		inotifyErrorEvent() : QCustomEvent(QEvent::User+2) {}
+};
+
 class selectThread : public QThread
 {
 	public:
-		selectThread() : QThread(), fd(0), threadOwner(0), restart(true) {}
-
-		// default destructor
-
-		void setData(KLinPopup *owner, int a) { threadOwner = owner; fd = a; }
-		void stop() { restart = false; }
+		void setData( KLinPopup* parent) { owner = parent; fd = -1, restart = 1; }
+		void stop() { restart = 0; }
 
 	protected:
 		virtual void run();
 
 	private:
-		int fd;
-		KLinPopup *threadOwner;
-		bool restart;
+		KLinPopup *owner;
+		int fd, wd, restart;
+
+		bool openInotify();
+		void closeInotify();
+		void watch();
 };
 
+/**
+ * @short Main window class
+ * @author Gerd Fleischer <gerdfleischer@web.de>
+ * @version 0.3.1
+ */
 class KLinPopup : public KMainWindow
 {
 	Q_OBJECT
 public:
 	KLinPopup();
-
-	~KLinPopup();
 
 public slots:
 	void newPopup();
@@ -87,12 +95,11 @@ public slots:
 protected:
 	void hideEvent(QHideEvent *) { hide(); }
 	void focusInEvent(QFocusEvent *);
-//	void customEvent(QCustomEvent *);
-	bool eventFilter(QObject *, QEvent *);
+	void customEvent(QCustomEvent *);
 
 private slots:
 	void slotQuit();
-	void slotShutdown();
+	void startWatch();
 	void popupFileTimerDone();
 	void signalNewMessage(const QString &, const QString &, const QString &, const QString &, const QString &);
 	void replyPopup();
@@ -119,6 +126,7 @@ private:
 	void setupActions();
 	void initSystemTray();
 	void initBars();
+	void initWatch();
 	void initTimer();
 	bool checkPopupFileDirectory();
 	void checkSmbclientBin();
@@ -129,15 +137,8 @@ private:
 	void readConfig();
 	void popupHelper();
 
-#ifdef WITH_INOTIFY
-	int fd;
-	int wd;
-	selectThread *watchThread;
-	void startWatch();
-	void endWatch();
-#endif
-
 	KLinPopupView *m_view;
+	selectThread *watcher;
 
 	//config and actions
 	KConfig *cfg;
@@ -155,6 +156,7 @@ private:
 	KAction *deletePopupAction;
 
 	int unreadMessages;
+	bool hasInotify;
 	QTimer *popupFileTimer;
 	QString messageText;
 	QString popupFileDirectory;

@@ -22,11 +22,21 @@
 
 #include <kdebug.h>
 
-#include "config.h"
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-//#include <cstdlib>
-//#include <string.h>
-//#include <time.h>
+#include <stdio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/select.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <asm/unistd.h>
+#include "inotify.h"
+#include "inotify-syscalls.h"
 
 #include <qtooltip.h>
 #include <qdir.h>
@@ -47,45 +57,58 @@
 #include <kstdaccel.h>
 #include <kstdaction.h>
 
-#ifdef WITH_INOTIFY
-#include <stdio.h>
-//#include <fstream>
-//#include <cstdio>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/select.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <asm/unistd.h>
-#include "inotify.h"
-#include "inotify-syscalls.h"
-
-//#define ALL_MASK 0xffffffff
-//#define EVENTQ_SIZE 128
-
-#endif
-
 #include "klinpopup.h"
 #include "klinpopup.moc"
 #include "settings.h"
 #include "prefs.h"
 #include "makepopup.h"
 
-void selectThread::run()
+bool selectThread::openInotify()
+{
+	fd = inotify_init();
+
+	if (fd < 0) {
+		switch (errno) {
+			case ENOSYS:
+				inotifyErrorEvent *ie = new inotifyErrorEvent();
+				kapp->postEvent(owner, ie);
+				return false;
+				break;
+		}
+	} else {
+		wd = inotify_add_watch (fd, POPUP_DIR, IN_MOVED_TO);
+		if (wd < 0) {
+			inotifyErrorEvent *ie = new inotifyErrorEvent();
+			kapp->postEvent(owner, ie);
+			closeInotify();
+			return false;
+		}
+	}
+
+	kdDebug() << "Using inotify" << endl;
+	return true;
+}
+
+void selectThread::closeInotify()
+{
+	if (fd >=0) {
+		int c = ::close(fd);
+		if (c == 0) fd = -1;
+	}
+}
+
+void selectThread::watch()
 {
 	int pending;
 	int select_retval = 1;
-
 	fd_set read_fds;
-	FD_ZERO (&read_fds);
-	FD_SET (fd, &read_fds);
-
 	struct timeval timeout;
 
 	while (select_retval >= 0 && restart) {
 		timeout.tv_sec = 2;
 		timeout.tv_usec = 0;
+		FD_ZERO (&read_fds);
+		FD_SET (fd, &read_fds);
 		select_retval = select(fd + 1, &read_fds, 0, 0, &timeout);
 		if (select_retval > 0) {
 			ioctl(fd, FIONREAD, &pending);
@@ -93,18 +116,23 @@ void selectThread::run()
 			read(fd, buffer, pending);
 			delete buffer;
 			newMessagesEvent *nm = new newMessagesEvent();
-			kapp->postEvent(threadOwner, nm);
+			kapp->postEvent(owner, nm);
 		}
 	}
+}
 
-	kdDebug() << "thread stopped" << endl;
+void selectThread::run()
+{
+	if (openInotify()) {
+		watch();
+		closeInotify();
+	}
 }
 
 KLinPopup::KLinPopup()
 	: KMainWindow( 0, "KLinPopup" ),
-	  watchThread(0),
-	  m_view(new KLinPopupView(this)),
-	  unreadMessages(0)
+	  m_view(new KLinPopupView(this)), watcher(0),
+	  unreadMessages(0), hasInotify(true)
 {
 	setFocusPolicy(QWidget::StrongFocus);
 
@@ -132,24 +160,16 @@ KLinPopup::KLinPopup()
 	connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
 			this,   SLOT(changeCaption(const QString&)));
 
+
 	updateStats();
 	checkSmbclientBin();
 
 	messageList.setAutoDelete(true);
 
-	connect(kapp, SIGNAL(shutDown()), this, SLOT(slotShutdown()));
-
-#ifdef WITH_INOTIFY
-	startWatch();
-#endif
-
-	initTimer();
-	popupFileTimer->start(1, true);
-}
-
-KLinPopup::~KLinPopup()
-{
-	delete watchThread;
+	// use a timer to finish the constructor ASAP
+	QTimer *watchTimer = new QTimer(this);
+	connect(watchTimer, SIGNAL(timeout()), this, SLOT(startWatch()));
+	watchTimer->start(1, true);
 }
 
 /**
@@ -161,23 +181,9 @@ bool KLinPopup::queryClose()
 		hide();
 		return false;
 	} else {
-		return true;
+		slotQuit();
+		return false;
 	}
-}
-
-void KLinPopup::slotQuit()
-{
-	kdDebug() << "slotQuit" << endl;
-	kapp->quit();
-}
-
-void KLinPopup::slotShutdown()
-{
-#ifdef WITH_INOTIFY
-	endWatch();
-#endif
-
-	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
 }
 
 /**
@@ -196,14 +202,15 @@ void KLinPopup::focusInEvent(QFocusEvent *e)
 	}
 }
 
-bool KLinPopup::eventFilter(QObject *, QEvent *e)
+void KLinPopup::customEvent(QCustomEvent *e)
 {
-	if (e->type() == (QEvent::User+1)) {
+	if (e->type() == QEvent::User+1) {
 		popupFileTimerDone();
-		return true;
+	} else if (e->type() == QEvent::User+2) {
+		hasInotify = false;
+		initTimer();
+		popupFileTimer->start(1, true);
 	}
-
-	return false;
 }
 
 /**
@@ -211,7 +218,7 @@ bool KLinPopup::eventFilter(QObject *, QEvent *e)
  */
 void KLinPopup::setupActions()
 {
-	KStdAction::quit(kapp, SLOT(quit()), actionCollection());
+	KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
 
 	m_menubarAction = KStdAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
 	m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
@@ -267,6 +274,20 @@ void KLinPopup::initSystemTray()
 }
 
 /**
+ * save window settings etc. and exit
+ */
+void KLinPopup::slotQuit()
+{
+	hide();
+	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
+	if (watcher) {
+		watcher->stop();
+		watcher->wait();
+	}
+	kapp->quit();
+}
+
+/**
  * Restore the status of the bars.
  * TODO: is this really the right way? Certainly not.
  */
@@ -292,6 +313,21 @@ void KLinPopup::initTimer()
 {
 	popupFileTimer = new QTimer(this);
 	connect(popupFileTimer, SIGNAL(timeout()), this, SLOT(popupFileTimerDone()));
+}
+
+void KLinPopup::startWatch()
+{
+	if (checkPopupFileDirectory()) {
+		initWatch();
+		popupFileTimerDone();
+	}
+}
+
+void KLinPopup::initWatch()
+{
+	watcher = new selectThread();
+	watcher->setData(this);
+	watcher->start();
 }
 
 /**
@@ -331,6 +367,16 @@ bool KLinPopup::checkPopupFileDirectory()
 			return true;
 		}
 	}
+
+	int tmpContinueQuit = KMessageBox::warningYesNo(this,
+													i18n("There is a serious problem with the working directory!\n"
+														 "Only sending messages will work, "
+														 "else you can manually fix and restart KLinPopup."),
+													i18n("Warning"),
+													i18n("&Continue"),
+													i18n("&Quit"),
+													"ShowWarningContinueQuit");
+	if (tmpContinueQuit != KMessageBox::Yes) slotQuit();
 
 	return false;
 }
@@ -432,65 +478,9 @@ void KLinPopup::popupFileTimerDone()
 				}
 			}
 		}
-#ifndef WITH_INOTIFY
-		popupFileTimer->start(optTimerInterval * 1000, true);
-#endif
-	} else {
-		int tmpContinueQuit = KMessageBox::warningYesNo(this,
-														i18n("There is a serious problem with the working directory!\n"
-															 "Only sending messages will work, "
-															 "else you can manually fix and restart KLinPopup."),
-														i18n("Warning"),
-														i18n("&Continue"),
-														i18n("&Quit"),
-														"ShowWarningContinueQuit");
-
-		if (tmpContinueQuit != KMessageBox::Yes) kapp->exit(1);
+		if (!hasInotify) popupFileTimer->start(optTimerInterval * 1000, true);
 	}
 }
-
-#ifdef WITH_INOTIFY
-void KLinPopup::startWatch()
-{
-	fd = inotify_init();
-
-	if (fd < 0) {
-		int _errno = errno;
-		switch (_errno) {
-			case ENOSYS:
-				kdDebug() << "Inotify not supported!  You need a "
-							 "2.6.13 kernel or later with CONFIG_INOTIFY "
-							 "enabled." << endl;
-				break;
-		}
-	} else {
-		kdDebug() << "inotify device fd = " <<  fd << endl;
-		wd = inotify_add_watch (fd, POPUP_DIR, IN_MOVED_TO);
-		if (wd < 0) {
-			kdDebug() << "inotify_add_watch failed" << endl;
-		} else {
-			watchThread = new selectThread();
-			watchThread->setData(this, fd);
-			watchThread->start();
-		}
-	}
-}
-
-void KLinPopup::endWatch()
-{
-	watchThread->stop();
-	watchThread->wait();
-//	delete watchThread;
-//	watchThread = 0;
-
-	if (fd >=0) {
-		if (inotify_rm_watch(fd, wd) < 0) kdDebug() << "inotify_rm_watch failed" << endl;
-		int c = ::close(fd);
-		if (c == 0) fd = -1;
-	}
-}
-#endif
-
 
 /**
  * append and signal a new message
@@ -836,7 +826,7 @@ void KLinPopup::settingsChanged()
 		m_systemTray->changeTrayPixmap(NEW_ICON);
 	}
 
-	popupFileTimer->changeInterval(optTimerInterval * 1000);
+	if (!hasInotify) popupFileTimer->changeInterval(optTimerInterval * 1000);
 	showPopup();
 	checkSmbclientBin();
 }

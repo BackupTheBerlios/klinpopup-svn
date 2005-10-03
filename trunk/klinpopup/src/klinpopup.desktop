@@ -9,3 +9,4 @@ DocPath=klinpopup/index.html
 Comment=Winpopup client for KDE
 Comment[de]=Winpopup Client für KDE
 Terminal=0
+X-DCOP-ServiceType=Unique

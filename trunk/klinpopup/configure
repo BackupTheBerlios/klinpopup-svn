@@ -1057,7 +1057,6 @@ Optional Features:
   --disable-threading     disables threading even if libpthread found
   --disable-rpath         do not use the rpath feature of ld
   --disable-path-check    don't try to find out, where to install
-  --enable-inotify        build with support for inotify [default=no]
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -7405,7 +7404,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7408 "configure"' > conftest.$ac_ext
+  echo '#line 7407 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8050,7 +8049,7 @@ fi
 
 
 # Provide some information about the compiler.
-echo "$as_me:8053:" \
+echo "$as_me:8052:" \
      "checking for Fortran 77 compiler version" >&5
 ac_compiler=`set X $ac_compile; echo $2`
 { (eval echo "$as_me:$LINENO: \"$ac_compiler --version </dev/null >&5\"") >&5
@@ -9082,11 +9081,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9085: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9084: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9089: \$? = $ac_status" >&5
+   echo "$as_me:9088: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -9315,11 +9314,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9318: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9317: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9322: \$? = $ac_status" >&5
+   echo "$as_me:9321: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -9382,11 +9381,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9385: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9384: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9389: \$? = $ac_status" >&5
+   echo "$as_me:9388: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -11505,7 +11504,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 11508 "configure"
+#line 11507 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11603,7 +11602,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 11606 "configure"
+#line 11605 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -13768,11 +13767,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13771: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13770: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:13775: \$? = $ac_status" >&5
+   echo "$as_me:13774: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -13835,11 +13834,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:13838: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:13837: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:13842: \$? = $ac_status" >&5
+   echo "$as_me:13841: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -15171,7 +15170,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 15174 "configure"
+#line 15173 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -15269,7 +15268,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 15272 "configure"
+#line 15271 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -16092,11 +16091,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16095: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16094: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16099: \$? = $ac_status" >&5
+   echo "$as_me:16098: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -16159,11 +16158,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16162: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16161: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:16166: \$? = $ac_status" >&5
+   echo "$as_me:16165: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -18132,11 +18131,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18135: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18134: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18139: \$? = $ac_status" >&5
+   echo "$as_me:18138: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -18365,11 +18364,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18368: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18367: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18372: \$? = $ac_status" >&5
+   echo "$as_me:18371: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings
@@ -18432,11 +18431,11 @@ else
    -e 's:.*FLAGS}? :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18435: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18434: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:18439: \$? = $ac_status" >&5
+   echo "$as_me:18438: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -20555,7 +20554,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 20558 "configure"
+#line 20557 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -20653,7 +20652,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 20656 "configure"
+#line 20655 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -29320,7 +29319,7 @@ for i in $jpeg_incdirs;
 do
   for j in jpeglib.h;
   do
-    echo "configure: 29323: $i/$j" >&5
+    echo "configure: 29322: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       jpeg_incdir=$i
@@ -29628,7 +29627,7 @@ for i in $qt_incdirs;
 do
   for j in $kde_qt_header;
   do
-    echo "configure: 29631: $i/$j" >&5
+    echo "configure: 29630: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       qt_incdir=$i
@@ -30465,7 +30464,7 @@ for i in $kde_incdirs;
 do
   for j in $kde_check_header;
   do
-    echo "configure: 30468: $i/$j" >&5
+    echo "configure: 30467: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_incdir=$i
@@ -30495,7 +30494,7 @@ for i in $kde_libdirs;
 do
   for j in $kde_check_lib;
   do
-    echo "configure: 30498: $i/$j" >&5
+    echo "configure: 30497: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_libdir=$i
@@ -30513,7 +30512,7 @@ for i in $kde_libdirs;
 do
   for j in "kde3/plugins/designer/kdewidgets.la";
   do
-    echo "configure: 30516: $i/$j" >&5
+    echo "configure: 30515: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       kde_widgetdir=$i
@@ -32015,7 +32014,7 @@ for i in $kde_sharedirs;
 do
   for j in apps/ksgmltools2/customization/kde-chunk.xsl;
   do
-    echo "configure: 32018: $i/$j" >&5
+    echo "configure: 32017: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       KDE_XSL_STYLESHEET=$i
@@ -32443,6 +32442,101 @@ _ACEOF
 
 
 
+     kde_save_LDFLAGS="$LDFLAGS"
+          kde_save_LIBS="$LIBS"
+     LDFLAGS="$LDFLAGS $all_libraries"
+     case $host_os in
+      aix*) LDFLAGS="-brtl $LDFLAGS"
+	test "$GCC" = yes && LDFLAGS="-Wl,$LDFLAGS"
+	;;
+     esac
+
+echo "$as_me:$LINENO: checking for smbc_new_context in -lsmbclient" >&5
+echo $ECHO_N "checking for smbc_new_context in -lsmbclient... $ECHO_C" >&6
+if test "${ac_cv_lib_smbclient_smbc_new_context+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lsmbclient  $LIBS"
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+/* Override any gcc2 internal prototype to avoid an error.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+/* We use char because int might match the return type of a gcc2
+   builtin and then its argument prototype would still apply.  */
+char smbc_new_context ();
+int
+main ()
+{
+smbc_new_context ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_lib_smbclient_smbc_new_context=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_lib_smbclient_smbc_new_context=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+echo "$as_me:$LINENO: result: $ac_cv_lib_smbclient_smbc_new_context" >&5
+echo "${ECHO_T}$ac_cv_lib_smbclient_smbc_new_context" >&6
+if test $ac_cv_lib_smbclient_smbc_new_context = yes; then
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LIBSMBCLIENT 1
+_ACEOF
+
+  LIBS="-lsmbclient $LIBS"
+
+else
+  { { echo "$as_me:$LINENO: error:
+Your smbclient library seems not to be up to date.
+Please install a recent version (>=3.0)" >&5
+echo "$as_me: error:
+Your smbclient library seems not to be up to date.
+Please install a recent version (>=3.0)" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+     LDFLAGS="$kde_save_LDFLAGS"
+     LIBS="$kde_save_LIBS"
+
+
+
 
 
 
@@ -32615,101 +32709,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-     kde_save_LDFLAGS="$LDFLAGS"
-          kde_save_LIBS="$LIBS"
-     LDFLAGS="$LDFLAGS $all_libraries"
-     case $host_os in
-      aix*) LDFLAGS="-brtl $LDFLAGS"
-	test "$GCC" = yes && LDFLAGS="-Wl,$LDFLAGS"
-	;;
-     esac
-
-echo "$as_me:$LINENO: checking for smbc_new_context in -lsmbclient" >&5
-echo $ECHO_N "checking for smbc_new_context in -lsmbclient... $ECHO_C" >&6
-if test "${ac_cv_lib_smbclient_smbc_new_context+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  ac_check_lib_save_LIBS=$LIBS
-LIBS="-lsmbclient  $LIBS"
-cat >conftest.$ac_ext <<_ACEOF
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
-
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char smbc_new_context ();
-int
-main ()
-{
-smbc_new_context ();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>conftest.er1
-  ac_status=$?
-  grep -v '^ *+' conftest.er1 >conftest.err
-  rm -f conftest.er1
-  cat conftest.err >&5
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; } &&
-	 { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_lib_smbclient_smbc_new_context=yes
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
-
-ac_cv_lib_smbclient_smbc_new_context=no
-fi
-rm -f conftest.err conftest.$ac_objext \
-      conftest$ac_exeext conftest.$ac_ext
-LIBS=$ac_check_lib_save_LIBS
-fi
-echo "$as_me:$LINENO: result: $ac_cv_lib_smbclient_smbc_new_context" >&5
-echo "${ECHO_T}$ac_cv_lib_smbclient_smbc_new_context" >&6
-if test $ac_cv_lib_smbclient_smbc_new_context = yes; then
-  cat >>confdefs.h <<_ACEOF
-#define HAVE_LIBSMBCLIENT 1
-_ACEOF
-
-  LIBS="-lsmbclient $LIBS"
-
-else
-  { { echo "$as_me:$LINENO: error:
-Your smbclient library seems not to be up to date.
-Please install a recent version (>=3.0)" >&5
-echo "$as_me: error:
-Your smbclient library seems not to be up to date.
-Please install a recent version (>=3.0)" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
-     LDFLAGS="$kde_save_LDFLAGS"
-     LIBS="$kde_save_LIBS"
-
-
-
 
 
 search_incs="$kde_includes /usr/local/include /usr/include"
@@ -32719,7 +32718,7 @@ for i in $search_incs;
 do
   for j in libsmbclient.h;
   do
-    echo "configure: 32722: $i/$j" >&5
+    echo "configure: 32721: $i/$j" >&5
     if test -r "$i/$j"; then
       echo "taking that" >&5
       libsmbc_incdir=$i
@@ -32737,18 +32736,6 @@ _ACEOF
 
 fi
 
-
-# Check whether --enable-inotify or --disable-inotify was given.
-if test "${enable_inotify+set}" = set; then
-  enableval="$enable_inotify"
-  if test $enableval="yes"; then
-
-cat >>confdefs.h <<\_ACEOF
-#define WITH_INOTIFY 1
-_ACEOF
-
-fi
-fi;
 
 
 DO_NOT_COMPILE="$DO_NOT_COMPILE CVS debian bsd-port admin"

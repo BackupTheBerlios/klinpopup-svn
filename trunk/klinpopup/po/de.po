@@ -1,19 +1,20 @@
 # translation of de.po to German
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de>, 2004, 2005.
+# Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-12 19:29+0200\n"
-"PO-Revision-Date: 2005-06-06 19:33+0200\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@web.de>\n"
-"Language-Team: deutsch <de@li.org>\n"
+"POT-Creation-Date: 2005-10-03 18:23+0200\n"
+"PO-Revision-Date: 2005-10-03 18:24+0200\n"
+"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
+"Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -28,39 +29,39 @@ msgid ""
 "Your emails"
 msgstr "gerdfleischer@web.de"
 
-#: klinpopup.cpp:138
+#: klinpopup.cpp:231
 msgid "&New"
 msgstr "&Neu"
 
-#: klinpopup.cpp:142
+#: klinpopup.cpp:235
 msgid "&Reply"
 msgstr "Antwo&rten"
 
-#: klinpopup.cpp:146
+#: klinpopup.cpp:239
 msgid "&First"
 msgstr "&Erste"
 
-#: klinpopup.cpp:154
+#: klinpopup.cpp:247
 msgid "&Next"
 msgstr "&Nächste"
 
-#: klinpopup.cpp:158
+#: klinpopup.cpp:251
 msgid "&Last"
 msgstr "&Letzte"
 
-#: klinpopup.cpp:162
+#: klinpopup.cpp:255
 msgid "&Unread"
 msgstr "&Ungelesene"
 
-#: klinpopup.cpp:228
+#: klinpopup.cpp:341
 msgid ""
 "Working directory /var/lib/klinpopup/ does not exist!\n"
 "Shall I create it? (May need root password)"
 msgstr ""
-"Arbeitsverzeichnis /var/lin/klinpopup/ existiert nicht!\n"
+"Arbeitsverzeichnis /var/lib/klinpopup/ existiert nicht!\n"
 "Anlegen? (Benötigt root-Passwort)"
 
-#: klinpopup.cpp:246
+#: klinpopup.cpp:359
 msgid ""
 "Permissions of the working directory /var/lib/klinpopup/ are wrong!\n"
 "Fix? (May need root password)"
@@ -68,17 +69,7 @@ msgstr ""
 "Die Berechtigungen von /var/lin/klinpopup/ sind nicht korrekt!\n"
 "Ändern? (Benötigt root-Passwort)"
 
-#: klinpopup.cpp:279
-msgid ""
-"Can't find smbclient executable!\n"
-"Sending messages will not work.\n"
-"Please set the right path in Settings->System."
-msgstr ""
-"Kann Programm smbclient nicht finden!\n"
-"Senden wird nicht funktionieren.\n"
-"Bitte den richtigen Pfad bei Einstellungen->System eingeben."
-
-#: klinpopup.cpp:361
+#: klinpopup.cpp:372
 msgid ""
 "There is a serious problem with the working directory!\n"
 "Only sending messages will work, else you can manually fix and restart "
@@ -88,75 +79,127 @@ msgstr ""
 "Nur das Senden wird funktionieren. Alternativ können sie es manuell beheben "
 "und KLinPopup neustarten."
 
-#: klinpopup.cpp:365
+#: klinpopup.cpp:376
 msgid "&Continue"
 msgstr "&Fortsetzen"
 
-#: klinpopup.cpp:446
+#: klinpopup.cpp:402
+msgid ""
+"Can't find smbclient executable!\n"
+"Sending messages will not work.\n"
+"Please set the right path in Settings->System."
+msgstr ""
+"Kann Programm smbclient nicht finden!\n"
+"Senden wird nicht funktionieren.\n"
+"Bitte den richtigen Pfad bei Einstellungen->System eingeben."
+
+#: klinpopup.cpp:556
 msgid "%1/%2"
 msgstr "%1/%2"
 
-#: klinpopup.cpp:449
+#: klinpopup.cpp:559
 msgid "Message %1/%2 - %3 Unread"
 msgstr "Nachricht %1/%2 - %3 ungelesen"
 
-#: klinpopup.cpp:542
+#: klinpopup.cpp:652
 msgid "New message"
 msgstr "Neue Nachricht"
 
-#: klinpopup.cpp:562
+#: klinpopup.cpp:671
 msgid "Reply to %1"
 msgstr "Antwort an %1"
 
-#: klinpopup.cpp:678
+#: klinpopup.cpp:786
 msgid "Settings"
 msgstr "Einstellungen"
+
+#. i18n: file klinpopupview_base.ui line 24
+#: klinpopupview_base.cpp:151 rc.cpp:6 rc.cpp:234
+#, no-c-format
+msgid "KLinPopup_base"
+msgstr "KLinPopup_base"
+
+#. i18n: file klinpopupview_base.ui line 331
+#: klinpopupview_base.cpp:153 rc.cpp:10 rc.cpp:238
+#, no-c-format
+msgid "Message from:"
+msgstr "Nachricht von:"
+
+#. i18n: file klinpopupview_base.ui line 368
+#: klinpopupview_base.cpp:156 rc.cpp:15 rc.cpp:243
+#, no-c-format
+msgid "Message time:"
+msgstr "Nachricht um:"
+
+#. i18n: file klinpopupview_base.ui line 414
+#: klinpopupview_base.cpp:160 rc.cpp:21 rc.cpp:249
+#, no-c-format
+msgid "Sender"
+msgstr "Absender"
+
+#. i18n: file klinpopupview_base.ui line 417
+#: klinpopupview_base.cpp:161 rc.cpp:24 rc.cpp:252
+#, no-c-format
+msgid "From whom this message was received."
+msgstr "Von wem die Nachricht empfangen wurde."
+
+#. i18n: file klinpopupview_base.ui line 451
+#: klinpopupview_base.cpp:163 rc.cpp:28 rc.cpp:256
+#, no-c-format
+msgid "When received"
+msgstr "Wann empfangen"
+
+#. i18n: file klinpopupview_base.ui line 454
+#: klinpopupview_base.cpp:164 rc.cpp:31 rc.cpp:259
+#, no-c-format
+msgid "When this message was received."
+msgstr "Wann die Nachricht empfangen wurde."
 
 #: main.cpp:30
 msgid "WinPopup-Client for KDE"
 msgstr "Winpopup-Client für KDE"
 
-#: main.cpp:42
+#: main.cpp:36
 msgid "KLinPopup"
 msgstr "KLinPopup"
 
-#: makepopup.cpp:93 makepopup.cpp:563
+#: makepopup.cpp:88 makepopup.cpp:562
 msgid "NO GROUP"
 msgstr "Keine Gruppe"
 
-#: makepopup.cpp:146 makepopup.cpp:224
+#: makepopup.cpp:141 makepopup.cpp:219
 msgid "From:"
 msgstr "Von:"
 
-#: makepopup.cpp:154
+#: makepopup.cpp:149
 msgid "Group:"
 msgstr "Gruppe:"
 
-#: makepopup.cpp:161 makepopup.cpp:230
+#: makepopup.cpp:156 makepopup.cpp:225
 msgid "To:"
 msgstr "An:"
 
-#: makepopup.cpp:184 makepopup.cpp:235
+#: makepopup.cpp:179 makepopup.cpp:229
 msgid "Message text"
 msgstr "Nachrichtentext"
 
-#: makepopup.cpp:210
+#: makepopup.cpp:205
 msgid "Groups/Hosts"
 msgstr "Gruppen/Hosts"
 
-#: makepopup.cpp:211
+#: makepopup.cpp:206
 msgid "Comment"
 msgstr "Kommentar"
 
-#: makepopup.cpp:279
+#: makepopup.cpp:273
 msgid "Message sent!"
 msgstr "Nachricht abgesendet!"
 
-#: makepopup.cpp:279
+#: makepopup.cpp:273
 msgid "Success"
 msgstr "Erfolg"
 
-#: makepopup.cpp:288
+#: makepopup.cpp:282
 msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
@@ -164,150 +207,96 @@ msgstr ""
 "Nachricht an %1 konnte nicht gesendet werden!\n"
 "Bearbeiten/Nochmal versuchen?"
 
-#: makepopup.cpp:339
+#: makepopup.cpp:328
 msgid "Please state an addressee!"
 msgstr "Bitte einen Empfänger eingeben!"
 
-#: makepopup.cpp:365 makepopup.cpp:551
+#: makepopup.cpp:354 makepopup.cpp:550
 msgid "Whole workgroup"
 msgstr "Ganze Arbeitsgruppe"
 
-#: makepopup.cpp:474 makepopup.cpp:476 makepopup.cpp:499
+#: makepopup.cpp:468 makepopup.cpp:470 makepopup.cpp:493
 msgid "own"
 msgstr "eigene"
 
-#: makepopup.cpp:595
+#: makepopup.cpp:593
 msgid "Choose sender"
 msgstr "Absender auswählen"
 
-#: makepopup.cpp:596
+#: makepopup.cpp:594
 msgid "This box lets you customize the sender value."
 msgstr "Mit dieser Box können sie den Absender einstellen."
 
-#: makepopup.cpp:598
+#: makepopup.cpp:596
 msgid "Available workgroups"
 msgstr "Vorhandene Arbeitsgruppen"
 
-#: makepopup.cpp:599
+#: makepopup.cpp:597
 msgid "Which workgroups are available in the network."
 msgstr "Welche Arbeitsgruppen im Netz verfügbar sind."
 
-#: makepopup.cpp:600 makepopup.cpp:603
+#: makepopup.cpp:598 makepopup.cpp:601
 msgid "Addressee(s) of this message"
 msgstr "Empfänger dieser Nachricht"
 
-#: makepopup.cpp:601 makepopup.cpp:604
+#: makepopup.cpp:599 makepopup.cpp:602
 msgid "Which computer shall receive this message?"
 msgstr "An welchen Computer die Nachricht geschickt werden soll."
 
-#: makepopup.cpp:606
+#: makepopup.cpp:604
 msgid "&Send"
 msgstr "&Senden"
 
-#: makepopup.cpp:607
+#: makepopup.cpp:605
 msgid "Alt+S"
 msgstr "Alt+S"
 
-#: makepopup.cpp:608
+#: makepopup.cpp:606
 msgid "Send the message"
 msgstr "Nachricht absenden"
 
-#: makepopup.cpp:609
+#: makepopup.cpp:607
 msgid "Send the message and close the dialog."
 msgstr "Nachricht absenden und den Dialog schließen."
 
-#: makepopup.cpp:611
+#: makepopup.cpp:609
 msgid "Alt+C"
 msgstr "Alt+B"
 
-#: makepopup.cpp:612
+#: makepopup.cpp:610
 msgid "Cancel the message"
 msgstr "Nachricht abbrechen"
 
-#: makepopup.cpp:613
+#: makepopup.cpp:611
 msgid "Cancel the dialog without sending the message."
 msgstr "Abbrechen der Nachricht ohne sie zu senden."
 
-#. i18n: file klinpopupui.rc line 4
-#: rc.cpp:3 rc.cpp:429
-#, no-c-format
-msgid "&Messages"
-msgstr "&Nachrichten"
-
-#. i18n: file klinpopupview_base.ui line 24
-#: rc.cpp:6 rc.cpp:234
-#, no-c-format
-msgid "KLinPopup_base"
-msgstr "KLinPopup_base"
-
-#. i18n: file klinpopupview_base.ui line 331
-#: rc.cpp:10 rc.cpp:238
-#, no-c-format
-msgid "Message from:"
-msgstr "Nachricht von:"
-
-#. i18n: file klinpopupview_base.ui line 368
-#: rc.cpp:15 rc.cpp:243
-#, no-c-format
-msgid "Message time:"
-msgstr "Nachricht um:"
-
-#. i18n: file klinpopupview_base.ui line 414
-#: rc.cpp:21 rc.cpp:249
-#, no-c-format
-msgid "Sender"
-msgstr "Absender"
-
-#. i18n: file klinpopupview_base.ui line 417
-#: rc.cpp:24 rc.cpp:252
-#, no-c-format
-msgid "From whom this message was received."
-msgstr "Von wem die Nachricht empfangen wurde."
-
-#. i18n: file klinpopupview_base.ui line 451
-#: rc.cpp:28 rc.cpp:256
-#, no-c-format
-msgid "When received"
-msgstr "Wann empfangen"
-
-#. i18n: file klinpopupview_base.ui line 454
-#: rc.cpp:31 rc.cpp:259
-#, no-c-format
-msgid "When this message was received."
-msgstr "Wann die Nachricht empfangen wurde."
-
 #. i18n: file prefs.ui line 24
-#: rc.cpp:34 rc.cpp:262
+#: prefs.cpp:236 rc.cpp:34 rc.cpp:262
 #, no-c-format
 msgid "Prefs"
 msgstr "Prefs"
 
-#. i18n: file prefs.ui line 50
-#: rc.cpp:37 rc.cpp:265
-#, no-c-format
-msgid "Messa&ges"
-msgstr "&Nachrichten"
-
 #. i18n: file prefs.ui line 69
-#: rc.cpp:40 rc.cpp:268
+#: prefs.cpp:237 rc.cpp:40 rc.cpp:268
 #, no-c-format
 msgid "Sender displaying"
 msgstr "Absenderanzeige"
 
 #. i18n: file prefs.ui line 108
-#: rc.cpp:43 rc.cpp:271
+#: prefs.cpp:238 rc.cpp:43 rc.cpp:271
 #, no-c-format
 msgid "Sender &name (%f)"
 msgstr "Absendername (%f)"
 
 #. i18n: file prefs.ui line 111
-#: rc.cpp:46 rc.cpp:274
+#: prefs.cpp:239 rc.cpp:46 rc.cpp:274
 #, no-c-format
 msgid "Display sender name?"
 msgstr "Absendername anzeigen?"
 
 #. i18n: file prefs.ui line 114
-#: rc.cpp:49 rc.cpp:277
+#: prefs.cpp:240 rc.cpp:49 rc.cpp:277
 #, no-c-format
 msgid "Show sender name as part of sender string for incoming messages?"
 msgstr ""
@@ -315,19 +304,19 @@ msgstr ""
 "Nachrichten anzeigen?"
 
 #. i18n: file prefs.ui line 130
-#: rc.cpp:52 rc.cpp:280
+#: prefs.cpp:241 rc.cpp:52 rc.cpp:280
 #, no-c-format
 msgid "Sender ma&chine (%m)"
 msgstr "Absendercomputer (%m)"
 
 #. i18n: file prefs.ui line 133
-#: rc.cpp:55 rc.cpp:283
+#: prefs.cpp:242 rc.cpp:55 rc.cpp:283
 #, no-c-format
 msgid "Display machine name?"
 msgstr "Absendercomputer anzeigen?"
 
 #. i18n: file prefs.ui line 136
-#: rc.cpp:58 rc.cpp:286
+#: prefs.cpp:243 rc.cpp:58 rc.cpp:286
 #, no-c-format
 msgid "Show machine name as part of sender string for incoming messages?"
 msgstr ""
@@ -335,55 +324,55 @@ msgstr ""
 "anzeigen?"
 
 #. i18n: file prefs.ui line 152
-#: rc.cpp:61 rc.cpp:289
+#: prefs.cpp:244 rc.cpp:61 rc.cpp:289
 #, no-c-format
 msgid "Sender &IP (%I)"
 msgstr "IP des Absenders (%I)"
 
 #. i18n: file prefs.ui line 155
-#: rc.cpp:64 rc.cpp:292
+#: prefs.cpp:245 rc.cpp:64 rc.cpp:292
 #, no-c-format
 msgid "Display sender IP?"
 msgstr "IP des Absenders anzeigen?"
 
 #. i18n: file prefs.ui line 158
-#: rc.cpp:67 rc.cpp:295
+#: prefs.cpp:246 rc.cpp:67 rc.cpp:295
 #, no-c-format
 msgid "Show sender IP as part of sender string for incoming messages?"
 msgstr "Absender-IP als Teil des Absenderstrings für empfangene Nachrichten anzeigen?"
 
 #. i18n: file prefs.ui line 176
-#: rc.cpp:70 rc.cpp:298
+#: prefs.cpp:247 rc.cpp:70 rc.cpp:298
 #, no-c-format
 msgid "Time displaying"
 msgstr "Zeitformat"
 
 #. i18n: file prefs.ui line 185
-#: rc.cpp:73 rc.cpp:301
+#: prefs.cpp:249 rc.cpp:73 rc.cpp:301
 #, no-c-format
 msgid "Date & Time"
 msgstr "Datum & Zeit"
 
 #. i18n: file prefs.ui line 190
-#: rc.cpp:76 rc.cpp:304
+#: prefs.cpp:250 rc.cpp:76 rc.cpp:304
 #, no-c-format
 msgid "Time"
 msgstr "Zeit"
 
 #. i18n: file prefs.ui line 195
-#: rc.cpp:79 rc.cpp:307
+#: prefs.cpp:251 rc.cpp:79 rc.cpp:307
 #, no-c-format
 msgid "Date"
 msgstr "Datum"
 
 #. i18n: file prefs.ui line 202
-#: rc.cpp:82 rc.cpp:310
+#: prefs.cpp:252 rc.cpp:82 rc.cpp:310
 #, no-c-format
 msgid "Details for time displaying"
 msgstr "Details für die Zeitanzeige"
 
 #. i18n: file prefs.ui line 205
-#: rc.cpp:85 rc.cpp:313
+#: prefs.cpp:253 rc.cpp:85 rc.cpp:313
 #, no-c-format
 msgid "What details to show for the time of received messages."
 msgstr ""
@@ -391,97 +380,97 @@ msgstr ""
 "sollen."
 
 #. i18n: file prefs.ui line 240
-#: rc.cpp:88 rc.cpp:316
+#: prefs.cpp:254 rc.cpp:88 rc.cpp:316
 #, no-c-format
 msgid "New message signaling"
 msgstr "Benachrichtigung bei neuen Nachrichten"
 
 #. i18n: file prefs.ui line 260
-#: rc.cpp:91 rc.cpp:319
+#: prefs.cpp:256 rc.cpp:91 rc.cpp:319
 #, no-c-format
 msgid "Nothing"
 msgstr "Nichts"
 
 #. i18n: file prefs.ui line 265
-#: rc.cpp:94 rc.cpp:322
+#: prefs.cpp:257 rc.cpp:94 rc.cpp:322
 #, no-c-format
 msgid "Sound and Tray"
 msgstr "Sound und Tray"
 
 #. i18n: file prefs.ui line 270
-#: rc.cpp:97 rc.cpp:325
+#: prefs.cpp:258 rc.cpp:97 rc.cpp:325
 #, no-c-format
 msgid "Activate window"
 msgstr "Fenster aktivieren"
 
 #. i18n: file prefs.ui line 275
-#: rc.cpp:100 rc.cpp:328
+#: prefs.cpp:259 rc.cpp:100 rc.cpp:328
 #, no-c-format
 msgid "All"
 msgstr "Alles"
 
 #. i18n: file prefs.ui line 290
-#: rc.cpp:103 rc.cpp:331
+#: prefs.cpp:260 rc.cpp:103 rc.cpp:331
 #, no-c-format
 msgid "Action for new messages"
 msgstr "Aktion bei neuen Nachrichten"
 
 #. i18n: file prefs.ui line 293
-#: rc.cpp:106 rc.cpp:334
+#: prefs.cpp:261 rc.cpp:106 rc.cpp:334
 #, no-c-format
 msgid "What to do when new messages are received."
 msgstr "Was soll gemacht werden wenn neue Nachrichten empfangen werden?"
 
 #. i18n: file prefs.ui line 336
-#: rc.cpp:109 rc.cpp:337
+#: prefs.cpp:262 rc.cpp:109 rc.cpp:337
 #, no-c-format
 msgid "Sound:"
 msgstr "Sound:"
 
 #. i18n: file prefs.ui line 358
-#: rc.cpp:114 rc.cpp:342
+#: prefs.cpp:265 rc.cpp:114 rc.cpp:342
 #, no-c-format
 msgid "Sound for new messages"
 msgstr "Sound für neue Nachrichten"
 
 #. i18n: file prefs.ui line 361
-#: rc.cpp:117 rc.cpp:345
+#: prefs.cpp:266 rc.cpp:117 rc.cpp:345
 #, no-c-format
 msgid "Choose which sound to play when new messages are received."
 msgstr "Auswahl welcher Sound beim Empfang neuer Nachrichten abgespielt werden soll."
 
 #. i18n: file prefs.ui line 373
-#: rc.cpp:120 rc.cpp:348
+#: prefs.cpp:267 rc.cpp:120 rc.cpp:348
 #, no-c-format
 msgid "Message Creation"
 msgstr "Nachrichtenerstellung"
 
 #. i18n: file prefs.ui line 384
-#: rc.cpp:123 rc.cpp:351
+#: prefs.cpp:268 rc.cpp:123 rc.cpp:351
 #, no-c-format
 msgid "Viewmode:"
 msgstr "Ansichtsmodus:"
 
 #. i18n: file prefs.ui line 390
-#: rc.cpp:126 rc.cpp:354
+#: prefs.cpp:270 rc.cpp:126 rc.cpp:354
 #, no-c-format
 msgid "ClassicView"
 msgstr "Klassische Ansicht"
 
 #. i18n: file prefs.ui line 395
-#: rc.cpp:129 rc.cpp:357
+#: prefs.cpp:271 rc.cpp:129 rc.cpp:357
 #, no-c-format
 msgid "TreeView"
 msgstr "Baumansicht"
 
 #. i18n: file prefs.ui line 402
-#: rc.cpp:132 rc.cpp:360
+#: prefs.cpp:272 rc.cpp:132 rc.cpp:360
 #, no-c-format
 msgid "View when writing a new message"
 msgstr "Ansicht beim Schreiben von neuen Nachrichten."
 
 #. i18n: file prefs.ui line 405
-#: rc.cpp:135 rc.cpp:363
+#: prefs.cpp:273 rc.cpp:135 rc.cpp:363
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
 msgstr ""
@@ -489,73 +478,73 @@ msgstr ""
 "werden?"
 
 #. i18n: file prefs.ui line 413
-#: rc.cpp:138 rc.cpp:366
+#: prefs.cpp:274 rc.cpp:138 rc.cpp:366
 #, no-c-format
 msgid "Encoding:"
 msgstr "Encoding:"
 
 #. i18n: file prefs.ui line 425
-#: rc.cpp:143 rc.cpp:371
+#: prefs.cpp:278 rc.cpp:143 rc.cpp:371
 #, no-c-format
 msgid "local8Bit"
 msgstr "local8Bit"
 
 #. i18n: file prefs.ui line 430
-#: rc.cpp:146 rc.cpp:374
+#: prefs.cpp:279 rc.cpp:146 rc.cpp:374
 #, no-c-format
 msgid "UTF-8"
 msgstr "UTF-8"
 
 #. i18n: file prefs.ui line 435
-#: rc.cpp:149 rc.cpp:377
+#: prefs.cpp:280 rc.cpp:149 rc.cpp:377
 #, no-c-format
 msgid "Latin1"
 msgstr "Latin1"
 
 #. i18n: file prefs.ui line 440
-#: rc.cpp:152 rc.cpp:380
+#: prefs.cpp:281 rc.cpp:152 rc.cpp:380
 #, no-c-format
 msgid "ASCII"
 msgstr "ASCII"
 
 #. i18n: file prefs.ui line 447
-#: rc.cpp:155 rc.cpp:383
+#: prefs.cpp:282 rc.cpp:155 rc.cpp:383
 #, no-c-format
 msgid "Character encoding for new messages"
 msgstr "Zeichenkodierung für neue Nachrichten"
 
 #. i18n: file prefs.ui line 450
-#: rc.cpp:158 rc.cpp:386
+#: prefs.cpp:283 rc.cpp:158 rc.cpp:386
 #, no-c-format
 msgid "Set the character encoding for new messages."
 msgstr "Einstellen der Zeichenkodierung für neue Nachrichten."
 
-#. i18n: file prefs.ui line 479
-#: rc.cpp:161 rc.cpp:389
+#. i18n: file prefs.ui line 50
+#: prefs.cpp:284 rc.cpp:37 rc.cpp:265
 #, no-c-format
-msgid "S&ystem"
-msgstr "S&ystem"
+msgid "Messa&ges"
+msgstr "&Nachrichten"
 
 #. i18n: file prefs.ui line 498
-#: rc.cpp:164 rc.cpp:392
+#: prefs.cpp:285 rc.cpp:164 rc.cpp:392
 #, no-c-format
 msgid "General Options"
 msgstr "Allgemeine Optionen"
 
 #. i18n: file prefs.ui line 537
-#: rc.cpp:167 rc.cpp:395
+#: prefs.cpp:286 rc.cpp:167 rc.cpp:395
 #, no-c-format
 msgid "Timer interval (in sec)"
 msgstr "Timerintervall (in Sek.)"
 
 #. i18n: file prefs.ui line 565
-#: rc.cpp:172 rc.cpp:400
+#: prefs.cpp:289 rc.cpp:172 rc.cpp:400
 #, no-c-format
 msgid "Interval for new messages check"
 msgstr "Intervall wie oft nach neuen Nachrichten geschaut werden soll"
 
 #. i18n: file prefs.ui line 568
-#: rc.cpp:175 rc.cpp:403
+#: prefs.cpp:290 rc.cpp:175 rc.cpp:403
 #, no-c-format
 msgid "Duration for check intervall for incoming new messages in seconds."
 msgstr ""
@@ -563,19 +552,19 @@ msgstr ""
 "soll."
 
 #. i18n: file prefs.ui line 584
-#: rc.cpp:178 rc.cpp:406
+#: prefs.cpp:291 rc.cpp:178 rc.cpp:406
 #, no-c-format
 msgid "Run do&cked"
 msgstr "Gedockt laufen"
 
 #. i18n: file prefs.ui line 587
-#: rc.cpp:181 rc.cpp:409
+#: prefs.cpp:292 rc.cpp:181 rc.cpp:409
 #, no-c-format
 msgid "Start docked and hide main window when closing"
 msgstr "Gedockt starten und Hauptfenster beim Schließen nur verstecken."
 
 #. i18n: file prefs.ui line 590
-#: rc.cpp:184 rc.cpp:412
+#: prefs.cpp:293 rc.cpp:184 rc.cpp:412
 #, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
@@ -585,28 +574,40 @@ msgstr ""
 "Systemtray weiter wenn das Fenster geschlossen wird."
 
 #. i18n: file prefs.ui line 625
-#: rc.cpp:187 rc.cpp:415
+#: prefs.cpp:294 rc.cpp:187 rc.cpp:415
 #, no-c-format
 msgid "System"
 msgstr "System"
 
 #. i18n: file prefs.ui line 639
-#: rc.cpp:190 rc.cpp:418
+#: prefs.cpp:295 rc.cpp:190 rc.cpp:418
 #, no-c-format
 msgid "smbclient-Bin:"
 msgstr "smbclient-Bin:"
 
 #. i18n: file prefs.ui line 653
-#: rc.cpp:195 rc.cpp:423
+#: prefs.cpp:298 rc.cpp:195 rc.cpp:423
 #, no-c-format
 msgid "Path to smbclient"
 msgstr "Pfad zu smbclient"
 
 #. i18n: file prefs.ui line 656
-#: rc.cpp:198 rc.cpp:426
+#: prefs.cpp:299 rc.cpp:198 rc.cpp:426
 #, no-c-format
 msgid "The Path to your smbclient binary."
 msgstr "Der Pfad zum smbclient-Programm."
+
+#. i18n: file prefs.ui line 479
+#: prefs.cpp:300 rc.cpp:161 rc.cpp:389
+#, no-c-format
+msgid "S&ystem"
+msgstr "S&ystem"
+
+#. i18n: file klinpopupui.rc line 4
+#: rc.cpp:3 rc.cpp:429
+#, no-c-format
+msgid "&Messages"
+msgstr "&Nachrichten"
 
 #. i18n: file klinpopup.kcfg line 7
 #: rc.cpp:201

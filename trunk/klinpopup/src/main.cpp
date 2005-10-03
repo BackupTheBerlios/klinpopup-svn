@@ -31,11 +31,6 @@ static const char description[] =
 
 static const char version[] = "0.3.2pre";
 
-static KCmdLineOptions options[] =
-{
-	KCmdLineLastOption
-};
-
 int main(int argc, char **argv)
 {
 	KAboutData about("klinpopup", I18N_NOOP("KLinPopup"), version, description,
@@ -43,7 +38,6 @@ int main(int argc, char **argv)
 	about.addAuthor( "Gerd Fleischer", 0, "gerdfleischer@web.de" );
 
 	KCmdLineArgs::init(argc, argv, &about);
-	KCmdLineArgs::addCmdLineOptions(options);
 	KUniqueApplication::addCmdLineOptions();
 
     if (!KUniqueApplication::start())
@@ -56,7 +50,6 @@ int main(int argc, char **argv)
 	runDocked = config.readBoolEntry("RunDocked", false);
 
 	KLinPopup *widget = new KLinPopup;
-	app.setMainWidget(widget);
 	if (!runDocked)
 		widget->show();
 

@@ -430,7 +430,6 @@ void makePopup::initSmbCtx()
 		smbCtx = smbc_init_context(smbCtx);
 		smbc_set_context(smbCtx);
 	} // else what?
-	kdDebug() << "really initialized smbCtx" << endl;
 }
 
 /**
@@ -445,10 +444,10 @@ void makePopup::readGroupList()
 		ownGroup = QString::fromUtf8(smbCtx->workgroup, -1);
 
 		kdDebug() << "own group: " << ownGroup << endl;
-		kdDebug() << "If this is WORKGROUP and you use 3.0.15/20preX we may have a problem." << endl;
 
 		if (ownGroup == "WORKGROUP") {
 			ownGroup = QString::null; // workaround for SAMBA 3.0.15pre2+
+			kdDebug() << "If this is WORKGROUP and you use Samba >= 3.0.20 we may have a problem." << endl;
 			kdDebug() << "Autodetection of own workgroup disabled." << endl;
 		}
 
@@ -489,10 +488,17 @@ void makePopup::readGroupList()
 		smbCtx->closedir(smbCtx, dirfd);
 	}
 
-	// initialize with own group if possible
+	// initialize with own group if possible or if it's only one
 	if (!ownGroup.isEmpty()) {
 		if (viewMode == CLASSIC_VIEW) groupBox->setCurrentText(ownGroup + " (" + i18n("own") + ")");
 		currentGroup = ownGroup;
+		readHosts.start();
+	} else if (viewMode == CLASSIC_VIEW && groupBox->count() == 2) {
+		groupBox->setCurrentItem(1);
+		currentGroup = groupBox->currentText();
+		readHosts.start();
+	} else if (viewMode == TREE_VIEW && groupTreeView->childCount() == 1) {
+		currentGroup = groupTreeView->firstChild()->text(0);
 		readHosts.start();
 	}
 }
@@ -503,7 +509,6 @@ void makePopup::readGroupList()
 void makePopup::readHostList()
 {
 	if (smbCtx != 0) {
-
 
 		SMBCFILE *dirfd;
 		struct smbc_dirent *dirp = 0;

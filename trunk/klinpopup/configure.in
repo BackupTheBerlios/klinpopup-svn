@@ -69,12 +69,12 @@ dnl PACKAGE set before
 AC_C_BIGENDIAN
 AC_CHECK_KDEMAXPATHLEN
 
-KDE_CHECK_HEADER(libsmbclient.h,, AC_MSG_ERROR([
-Required header libsmbclient.h is missing! (usually it is in the libsmbclient devel package)]))
-
 KDE_CHECK_LIB(smbclient, smbc_new_context, [] ,AC_MSG_ERROR([
 Your smbclient library seems not to be up to date.
 Please install a recent version (>=3.0)]))
+
+KDE_CHECK_HEADER(libsmbclient.h,, AC_MSG_ERROR([
+Required header libsmbclient.h is missing! (usually it is in the libsmbclient devel package)]))
 
 AC_DEFUN([AC_HAVE_SMBCCTX_OPTIONS],
 [
@@ -87,11 +87,6 @@ fi
 ])
 
 AC_HAVE_SMBCCTX_OPTIONS
-
-AC_ARG_ENABLE(inotify, AC_HELP_STRING([--enable-inotify], [build with support for inotify @<:@default=no@:>@]),
-if test $enableval="yes"; then
-    AC_DEFINE(WITH_INOTIFY, 1, [Define to 1 if klinpopup should be built with inotify support])
-fi,)
 KDE_CREATE_SUBDIRSLIST
 AC_CONFIG_FILES([ Makefile ])
 AC_CONFIG_FILES([ doc/Makefile ])
