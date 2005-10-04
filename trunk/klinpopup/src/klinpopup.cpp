@@ -279,7 +279,7 @@ void KLinPopup::initSystemTray()
 void KLinPopup::slotQuit()
 {
 	hide();
-	if (settingsDirty() && autoSaveSettings()) saveAutoSaveSettings();
+	saveAutoSaveSettings();
 	if (watcher) {
 		watcher->stop();
 		watcher->wait();
