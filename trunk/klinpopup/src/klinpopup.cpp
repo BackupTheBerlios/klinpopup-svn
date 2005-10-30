@@ -152,8 +152,6 @@ KLinPopup::KLinPopup()
 
 	initSystemTray();
 
-	initBars();
-
 	// allow the view to change the statusbar and caption
 	connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
 			this,   SLOT(changeStatusbar(const QString&)));
@@ -220,9 +218,10 @@ void KLinPopup::setupActions()
 {
 	KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
 
+	setStandardToolBarMenuEnabled(true);
+	createStandardStatusBarAction();
+
 	m_menubarAction = KStdAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
-	m_toolbarAction = KStdAction::showToolbar(this, SLOT(optionsShowToolbar()), actionCollection());
-	m_statusbarAction = KStdAction::showStatusbar(this, SLOT(optionsShowStatusbar()), actionCollection());
 
 	KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
 	KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
@@ -288,25 +287,6 @@ void KLinPopup::slotQuit()
 }
 
 /**
- * Restore the status of the bars.
- * TODO: is this really the right way? Certainly not.
- */
-void KLinPopup::initBars()
-{
-	bool showMenuBar = cfg->readBoolEntry("showMenuBar", true);
-	m_menubarAction->setChecked(showMenuBar);
-	optionsShowMenubar();
-
-	bool showToolBar = cfg->readBoolEntry("showToolBar", true);
-	m_toolbarAction->setChecked(showToolBar);
-	optionsShowToolbar();
-
-	bool showStatusBar = cfg->readBoolEntry("showStatusBar", true);
-	m_statusbarAction->setChecked(showStatusBar);
-	optionsShowStatusbar();
-}
-
-/**
  * init the popupFileTimer
  */
 void KLinPopup::initTimer()
@@ -346,13 +326,13 @@ bool KLinPopup::checkPopupFileDirectory()
 		}
 	} else {
 		KFileItem tmpFileItem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, "/var/lib/klinpopup");
-		QString tmpPerms = tmpFileItem.permissionsString();
+		mode_t tmpPerms = tmpFileItem.permissions();
 
 		#ifdef MY_EXTRA_DEBUG
 		kdDebug() << tmpPerms << endl;
 		#endif
 
-		if (tmpPerms != "drwxrwxrwx") {
+		if (tmpPerms != 0777) {
 
 			kdDebug() << "Perms not ok!" << endl;
 
@@ -712,41 +692,10 @@ void KLinPopup::popupHelper()
  */
 void KLinPopup::optionsShowMenubar()
 {
-	if (m_menubarAction->isChecked())
+	if (menuBar()->isHidden())
 		menuBar()->show();
 	else
 		menuBar()->hide();
-
-	cfg->writeEntry("showMenuBar", m_menubarAction->isChecked());
-	cfg->sync();
-}
-
-/**
- * toggle Toolbar
- */
-void KLinPopup::optionsShowToolbar()
-{
-	if (m_toolbarAction->isChecked())
-		toolBar()->show();
-	else
-		toolBar()->hide();
-
-	cfg->writeEntry("showToolBar", m_toolbarAction->isChecked());
-	cfg->sync();
-}
-
-/**
- * toggle Statusbar
- */
-void KLinPopup::optionsShowStatusbar()
-{
-	if (m_statusbarAction->isChecked())
-		statusBar()->show();
-	else
-		statusBar()->hide();
-
-	cfg->writeEntry("showStatusBar", m_statusbarAction->isChecked());
-	cfg->sync();
 }
 
 /**

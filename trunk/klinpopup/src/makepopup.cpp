@@ -428,8 +428,10 @@ void makePopup::initSmbCtx()
 		smbCtx->options.urlencode_readdir_entries = 1;
 #endif
 		smbCtx = smbc_init_context(smbCtx);
-		smbc_set_context(smbCtx);
-	} // else what?
+//		smbc_set_context(smbCtx);
+	} else {
+		kdDebug() << "Error getting new smbCtx!" << endl;
+	}
 }
 
 /**

@@ -110,8 +110,6 @@ private slots:
 	void unreadPopup();
 	void deletePopup() { messageList.remove(); showPopup(); popupHelper(); }
 	void optionsShowMenubar();
-	void optionsShowToolbar();
-	void optionsShowStatusbar();
 	void optionsConfigureKeys() { KKeyDialog::configure(actionCollection()); }
 	void optionsConfigureToolbars();
 	void optionsPreferences();
@@ -125,7 +123,6 @@ private:
 	void setupAccel();
 	void setupActions();
 	void initSystemTray();
-	void initBars();
 	void initWatch();
 	void initTimer();
 	bool checkPopupFileDirectory();
@@ -144,8 +141,6 @@ private:
 	KConfig *cfg;
 	SystemTray *m_systemTray;
 	KToggleAction *m_menubarAction;
-	KToggleAction *m_toolbarAction;
-	KToggleAction *m_statusbarAction;
 	KAction *newPopupAction;
 	KAction *replyPopupAction;
 	KAction *firstPopupAction;
