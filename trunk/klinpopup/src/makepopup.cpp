@@ -459,7 +459,7 @@ void makePopup::readGroupList()
 		// first level should be the workgroups
 		dirfd = smbCtx->opendir(smbCtx, "smb://");
 
-		if (dirfd >= 0) {
+		if (dirfd) {
 			do {
 				dirp = smbCtx->readdir(smbCtx, dirfd);
 				if (dirp == 0) break;
@@ -521,8 +521,9 @@ void makePopup::readHostList()
 //		kdDebug() << tmpGroup << endl;
 
 		dirfd = smbCtx->opendir(smbCtx, tmpGroup);
+//		kdDebug() << dirfd << endl;
 
-		if (dirfd >= 0) {
+		if (dirfd) {
 			do {
 				dirp = smbCtx->readdir(smbCtx, dirfd);
 				if (dirp == 0) break;

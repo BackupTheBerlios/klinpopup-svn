@@ -10,14 +10,12 @@
 
 %define DIST %(if [ -r /etc/SuSE-release ]; then echo "SuSE"; else echo "Unknown"; fi)
 
-#BuildRequires: aaa_base acl attr bash bind-utils bison bzip2 coreutils cpio cpp cracklib cvs cyrus-sasl db devs diffutils e2fsprogs file filesystem fillup findutils flex gawk gdbm-devel glibc glibc-devel glibc-locale gpm grep groff gzip info insserv less libacl libattr libgcc libnscd libselinux libstdc++ libxcrypt libzio m4 make man mktemp module-init-tools ncurses ncurses-devel net-tools netcfg openldap2-client openssl pam pam-modules patch permissions popt procinfo procps psmisc pwdutils rcs readline sed strace syslogd sysvinit tar tcpd texinfo timezone unzip util-linux vim zlib zlib-devel arts arts-devel autoconf automake binutils expat fam fam-devel fontconfig fontconfig-devel freeglut freeglut-devel freetype2 freetype2-devel gcc gcc-c++ gdbm gettext glib2 glib2-devel gnome-filesystem jack jack-devel kdelibs3 kdelibs3-devel kdelibs3-doc libart_lgpl libart_lgpl-devel libidn libidn-devel libjpeg libjpeg-devel liblcms liblcms-devel libmng libmng-devel libpng libpng-devel libstdc++-devel libtiff libtiff-devel libtool libxml2 libxml2-devel libxslt libxslt-devel openssl-devel pcre pcre-devel perl qt3 qt3-devel rpm update-desktop-files xorg-x11-Mesa xorg-x11-Mesa-devel xorg-x11-devel xorg-x11-libs
-
 Name:         klinpopup
-URL:          http://www.gerdfleischer.de/wireless.html
+URL:          http://www.gerdfleischer.de/klinpopup.php
 License:      GPL
 Group:        Productivity/Networking/Samba
 Summary:      Send and Receive Messages via SMB
-Version:      0.3.1
+Version:      0.3.2rc1
 Release:      1
 Requires:     /usr/bin/smbclient
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build

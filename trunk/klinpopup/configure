@@ -1952,7 +1952,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=klinpopup
- VERSION=0.3.2pre1
+ VERSION=0.3.2rc1
 
 
 cat >>confdefs.h <<_ACEOF

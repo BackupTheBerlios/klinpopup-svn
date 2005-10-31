@@ -1,20 +1,17 @@
-goals for the next release (0.3.2)
-
--real event queue for inotify
--solve crashes, double free or corruption, invalid next size etc. on exit
+bugfixing
 
 SAMBA problems: -%f between samba itself are only underlines
                  (fixed in 3.0.11)
                 -sending nearly every character except the euro sign works?
                 -since 3.0.12 (e.g. SUSE 9.3) %m isn't replaced by the netbios name anymore but
-                 by the IP of the client (will be fixed in next release)
+                 by the IP of the client (fixed in 3.0.14)
                 -since 3.0.15pre2 smbctx->workgroup not initialized with own workgroup
-                 (autodetection does not work)
+                 (autodetection does not work, create a $HOME/.smb/smb.conf.append with a
+                  workgroup = ... entry to workaround)
 
 later/not so important
 -check if cached servers are still good?
 -sending messages with libsmbclient really not possible?
--improve remembering and restoring tool-, menu-, statusbar status
 -improve spec file (other dists than SuSE?)
 
 always:

@@ -26,7 +26,7 @@ An URL for a freeware GUI for Windows(R) is http://www.netsendgui.de.vu/.
 Gerd Fleischer <gerdfleischer@web.de>
 
 This program, including all files in src/, admin/, debian/, templates/, po/ and the png images in src/icons,
-is released under the GNU General Public License Version 2 (see file COPYING).
+except acinclude.m4 und admin/acinclude.m4.in, which are LGPL, is released under the GNU General Public License Version 2 (see file COPYING).
 
 The documentation in doc/ is released under the
 GNU Free Documentation License Version 1.2 (see file GFDL).
