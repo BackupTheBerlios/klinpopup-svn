@@ -29,7 +29,7 @@
 static const char description[] =
 	I18N_NOOP("WinPopup-Client for KDE");
 
-static const char version[] = "0.3.2rc1";
+static const char version[] = "0.3.2";
 
 int main(int argc, char **argv)
 {
