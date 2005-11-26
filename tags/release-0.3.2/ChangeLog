@@ -1,0 +1,139 @@
+0.3.2
+-using inotify (0.24 - kernel >= 2.6.13rc3) for message arrival notification if available
+-replaced showToolBar + friends with recommended members
+
+0.3.1
+-updated russian, spanish, brazilian portuguese and vietnamese translations
+
+0.3.1rc3
+-fixed documentation building
+
+0.3.1rc2
+-updated and corrected licensing
+-updated french translation
+
+0.3.1rc1
+-little changes to libsmbclient initalization
+-updated norwegian translation
+-documentation updates
+-tweaks to time handling
+
+0.3.1pre2
+-added treeview mode for makepopup
+-a lot of little code changes/fixes/new bugs
+
+0.3a
+-new translation: french (by Pascal and me, quite rough though)
+-new translation: brazilian portuguese (Thanks to Cesar A. Ramina)
+-fix a small message count bug
+
+0.3.1pre1
+-dry and rough translation to french by Pascal and me (some additional help by a native speaker would be cool ;-)
+-new translation: brazilian portuguese (Thanks to Cesar A. Ramina)
+-sending one message to more than one host (separated by space) or whole workgroup
+-discovered i18n args ;-)
+
+0.3
+-fixed crash if cancelling new popup while browse threads still running
+-updated norwegian, spanish and vietnamese translation
+
+0.3rc1
+-new translation: vietnamese (Thanks to Khuc Ngoc Vinh)
+-fix configure to give an error if libsmbclient devel is not installed
+-documentation updates
+
+0.3pre3
+-small fix for desktop file to show handbook in khelpcenter
+-slightly changed behavior of start docked - now run docked
+-properly quit from systemtray
+-made readGroupList and readHostsList threads (not blocking)
+-2s timeout for libsmbclient
+
+0.3pre2
+- started converting to use libsmbclient
+
+0.3pre1
+-check that host-, login- and fullname are not empty
+-initialize makepopup with own workgroup if possible
+-indicate textfield in makepopup clearer (for Mirko)
+-use -g option for smbclient and QRegExp for parsing (cleaner code)
+-show own group at makepopup start if possible
+-tabbed config dialog
+-use kdeinitexecWait instead of KProcess for kdesu
+-if possible indicate own workgroup in makePopup
+-complete smbclient path instead of part w/o binary in options
+-time format configurable and automatically localized
+-moved messages to a class and manage them with a QPtrList
+
+0.2.1
+-made field for received messages white on request by Mirko Himmel
+-updated translations
+-fixed time order of received messages
+-makePopup is now a custom QWidget and simple toplevel window
+-reworked check for empty receiver (catch accel)
+ the dialog is now only accepted after the smbclient has exited
+ I hope this does not cause problems (works for me so far)
+-if sending message gives an error ask to edit/try again
+-code cleanup
+-updated documentation
+-remembering and restoring (not only position, also enabled/disabled) of the bars my own way for now
+-unified i18n Popup/Message to Message (despite the app name being KLinPopup ;-)
+-now that configure toolbars works implemented
+    first and last popup button
+    search unread button
+-made "configure toolbar" work
+-show comment for hosts in makePopup
+-added conf option to state the smbuser for the local master
+ (can be useful if you have an empty host list)
+
+0.2
+-check exitStatus of KProcess in all places
+-check for empty receiver for new messages
+-restricted message size to 1600 bytes
+-added some default shortcuts
+-switched popen calls in makePopup to KProcess
+-moved prefs-base direct to prefs
+ this makes --enable-final work
+-new translation: spanish (Thanks to Pablo Navarro)
+-updated other translations
+-fixed small bug not clearing hostBox for NO GROUP
+-fixed another small unread message counting bug
+
+0.1.5
+-can set local master
+-path to smbclient (someone in /usr/local/bin?), check for
+-tried to improve localization issues for message sending
+ (I need feedback on this, e.g. euro sign still won't work for me)
+-new translations: russian (Thanks to Damir R. Islamov)
+                   norwegian (Thanks to Alexander N. Sørnes)
+-slightly improved debianization (menu)
+
+0.1.4
+-"new" icons copied from kopete, thanks
+-improved error handling when working directory is missing
+-made timer interval adjustable
+-fixed unread messages counting bug
+-some documentation and translation updates
+
+0.1.3
+-allow choose/input sender value for new messages
+-improved error handling when working directory is missing (not perfect yet)
+-when replying, sender machine (%m) is now default receiver (more reliable?)
+-composing sender value of sender name/machine/ip possible
+ (ATTENTION - message command has changed!)
+
+0.1.2
+-some translation and documentation updates
+-improved tooltips and statusbar texts a little
+-implemented unread message counting
+
+0.1.1
+-makepopup designer based
+-changed lib directory to klinpopup
+-create first rough spec file
+
+0.1
+-initial release
+-mostly a clone of KPopup from Torsten Henschel
+ and a KDevelop template
+-some code copied from juk, kscd

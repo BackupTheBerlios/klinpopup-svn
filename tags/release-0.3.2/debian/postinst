@@ -1,0 +1,58 @@
+#!/bin/sh
+# klinpopup postinst
+
+set -e
+
+
+yesno() {
+    retval=$1
+    question="$2"
+    while :
+    do
+        echo -n "$question"
+        read ans
+        case "x$ans" in
+            x[yY]*)     return 0;;
+            x[nN]*)     return 1;;
+            x)          return $retval;;  # default
+            x*)         echo "Please respond with y or n";;
+        esac
+    done
+}
+
+
+case "$1" in
+    configure)
+        if [ ! -d /var/lib/klinpopup ]; then
+            echo "The directory where incoming messages are temporarily stored does not exist."
+	    if yesno 0 'Shall I create it? [Y/n] '; then
+	        mkdir -vp /var/lib/klinpopup
+	        chmod -v 0777 /var/lib/klinpopup
+	    fi
+	else
+	    PERMS=`ls -la /var/lib/|grep klinpopup|cut -c-10`
+	    if [ "$PERMS" != "drwxrwxrwx" ]; then
+	        chmod -v 0777 /var/lib/klinpopup
+	    fi	
+	fi    
+        
+        if [ -x /usr/bin/update-menus ]; then
+            /usr/bin/update-menus
+        fi
+        
+        echo
+        echo "Please make sure your message command in smb.conf is ok (see README)."
+        echo "I will not do this for you. Thanks."
+
+        exit 0
+        ;;
+    abort-upgrade)
+        ;;
+    abort-remove)
+        ;;
+    abort-deconfigure)
+        ;;
+    *)
+        echo "postinst called with unexpected argument '$1', ignored."
+        ;;
+esac

@@ -1,0 +1,13 @@
+Source: klinpopup
+Section: net
+Priority: optional
+Maintainer: Gerd Fleischer <gerdfleischer@web.de>
+Build-Depends: debhelper (>= 4.0.0), kdelibs4-dev (>=3.2.0), libsmbclient-dev, cdbs
+Standards-Version: 3.6.2
+
+Package: klinpopup
+Architecture: any
+Depends: ${shlibs:Depends}, , libsmbclient, smbclient
+Description: A Winpopup client for KDE
+ A program for KDE to send and receive popup messages
+ like the "net send" command on windows. Only better.
