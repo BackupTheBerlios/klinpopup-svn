@@ -27,6 +27,14 @@
             <label>Sound URL</label>
             <default>/usr/share/sounds/KDE_Chimes_2.ogg</default>
     </entry>
+    <entry name="ExternalCommand" type="Bool">
+            <label>Additional external command</label>
+            <default>false</default>
+    </entry>
+    <entry name="ExternalCommandURL" type="String">
+            <label>URL of external command</label>
+            <default></default>
+    </entry>
     <entry name="RunDocked" type="Bool">
             <label>Run docked</label>
             <default>false</default>

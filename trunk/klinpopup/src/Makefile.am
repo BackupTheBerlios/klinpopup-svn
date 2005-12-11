@@ -19,7 +19,7 @@ klinpopup_LDADD   = $(LIB_KFILE) -lsmbclient
 
 # which sources should be compiled for klinpopup
 klinpopup_SOURCES = settings.kcfgc main.cpp klinpopup.cpp klinpopupview.cpp \
-	klinpopupview_base.ui systemtray.cpp makepopup.cpp prefs.ui
+	klinpopupview_base.ui systemtray.cpp makepopup.cpp prefs_base.ui prefs.cpp
 
 xdg_apps_DATA = klinpopup.desktop
 kde_kcfg_DATA = klinpopup.kcfg

@@ -524,6 +524,8 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			updateStats();
 			break;
 	}
+
+	if (optExternalCommand) runExternalCommand();
 }
 
 /**
@@ -688,6 +690,23 @@ void KLinPopup::popupHelper()
 }
 
 /**
+ * run an external command
+ */
+void KLinPopup::runExternalCommand()
+{
+	QString program = QString::null;
+	QString args = QString::null;
+	int pos = optExternalCommandURL.find(" ");
+	if (pos > 0) {
+		program = optExternalCommandURL.left(pos);
+		args = optExternalCommandURL.right(optExternalCommandURL.length() - pos - 1);
+		KApplication::kdeinitExec(program, args); // don't care about the result
+	} else if (!optExternalCommandURL.isEmpty()) {
+		KApplication::kdeinitExec(program, args); // don't care about the result
+	}
+}
+
+/**
  * toggle Menubar
  */
 void KLinPopup::optionsShowMenubar()
@@ -748,7 +767,9 @@ void KLinPopup::readConfig()
 	optDisplayIP = Settings::displayIP();
 	optTimeFormat = Settings::timeFormat();
 	optNewMessageSignaling = Settings::toggleSignaling();
-	optNewPopupSound = Settings::soundURL();
+	optNewPopupSound = Settings::soundURL().stripWhiteSpace();
+	optExternalCommand = Settings::externalCommand();
+	optExternalCommandURL = Settings::externalCommandURL().stripWhiteSpace();
 	optTimerInterval= Settings::timerInterval();
 	optMakePopupView = Settings::makePopupView();
 	optSmbclientBin=Settings::smbclientBin();

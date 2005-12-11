@@ -133,6 +133,7 @@ private:
 	QString createSenderText();
 	void readConfig();
 	void popupHelper();
+	void runExternalCommand();
 
 	KLinPopupView *m_view;
 	selectThread *watcher;
@@ -166,6 +167,8 @@ private:
 	int optTimeFormat;
 	int optNewMessageSignaling;
 	QString optNewPopupSound;
+	bool optExternalCommand;
+	QString optExternalCommandURL;
 	int optMakePopupView;
 	QString optSmbclientBin;
 	int optEncoding;
