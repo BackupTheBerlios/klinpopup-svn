@@ -40,5 +40,6 @@ void Prefs::disableExternalCommandURL(bool toggle)
 {
 	kcfg_ExternalCommandURL->setDisabled(!toggle);
 }
+
 // kate: tab-width 4; indent-width 4; replace-trailing-space-save on;
 

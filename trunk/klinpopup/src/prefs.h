@@ -27,10 +27,12 @@
 class Prefs : public Prefs_base
 {
 	Q_OBJECT
-	public:
-		Prefs();
-	public slots:
-		void disableExternalCommandURL(bool toggle);
+
+public:
+	Prefs();
+
+public slots:
+	void disableExternalCommandURL(bool toggle);
 };
 
 #endif // PREFS_H
