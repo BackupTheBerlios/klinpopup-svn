@@ -41,6 +41,7 @@
 #include <qtooltip.h>
 #include <qdir.h>
 #include <qfile.h>
+#include <qstringlist.h>
 
 #include <kwin.h>
 #include <kconfigdialog.h>
@@ -700,9 +701,9 @@ void KLinPopup::runExternalCommand()
 	if (pos > 0) {
 		program = optExternalCommandURL.left(pos);
 		args = optExternalCommandURL.right(optExternalCommandURL.length() - pos - 1);
-		KApplication::kdeinitExec(program, args); // don't care about the result
+		KApplication::kdeinitExec(program, QStringList::split(" ", args)); // don't care about the result
 	} else if (!optExternalCommandURL.isEmpty()) {
-		KApplication::kdeinitExec(program, args); // don't care about the result
+		KApplication::kdeinitExec(program); // don't care about the result
 	}
 }
 
@@ -769,7 +770,7 @@ void KLinPopup::readConfig()
 	optNewMessageSignaling = Settings::toggleSignaling();
 	optNewPopupSound = Settings::soundURL().stripWhiteSpace();
 	optExternalCommand = Settings::externalCommand();
-	optExternalCommandURL = Settings::externalCommandURL().stripWhiteSpace();
+	optExternalCommandURL = Settings::externalCommandURL().simplifyWhiteSpace();
 	optTimerInterval= Settings::timerInterval();
 	optMakePopupView = Settings::makePopupView();
 	optSmbclientBin=Settings::smbclientBin();
