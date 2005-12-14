@@ -1,3 +1,7 @@
+0.3.3
+-added italian translation (Thanks to Daniele Bortoluzzi)
+-option for an external command for notification
+
 0.3.2
 -using inotify (0.24 - kernel >= 2.6.13rc3) for message arrival notification if available
 -replaced showToolBar + friends with recommended members
