@@ -41,8 +41,8 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>2005-05-08</date>
-<releaseinfo>0.3.1</releaseinfo>
+<date>2005-12-14</date>
+<releaseinfo>0.3.3</releaseinfo>
 
 <abstract>
 <para>
@@ -382,6 +382,22 @@ The usage of KLinPopup is pretty straightforward. Use the menu items or icons to
 <varlistentry>
 <term><menuchoice>
 <guimenu>Messages</guimenu>
+<guibutton>Additional external command</guibutton>
+</menuchoice></term>
+<listitem><para>Run an external command when a new message arrives.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
+<guibutton>External command URL</guibutton>
+</menuchoice></term>
+<listitem><para>The external command with path and parameters. Please wrap scrips in sh -c "". You don't need &#038;.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Messages</guimenu>
 <guibutton>Viewmode</guibutton>
 </menuchoice></term>
 <listitem><para>Viewmode for creation of new messages (classic with comboboxes or treeview).</para></listitem>
@@ -408,7 +424,7 @@ The usage of KLinPopup is pretty straightforward. Use the menu items or icons to
 <guimenu>System</guimenu>
 <guibutton>Timer interval</guibutton>
 </menuchoice></term>
-<listitem><para>Set the timer interval for new incoming messages check.</para></listitem>
+<listitem><para>Set the timer interval for new incoming messages check. Not used if inotify is found.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -459,6 +475,8 @@ Translators, Testing, Tips:
 <listitem><para>Cesar A. Ramina <email>linux225159-geral@yahoo.com.br</email></para>
 </listitem>
 <listitem><para>Pascal Solignac</para>
+</listitem>
+<listitem><para>Daniele Bortoluzzi</para>
 </listitem>
 </itemizedlist>
 </para>

@@ -40,8 +40,8 @@
 </copyright>
 <legalnotice>&FDLNotice;</legalnotice>
 
-<date>08.05.2005</date>
-<releaseinfo>0.3.1</releaseinfo>
+<date>14.12.2005</date>
+<releaseinfo>0.3.3</releaseinfo>
 
 <abstract>
 <para>
@@ -383,6 +383,22 @@ Man kann über das Menü oder die Toolbar-Icons Nachrichten senden, beantworten,
 <varlistentry>
 <term><menuchoice>
 <guimenu>Nachrichten</guimenu>
+<guibutton>Zusätzlicher externer Befehl</guibutton>
+</menuchoice></term>
+<listitem><para>Externen Befehl bei Empfang einer neuen Nachricht ausführen.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Nachrichten</guimenu>
+<guibutton>URL für externen Befehl</guibutton>
+</menuchoice></term>
+<listitem><para>Externer Befehl mit Pfad und Parametern. Skripte bitte mit sh -c "" ausführen. Das &#038; wird nicht gebraucht.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Nachrichten</guimenu>
 <guibutton>Ansichtsmodus</guibutton>
 </menuchoice></term>
 <listitem><para>Ansichtsmodus für die Erstellung von neuen Nachrichten (klassisch mit Comboboxen oder Baumansicht).</para></listitem>
@@ -462,6 +478,8 @@ Beiträge von:
 <listitem><para>Cesar A. Ramina <email>linux225159-geral@yahoo.com.br</email></para>
 </listitem>
 <listitem><para>Pascal Solignac</para>
+</listitem>
+<listitem><para>Daniele Bortoluzzi</para>
 </listitem>
 </itemizedlist>
 </para>
