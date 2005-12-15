@@ -15,7 +15,7 @@ URL:          http://www.gerdfleischer.de/klinpopup.php
 License:      GPL
 Group:        Productivity/Networking/Samba
 Summary:      Send and Receive Messages via SMB
-Version:      0.3.2
+Version:      0.3.3rc1
 Release:      1
 Requires:     /usr/bin/smbclient
 BuildRoot:    %{_tmppath}/%{name}-%{version}-build
