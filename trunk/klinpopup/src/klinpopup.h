@@ -81,7 +81,7 @@ class selectThread : public QThread
 /**
  * @short Main window class
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.2
+ * @version 0.3.3rc1
  */
 class KLinPopup : public KMainWindow
 {

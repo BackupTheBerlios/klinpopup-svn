@@ -13,7 +13,7 @@
 /**
  * @short Main view
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.2
+ * @version 0.3.3rc1
  */
 class KLinPopupView : public KLinPopupview_base
 {
