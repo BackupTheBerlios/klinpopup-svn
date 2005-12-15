@@ -1,5 +1,3 @@
-# translation of ru.po to Deutsch
-# translation of ru.po to
 # translation of ru.po to
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
@@ -11,13 +9,13 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 2005-12-14 17:08+0100\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"PO-Revision-Date: 16.12.2005 03:26\n"
+"Last-Translator: Damir R. Islamov <damir@land5.nsu.ru>\n"
+"Language-Team:  <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.11.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -42,7 +40,7 @@ msgstr "&Ответить"
 
 #: klinpopup.cpp:239
 msgid "&First"
-msgstr "&Первое сообщение"
+msgstr "П&ервое сообщение"
 
 #: klinpopup.cpp:247
 msgid "&Next"
@@ -50,7 +48,7 @@ msgstr "&Следующее сообщение"
 
 #: klinpopup.cpp:251
 msgid "&Last"
-msgstr "П&оследнее сообщение"
+msgstr "&Последнее сообщение"
 
 #: klinpopup.cpp:255
 msgid "&Unread"
@@ -102,7 +100,7 @@ msgstr "%1/%2"
 
 #: klinpopup.cpp:542
 msgid "Message %1/%2 - %3 Unread"
-msgstr "Сообщения %1/%2 - %3 непрочитанны"
+msgstr "Сообщение %1/%2 - %3 непрочитано"
 
 #: klinpopup.cpp:635
 msgid "New message"
@@ -252,7 +250,7 @@ msgstr "&Отправить"
 
 #: makepopup.cpp:608
 msgid "Alt+S"
-msgstr "Alt+O"
+msgstr "Alt+S"
 
 #: makepopup.cpp:609
 msgid "Send the message"
@@ -264,7 +262,7 @@ msgstr "Отправить сообщение и закрыть окно."
 
 #: makepopup.cpp:612
 msgid "Alt+C"
-msgstr "Alt+T"
+msgstr "Alt+C"
 
 #: makepopup.cpp:613
 msgid "Cancel the message"
@@ -404,7 +402,7 @@ msgstr "Активировать окно"
 #: prefs_base.cpp:264 rc.cpp:100 rc.cpp:338
 #, no-c-format
 msgid "All"
-msgstr "Всё"
+msgstr "Всё вместе"
 
 #. i18n: file prefs_base.ui line 290
 #: prefs_base.cpp:265 rc.cpp:103 rc.cpp:341
@@ -442,7 +440,7 @@ msgstr "Выберете звук для проигрывания при пол�
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Дополнительная внешняя команда"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
@@ -650,7 +648,7 @@ msgstr "URL звукового файла"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL внешней комманды"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
