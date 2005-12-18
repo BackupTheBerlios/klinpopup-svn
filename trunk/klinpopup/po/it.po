@@ -3,21 +3,21 @@
 # Traduzione italiana KLinpop
 # This file is distributed under the GNU General Public License Version 2
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
-#
 # Daniele Bortoluzzi <digital.death@gmx.it>, 2005.
 # Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 2005-12-14 17:06+0100\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"PO-Revision-Date: 2005-12-17 20:25+0000\n"
+"Last-Translator: Daniele Bortoluzzi <digital.death@gmx.it>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.10.1\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -61,7 +61,7 @@ msgid ""
 "Shall I create it? (May need root password)"
 msgstr ""
 "La cartella /var/lib/klinpopup non esiste!\n"
-"La devo creare? (Pu�essere richiesta la password di root)"
+"La devo creare? (Può essere richiesta la password di root)"
 
 #: klinpopup.cpp:340
 msgid ""
@@ -69,7 +69,7 @@ msgid ""
 "Fix? (May need root password)"
 msgstr ""
 "I permessi della cartella /var/lib/klinpopup non sono corretti!\n"
-"Li aggiusto? (Pu�essere richiesta la password di root)"
+"Li aggiusto? (Può essere richiesta la password di root)"
 
 #: klinpopup.cpp:353
 msgid ""
@@ -77,8 +77,8 @@ msgid ""
 "Only sending messages will work, else you can manually fix and restart "
 "KLinPopup."
 msgstr ""
-"Si �verificato un problema critico nella cartella di lavoro!\n"
-"Funzioner�solo l'invio di messaggi, altrimenti pu�intervenire manualmente e "
+"Si è verificato un problema critico nella cartella di lavoro!\n"
+"Funzionerà solo l'invio di messaggi, altrimenti puoi intervenire manualmente e "
 "riavviare KLinPopup"
 
 #: klinpopup.cpp:357
@@ -92,7 +92,8 @@ msgid ""
 "Please set the right path in Settings->System."
 msgstr ""
 "Impossibile eseguire smbclient!\n"
-"Non sar�possibile inviare messaggiInserire il percorso corretto nel menù "
+"Non sarà possibile inviare messaggi. "
+"Inserire il percorso corretto nel menù "
 "Impostazioni->Sistema."
 
 #: klinpopup.cpp:539
@@ -143,7 +144,7 @@ msgstr "Mittente"
 #: klinpopupview_base.cpp:162 rc.cpp:24 rc.cpp:262
 #, no-c-format
 msgid "From whom this message was received."
-msgstr "Dal quale �stato ricevuto il messaggio"
+msgstr "Dal quale è stato ricevuto il messaggio"
 
 #. i18n: file klinpopupview_base.ui line 451
 #: klinpopupview_base.cpp:164 rc.cpp:28 rc.cpp:266
@@ -155,7 +156,7 @@ msgstr "Quando venga ricevuto"
 #: klinpopupview_base.cpp:165 rc.cpp:31 rc.cpp:269
 #, no-c-format
 msgid "When this message was received."
-msgstr "Quando �stato ricevuto questo messaggio"
+msgstr "Quando è stato ricevuto questo messaggio"
 
 #: main.cpp:30
 msgid "WinPopup-Client for KDE"
@@ -167,7 +168,7 @@ msgstr "KLinPopup"
 
 #: makepopup.cpp:88 makepopup.cpp:565
 msgid "NO GROUP"
-msgstr "SENZA GRUPPO"
+msgstr "NESSUN GRUPPO"
 
 #: makepopup.cpp:141 makepopup.cpp:219
 msgid "From:"
@@ -206,7 +207,7 @@ msgid ""
 "Message could not be sent to %1!\n"
 "Edit/Try again?"
 msgstr ""
-"Non �stato possibile spedire il messaggio a %1!\n"
+"Non è stato possibile spedire il messaggio a %1!\n"
 "Modifica/Prova di nuovo?"
 
 #: makepopup.cpp:328
@@ -277,7 +278,7 @@ msgstr "Chiudere la finestra di dialogo senza mandare il messaggio"
 #: prefs_base.cpp:241 rc.cpp:34 rc.cpp:272
 #, no-c-format
 msgid "Prefs_base"
-msgstr "Prefs_base"
+msgstr "Pref_base"
 
 #. i18n: file prefs_base.ui line 69
 #: prefs_base.cpp:242 rc.cpp:40 rc.cpp:278
@@ -325,7 +326,7 @@ msgstr "Visualizzare il nome della macchina come stringa dei messaggi in arrivo?
 #: prefs_base.cpp:249 rc.cpp:61 rc.cpp:299
 #, no-c-format
 msgid "Sender &IP (%I)"
-msgstr "Mittente &IP (%I)"
+msgstr "&IP del mittente (%I)"
 
 #. i18n: file prefs_base.ui line 155
 #: prefs_base.cpp:250 rc.cpp:64 rc.cpp:302
@@ -441,7 +442,7 @@ msgstr "Scegli quale suono riprodurre quando si ricevono messaggi nuovi"
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Comando esterno addizionale"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
@@ -649,7 +650,7 @@ msgstr "URL del suono"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL del comando esterno"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
