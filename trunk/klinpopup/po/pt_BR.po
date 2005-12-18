@@ -1,22 +1,24 @@
+# translation of pt_BR.po to Brazilian Portuguese
 # translation of pt_BR.po to Deutsch
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
-#
 # Cesar A. Ramina <linux225159-geral@@@@yahoo.com.br>, 2005.
 # Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
+# Cesar A. Ramina <linux225159@@@@yahoo.com.br>, 2005.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 2005-12-14 17:07+0100\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"PO-Revision-Date: 2005-12-18 09:50-0200\n"
+"Last-Translator: Cesar A. Ramina <linux225159@@@@yahoo.com.br>\n"
+"Language-Team: Brazilian Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -189,7 +191,6 @@ msgid "Groups/Hosts"
 msgstr "Grupos/Servidores"
 
 #: makepopup.cpp:206
-#, fuzzy
 msgid "Comment"
 msgstr "Comentário"
 
@@ -218,9 +219,8 @@ msgid "Whole workgroup"
 msgstr "Todo grupo de trabalho"
 
 #: makepopup.cpp:470 makepopup.cpp:472 makepopup.cpp:495
-#, fuzzy
 msgid "own"
-msgstr "(próprio)"
+msgstr "próprio"
 
 #: makepopup.cpp:596
 msgid "Choose sender"
@@ -442,25 +442,25 @@ msgstr "Qual som será reproduzido quando chegar uma nova mensagem."
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Comando externo adicional"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Message Creation"
-msgstr "Texto da mensagem"
+msgstr "Criação da mensagem"
 
 #. i18n: file prefs_base.ui line 400
 #: prefs_base.cpp:275 rc.cpp:127 rc.cpp:365
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Viewmode:"
-msgstr "Tipo de Visualização:"
+msgstr "Modo de Visualização:"
 
 #. i18n: file prefs_base.ui line 406
 #: prefs_base.cpp:277 rc.cpp:130 rc.cpp:368
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ClassicView"
-msgstr "Clássico"
+msgstr "Modo Clássico"
 
 #. i18n: file prefs_base.ui line 411
 #: prefs_base.cpp:278 rc.cpp:133 rc.cpp:371
@@ -476,7 +476,7 @@ msgstr "Ajustar a visualização para novas mensagens"
 
 #. i18n: file prefs_base.ui line 421
 #: prefs_base.cpp:280 rc.cpp:139 rc.cpp:377
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "What viewmode should be used when writing new messages."
 msgstr "Qual tipo de visualização será usado para novas mensagens."
 
@@ -566,7 +566,7 @@ msgstr "Começar minimizado e ocultar a janela principal ao fechar"
 
 #. i18n: file prefs_base.ui line 606
 #: prefs_base.cpp:300 rc.cpp:188 rc.cpp:426
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
 "window is closed."
@@ -650,7 +650,7 @@ msgstr "Som URL"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL do comando externo"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
@@ -666,7 +666,7 @@ msgstr "Intervalo de tempo"
 
 #. i18n: file klinpopup.kcfg line 47
 #: rc.cpp:235
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Viewmode for message creation"
 msgstr "Tipo de visualização para criação de mensages"
 

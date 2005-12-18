@@ -1,4 +1,7 @@
 0.3.3
+-updated russian, brazilian portuguese, german translation
+-updated documentation
+-updated inotify header
 -added italian translation (Thanks to Daniele Bortoluzzi)
 -option for an external command for notification
 

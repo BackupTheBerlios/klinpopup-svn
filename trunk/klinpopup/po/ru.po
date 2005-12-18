@@ -1,3 +1,4 @@
+# translation of ru.po to Deutsch
 # translation of ru.po to
 # This file is distributed under the GNU General Public License Version 2.
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
@@ -9,13 +10,13 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 16.12.2005 03:26\n"
-"Last-Translator: Damir R. Islamov <damir@land5.nsu.ru>\n"
-"Language-Team:  <ru@li.org>\n"
+"PO-Revision-Date: 2005-12-18 11:07+0100\n"
+"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
+"Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.1\n"
+"X-Generator: KBabel 1.11\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -250,7 +251,7 @@ msgstr "&Отправить"
 
 #: makepopup.cpp:608
 msgid "Alt+S"
-msgstr "Alt+S"
+msgstr "Alt+O"
 
 #: makepopup.cpp:609
 msgid "Send the message"
@@ -262,7 +263,7 @@ msgstr "Отправить сообщение и закрыть окно."
 
 #: makepopup.cpp:612
 msgid "Alt+C"
-msgstr "Alt+C"
+msgstr "Alt+T"
 
 #: makepopup.cpp:613
 msgid "Cancel the message"
