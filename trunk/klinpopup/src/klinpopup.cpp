@@ -322,7 +322,9 @@ bool KLinPopup::checkPopupFileDirectory()
 		int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Working directory /var/lib/klinpopup/ does not exist!\n"
 															 "Shall I create it? (May need root password)"));
 		if (tmpYesNo == KMessageBox::Yes) {
-			QString kdesuArgs = "mkdir -p -m 0777 /var/lib/klinpopup";
+			QStringList kdesuArgs;
+			kdesuArgs += "-c";
+			kdesuArgs += "mkdir -p -m 0777 /var/lib/klinpopup";
 			if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0) return true;
 		}
 	} else {
@@ -340,7 +342,9 @@ bool KLinPopup::checkPopupFileDirectory()
 			int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Permissions of the working directory /var/lib/klinpopup/ are wrong!\n"
 																 "Fix? (May need root password)"));
 			if (tmpYesNo == KMessageBox::Yes) {
-				QString kdesuArgs = "chmod 0777 /var/lib/klinpopup";
+				QStringList kdesuArgs;
+				kdesuArgs += "-c";
+				kdesuArgs += "chmod 0777 /var/lib/klinpopup";
 				if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0)
 					return true;
 			}
