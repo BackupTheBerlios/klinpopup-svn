@@ -100,7 +100,7 @@ msgstr "%1/%2"
 
 #: klinpopup.cpp:542
 msgid "Message %1/%2 - %3 Unread"
-msgstr "Mensaje 1%/%2 - %3 Sin leer"
+msgstr "Mensaje %1/%2 - %3 Sin leer"
 
 #: klinpopup.cpp:635
 msgid "New message"
@@ -148,7 +148,7 @@ msgstr "De quien fue recibido este mensaje."
 #: klinpopupview_base.cpp:164 rc.cpp:28 rc.cpp:266
 #, no-c-format
 msgid "When received"
-msgstr "Cuando sea recibido"
+msgstr "Hora de recibo"
 
 #. i18n: file klinpopupview_base.ui line 454
 #: klinpopupview_base.cpp:165 rc.cpp:31 rc.cpp:269
@@ -210,7 +210,7 @@ msgstr ""
 
 #: makepopup.cpp:328
 msgid "Please state an addressee!"
-msgstr "Por favor introduzca una dirección"
+msgstr "Por favor introduzca una dirección!"
 
 #: makepopup.cpp:354 makepopup.cpp:553
 msgid "Whole workgroup"
@@ -230,7 +230,7 @@ msgstr "Esta opción le permite personalizar los valores del remitente."
 
 #: makepopup.cpp:599
 msgid "Available workgroups"
-msgstr "Grupos de trabajo entero"
+msgstr "Grupos de trabajo disponibles"
 
 #: makepopup.cpp:600
 msgid "Which workgroups are available in the network."
@@ -242,7 +242,7 @@ msgstr "Dirección(es) de este mensaje"
 
 #: makepopup.cpp:602 makepopup.cpp:605
 msgid "Which computer shall receive this message?"
-msgstr "Qué ordenador debe recibir el mensaje?."
+msgstr "¿Qué ordenador debe recibir el mensaje?."
 
 #: makepopup.cpp:607
 msgid "&Send"
@@ -250,7 +250,7 @@ msgstr "&Enviar"
 
 #: makepopup.cpp:608
 msgid "Alt+S"
-msgstr "Alt+S"
+msgstr "Alt+E"
 
 #: makepopup.cpp:609
 msgid "Send the message"
@@ -300,7 +300,7 @@ msgstr "¿Mostrar el nombre del remitente?"
 #: prefs_base.cpp:245 rc.cpp:49 rc.cpp:287
 #, no-c-format
 msgid "Show sender name as part of sender string for incoming messages?"
-msgstr "Mostrar el nombre del remitente en la cabecera de los mensajes recibidos?"
+msgstr "¿Mostrar el nombre del remitente en la cabecera de los mensajes recibidos?"
 
 #. i18n: file prefs_base.ui line 130
 #: prefs_base.cpp:246 rc.cpp:52 rc.cpp:290
@@ -318,7 +318,7 @@ msgstr "¿Mostrar el nombre de la máquina?"
 #: prefs_base.cpp:248 rc.cpp:58 rc.cpp:296
 #, no-c-format
 msgid "Show machine name as part of sender string for incoming messages?"
-msgstr "Mostrar el nombre de la máquina en la cabecera de los mensajes recibidos?"
+msgstr "¿Mostrar el nombre de la máquina en la cabecera de los mensajes entrantes?"
 
 #. i18n: file prefs_base.ui line 152
 #: prefs_base.cpp:249 rc.cpp:61 rc.cpp:299
@@ -330,7 +330,7 @@ msgstr "&IP del Remitente (%I)"
 #: prefs_base.cpp:250 rc.cpp:64 rc.cpp:302
 #, no-c-format
 msgid "Display sender IP?"
-msgstr "Mostrar IP del remitente?"
+msgstr "¿Mostrar IP del remitente?"
 
 #. i18n: file prefs_base.ui line 158
 #: prefs_base.cpp:251 rc.cpp:67 rc.cpp:305
@@ -366,13 +366,13 @@ msgstr "Fecha"
 #: prefs_base.cpp:257 rc.cpp:82 rc.cpp:320
 #, no-c-format
 msgid "Details for time displaying"
-msgstr "Detaller para el formato de tiempo mostrado"
+msgstr "Detalles para el formato de tiempo mostrado"
 
 #. i18n: file prefs_base.ui line 205
 #: prefs_base.cpp:258 rc.cpp:85 rc.cpp:323
 #, no-c-format
 msgid "What details to show for the time of received messages."
-msgstr "Qué detalles se mostrarán, para el tiempo de los mensajes recibidos."
+msgstr "Que detalles se mostrarán, para el tiempo de los mensajes recibidos."
 
 #. i18n: file prefs_base.ui line 240
 #: prefs_base.cpp:259 rc.cpp:88 rc.cpp:326
@@ -414,7 +414,7 @@ msgstr "Acción a realizar para el mensaje nuevo"
 #: prefs_base.cpp:266 rc.cpp:106 rc.cpp:344
 #, no-c-format
 msgid "What to do when new messages are received."
-msgstr "Qué acción realizar cuando se reciba un mensaje nuevo?"
+msgstr "Que acción realizar cuando se reciba un mensaje nuevo"
 
 #. i18n: file prefs_base.ui line 336
 #: prefs_base.cpp:267 rc.cpp:109 rc.cpp:347
@@ -440,7 +440,7 @@ msgstr "Elegir qué sonido será reproducido cuando se reciba un mensaje."
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Comando externo adicional"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
@@ -470,7 +470,7 @@ msgstr "Vista en árbol"
 #: prefs_base.cpp:279 rc.cpp:136 rc.cpp:374
 #, no-c-format
 msgid "View when writing a new message"
-msgstr "Vista escribinedo un mensaje nuevo"
+msgstr "Modo de Vista escribiendo un mensaje nuevo"
 
 #. i18n: file prefs_base.ui line 421
 #: prefs_base.cpp:280 rc.cpp:139 rc.cpp:377
@@ -648,7 +648,7 @@ msgstr "Sonido URL"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL del comando externo"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
