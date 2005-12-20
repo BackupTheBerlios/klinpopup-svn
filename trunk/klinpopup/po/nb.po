@@ -1,20 +1,22 @@
+# translation of nb.po to
 # translation of nb.po to Deutsch
+# This file is distributed under the GNU General Public License Version 2.
 # Alexander N. Sørnes <alex@thehandofagony.com>, 2005.
 # Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
-# This file is distributed under the GNU General Public License Version 2.
-# Copyright (C) Gerd Fleischer <gerdfleischer@web.de>, 2005;
+# Copyright (C) Gerd Fleischer <gerdfleischer@web.de>, 2005;.
+# Alexander Nicolaysen Sørnes <alex@thehandofagony.com>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 2005-12-14 17:07+0100\n"
-"Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
-"Language-Team: Deutsch <de@li.org>\n"
+"PO-Revision-Date: 2005-12-19 23:18+0000\n"
+"Last-Translator: Alexander Nicolaysen Sørnes <alex@thehandofagony.com>\n"
+"Language-Team:  <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.10.2\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: _translatorinfo.cpp:1
@@ -58,16 +60,16 @@ msgid ""
 "Working directory /var/lib/klinpopup/ does not exist!\n"
 "Shall I create it? (May need root password)"
 msgstr ""
-"Arbeidskatalogen '/var/lib/klinpopup/' eksisterer ikke.\n"
-"Skal jeg opprette den? (Krever kanskje 'root'-passord.)"
+"Arbeidskatalogen «/var/lib/klinpopup/» finnes ikke.\n"
+"Skal den opprettes? (Krever kanskje «root»-passord.)"
 
 #: klinpopup.cpp:340
 msgid ""
 "Permissions of the working directory /var/lib/klinpopup/ are wrong!\n"
 "Fix? (May need root password)"
 msgstr ""
-"Arbeidskatalogen '/var/lib/klinpopup/' har ikke riktige tillatelser.\n"
-"Skal det ordnes? (Krever kanskje 'root'-passord.)"
+"Arbeidskatalogen «/var/lib/klinpopup/» har ikke riktige tillatelser.\n"
+"Skal det ordnes? (Krever kanskje «root»-passord.)"
 
 #: klinpopup.cpp:353
 msgid ""
@@ -89,7 +91,7 @@ msgid ""
 "Sending messages will not work.\n"
 "Please set the right path in Settings->System."
 msgstr ""
-"Kan ikke finne 'smbclient'-programmet:\n"
+"Klarte ikke finne «smbclient»-programmet:\n"
 "det vil ikke gå an å sende meldinger.\n"
 "Oppgi hvor programmet er i Innstillinger->System."
 
@@ -157,7 +159,7 @@ msgstr "Når denne meldingen ble mottatt."
 
 #: main.cpp:30
 msgid "WinPopup-Client for KDE"
-msgstr "'WinPopup'-program for KDE"
+msgstr "«WinPopup»-program for KDE"
 
 #: main.cpp:36
 msgid "KLinPopup"
@@ -261,7 +263,7 @@ msgstr "Send meldingen og lukk denne dialogboksen."
 
 #: makepopup.cpp:612
 msgid "Alt+C"
-msgstr "Alt+C"
+msgstr "Alt+A"
 
 #: makepopup.cpp:613
 msgid "Cancel the message"
@@ -439,7 +441,7 @@ msgstr "Velg hvilken lyd som skal spilles når nye meldinger mottas."
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Ytterligere ekstern kommando"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
@@ -581,19 +583,19 @@ msgstr "System"
 #: prefs_base.cpp:302 rc.cpp:194 rc.cpp:432
 #, no-c-format
 msgid "smbclient-Bin:"
-msgstr "'smbclient'-program:"
+msgstr "«smbclient»-program:"
 
 #. i18n: file prefs_base.ui line 669
 #: prefs_base.cpp:305 rc.cpp:199 rc.cpp:437
 #, no-c-format
 msgid "Path to smbclient"
-msgstr "Sti til 'smbclient'"
+msgstr "Sti til «smbclient»"
 
 #. i18n: file prefs_base.ui line 672
 #: prefs_base.cpp:306 rc.cpp:202 rc.cpp:440
 #, no-c-format
 msgid "The Path to your smbclient binary."
-msgstr "Stien til 'smbclient'-programmet."
+msgstr "Stien til «smbclient»-programmet."
 
 #. i18n: file prefs_base.ui line 495
 #: prefs_base.cpp:307 rc.cpp:165 rc.cpp:403
@@ -647,7 +649,7 @@ msgstr "Lyd-URL"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL til ekstern kommando"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
@@ -671,7 +673,7 @@ msgstr "Visningsmodus for meldingsskriving"
 #: rc.cpp:238
 #, no-c-format
 msgid "smbclient-Bin"
-msgstr "'smbclient'-program:"
+msgstr "«smbclient»-program:"
 
 #. i18n: file klinpopup.kcfg line 55
 #: rc.cpp:241
