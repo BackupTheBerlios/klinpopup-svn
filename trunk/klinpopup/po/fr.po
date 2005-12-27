@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-14 17:02+0100\n"
-"PO-Revision-Date: 2005-12-14 17:06+0100\n"
+"PO-Revision-Date: 2005-12-27 11:26+0100\n"
 "Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -441,7 +441,7 @@ msgstr "Choisir le son produit a la reception de nouveaux messages."
 #: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
 #, no-c-format
 msgid "Additional external command"
-msgstr ""
+msgstr "Ordre externe additionnel"
 
 #. i18n: file prefs_base.ui line 389
 #: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
@@ -651,7 +651,7 @@ msgstr "URL de son"
 #: rc.cpp:226
 #, no-c-format
 msgid "URL of external command"
-msgstr ""
+msgstr "URL de l'ordre externe"
 
 #. i18n: file klinpopup.kcfg line 39
 #: rc.cpp:229
