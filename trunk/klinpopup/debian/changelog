@@ -1,8 +1,8 @@
-klinpopup (0.3.2+0.3.3rc1-1) unstable; urgency=low
+klinpopup (0.3.3-1) unstable; urgency=low
 
-  * updated to 0.3.3rc1
+  * updated to 0.3.3
 
- -- Gerd Fleischer <gerdfleischer@web.de>  Thu, 15 Dec 2005 10:09:00 +0100
+ -- Gerd Fleischer <gerdfleischer@web.de>  Fri, 30 Dec 2005 10:09:00 +0100
 
 klinpopup (0.3.2-1) unstable; urgency=low
 

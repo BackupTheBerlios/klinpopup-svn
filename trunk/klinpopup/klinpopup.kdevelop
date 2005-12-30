@@ -3,7 +3,7 @@
   <general>
     <author>Gerd Fleischer</author>
     <email>gerdfleischer@web.de</email>
-    <version>0.3.3rc1</version>
+    <version>0.3.3</version>
     <projectmanagement>KDevKDEAutoProject</projectmanagement>
     <primarylanguage>C++</primarylanguage>
     <keywords>

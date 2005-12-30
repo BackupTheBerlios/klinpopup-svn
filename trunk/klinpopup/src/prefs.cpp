@@ -15,12 +15,13 @@
 *   You should have received a copy of the GNU General Public License     *
 *   along with this program; if not, write to the                         *
 *   Free Software Foundation, Inc.,                                       *
-*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+*   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
-//#include <kdebug.h>
+#include <kdebug.h>
 
 #include <qcheckbox.h>
+#include <qcombobox.h>
 
 #include <kurlrequester.h>
 
@@ -30,13 +31,30 @@
 Prefs::Prefs()
 	: Prefs_base()
 {
-	if (!kcfg_ExternalCommand->isChecked())
-		kcfg_ExternalCommandURL->setDisabled(true);
-
-	connect(kcfg_ExternalCommand, SIGNAL(toggled(bool)), this, SLOT(disableExternalCommandURL(bool)));
+	connect(kcfg_ToggleSignaling, SIGNAL(activated(int)), this, SLOT(toggleSoundURL(int)));
+	connect(kcfg_ExternalCommand, SIGNAL(toggled(bool)), this, SLOT(toggleExternalCommandURL(bool)));
 }
 
-void Prefs::disableExternalCommandURL(bool toggle)
+void Prefs::toggleURLs()
+{
+	if (kcfg_ToggleSignaling->currentItem() == 0 || kcfg_ToggleSignaling->currentItem() == 2)
+		kcfg_SoundURL->setDisabled(true);
+	else
+		kcfg_SoundURL->setDisabled(false);
+
+	if (!kcfg_ExternalCommand->isChecked())
+		kcfg_ExternalCommandURL->setDisabled(true);
+}
+
+void Prefs::toggleSoundURL(int index)
+{
+	if (index == 0 || index == 2)
+		kcfg_SoundURL->setDisabled(true);
+	else
+		kcfg_SoundURL->setDisabled(false);
+}
+
+void Prefs::toggleExternalCommandURL(bool toggle)
 {
 	kcfg_ExternalCommandURL->setDisabled(!toggle);
 }

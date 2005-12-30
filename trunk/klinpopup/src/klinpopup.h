@@ -1,5 +1,5 @@
 /***************************************************************************
-*   Copyright (C) 2004 by Gerd Fleischer                                  *
+*   Copyright (C) 2004, 2005 by Gerd Fleischer                                  *
 *   gerdfleischer@web.de                                                  *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
@@ -15,7 +15,7 @@
 *   You should have received a copy of the GNU General Public License     *
 *   along with this program; if not, write to the                         *
 *   Free Software Foundation, Inc.,                                       *
-*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+*   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
 #ifndef KLINPOPUP_H
@@ -81,7 +81,7 @@ class selectThread : public QThread
 /**
  * @short Main window class
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.3rc1
+ * @version 0.3.3
  */
 class KLinPopup : public KMainWindow
 {

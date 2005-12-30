@@ -15,7 +15,7 @@
 *   You should have received a copy of the GNU General Public License     *
 *   along with this program; if not, write to the                         *
 *   Free Software Foundation, Inc.,                                       *
-*   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+*   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
 //#define MY_EXTRA_DEBUG
@@ -756,9 +756,11 @@ void KLinPopup::optionsPreferences()
 		// compare the names of the widgets in the .ui file
 		// to the names of the variables in the .kcfg file
 		KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self(), KDialogBase::Swallow);
-		dialog->addPage(new Prefs(), i18n("Settings"), "settings");
+		Prefs *prefs = new Prefs();
+		dialog->addPage(prefs, i18n("Settings"), "settings");
 		connect(dialog, SIGNAL(settingsChanged()), this, SLOT(settingsChanged()));
 		dialog->show();
+		prefs->toggleURLs();
 }
 
 /**
