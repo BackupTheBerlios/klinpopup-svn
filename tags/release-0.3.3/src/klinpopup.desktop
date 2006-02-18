@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=KLinPopup
+Exec=klinpopup %i %m -caption "%c"
+Icon=klinpopup
+Type=Application
+Categories=Qt;KDE;Network;InstantMessaging
+DocPath=klinpopup/index.html
+Comment=Winpopup client for KDE
+Comment[de]=Winpopup Client für KDE
+Terminal=0
+X-DCOP-ServiceType=Unique

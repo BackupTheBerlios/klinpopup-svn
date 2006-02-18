@@ -1,0 +1,48 @@
+With this program you can receive and send popup messages like e.g.
+with net send from a windows computer.
+
+Features:
+-can start docked only
+-adjustable new message signaling (e.g. sound, tray pix, activate window)
+Wow!
+
+To build from svn you must do a
+make -f Makefile.cvs
+
+Then follow the instructions in INSTALL.
+
+For this to work you must configure samba correctly (e.g. name resolution).
+Add or change the line smb.conf:
+message command = sh -c '_PATH_TO_/receivepopup.sh "%f" "%m" "%I" "%s"' &
+(of course the real path for _PATH_TO_)
+
+Then you should create the appropriate directory where the messages go to.
+mkdir -vp -m 0777 /var/lib/klinpopup
+
+That's it! Now you can stress the nerves of your colleagues or so.
+
+An URL for a freeware GUI for Windows(R) is http://www.netsendgui.de.vu/.
+
+Gerd Fleischer <gerdfleischer@web.de>
+
+This program, including all files in src/, admin/, debian/, templates/, po/ and the png images in src/icons,
+except acinclude.m4 und admin/acinclude.m4.in, which are LGPL, is released under the GNU General Public License Version 2 (see file COPYING).
+
+The documentation in doc/ is released under the
+GNU Free Documentation License Version 1.2 (see file GFDL).
+
+KLinPopup - Copyright (C) 2004, 2005 Gerd Fleischer
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA

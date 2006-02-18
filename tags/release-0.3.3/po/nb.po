@@ -1,0 +1,687 @@
+# translation of nb.po to
+# translation of nb.po to Deutsch
+# This file is distributed under the GNU General Public License Version 2.
+# Alexander N. Sørnes <alex@thehandofagony.com>, 2005.
+# Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
+# Copyright (C) Gerd Fleischer <gerdfleischer@web.de>, 2005;.
+# Alexander Nicolaysen Sørnes <alex@thehandofagony.com>, 2005.
+msgid ""
+msgstr ""
+"Project-Id-Version: nb\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-12-14 17:02+0100\n"
+"PO-Revision-Date: 2005-12-19 23:18+0000\n"
+"Last-Translator: Alexander Nicolaysen Sørnes <alex@thehandofagony.com>\n"
+"Language-Team:  <nb@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Alexander N. Sørnes"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "alex@thehandofagony.com"
+
+#: klinpopup.cpp:231
+msgid "&New"
+msgstr "&Ny"
+
+#: klinpopup.cpp:235
+msgid "&Reply"
+msgstr "Svar"
+
+#: klinpopup.cpp:239
+msgid "&First"
+msgstr "&Første"
+
+#: klinpopup.cpp:247
+msgid "&Next"
+msgstr "&Neste"
+
+#: klinpopup.cpp:251
+msgid "&Last"
+msgstr "Siste"
+
+#: klinpopup.cpp:255
+msgid "&Unread"
+msgstr "&Ulest"
+
+#: klinpopup.cpp:322
+msgid ""
+"Working directory /var/lib/klinpopup/ does not exist!\n"
+"Shall I create it? (May need root password)"
+msgstr ""
+"Arbeidskatalogen «/var/lib/klinpopup/» finnes ikke.\n"
+"Skal den opprettes? (Krever kanskje «root»-passord.)"
+
+#: klinpopup.cpp:340
+msgid ""
+"Permissions of the working directory /var/lib/klinpopup/ are wrong!\n"
+"Fix? (May need root password)"
+msgstr ""
+"Arbeidskatalogen «/var/lib/klinpopup/» har ikke riktige tillatelser.\n"
+"Skal det ordnes? (Krever kanskje «root»-passord.)"
+
+#: klinpopup.cpp:353
+msgid ""
+"There is a serious problem with the working directory!\n"
+"Only sending messages will work, else you can manually fix and restart "
+"KLinPopup."
+msgstr ""
+"Det er et alvorlig problem med arbeidskatalogen.\n"
+"Det vil kun gå an å sende meldinger, med mindre du ordner problemet manuelt "
+"og starter KLinPopup på nytt."
+
+#: klinpopup.cpp:357
+msgid "&Continue"
+msgstr "Fortsett"
+
+#: klinpopup.cpp:383
+msgid ""
+"Can't find smbclient executable!\n"
+"Sending messages will not work.\n"
+"Please set the right path in Settings->System."
+msgstr ""
+"Klarte ikke finne «smbclient»-programmet:\n"
+"det vil ikke gå an å sende meldinger.\n"
+"Oppgi hvor programmet er i Innstillinger->System."
+
+#: klinpopup.cpp:539
+msgid "%1/%2"
+msgstr "%1 av %2"
+
+#: klinpopup.cpp:542
+msgid "Message %1/%2 - %3 Unread"
+msgstr "Melding %1 av %2 - %3 ulest"
+
+#: klinpopup.cpp:635
+msgid "New message"
+msgstr "Ny melding"
+
+#: klinpopup.cpp:654
+msgid "Reply to %1"
+msgstr "Svar på %1"
+
+#: klinpopup.cpp:755
+msgid "Settings"
+msgstr "Innstillinger"
+
+#. i18n: file klinpopupview_base.ui line 24
+#: klinpopupview_base.cpp:152 rc.cpp:6 rc.cpp:244
+#, no-c-format
+msgid "KLinPopup_base"
+msgstr "KLinPopup_base"
+
+#. i18n: file klinpopupview_base.ui line 331
+#: klinpopupview_base.cpp:154 rc.cpp:10 rc.cpp:248
+#, no-c-format
+msgid "Message from:"
+msgstr "Avsender:"
+
+#. i18n: file klinpopupview_base.ui line 368
+#: klinpopupview_base.cpp:157 rc.cpp:15 rc.cpp:253
+#, no-c-format
+msgid "Message time:"
+msgstr "Tidspunkt:"
+
+#. i18n: file klinpopupview_base.ui line 414
+#: klinpopupview_base.cpp:161 rc.cpp:21 rc.cpp:259
+#, no-c-format
+msgid "Sender"
+msgstr "Avsender"
+
+#. i18n: file klinpopupview_base.ui line 417
+#: klinpopupview_base.cpp:162 rc.cpp:24 rc.cpp:262
+#, no-c-format
+msgid "From whom this message was received."
+msgstr "Hvem meldingen ble mottatt fra."
+
+#. i18n: file klinpopupview_base.ui line 451
+#: klinpopupview_base.cpp:164 rc.cpp:28 rc.cpp:266
+#, no-c-format
+msgid "When received"
+msgstr "Når den ble mottatt"
+
+#. i18n: file klinpopupview_base.ui line 454
+#: klinpopupview_base.cpp:165 rc.cpp:31 rc.cpp:269
+#, no-c-format
+msgid "When this message was received."
+msgstr "Når denne meldingen ble mottatt."
+
+#: main.cpp:30
+msgid "WinPopup-Client for KDE"
+msgstr "«WinPopup»-program for KDE"
+
+#: main.cpp:36
+msgid "KLinPopup"
+msgstr "KLinPopup"
+
+#: makepopup.cpp:88 makepopup.cpp:565
+msgid "NO GROUP"
+msgstr "INGEN GRUPPE"
+
+#: makepopup.cpp:141 makepopup.cpp:219
+msgid "From:"
+msgstr "Fra:"
+
+#: makepopup.cpp:149
+msgid "Group:"
+msgstr "Gruppe:"
+
+#: makepopup.cpp:156 makepopup.cpp:225
+msgid "To:"
+msgstr "Til:"
+
+#: makepopup.cpp:179 makepopup.cpp:229
+msgid "Message text"
+msgstr "Meldingstekst"
+
+#: makepopup.cpp:205
+msgid "Groups/Hosts"
+msgstr "Grupper/Verter"
+
+#: makepopup.cpp:206
+msgid "Comment"
+msgstr "Kommentar"
+
+#: makepopup.cpp:273
+msgid "Message sent!"
+msgstr "Melding sendt."
+
+#: makepopup.cpp:273
+msgid "Success"
+msgstr "Suksess"
+
+#: makepopup.cpp:282
+msgid ""
+"Message could not be sent to %1!\n"
+"Edit/Try again?"
+msgstr ""
+"Meldingen kunne ikke sendes til %1.\n"
+"Redigere/Prøve på nytt?"
+
+#: makepopup.cpp:328
+msgid "Please state an addressee!"
+msgstr "Oppgi en avsender."
+
+#: makepopup.cpp:354 makepopup.cpp:553
+msgid "Whole workgroup"
+msgstr "Hele arbeidsgruppen"
+
+#: makepopup.cpp:470 makepopup.cpp:472 makepopup.cpp:495
+msgid "own"
+msgstr "egen"
+
+#: makepopup.cpp:596
+msgid "Choose sender"
+msgstr "Velg avsender"
+
+#: makepopup.cpp:597
+msgid "This box lets you customize the sender value."
+msgstr "Dette feltet lar deg endre avsender."
+
+#: makepopup.cpp:599
+msgid "Available workgroups"
+msgstr "Tilgjengelige arbeidsgrupper"
+
+#: makepopup.cpp:600
+msgid "Which workgroups are available in the network."
+msgstr "Hvilke arbeidsgrupper er tilgjengelige på dette nettverket."
+
+#: makepopup.cpp:601 makepopup.cpp:604
+msgid "Addressee(s) of this message"
+msgstr "Mottakeren(-ene) av denne meldingen"
+
+#: makepopup.cpp:602 makepopup.cpp:605
+msgid "Which computer shall receive this message?"
+msgstr "Hvilken datamaskin skal motta denne meldingen?"
+
+#: makepopup.cpp:607
+msgid "&Send"
+msgstr "&Send"
+
+#: makepopup.cpp:608
+msgid "Alt+S"
+msgstr "Alt+S"
+
+#: makepopup.cpp:609
+msgid "Send the message"
+msgstr "Send meldingen"
+
+#: makepopup.cpp:610
+msgid "Send the message and close the dialog."
+msgstr "Send meldingen og lukk denne dialogboksen."
+
+#: makepopup.cpp:612
+msgid "Alt+C"
+msgstr "Alt+A"
+
+#: makepopup.cpp:613
+msgid "Cancel the message"
+msgstr "Avbryt sendingen"
+
+#: makepopup.cpp:614
+msgid "Cancel the dialog without sending the message."
+msgstr "Lukk dialogboksen uten å sende meldingen."
+
+#. i18n: file prefs_base.ui line 24
+#: prefs_base.cpp:241 rc.cpp:34 rc.cpp:272
+#, no-c-format
+msgid "Prefs_base"
+msgstr "Prefs_base"
+
+#. i18n: file prefs_base.ui line 69
+#: prefs_base.cpp:242 rc.cpp:40 rc.cpp:278
+#, no-c-format
+msgid "Sender displaying"
+msgstr "Avsenderinformasjon som skal vises"
+
+#. i18n: file prefs_base.ui line 108
+#: prefs_base.cpp:243 rc.cpp:43 rc.cpp:281
+#, no-c-format
+msgid "Sender &name (%f)"
+msgstr "Senderens &navn (%f)"
+
+#. i18n: file prefs_base.ui line 111
+#: prefs_base.cpp:244 rc.cpp:46 rc.cpp:284
+#, no-c-format
+msgid "Display sender name?"
+msgstr "Vise avsenderens navn?"
+
+#. i18n: file prefs_base.ui line 114
+#: prefs_base.cpp:245 rc.cpp:49 rc.cpp:287
+#, no-c-format
+msgid "Show sender name as part of sender string for incoming messages?"
+msgstr "Vise avsendernavn som en del av avsender-strengen for innkommende meldinger?"
+
+#. i18n: file prefs_base.ui line 130
+#: prefs_base.cpp:246 rc.cpp:52 rc.cpp:290
+#, no-c-format
+msgid "Sender ma&chine (%m)"
+msgstr "Avsendermaskin (%m)"
+
+#. i18n: file prefs_base.ui line 133
+#: prefs_base.cpp:247 rc.cpp:55 rc.cpp:293
+#, no-c-format
+msgid "Display machine name?"
+msgstr "Vise navnet til maskinen meldingen ble sendt fra?"
+
+#. i18n: file prefs_base.ui line 136
+#: prefs_base.cpp:248 rc.cpp:58 rc.cpp:296
+#, no-c-format
+msgid "Show machine name as part of sender string for incoming messages?"
+msgstr "Vise maskinnavn som del av avsenderstrengen for innkommende meldinger?"
+
+#. i18n: file prefs_base.ui line 152
+#: prefs_base.cpp:249 rc.cpp:61 rc.cpp:299
+#, no-c-format
+msgid "Sender &IP (%I)"
+msgstr "Avsender-&IP (%I)"
+
+#. i18n: file prefs_base.ui line 155
+#: prefs_base.cpp:250 rc.cpp:64 rc.cpp:302
+#, no-c-format
+msgid "Display sender IP?"
+msgstr "Vise avsenderens IP-adresse?"
+
+#. i18n: file prefs_base.ui line 158
+#: prefs_base.cpp:251 rc.cpp:67 rc.cpp:305
+#, no-c-format
+msgid "Show sender IP as part of sender string for incoming messages?"
+msgstr "Vise avsender-IP som del av sender-strengen for innkommende meldinger?"
+
+#. i18n: file prefs_base.ui line 176
+#: prefs_base.cpp:252 rc.cpp:70 rc.cpp:308
+#, no-c-format
+msgid "Time displaying"
+msgstr "Tidsvisning"
+
+#. i18n: file prefs_base.ui line 185
+#: prefs_base.cpp:254 rc.cpp:73 rc.cpp:311
+#, no-c-format
+msgid "Date & Time"
+msgstr "Dato og klokkeslett"
+
+#. i18n: file prefs_base.ui line 190
+#: prefs_base.cpp:255 rc.cpp:76 rc.cpp:314
+#, no-c-format
+msgid "Time"
+msgstr "Klokkeslett"
+
+#. i18n: file prefs_base.ui line 195
+#: prefs_base.cpp:256 rc.cpp:79 rc.cpp:317
+#, no-c-format
+msgid "Date"
+msgstr "Dato"
+
+#. i18n: file prefs_base.ui line 202
+#: prefs_base.cpp:257 rc.cpp:82 rc.cpp:320
+#, no-c-format
+msgid "Details for time displaying"
+msgstr "Detaljer for tidsvisning"
+
+#. i18n: file prefs_base.ui line 205
+#: prefs_base.cpp:258 rc.cpp:85 rc.cpp:323
+#, no-c-format
+msgid "What details to show for the time of received messages."
+msgstr "Hvilke detaljer om mottakstidspunkt som skal vises."
+
+#. i18n: file prefs_base.ui line 240
+#: prefs_base.cpp:259 rc.cpp:88 rc.cpp:326
+#, no-c-format
+msgid "New message signaling"
+msgstr "Signal for ny melding"
+
+#. i18n: file prefs_base.ui line 260
+#: prefs_base.cpp:261 rc.cpp:91 rc.cpp:329
+#, no-c-format
+msgid "Nothing"
+msgstr "Ingenting"
+
+#. i18n: file prefs_base.ui line 265
+#: prefs_base.cpp:262 rc.cpp:94 rc.cpp:332
+#, no-c-format
+msgid "Sound and Tray"
+msgstr "Lyd og systemkurv"
+
+#. i18n: file prefs_base.ui line 270
+#: prefs_base.cpp:263 rc.cpp:97 rc.cpp:335
+#, no-c-format
+msgid "Activate window"
+msgstr "Aktiver vindu"
+
+#. i18n: file prefs_base.ui line 275
+#: prefs_base.cpp:264 rc.cpp:100 rc.cpp:338
+#, no-c-format
+msgid "All"
+msgstr "Alle"
+
+#. i18n: file prefs_base.ui line 290
+#: prefs_base.cpp:265 rc.cpp:103 rc.cpp:341
+#, no-c-format
+msgid "Action for new messages"
+msgstr "Handling for nye meldinger"
+
+#. i18n: file prefs_base.ui line 293
+#: prefs_base.cpp:266 rc.cpp:106 rc.cpp:344
+#, no-c-format
+msgid "What to do when new messages are received."
+msgstr "Hva som skal gjøres når nye meldinger mottas."
+
+#. i18n: file prefs_base.ui line 336
+#: prefs_base.cpp:267 rc.cpp:109 rc.cpp:347
+#, no-c-format
+msgid "Sound:"
+msgstr "Lyd:"
+
+#. i18n: file prefs_base.ui line 358
+#: prefs_base.cpp:270 rc.cpp:114 rc.cpp:352
+#, no-c-format
+msgid "Sound for new messages"
+msgstr "Lyd for nye meldinger"
+
+#. i18n: file prefs_base.ui line 361
+#: prefs_base.cpp:271 rc.cpp:117 rc.cpp:355
+#, no-c-format
+msgid "Choose which sound to play when new messages are received."
+msgstr "Velg hvilken lyd som skal spilles når nye meldinger mottas."
+
+#. i18n: file prefs_base.ui line 371
+#. i18n: file klinpopup.kcfg line 31
+#. i18n: file prefs_base.ui line 371
+#: prefs_base.cpp:272 rc.cpp:120 rc.cpp:223 rc.cpp:358
+#, no-c-format
+msgid "Additional external command"
+msgstr "Ytterligere ekstern kommando"
+
+#. i18n: file prefs_base.ui line 389
+#: prefs_base.cpp:274 rc.cpp:124 rc.cpp:362
+#, no-c-format
+msgid "Message Creation"
+msgstr "Meldingsskriving"
+
+#. i18n: file prefs_base.ui line 400
+#: prefs_base.cpp:275 rc.cpp:127 rc.cpp:365
+#, no-c-format
+msgid "Viewmode:"
+msgstr "Visningsmodus:"
+
+#. i18n: file prefs_base.ui line 406
+#: prefs_base.cpp:277 rc.cpp:130 rc.cpp:368
+#, no-c-format
+msgid "ClassicView"
+msgstr "Klassisk"
+
+#. i18n: file prefs_base.ui line 411
+#: prefs_base.cpp:278 rc.cpp:133 rc.cpp:371
+#, no-c-format
+msgid "TreeView"
+msgstr "Trevisning"
+
+#. i18n: file prefs_base.ui line 418
+#: prefs_base.cpp:279 rc.cpp:136 rc.cpp:374
+#, no-c-format
+msgid "View when writing a new message"
+msgstr "Vis når en ny melding skrives"
+
+#. i18n: file prefs_base.ui line 421
+#: prefs_base.cpp:280 rc.cpp:139 rc.cpp:377
+#, no-c-format
+msgid "What viewmode should be used when writing new messages."
+msgstr "Hvilken visningsmodus som skal brukes når nye meldinger skrives."
+
+#. i18n: file prefs_base.ui line 429
+#: prefs_base.cpp:281 rc.cpp:142 rc.cpp:380
+#, no-c-format
+msgid "Encoding:"
+msgstr "Koding:"
+
+#. i18n: file prefs_base.ui line 441
+#: prefs_base.cpp:285 rc.cpp:147 rc.cpp:385
+#, no-c-format
+msgid "local8Bit"
+msgstr "local8Bit"
+
+#. i18n: file prefs_base.ui line 446
+#: prefs_base.cpp:286 rc.cpp:150 rc.cpp:388
+#, no-c-format
+msgid "UTF-8"
+msgstr "UTF-8"
+
+#. i18n: file prefs_base.ui line 451
+#: prefs_base.cpp:287 rc.cpp:153 rc.cpp:391
+#, no-c-format
+msgid "Latin1"
+msgstr "Latin1"
+
+#. i18n: file prefs_base.ui line 456
+#: prefs_base.cpp:288 rc.cpp:156 rc.cpp:394
+#, no-c-format
+msgid "ASCII"
+msgstr "ASCII"
+
+#. i18n: file prefs_base.ui line 463
+#: prefs_base.cpp:289 rc.cpp:159 rc.cpp:397
+#, no-c-format
+msgid "Character encoding for new messages"
+msgstr "Tegnkoding for nye meldinger"
+
+#. i18n: file prefs_base.ui line 466
+#: prefs_base.cpp:290 rc.cpp:162 rc.cpp:400
+#, no-c-format
+msgid "Set the character encoding for new messages."
+msgstr "Oppgi tegnkodingen for nye meldinger."
+
+#. i18n: file prefs_base.ui line 50
+#: prefs_base.cpp:291 rc.cpp:37 rc.cpp:275
+#, no-c-format
+msgid "Messa&ges"
+msgstr "Meldin&ger"
+
+#. i18n: file prefs_base.ui line 514
+#: prefs_base.cpp:292 rc.cpp:168 rc.cpp:406
+#, no-c-format
+msgid "General Options"
+msgstr "Generelle innstillinger"
+
+#. i18n: file prefs_base.ui line 553
+#: prefs_base.cpp:293 rc.cpp:171 rc.cpp:409
+#, no-c-format
+msgid "Timer interval (in sec)"
+msgstr "Tidtakerintervall (i sekunder)."
+
+#. i18n: file prefs_base.ui line 581
+#: prefs_base.cpp:296 rc.cpp:176 rc.cpp:414
+#, no-c-format
+msgid "Interval for new messages check"
+msgstr "Hvor ofte det skal sees etter nye meldinger"
+
+#. i18n: file prefs_base.ui line 584
+#: prefs_base.cpp:297 rc.cpp:179 rc.cpp:417
+#, no-c-format
+msgid "Duration for check intervall for incoming new messages in seconds."
+msgstr "Varighet for sjekkintervall for nye meldinger i sekunder."
+
+#. i18n: file prefs_base.ui line 600
+#: prefs_base.cpp:298 rc.cpp:182 rc.cpp:420
+#, no-c-format
+msgid "Run do&cked"
+msgstr "Start kun i systemkurven"
+
+#. i18n: file prefs_base.ui line 603
+#: prefs_base.cpp:299 rc.cpp:185 rc.cpp:423
+#, no-c-format
+msgid "Start docked and hide main window when closing"
+msgstr "Start i systemkurven og skjul hovedvinduet ved lukking"
+
+#. i18n: file prefs_base.ui line 606
+#: prefs_base.cpp:300 rc.cpp:188 rc.cpp:426
+#, no-c-format
+msgid ""
+"If checked it starts docked only in the systemtray and only hides when "
+"window is closed."
+msgstr ""
+"Når dette er valgt, starter programmet kun i systemkurven, og skjuler seg "
+"når det lukkes."
+
+#. i18n: file prefs_base.ui line 641
+#: prefs_base.cpp:301 rc.cpp:191 rc.cpp:429
+#, no-c-format
+msgid "System"
+msgstr "System"
+
+#. i18n: file prefs_base.ui line 655
+#: prefs_base.cpp:302 rc.cpp:194 rc.cpp:432
+#, no-c-format
+msgid "smbclient-Bin:"
+msgstr "«smbclient»-program:"
+
+#. i18n: file prefs_base.ui line 669
+#: prefs_base.cpp:305 rc.cpp:199 rc.cpp:437
+#, no-c-format
+msgid "Path to smbclient"
+msgstr "Sti til «smbclient»"
+
+#. i18n: file prefs_base.ui line 672
+#: prefs_base.cpp:306 rc.cpp:202 rc.cpp:440
+#, no-c-format
+msgid "The Path to your smbclient binary."
+msgstr "Stien til «smbclient»-programmet."
+
+#. i18n: file prefs_base.ui line 495
+#: prefs_base.cpp:307 rc.cpp:165 rc.cpp:403
+#, no-c-format
+msgid "S&ystem"
+msgstr "S&ystem"
+
+#. i18n: file klinpopupui.rc line 4
+#: rc.cpp:3 rc.cpp:443
+#, no-c-format
+msgid "&Messages"
+msgstr "&Meldinger"
+
+#. i18n: file klinpopup.kcfg line 7
+#: rc.cpp:205
+#, no-c-format
+msgid "Display sender name"
+msgstr "Vis avsenderens navn"
+
+#. i18n: file klinpopup.kcfg line 11
+#: rc.cpp:208
+#, no-c-format
+msgid "Display sender machine"
+msgstr "Vis avsendermaskin"
+
+#. i18n: file klinpopup.kcfg line 15
+#: rc.cpp:211
+#, no-c-format
+msgid "Display sender IP"
+msgstr "Vis avsenderens IP-adresse"
+
+#. i18n: file klinpopup.kcfg line 19
+#: rc.cpp:214
+#, no-c-format
+msgid "Displayed time format"
+msgstr "Vist tidsformat"
+
+#. i18n: file klinpopup.kcfg line 23
+#: rc.cpp:217
+#, no-c-format
+msgid "Toggle Signaling"
+msgstr "Velg signal"
+
+#. i18n: file klinpopup.kcfg line 27
+#: rc.cpp:220
+#, no-c-format
+msgid "Sound URL"
+msgstr "Lyd-URL"
+
+#. i18n: file klinpopup.kcfg line 35
+#: rc.cpp:226
+#, no-c-format
+msgid "URL of external command"
+msgstr "URL til ekstern kommando"
+
+#. i18n: file klinpopup.kcfg line 39
+#: rc.cpp:229
+#, no-c-format
+msgid "Run docked"
+msgstr "Start kun i systemkurven"
+
+#. i18n: file klinpopup.kcfg line 43
+#: rc.cpp:232
+#, no-c-format
+msgid "TimerInterval"
+msgstr "Tidtakerintervall"
+
+#. i18n: file klinpopup.kcfg line 47
+#: rc.cpp:235
+#, no-c-format
+msgid "Viewmode for message creation"
+msgstr "Visningsmodus for meldingsskriving"
+
+#. i18n: file klinpopup.kcfg line 51
+#: rc.cpp:238
+#, no-c-format
+msgid "smbclient-Bin"
+msgstr "«smbclient»-program:"
+
+#. i18n: file klinpopup.kcfg line 55
+#: rc.cpp:241
+#, no-c-format
+msgid "Encoding"
+msgstr "Koding"
+
+#: systemtray.cpp:39
+msgid "&New Message"
+msgstr "&Ny melding"
+

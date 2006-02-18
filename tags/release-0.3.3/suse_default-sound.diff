@@ -1,0 +1,11 @@
+--- src/klinpopup.kcfg.orig	2005-03-25 17:37:14.000000000 +0100
++++ src/klinpopup.kcfg	2005-03-25 17:37:36.000000000 +0100
+@@ -25,7 +25,7 @@
+     </entry>
+     <entry name="SoundURL" type="String">
+             <label>Sound URL</label>
+-            <default>/usr/share/sounds/KDE_Chimes_2.ogg</default>
++            <default>/opt/kde3/share/sounds/KDE_Chimes_2.ogg</default>
+     </entry>
+     <entry name="RunDocked" type="Bool">
+             <label>Run docked</label>
