@@ -47,10 +47,22 @@ SystemTray::~SystemTray()
 
 void SystemTray::changeTrayPixmap(int iconSwitch)
 {
-	if (iconSwitch == NORMAL_ICON) {
-		newTrayPixmap = loadIcon("klinpopup");
-	} else {
-		newTrayPixmap = loadIcon("new_popup");
+	switch (iconSwitch) {
+		case NEW_ICON:
+			newTrayPixmap = loadIcon("new_popup");
+			break;
+		case NORMAL_ICON:
+			newTrayPixmap = loadIcon("klinpopup");
+			break;
+		case NEW_ICON_AR:
+			newTrayPixmap = loadIcon("new_popup_ar");
+			break;
+		case NORMAL_ICON_AR:
+			newTrayPixmap = loadIcon("klinpopup_ar");
+			break;
+		default:
+			newTrayPixmap = loadIcon("klinpopup");
+			break;
 	}
 
 	setPixmap(newTrayPixmap);

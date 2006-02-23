@@ -21,10 +21,12 @@
 #ifndef KLINPOPUP_H
 #define KLINPOPUP_H
 
-#define POPUP_DIR "/var/lib/klinpopup"
 #define ID_STATUS_TEXT 10
+#define ID_AUTO_REPLY 11
 #define NEW_ICON 0
 #define NORMAL_ICON 1
+#define NEW_ICON_AR 2
+#define NORMAL_ICON_AR 3
 #define MS_NOTHING 0
 #define MS_SOUND_TRAY 1
 #define MS_ACTIVATE 2
@@ -41,10 +43,13 @@
 #include <kaction.h>
 #include <kconfig.h>
 #include <kkeydialog.h>
+#include <kprocess.h>
 
 #include "popupmessage.h"
 #include "klinpopupview.h"
 #include "systemtray.h"
+
+const QString POPUP_DIR = "/var/lib/klinpopup";
 
 class KLinPopup;
 
@@ -117,6 +122,9 @@ private slots:
 	void changeStatusbar(const QString &);
 	void changeCaption(const QString &text) { setCaption(text); }
 	void settingsChanged();
+	void slotSendCmdExit(KProcess *);
+	void updateStats();
+	void statusAutoReply();
 
 private:
 	virtual bool queryClose();
@@ -129,11 +137,12 @@ private:
 	void checkSmbclientBin();
 	void checkMessageMap();
 	void showPopup();
-	void updateStats();
 	QString createSenderText();
 	void readConfig();
 	void popupHelper();
 	void runExternalCommand();
+	void autoReply(const QString &);
+	void setTrayPixmap();
 
 	KLinPopupView *m_view;
 	selectThread *watcher;
@@ -142,6 +151,7 @@ private:
 	KConfig *cfg;
 	SystemTray *m_systemTray;
 	KToggleAction *m_menubarAction;
+	KToggleAction *autoReplyAction;
 	KAction *newPopupAction;
 	KAction *replyPopupAction;
 	KAction *firstPopupAction;
@@ -154,9 +164,10 @@ private:
 	int unreadMessages;
 	bool hasInotify;
 	QTimer *popupFileTimer;
-	QString messageText;
+	QString messageText, m_hostName, m_arOffPic, m_arOnPic;
 	QString popupFileDirectory;
 	QPtrList<popupMessage> messageList;
+	QLabel *m_arLabel;
 
 	//option variables
 	bool optRunDocked;
@@ -169,6 +180,7 @@ private:
 	QString optNewPopupSound;
 	bool optExternalCommand;
 	QString optExternalCommandURL;
+	QString optArMsg;
 	int optMakePopupView;
 	QString optSmbclientBin;
 	int optEncoding;

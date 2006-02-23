@@ -1,6 +1,12 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="klinpopup" version="2">
+<kpartgui name="klinpopup" version="3">
 <MenuBar>
+  <Menu name="file" noMerge="1"><text>&amp;File</text>
+    <Action name="auto_reply"/>
+    <Separator lineSeparator="true"/>
+    <Action name="file_quit"/>
+  </Menu>
+
   <Menu name="popup_actions"><text>&amp;Messages</text>
     <Action name="new_popup" />
     <Action name="reply_popup" />
@@ -22,5 +28,6 @@
   <Action name="last_popup" />
   <Action name="unread_popup" />
   <Action name="delete_popup" />
+  <Action name="auto_reply"/>
 </ToolBar>
 </kpartgui>

@@ -8,8 +8,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>414</width>
-            <height>501</height>
+            <width>417</width>
+            <height>575</height>
         </rect>
     </property>
     <property name="sizePolicy">
@@ -23,14 +23,14 @@
     <property name="caption">
         <string>Prefs_base</string>
     </property>
-    <grid>
+    <vbox>
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget" row="0" column="0">
+        <widget class="QTabWidget">
             <property name="name">
                 <cstring>tabWidget4</cstring>
             </property>
@@ -128,6 +128,9 @@
                                 </property>
                                 <property name="text">
                                     <string>Sender ma&amp;chine (%m)</string>
+                                </property>
+                                <property name="accel">
+                                    <string>Alt+C</string>
                                 </property>
                                 <property name="toolTip" stdset="0">
                                     <string>Display machine name?</string>
@@ -368,15 +371,33 @@
                                     <cstring>kcfg_ExternalCommand</cstring>
                                 </property>
                                 <property name="text">
-                                    <string>Additional external command</string>
+                                    <string>Addi&amp;tional external command</string>
                                 </property>
                                 <property name="accel">
-                                    <string></string>
+                                    <string>Alt+T</string>
                                 </property>
                             </widget>
                             <widget class="KURLRequester">
                                 <property name="name">
                                     <cstring>kcfg_ExternalCommandURL</cstring>
+                                </property>
+                            </widget>
+                        </vbox>
+                    </widget>
+                    <widget class="QGroupBox">
+                        <property name="name">
+                            <cstring>groupBox7_2</cstring>
+                        </property>
+                        <property name="title">
+                            <string>Autoreply message</string>
+                        </property>
+                        <vbox>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="KLineEdit">
+                                <property name="name">
+                                    <cstring>kcfg_ArMsg</cstring>
                                 </property>
                             </widget>
                         </vbox>
@@ -677,7 +698,7 @@
                 </grid>
             </widget>
         </widget>
-    </grid>
+    </vbox>
 </widget>
 <tabstops>
     <tabstop>tabWidget4</tabstop>
@@ -701,6 +722,7 @@
     <includehint>kurlrequester.h</includehint>
     <includehint>klineedit.h</includehint>
     <includehint>kpushbutton.h</includehint>
+    <includehint>klineedit.h</includehint>
     <includehint>kcombobox.h</includehint>
     <includehint>kcombobox.h</includehint>
     <includehint>knuminput.h</includehint>

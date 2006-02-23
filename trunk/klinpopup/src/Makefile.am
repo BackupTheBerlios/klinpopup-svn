@@ -41,4 +41,7 @@ kdelnk_DATA = klinpopup.desktop
 rcdir = $(kde_datadir)/klinpopup
 rc_DATA = klinpopupui.rc
 
+mypicsdir = $(kde_datadir)/klinpopup
+mypics_DATA = ar_on.png ar_off.png
+
 SUBDIRS = icons

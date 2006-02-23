@@ -57,6 +57,8 @@
 #include <kfileitem.h>
 #include <kstdaccel.h>
 #include <kstdaction.h>
+#include <kpixmap.h>
+#include <kstandarddirs.h>
 
 #include "klinpopup.h"
 #include "klinpopup.moc"
@@ -132,8 +134,8 @@ void selectThread::run()
 
 KLinPopup::KLinPopup()
 	: KMainWindow( 0, "KLinPopup" ),
-	  m_view(new KLinPopupView(this)), watcher(0),
-	  unreadMessages(0), hasInotify(true)
+	  m_view(new KLinPopupView(this)), watcher(0), unreadMessages(0),
+	  hasInotify(true), m_hostName(QString()), m_arLabel(new QLabel(this))
 {
 	setFocusPolicy(QWidget::StrongFocus);
 
@@ -159,6 +161,12 @@ KLinPopup::KLinPopup()
 	connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
 			this,   SLOT(changeCaption(const QString&)));
 
+	statusBar()->insertItem(QString(), ID_STATUS_TEXT, 1, true);
+	m_arOffPic = locate("data", "klinpopup/ar_off.png");
+	m_arOnPic = locate("data", "klinpopup/ar_on.png");
+	m_arLabel->setPixmap(QPixmap(m_arOffPic));
+	QToolTip::add(m_arLabel, i18n("Autoreply off"));
+	statusBar()->addWidget(m_arLabel, 0, true);
 
 	updateStats();
 	checkSmbclientBin();
@@ -197,7 +205,7 @@ void KLinPopup::focusInEvent(QFocusEvent *e)
 			messageList.current()->setRead();
 		}
 		updateStats();
-		if (unreadMessages == 0) m_systemTray->changeTrayPixmap(NORMAL_ICON);
+		setTrayPixmap();
 	}
 }
 
@@ -228,6 +236,10 @@ void KLinPopup::setupActions()
 	KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 	KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
+	autoReplyAction = new KToggleAction(i18n("&Autoreply"),
+										"mail_replyall", CTRL+Key_A,
+								 		this, SLOT(statusAutoReply()),
+								 		actionCollection(), "auto_reply");
 	newPopupAction = new KAction(i18n("&New"),
 								 "mail_new", CTRL+Key_N,
 								 this, SLOT(newPopup()),
@@ -319,16 +331,14 @@ bool KLinPopup::checkPopupFileDirectory()
 {
 	QDir dir(POPUP_DIR);
 	if (! dir.exists()) {
-		int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Working directory /var/lib/klinpopup/ does not exist!\n"
-															 "Shall I create it? (May need root password)"));
+		int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Working directory %1 does not exist!\n"
+															 "Shall I create it? (May need root password)").arg(POPUP_DIR));
 		if (tmpYesNo == KMessageBox::Yes) {
-			QStringList kdesuArgs;
-			kdesuArgs += "-c";
-			kdesuArgs += "mkdir -p -m 0777 /var/lib/klinpopup";
+			QStringList kdesuArgs = QStringList(QString("-c mkdir -p -m 0777 " + POPUP_DIR));
 			if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0) return true;
 		}
 	} else {
-		KFileItem tmpFileItem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, "/var/lib/klinpopup");
+		KFileItem tmpFileItem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, POPUP_DIR);
 		mode_t tmpPerms = tmpFileItem.permissions();
 
 		#ifdef MY_EXTRA_DEBUG
@@ -339,12 +349,10 @@ bool KLinPopup::checkPopupFileDirectory()
 
 			kdDebug() << "Perms not ok!" << endl;
 
-			int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Permissions of the working directory /var/lib/klinpopup/ are wrong!\n"
-																 "Fix? (May need root password)"));
+			int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Permissions of the working directory %1 are wrong!\n"
+																 "Fix? (May need root password)").arg(POPUP_DIR));
 			if (tmpYesNo == KMessageBox::Yes) {
-				QStringList kdesuArgs;
-				kdesuArgs += "-c";
-				kdesuArgs += "chmod 0777 /var/lib/klinpopup";
+				QStringList kdesuArgs = QStringList(QString("-c chmod 0777 " + POPUP_DIR));
 				if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0)
 					return true;
 			}
@@ -397,7 +405,6 @@ void KLinPopup::checkSmbclientBin()
  */
 void KLinPopup::popupFileTimerDone()
 {
-// maybe we can use inotify here some day
 	if (checkPopupFileDirectory()) {
 		QDir dir(POPUP_DIR);
 		const QFileInfoList *popupFiles = dir.entryInfoList(QDir::Files, QDir::Name);
@@ -407,7 +414,7 @@ void KLinPopup::popupFileTimerDone()
 			while((popupFileInfo = it.current()) != 0) {
 				++it;
 				if (popupFileInfo -> isFile()) {
-					QString popupFileName(popupFileInfo -> fileName());
+					QString popupFileName(popupFileInfo->fileName());
 					QString popupFilePath(POPUP_DIR);
 					popupFilePath.append("/");
 					popupFilePath.append(popupFileName);
@@ -500,11 +507,8 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			if (isActiveWindow()) {
 				unreadMessages--;
 				messageList.current()->setRead();
-				if (unreadMessages == 0)
-					m_systemTray->changeTrayPixmap(NORMAL_ICON);
-			} else {
-				m_systemTray->changeTrayPixmap(NEW_ICON);
 			}
+			setTrayPixmap();
 			updateStats();
 			break;
 		case MS_ACTIVATE:    //activate Window
@@ -513,8 +517,7 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			KWin::forceActiveWindow(winId());
 			unreadMessages--;
 			messageList.current()->setRead();
-			if (unreadMessages == 0)
-				m_systemTray->changeTrayPixmap(NORMAL_ICON);
+			setTrayPixmap();
 			updateStats();
 			break;
 		case MS_ALL:    //all
@@ -524,13 +527,13 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			KWin::forceActiveWindow(winId());
 			unreadMessages--;
 			messageList.current()->setRead();
-			if (unreadMessages == 0)
-				m_systemTray->changeTrayPixmap(NORMAL_ICON);
+			setTrayPixmap();
 			updateStats();
 			break;
 	}
 
 	if (optExternalCommand) runExternalCommand();
+	if (autoReplyAction->isChecked()) autoReply(popupMachine);
 }
 
 /**
@@ -688,9 +691,8 @@ void KLinPopup::popupHelper()
 		unreadMessages--;
 		messageList.current()->setRead();
 	}
-	if (unreadMessages == 0)
-		m_systemTray->changeTrayPixmap(NORMAL_ICON);
 
+	setTrayPixmap();
 	updateStats();
 }
 
@@ -705,10 +707,83 @@ void KLinPopup::runExternalCommand()
 	if (pos > 0) {
 		program = optExternalCommandURL.left(pos);
 		args = optExternalCommandURL.right(optExternalCommandURL.length() - pos - 1);
-		KApplication::kdeinitExec(program, QStringList::split(" ", args)); // don't care about the result
+		KApplication::kdeinitExec(program, QStringList(args)); // don't care about the result
 	} else if (!optExternalCommandURL.isEmpty()) {
 		KApplication::kdeinitExec(program); // don't care about the result
 	}
+}
+
+/**
+ * automatically send an away message
+ */
+void KLinPopup::statusAutoReply()
+{
+	if (autoReplyAction->isChecked()) {
+		m_arLabel->setPixmap(QPixmap(m_arOnPic));
+		QToolTip::add(m_arLabel, i18n("Autoreply on"));
+	} else {
+		m_arLabel->setPixmap(QPixmap(m_arOffPic));
+		QToolTip::add(m_arLabel, i18n("Autoreply off"));
+	}
+
+	setTrayPixmap();
+}
+
+void KLinPopup::autoReply(const QString &host)
+{
+	if (m_hostName.isEmpty()) {
+		QString theHostName = QString::null;
+		char *tmp = new char[255];
+
+		if (tmp != 0) {
+			gethostname(tmp, 255);
+			m_hostName = tmp;
+			if (m_hostName.contains('.') != 0) m_hostName.remove(m_hostName.find('.'), m_hostName.length());
+			m_hostName = m_hostName.upper();
+		}
+	}
+
+	if (host.upper() != "LOCALHOST" && host.upper() != m_hostName) { /// prevent endless loop
+		KProcess *p = new KProcess(this);
+		*p << optSmbclientBin << "-M" << host;
+		*p << "-N" << "-";
+
+		connect(p, SIGNAL(processExited(KProcess *)), this, SLOT(slotSendCmdExit(KProcess *)));
+
+		if (p->start(KProcess::NotifyOnExit, KProcess::Stdin)) {
+
+			///@TODO: does local8Bit work for all environments?
+			switch (optEncoding)
+			{
+				case ENC_LOCAL8BIT:
+					p->writeStdin(optArMsg.local8Bit(), optArMsg.local8Bit().length());
+					break;
+				case ENC_UTF8:
+					p->writeStdin(optArMsg.utf8(), optArMsg.utf8().length());
+					break;
+				case ENC_LATIN1:
+					p->writeStdin(optArMsg.latin1(), optArMsg.length());
+					break;
+				case ENC_ASCII:
+					p->writeStdin(optArMsg.ascii(), optArMsg.length());
+					break;
+				default:
+					p->writeStdin(optArMsg.local8Bit(), optArMsg.local8Bit().length());
+					break;
+			}
+				if (!p->closeStdin()) {
+					///@TODO: does this work, how to test this?
+					delete p;
+				}
+		} else {
+			slotSendCmdExit(0);
+		}
+	}
+}
+
+void KLinPopup::slotSendCmdExit(KProcess *_p)
+{
+	delete _p;
 }
 
 /**
@@ -777,6 +852,7 @@ void KLinPopup::readConfig()
 	optNewPopupSound = Settings::soundURL().stripWhiteSpace();
 	optExternalCommand = Settings::externalCommand();
 	optExternalCommandURL = Settings::externalCommandURL().simplifyWhiteSpace();
+	optArMsg = Settings::arMsg();
 	optTimerInterval= Settings::timerInterval();
 	optMakePopupView = Settings::makePopupView();
 	optSmbclientBin=Settings::smbclientBin();
@@ -799,8 +875,8 @@ void KLinPopup::settingsChanged()
 		optDisplaySender = Settings::displaySender();
 	}
 
-	if (optNewMessageSignaling == MS_SOUND_TRAY && unreadMessages != 0) {
-		m_systemTray->changeTrayPixmap(NEW_ICON);
+	if (optNewMessageSignaling == MS_SOUND_TRAY) {
+		setTrayPixmap();
 	}
 
 	if (!hasInotify) popupFileTimer->changeInterval(optTimerInterval * 1000);
@@ -813,10 +889,21 @@ void KLinPopup::settingsChanged()
  */
 void KLinPopup::changeStatusbar(const QString &text)
 {
-	if (!statusBar()->hasItem(ID_STATUS_TEXT)) {
-		statusBar()->insertItem(text, ID_STATUS_TEXT, 1, true);
+	statusBar()->changeItem(text, ID_STATUS_TEXT);
+}
+
+void KLinPopup::setTrayPixmap()
+{
+	if (unreadMessages == 0) {
+		if (autoReplyAction->isChecked())
+			m_systemTray->changeTrayPixmap(NORMAL_ICON_AR);
+		else
+			m_systemTray->changeTrayPixmap(NORMAL_ICON);
 	} else {
-		statusBar()->changeItem(text, ID_STATUS_TEXT);
+		if (autoReplyAction->isChecked())
+			m_systemTray->changeTrayPixmap(NEW_ICON_AR);
+		else
+			m_systemTray->changeTrayPixmap(NEW_ICON);
 	}
 }
 
