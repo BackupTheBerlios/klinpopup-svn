@@ -37,7 +37,7 @@
     </entry>
     <entry name="ArMsg" type="String">
             <label>Message for autoreply</label>
-            <default>Sorry, I'm away at the moment.</default>
+            <default code="true">i18n("Sorry, I'm away at the moment.")</default>
     </entry>
     <entry name="RunDocked" type="Bool">
             <label>Run docked</label>

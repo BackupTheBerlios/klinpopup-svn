@@ -3,4 +3,5 @@ File=klinpopup.kcfg
 ClassName=Settings
 Singleton=true
 Mutators=true
+IncludeFiles=klocale.h
 # will create the necessary code for setting those variables
