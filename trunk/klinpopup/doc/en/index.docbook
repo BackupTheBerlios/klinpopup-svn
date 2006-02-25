@@ -106,6 +106,17 @@ The usage of KLinPopup is pretty straightforward. Use the menu items or icons to
 <varlistentry>
 <term><menuchoice>
 <shortcut>
+<keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Autoreply</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggles autoreply.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
 <keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
 </shortcut>
 <guimenu>File</guimenu>

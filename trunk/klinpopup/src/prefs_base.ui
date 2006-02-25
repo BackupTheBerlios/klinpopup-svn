@@ -381,6 +381,12 @@
                                 <property name="name">
                                     <cstring>kcfg_ExternalCommandURL</cstring>
                                 </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Command to execute</string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>The URL and arguments for the external command.</string>
+                                </property>
                             </widget>
                         </vbox>
                     </widget>
@@ -398,6 +404,12 @@
                             <widget class="KLineEdit">
                                 <property name="name">
                                     <cstring>kcfg_ArMsg</cstring>
+                                </property>
+                                <property name="toolTip" stdset="0">
+                                    <string>Text for the autoreply message</string>
+                                </property>
+                                <property name="whatsThis" stdset="0">
+                                    <string>The text for the message sent when autoreply is on.</string>
                                 </property>
                             </widget>
                         </vbox>

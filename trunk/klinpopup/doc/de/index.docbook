@@ -106,6 +106,17 @@ Man kann über das Menü oder die Toolbar-Icons Nachrichten senden, beantworten,
 <varlistentry>
 <term><menuchoice>
 <shortcut>
+<keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
+</shortcut>
+<guimenu>Datei</guimenu>
+<guimenuitem>Autoantwort</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Schaltet Autoantwort ein/aus.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
 <keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
 </shortcut>
 <guimenu>Datei</guimenu>

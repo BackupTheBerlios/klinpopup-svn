@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-24 18:01+0100\n"
+"POT-Creation-Date: 2006-02-25 17:04+0100\n"
 "PO-Revision-Date: 2006-02-24 17:45+0100\n"
 "Last-Translator: Gerd Fleischer <gerdfleischer@gmx.de>\n"
 "Language-Team: Deutsch <de@li.org>\n"
@@ -132,43 +132,43 @@ msgid "Settings"
 msgstr "Cấu hình"
 
 #. i18n: file klinpopupview_base.ui line 24
-#: klinpopupview_base.cpp:152 rc.cpp:9 rc.cpp:258
+#: klinpopupview_base.cpp:152 rc.cpp:9 rc.cpp:270
 #, no-c-format
 msgid "KLinPopup_base"
 msgstr "Phần cơ bản của KLinPopup"
 
 #. i18n: file klinpopupview_base.ui line 331
-#: klinpopupview_base.cpp:154 rc.cpp:13 rc.cpp:262
+#: klinpopupview_base.cpp:154 rc.cpp:13 rc.cpp:274
 #, fuzzy, no-c-format
 msgid "Message from:"
 msgstr "Thông điệp gửi từ:"
 
 #. i18n: file klinpopupview_base.ui line 368
-#: klinpopupview_base.cpp:157 rc.cpp:18 rc.cpp:267
+#: klinpopupview_base.cpp:157 rc.cpp:18 rc.cpp:279
 #, fuzzy, no-c-format
 msgid "Message time:"
 msgstr "Thông điệp nhận lúc"
 
 #. i18n: file klinpopupview_base.ui line 414
-#: klinpopupview_base.cpp:161 rc.cpp:24 rc.cpp:273
+#: klinpopupview_base.cpp:161 rc.cpp:24 rc.cpp:285
 #, no-c-format
 msgid "Sender"
 msgstr "Người gửi"
 
 #. i18n: file klinpopupview_base.ui line 417
-#: klinpopupview_base.cpp:162 rc.cpp:27 rc.cpp:276
+#: klinpopupview_base.cpp:162 rc.cpp:27 rc.cpp:288
 #, no-c-format
 msgid "From whom this message was received."
 msgstr "Thông điệp được gửi từ người này"
 
 #. i18n: file klinpopupview_base.ui line 451
-#: klinpopupview_base.cpp:164 rc.cpp:31 rc.cpp:280
+#: klinpopupview_base.cpp:164 rc.cpp:31 rc.cpp:292
 #, no-c-format
 msgid "When received"
 msgstr "Thời gian nhận"
 
 #. i18n: file klinpopupview_base.ui line 454
-#: klinpopupview_base.cpp:165 rc.cpp:34 rc.cpp:283
+#: klinpopupview_base.cpp:165 rc.cpp:34 rc.cpp:295
 #, fuzzy, no-c-format
 msgid "When this message was received."
 msgstr "Thời gian khi thông điệp được nhận."
@@ -277,7 +277,7 @@ msgid "Send the message and close the dialog."
 msgstr "Gửi thông điệp và đóng hộp thoại."
 
 #. i18n: file prefs_base.ui line 133
-#: makepopup.cpp:612 prefs_base.cpp:258 rc.cpp:58 rc.cpp:307
+#: makepopup.cpp:612 prefs_base.cpp:258 rc.cpp:58 rc.cpp:319
 #, no-c-format
 msgid "Alt+C"
 msgstr "Alt+C"
@@ -291,307 +291,319 @@ msgid "Cancel the dialog without sending the message."
 msgstr "Không gửi và huỷ bỏ hộp thoại"
 
 #. i18n: file prefs_base.ui line 24
-#: prefs_base.cpp:252 rc.cpp:37 rc.cpp:286
+#: prefs_base.cpp:252 rc.cpp:37 rc.cpp:298
 #, no-c-format
 msgid "Prefs_base"
 msgstr "Prefs_base"
 
 #. i18n: file prefs_base.ui line 69
-#: prefs_base.cpp:253 rc.cpp:43 rc.cpp:292
+#: prefs_base.cpp:253 rc.cpp:43 rc.cpp:304
 #, no-c-format
 msgid "Sender displaying"
 msgstr "Hiện tên người gửi"
 
 #. i18n: file prefs_base.ui line 108
-#: prefs_base.cpp:254 rc.cpp:46 rc.cpp:295
+#: prefs_base.cpp:254 rc.cpp:46 rc.cpp:307
 #, fuzzy, no-c-format
 msgid "Sender &name (%f)"
 msgstr "Tên người gửi (%f)"
 
 #. i18n: file prefs_base.ui line 111
-#: prefs_base.cpp:255 rc.cpp:49 rc.cpp:298
+#: prefs_base.cpp:255 rc.cpp:49 rc.cpp:310
 #, no-c-format
 msgid "Display sender name?"
 msgstr "Bạn có muốn hiện tên người gửi?"
 
 #. i18n: file prefs_base.ui line 114
-#: prefs_base.cpp:256 rc.cpp:52 rc.cpp:301
+#: prefs_base.cpp:256 rc.cpp:52 rc.cpp:313
 #, no-c-format
 msgid "Show sender name as part of sender string for incoming messages?"
 msgstr "Bạn có muốn tên người gửi trở thành 1 phần của thông điệp không? "
 
 #. i18n: file prefs_base.ui line 130
-#: prefs_base.cpp:257 rc.cpp:55 rc.cpp:304
+#: prefs_base.cpp:257 rc.cpp:55 rc.cpp:316
 #, fuzzy, no-c-format
 msgid "Sender ma&chine (%m)"
 msgstr "Máy gửi thông điệp (%m)"
 
 #. i18n: file prefs_base.ui line 136
-#: prefs_base.cpp:259 rc.cpp:61 rc.cpp:310
+#: prefs_base.cpp:259 rc.cpp:61 rc.cpp:322
 #, no-c-format
 msgid "Display machine name?"
 msgstr "Hiện tên máy?"
 
 #. i18n: file prefs_base.ui line 139
-#: prefs_base.cpp:260 rc.cpp:64 rc.cpp:313
+#: prefs_base.cpp:260 rc.cpp:64 rc.cpp:325
 #, no-c-format
 msgid "Show machine name as part of sender string for incoming messages?"
 msgstr "Bạn có muốn tên máy trở thành 1 phần của thông điệp không?"
 
 #. i18n: file prefs_base.ui line 155
-#: prefs_base.cpp:261 rc.cpp:67 rc.cpp:316
+#: prefs_base.cpp:261 rc.cpp:67 rc.cpp:328
 #, fuzzy, no-c-format
 msgid "Sender &IP (%I)"
 msgstr "IP của người gửi (%I)"
 
 #. i18n: file prefs_base.ui line 158
-#: prefs_base.cpp:262 rc.cpp:70 rc.cpp:319
+#: prefs_base.cpp:262 rc.cpp:70 rc.cpp:331
 #, no-c-format
 msgid "Display sender IP?"
 msgstr "Hiện IP của người gửi?"
 
 #. i18n: file prefs_base.ui line 161
-#: prefs_base.cpp:263 rc.cpp:73 rc.cpp:322
+#: prefs_base.cpp:263 rc.cpp:73 rc.cpp:334
 #, no-c-format
 msgid "Show sender IP as part of sender string for incoming messages?"
 msgstr "Bạn có muốn IP người gửi trở thành 1 phần của thông điệp không?"
 
 #. i18n: file prefs_base.ui line 179
-#: prefs_base.cpp:264 rc.cpp:76 rc.cpp:325
+#: prefs_base.cpp:264 rc.cpp:76 rc.cpp:337
 #, fuzzy, no-c-format
 msgid "Time displaying"
 msgstr "Hiện thời gian"
 
 #. i18n: file prefs_base.ui line 188
-#: prefs_base.cpp:266 rc.cpp:79 rc.cpp:328
+#: prefs_base.cpp:266 rc.cpp:79 rc.cpp:340
 #, no-c-format
 msgid "Date & Time"
 msgstr "Ngày & giờ"
 
 #. i18n: file prefs_base.ui line 193
-#: prefs_base.cpp:267 rc.cpp:82 rc.cpp:331
+#: prefs_base.cpp:267 rc.cpp:82 rc.cpp:343
 #, no-c-format
 msgid "Time"
 msgstr "Giờ"
 
 #. i18n: file prefs_base.ui line 198
-#: prefs_base.cpp:268 rc.cpp:85 rc.cpp:334
+#: prefs_base.cpp:268 rc.cpp:85 rc.cpp:346
 #, no-c-format
 msgid "Date"
 msgstr "Ngày"
 
 #. i18n: file prefs_base.ui line 205
-#: prefs_base.cpp:269 rc.cpp:88 rc.cpp:337
+#: prefs_base.cpp:269 rc.cpp:88 rc.cpp:349
 #, no-c-format
 msgid "Details for time displaying"
 msgstr "Hiện chi tiết giờ nhận thông điệp"
 
 #. i18n: file prefs_base.ui line 208
-#: prefs_base.cpp:270 rc.cpp:91 rc.cpp:340
+#: prefs_base.cpp:270 rc.cpp:91 rc.cpp:352
 #, no-c-format
 msgid "What details to show for the time of received messages."
 msgstr "Hiện thời gian nhận thông điệp như thế nào"
 
 #. i18n: file prefs_base.ui line 243
-#: prefs_base.cpp:271 rc.cpp:94 rc.cpp:343
+#: prefs_base.cpp:271 rc.cpp:94 rc.cpp:355
 #, no-c-format
 msgid "New message signaling"
 msgstr "Tín hiệu khi nhận được thông điệp"
 
 #. i18n: file prefs_base.ui line 263
-#: prefs_base.cpp:273 rc.cpp:97 rc.cpp:346
+#: prefs_base.cpp:273 rc.cpp:97 rc.cpp:358
 #, no-c-format
 msgid "Nothing"
 msgstr "Không có gì cả"
 
 #. i18n: file prefs_base.ui line 268
-#: prefs_base.cpp:274 rc.cpp:100 rc.cpp:349
+#: prefs_base.cpp:274 rc.cpp:100 rc.cpp:361
 #, no-c-format
 msgid "Sound and Tray"
 msgstr "Âm thanh và khay hệ thống"
 
 #. i18n: file prefs_base.ui line 273
-#: prefs_base.cpp:275 rc.cpp:103 rc.cpp:352
+#: prefs_base.cpp:275 rc.cpp:103 rc.cpp:364
 #, no-c-format
 msgid "Activate window"
 msgstr "Kích hoạt cửa sổ"
 
 #. i18n: file prefs_base.ui line 278
-#: prefs_base.cpp:276 rc.cpp:106 rc.cpp:355
+#: prefs_base.cpp:276 rc.cpp:106 rc.cpp:367
 #, no-c-format
 msgid "All"
 msgstr "Tất cả"
 
 #. i18n: file prefs_base.ui line 293
-#: prefs_base.cpp:277 rc.cpp:109 rc.cpp:358
+#: prefs_base.cpp:277 rc.cpp:109 rc.cpp:370
 #, no-c-format
 msgid "Action for new messages"
 msgstr "Những việc sẽ thực hiện khi nhận được thông điệp"
 
 #. i18n: file prefs_base.ui line 296
-#: prefs_base.cpp:278 rc.cpp:112 rc.cpp:361
+#: prefs_base.cpp:278 rc.cpp:112 rc.cpp:373
 #, no-c-format
 msgid "What to do when new messages are received."
 msgstr "Phải làm gì khi khi nhận được thông điệp"
 
 #. i18n: file prefs_base.ui line 339
-#: prefs_base.cpp:279 rc.cpp:115 rc.cpp:364
+#: prefs_base.cpp:279 rc.cpp:115 rc.cpp:376
 #, no-c-format
 msgid "Sound:"
 msgstr "Âm thanh:"
 
 #. i18n: file prefs_base.ui line 361
-#: prefs_base.cpp:282 rc.cpp:120 rc.cpp:369
+#: prefs_base.cpp:282 rc.cpp:120 rc.cpp:381
 #, no-c-format
 msgid "Sound for new messages"
 msgstr "Âm thanh khi nhận được thông điệp"
 
 #. i18n: file prefs_base.ui line 364
-#: prefs_base.cpp:283 rc.cpp:123 rc.cpp:372
+#: prefs_base.cpp:283 rc.cpp:123 rc.cpp:384
 #, no-c-format
 msgid "Choose which sound to play when new messages are received."
 msgstr "Hãy chọn âm thanh sẽ phát ra khi nhận được thông điệp."
 
 #. i18n: file prefs_base.ui line 374
-#: prefs_base.cpp:284 rc.cpp:126 rc.cpp:375
+#: prefs_base.cpp:284 rc.cpp:126 rc.cpp:387
 #, no-c-format
 msgid "Addi&tional external command"
 msgstr ""
 
 #. i18n: file prefs_base.ui line 377
-#: prefs_base.cpp:285 rc.cpp:129 rc.cpp:378
+#: prefs_base.cpp:285 rc.cpp:129 rc.cpp:390
 #, fuzzy, no-c-format
 msgid "Alt+T"
 msgstr "Alt+S"
 
-#. i18n: file prefs_base.ui line 392
-#: prefs_base.cpp:286 rc.cpp:132 rc.cpp:381
+#. i18n: file prefs_base.ui line 409
+#: prefs_base.cpp:286 rc.cpp:141 rc.cpp:402
+#, fuzzy, no-c-format
+msgid "Text for the autoreply message"
+msgstr "Những việc sẽ thực hiện khi nhận được thông điệp"
+
+#. i18n: file prefs_base.ui line 412
+#: prefs_base.cpp:287 rc.cpp:144 rc.cpp:405
+#, no-c-format
+msgid "The text for the message sent when autoreply is on."
+msgstr ""
+
+#. i18n: file prefs_base.ui line 398
+#: prefs_base.cpp:288 rc.cpp:138 rc.cpp:399
 #, fuzzy, no-c-format
 msgid "Autoreply message"
 msgstr "Những việc sẽ thực hiện khi nhận được thông điệp"
 
-#. i18n: file prefs_base.ui line 410
-#: prefs_base.cpp:287 rc.cpp:135 rc.cpp:384
+#. i18n: file prefs_base.ui line 422
+#: prefs_base.cpp:289 rc.cpp:147 rc.cpp:408
 #, fuzzy, no-c-format
 msgid "Message Creation"
 msgstr "Soạn thảo thông điệp"
 
-#. i18n: file prefs_base.ui line 421
-#: prefs_base.cpp:288 rc.cpp:138 rc.cpp:387
+#. i18n: file prefs_base.ui line 433
+#: prefs_base.cpp:290 rc.cpp:150 rc.cpp:411
 #, no-c-format
 msgid "Viewmode:"
 msgstr "Chế độ xem"
 
-#. i18n: file prefs_base.ui line 427
-#: prefs_base.cpp:290 rc.cpp:141 rc.cpp:390
+#. i18n: file prefs_base.ui line 439
+#: prefs_base.cpp:292 rc.cpp:153 rc.cpp:414
 #, no-c-format
 msgid "ClassicView"
 msgstr "Xem dưới dạng classic (cũ)"
 
-#. i18n: file prefs_base.ui line 432
-#: prefs_base.cpp:291 rc.cpp:144 rc.cpp:393
+#. i18n: file prefs_base.ui line 444
+#: prefs_base.cpp:293 rc.cpp:156 rc.cpp:417
 #, no-c-format
 msgid "TreeView"
 msgstr "Xem dưới dạng cây"
 
-#. i18n: file prefs_base.ui line 439
-#: prefs_base.cpp:292 rc.cpp:147 rc.cpp:396
+#. i18n: file prefs_base.ui line 451
+#: prefs_base.cpp:294 rc.cpp:159 rc.cpp:420
 #, fuzzy, no-c-format
 msgid "View when writing a new message"
 msgstr "Xem khi soạn thảo thông điệp mới"
 
-#. i18n: file prefs_base.ui line 442
-#: prefs_base.cpp:293 rc.cpp:150 rc.cpp:399
+#. i18n: file prefs_base.ui line 454
+#: prefs_base.cpp:295 rc.cpp:162 rc.cpp:423
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
 msgstr "Chế độ xem nào sẽ dùng khi đang soạn thảo thông điệp mới"
 
-#. i18n: file prefs_base.ui line 450
-#: prefs_base.cpp:294 rc.cpp:153 rc.cpp:402
+#. i18n: file prefs_base.ui line 462
+#: prefs_base.cpp:296 rc.cpp:165 rc.cpp:426
 #, no-c-format
 msgid "Encoding:"
 msgstr "Mã hoá:"
 
-#. i18n: file prefs_base.ui line 462
-#: prefs_base.cpp:298 rc.cpp:158 rc.cpp:407
+#. i18n: file prefs_base.ui line 474
+#: prefs_base.cpp:300 rc.cpp:170 rc.cpp:431
 #, no-c-format
 msgid "local8Bit"
 msgstr "local8Bit"
 
-#. i18n: file prefs_base.ui line 467
-#: prefs_base.cpp:299 rc.cpp:161 rc.cpp:410
+#. i18n: file prefs_base.ui line 479
+#: prefs_base.cpp:301 rc.cpp:173 rc.cpp:434
 #, no-c-format
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#. i18n: file prefs_base.ui line 472
-#: prefs_base.cpp:300 rc.cpp:164 rc.cpp:413
+#. i18n: file prefs_base.ui line 484
+#: prefs_base.cpp:302 rc.cpp:176 rc.cpp:437
 #, no-c-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#. i18n: file prefs_base.ui line 477
-#: prefs_base.cpp:301 rc.cpp:167 rc.cpp:416
+#. i18n: file prefs_base.ui line 489
+#: prefs_base.cpp:303 rc.cpp:179 rc.cpp:440
 #, no-c-format
 msgid "ASCII"
 msgstr "ASCII"
 
-#. i18n: file prefs_base.ui line 484
-#: prefs_base.cpp:302 rc.cpp:170 rc.cpp:419
+#. i18n: file prefs_base.ui line 496
+#: prefs_base.cpp:304 rc.cpp:182 rc.cpp:443
 #, no-c-format
 msgid "Character encoding for new messages"
 msgstr "Ký tự được mã hoá cho thông điệp mới"
 
-#. i18n: file prefs_base.ui line 487
-#: prefs_base.cpp:303 rc.cpp:173 rc.cpp:422
+#. i18n: file prefs_base.ui line 499
+#: prefs_base.cpp:305 rc.cpp:185 rc.cpp:446
 #, no-c-format
 msgid "Set the character encoding for new messages."
 msgstr "Xác định ký tự được mã hoá cho thông điệp mới"
 
 #. i18n: file prefs_base.ui line 50
-#: prefs_base.cpp:304 rc.cpp:40 rc.cpp:289
+#: prefs_base.cpp:306 rc.cpp:40 rc.cpp:301
 #, fuzzy, no-c-format
 msgid "Messa&ges"
 msgstr "&Thông điệp"
 
-#. i18n: file prefs_base.ui line 535
-#: prefs_base.cpp:305 rc.cpp:179 rc.cpp:428
+#. i18n: file prefs_base.ui line 547
+#: prefs_base.cpp:307 rc.cpp:191 rc.cpp:452
 #, no-c-format
 msgid "General Options"
 msgstr "Tuỳ chọn chung"
 
-#. i18n: file prefs_base.ui line 574
-#: prefs_base.cpp:306 rc.cpp:182 rc.cpp:431
+#. i18n: file prefs_base.ui line 586
+#: prefs_base.cpp:308 rc.cpp:194 rc.cpp:455
 #, no-c-format
 msgid "Timer interval (in sec)"
 msgstr "Khoảng thời gian(tính theo giây)"
 
-#. i18n: file prefs_base.ui line 602
-#: prefs_base.cpp:309 rc.cpp:187 rc.cpp:436
+#. i18n: file prefs_base.ui line 614
+#: prefs_base.cpp:311 rc.cpp:199 rc.cpp:460
 #, no-c-format
 msgid "Interval for new messages check"
 msgstr "Khoảng thời gian kiểm tra thông điệp mới"
 
-#. i18n: file prefs_base.ui line 605
-#: prefs_base.cpp:310 rc.cpp:190 rc.cpp:439
+#. i18n: file prefs_base.ui line 617
+#: prefs_base.cpp:312 rc.cpp:202 rc.cpp:463
 #, no-c-format
 msgid "Duration for check intervall for incoming new messages in seconds."
 msgstr "Khoảng thời gian kiểm tra thông điệp mới, tính theo giây. "
 
-#. i18n: file prefs_base.ui line 621
-#: prefs_base.cpp:311 rc.cpp:193 rc.cpp:442
+#. i18n: file prefs_base.ui line 633
+#: prefs_base.cpp:313 rc.cpp:205 rc.cpp:466
 #, fuzzy, no-c-format
 msgid "Run do&cked"
 msgstr "Neo cố định"
 
-#. i18n: file prefs_base.ui line 624
-#: prefs_base.cpp:312 rc.cpp:196 rc.cpp:445
+#. i18n: file prefs_base.ui line 636
+#: prefs_base.cpp:314 rc.cpp:208 rc.cpp:469
 #, no-c-format
 msgid "Start docked and hide main window when closing"
 msgstr "Giữ cố định và tắt cữa sỗ chính khi đóng"
 
-#. i18n: file prefs_base.ui line 627
-#: prefs_base.cpp:313 rc.cpp:199 rc.cpp:448
+#. i18n: file prefs_base.ui line 639
+#: prefs_base.cpp:315 rc.cpp:211 rc.cpp:472
 #, fuzzy, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
@@ -600,122 +612,134 @@ msgstr ""
 "Khi đã kiểm tra xong, sẽ bắt đầu gắn cố định vào khay hệ thống và chỉ tắt "
 "khi cửa sổ được đóng"
 
-#. i18n: file prefs_base.ui line 662
-#: prefs_base.cpp:314 rc.cpp:202 rc.cpp:451
+#. i18n: file prefs_base.ui line 674
+#: prefs_base.cpp:316 rc.cpp:214 rc.cpp:475
 #, no-c-format
 msgid "System"
 msgstr "Hệ thống"
 
-#. i18n: file prefs_base.ui line 676
-#: prefs_base.cpp:315 rc.cpp:205 rc.cpp:454
+#. i18n: file prefs_base.ui line 688
+#: prefs_base.cpp:317 rc.cpp:217 rc.cpp:478
 #, fuzzy, no-c-format
 msgid "smbclient-Bin:"
 msgstr "smbclient-Bin"
 
-#. i18n: file prefs_base.ui line 690
-#: prefs_base.cpp:318 rc.cpp:210 rc.cpp:459
+#. i18n: file prefs_base.ui line 702
+#: prefs_base.cpp:320 rc.cpp:222 rc.cpp:483
 #, no-c-format
 msgid "Path to smbclient"
 msgstr "Đường dẫn đến smbclient"
 
-#. i18n: file prefs_base.ui line 693
-#: prefs_base.cpp:319 rc.cpp:213 rc.cpp:462
+#. i18n: file prefs_base.ui line 705
+#: prefs_base.cpp:321 rc.cpp:225 rc.cpp:486
 #, fuzzy, no-c-format
 msgid "The Path to your smbclient binary."
 msgstr "Đường dẫn đến smbclient"
 
-#. i18n: file prefs_base.ui line 516
-#: prefs_base.cpp:320 rc.cpp:176 rc.cpp:425
+#. i18n: file prefs_base.ui line 528
+#: prefs_base.cpp:322 rc.cpp:188 rc.cpp:449
 #, fuzzy, no-c-format
 msgid "S&ystem"
 msgstr "Hệ thống"
 
 #. i18n: file klinpopupui.rc line 10
-#: rc.cpp:6 rc.cpp:468
+#: rc.cpp:6 rc.cpp:492
 #, fuzzy, no-c-format
 msgid "&Messages"
 msgstr "&Thông điệp"
 
+#. i18n: file prefs_base.ui line 385
+#: rc.cpp:132 rc.cpp:393
+#, no-c-format
+msgid "Command to execute"
+msgstr ""
+
+#. i18n: file prefs_base.ui line 388
+#: rc.cpp:135 rc.cpp:396
+#, no-c-format
+msgid "The URL and arguments for the external command."
+msgstr ""
+
 #. i18n: file klinpopup.kcfg line 7
-#: rc.cpp:216
+#: rc.cpp:228
 #, no-c-format
 msgid "Display sender name"
 msgstr "Bạn có muốn hiện tên người gửi?"
 
 #. i18n: file klinpopup.kcfg line 11
-#: rc.cpp:219
+#: rc.cpp:231
 #, no-c-format
 msgid "Display sender machine"
 msgstr "Hiện tên máy giử"
 
 #. i18n: file klinpopup.kcfg line 15
-#: rc.cpp:222
+#: rc.cpp:234
 #, no-c-format
 msgid "Display sender IP"
 msgstr "Hiện IP của người gửi?"
 
 #. i18n: file klinpopup.kcfg line 19
-#: rc.cpp:225
+#: rc.cpp:237
 #, no-c-format
 msgid "Displayed time format"
 msgstr "Định dạng giờ"
 
 #. i18n: file klinpopup.kcfg line 23
-#: rc.cpp:228
+#: rc.cpp:240
 #, no-c-format
 msgid "Toggle Signaling"
 msgstr "Tín hiệu"
 
 #. i18n: file klinpopup.kcfg line 27
-#: rc.cpp:231
+#: rc.cpp:243
 #, no-c-format
 msgid "Sound URL"
 msgstr "Địa chỉ tập tin âm thanh"
 
 #. i18n: file klinpopup.kcfg line 31
-#: rc.cpp:234
+#: rc.cpp:246
 #, no-c-format
 msgid "Additional external command"
 msgstr ""
 
 #. i18n: file klinpopup.kcfg line 35
-#: rc.cpp:237
+#: rc.cpp:249
 #, no-c-format
 msgid "URL of external command"
 msgstr ""
 
 #. i18n: file klinpopup.kcfg line 39
-#: rc.cpp:240
+#: rc.cpp:252
 #, fuzzy, no-c-format
 msgid "Message for autoreply"
 msgstr "Soạn thảo thông điệp"
 
 #. i18n: file klinpopup.kcfg line 43
-#: rc.cpp:243
+#: rc.cpp:255
 #, fuzzy, no-c-format
 msgid "Run docked"
 msgstr "Neo cố định"
 
 #. i18n: file klinpopup.kcfg line 47
-#: rc.cpp:246
+#: rc.cpp:258
 #, no-c-format
 msgid "TimerInterval"
 msgstr "Khoảng thời gian"
 
 #. i18n: file klinpopup.kcfg line 51
-#: rc.cpp:249
+#: rc.cpp:261
 #, no-c-format
 msgid "Viewmode for message creation"
 msgstr "Chế độ xem khi soạn thảo thông điệp"
 
 #. i18n: file klinpopup.kcfg line 55
-#: rc.cpp:252
+#: rc.cpp:264
 #, fuzzy, no-c-format
 msgid "smbclient-Bin"
 msgstr "smbclient-Bin"
 
 #. i18n: file klinpopup.kcfg line 59
-#: rc.cpp:255
+#: rc.cpp:267
 #, no-c-format
 msgid "Encoding"
 msgstr "Mã hoá"

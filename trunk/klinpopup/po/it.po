@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-24 18:01+0100\n"
+"POT-Creation-Date: 2006-02-25 17:04+0100\n"
 "PO-Revision-Date: 2005-12-17 20:25+0000\n"
 "Last-Translator: Daniele Bortoluzzi <digital.death@gmx.it>\n"
 "Language-Team: \n"
@@ -131,43 +131,43 @@ msgid "Settings"
 msgstr "Impostazioni"
 
 #. i18n: file klinpopupview_base.ui line 24
-#: klinpopupview_base.cpp:152 rc.cpp:9 rc.cpp:258
+#: klinpopupview_base.cpp:152 rc.cpp:9 rc.cpp:270
 #, no-c-format
 msgid "KLinPopup_base"
 msgstr "KLinPopup_base"
 
 #. i18n: file klinpopupview_base.ui line 331
-#: klinpopupview_base.cpp:154 rc.cpp:13 rc.cpp:262
+#: klinpopupview_base.cpp:154 rc.cpp:13 rc.cpp:274
 #, no-c-format
 msgid "Message from:"
 msgstr "Messaggio da:"
 
 #. i18n: file klinpopupview_base.ui line 368
-#: klinpopupview_base.cpp:157 rc.cpp:18 rc.cpp:267
+#: klinpopupview_base.cpp:157 rc.cpp:18 rc.cpp:279
 #, no-c-format
 msgid "Message time:"
 msgstr "Ora:"
 
 #. i18n: file klinpopupview_base.ui line 414
-#: klinpopupview_base.cpp:161 rc.cpp:24 rc.cpp:273
+#: klinpopupview_base.cpp:161 rc.cpp:24 rc.cpp:285
 #, no-c-format
 msgid "Sender"
 msgstr "Mittente"
 
 #. i18n: file klinpopupview_base.ui line 417
-#: klinpopupview_base.cpp:162 rc.cpp:27 rc.cpp:276
+#: klinpopupview_base.cpp:162 rc.cpp:27 rc.cpp:288
 #, no-c-format
 msgid "From whom this message was received."
 msgstr "Dal quale è stato ricevuto il messaggio"
 
 #. i18n: file klinpopupview_base.ui line 451
-#: klinpopupview_base.cpp:164 rc.cpp:31 rc.cpp:280
+#: klinpopupview_base.cpp:164 rc.cpp:31 rc.cpp:292
 #, no-c-format
 msgid "When received"
 msgstr "Quando venga ricevuto"
 
 #. i18n: file klinpopupview_base.ui line 454
-#: klinpopupview_base.cpp:165 rc.cpp:34 rc.cpp:283
+#: klinpopupview_base.cpp:165 rc.cpp:34 rc.cpp:295
 #, no-c-format
 msgid "When this message was received."
 msgstr "Quando è stato ricevuto questo messaggio"
@@ -277,7 +277,7 @@ msgid "Send the message and close the dialog."
 msgstr "Inviare il messaggio e chiudere la finestra di dialogo"
 
 #. i18n: file prefs_base.ui line 133
-#: makepopup.cpp:612 prefs_base.cpp:258 rc.cpp:58 rc.cpp:307
+#: makepopup.cpp:612 prefs_base.cpp:258 rc.cpp:58 rc.cpp:319
 #, no-c-format
 msgid "Alt+C"
 msgstr "Alt+A"
@@ -291,310 +291,322 @@ msgid "Cancel the dialog without sending the message."
 msgstr "Chiudere la finestra di dialogo senza mandare il messaggio"
 
 #. i18n: file prefs_base.ui line 24
-#: prefs_base.cpp:252 rc.cpp:37 rc.cpp:286
+#: prefs_base.cpp:252 rc.cpp:37 rc.cpp:298
 #, no-c-format
 msgid "Prefs_base"
 msgstr "Pref_base"
 
 #. i18n: file prefs_base.ui line 69
-#: prefs_base.cpp:253 rc.cpp:43 rc.cpp:292
+#: prefs_base.cpp:253 rc.cpp:43 rc.cpp:304
 #, no-c-format
 msgid "Sender displaying"
 msgstr "Mittente visualizzato"
 
 #. i18n: file prefs_base.ui line 108
-#: prefs_base.cpp:254 rc.cpp:46 rc.cpp:295
+#: prefs_base.cpp:254 rc.cpp:46 rc.cpp:307
 #, no-c-format
 msgid "Sender &name (%f)"
 msgstr "&Nome del mittente (%f)"
 
 #. i18n: file prefs_base.ui line 111
-#: prefs_base.cpp:255 rc.cpp:49 rc.cpp:298
+#: prefs_base.cpp:255 rc.cpp:49 rc.cpp:310
 #, no-c-format
 msgid "Display sender name?"
 msgstr "Mostrare il nome del mittente?"
 
 #. i18n: file prefs_base.ui line 114
-#: prefs_base.cpp:256 rc.cpp:52 rc.cpp:301
+#: prefs_base.cpp:256 rc.cpp:52 rc.cpp:313
 #, no-c-format
 msgid "Show sender name as part of sender string for incoming messages?"
 msgstr ""
 "Mostrare il nome del mittente nell'intestazione del messaggio in arrivo?"
 
 #. i18n: file prefs_base.ui line 130
-#: prefs_base.cpp:257 rc.cpp:55 rc.cpp:304
+#: prefs_base.cpp:257 rc.cpp:55 rc.cpp:316
 #, no-c-format
 msgid "Sender ma&chine (%m)"
 msgstr "Macchina del mittente (%m)"
 
 #. i18n: file prefs_base.ui line 136
-#: prefs_base.cpp:259 rc.cpp:61 rc.cpp:310
+#: prefs_base.cpp:259 rc.cpp:61 rc.cpp:322
 #, no-c-format
 msgid "Display machine name?"
 msgstr "Visualizzare il nome della macchina?"
 
 #. i18n: file prefs_base.ui line 139
-#: prefs_base.cpp:260 rc.cpp:64 rc.cpp:313
+#: prefs_base.cpp:260 rc.cpp:64 rc.cpp:325
 #, no-c-format
 msgid "Show machine name as part of sender string for incoming messages?"
 msgstr ""
 "Visualizzare il nome della macchina come stringa dei messaggi in arrivo?"
 
 #. i18n: file prefs_base.ui line 155
-#: prefs_base.cpp:261 rc.cpp:67 rc.cpp:316
+#: prefs_base.cpp:261 rc.cpp:67 rc.cpp:328
 #, no-c-format
 msgid "Sender &IP (%I)"
 msgstr "&IP del mittente (%I)"
 
 #. i18n: file prefs_base.ui line 158
-#: prefs_base.cpp:262 rc.cpp:70 rc.cpp:319
+#: prefs_base.cpp:262 rc.cpp:70 rc.cpp:331
 #, no-c-format
 msgid "Display sender IP?"
 msgstr "Visualizzare IP del mittente?"
 
 #. i18n: file prefs_base.ui line 161
-#: prefs_base.cpp:263 rc.cpp:73 rc.cpp:322
+#: prefs_base.cpp:263 rc.cpp:73 rc.cpp:334
 #, no-c-format
 msgid "Show sender IP as part of sender string for incoming messages?"
 msgstr ""
 "Visualizzare IP del mittente come parte della stringa dei messaggi in arrivo?"
 
 #. i18n: file prefs_base.ui line 179
-#: prefs_base.cpp:264 rc.cpp:76 rc.cpp:325
+#: prefs_base.cpp:264 rc.cpp:76 rc.cpp:337
 #, no-c-format
 msgid "Time displaying"
 msgstr "Visualizzare ora"
 
 #. i18n: file prefs_base.ui line 188
-#: prefs_base.cpp:266 rc.cpp:79 rc.cpp:328
+#: prefs_base.cpp:266 rc.cpp:79 rc.cpp:340
 #, no-c-format
 msgid "Date & Time"
 msgstr "Data e ora"
 
 #. i18n: file prefs_base.ui line 193
-#: prefs_base.cpp:267 rc.cpp:82 rc.cpp:331
+#: prefs_base.cpp:267 rc.cpp:82 rc.cpp:343
 #, no-c-format
 msgid "Time"
 msgstr "Ora"
 
 #. i18n: file prefs_base.ui line 198
-#: prefs_base.cpp:268 rc.cpp:85 rc.cpp:334
+#: prefs_base.cpp:268 rc.cpp:85 rc.cpp:346
 #, no-c-format
 msgid "Date"
 msgstr "Data"
 
 #. i18n: file prefs_base.ui line 205
-#: prefs_base.cpp:269 rc.cpp:88 rc.cpp:337
+#: prefs_base.cpp:269 rc.cpp:88 rc.cpp:349
 #, no-c-format
 msgid "Details for time displaying"
 msgstr "Dettagli di visualizzazione dell'orario"
 
 #. i18n: file prefs_base.ui line 208
-#: prefs_base.cpp:270 rc.cpp:91 rc.cpp:340
+#: prefs_base.cpp:270 rc.cpp:91 rc.cpp:352
 #, no-c-format
 msgid "What details to show for the time of received messages."
 msgstr "Che dettagli di orario mostrare nei messaggi in arrivo"
 
 #. i18n: file prefs_base.ui line 243
-#: prefs_base.cpp:271 rc.cpp:94 rc.cpp:343
+#: prefs_base.cpp:271 rc.cpp:94 rc.cpp:355
 #, no-c-format
 msgid "New message signaling"
 msgstr "Segnale di nuovo messaggio"
 
 #. i18n: file prefs_base.ui line 263
-#: prefs_base.cpp:273 rc.cpp:97 rc.cpp:346
+#: prefs_base.cpp:273 rc.cpp:97 rc.cpp:358
 #, no-c-format
 msgid "Nothing"
 msgstr "Niente"
 
 #. i18n: file prefs_base.ui line 268
-#: prefs_base.cpp:274 rc.cpp:100 rc.cpp:349
+#: prefs_base.cpp:274 rc.cpp:100 rc.cpp:361
 #, no-c-format
 msgid "Sound and Tray"
 msgstr "Suono e icona tray"
 
 #. i18n: file prefs_base.ui line 273
-#: prefs_base.cpp:275 rc.cpp:103 rc.cpp:352
+#: prefs_base.cpp:275 rc.cpp:103 rc.cpp:364
 #, no-c-format
 msgid "Activate window"
 msgstr "Attivare finestra"
 
 #. i18n: file prefs_base.ui line 278
-#: prefs_base.cpp:276 rc.cpp:106 rc.cpp:355
+#: prefs_base.cpp:276 rc.cpp:106 rc.cpp:367
 #, no-c-format
 msgid "All"
 msgstr "Tutto"
 
 #. i18n: file prefs_base.ui line 293
-#: prefs_base.cpp:277 rc.cpp:109 rc.cpp:358
+#: prefs_base.cpp:277 rc.cpp:109 rc.cpp:370
 #, no-c-format
 msgid "Action for new messages"
 msgstr "Azione per i messaggi nuovi"
 
 #. i18n: file prefs_base.ui line 296
-#: prefs_base.cpp:278 rc.cpp:112 rc.cpp:361
+#: prefs_base.cpp:278 rc.cpp:112 rc.cpp:373
 #, no-c-format
 msgid "What to do when new messages are received."
 msgstr "Cosa fare quando si ricevono messaggi nuovi"
 
 #. i18n: file prefs_base.ui line 339
-#: prefs_base.cpp:279 rc.cpp:115 rc.cpp:364
+#: prefs_base.cpp:279 rc.cpp:115 rc.cpp:376
 #, no-c-format
 msgid "Sound:"
 msgstr "Suono:"
 
 #. i18n: file prefs_base.ui line 361
-#: prefs_base.cpp:282 rc.cpp:120 rc.cpp:369
+#: prefs_base.cpp:282 rc.cpp:120 rc.cpp:381
 #, no-c-format
 msgid "Sound for new messages"
 msgstr "Suono per i messaggi nuovi"
 
 #. i18n: file prefs_base.ui line 364
-#: prefs_base.cpp:283 rc.cpp:123 rc.cpp:372
+#: prefs_base.cpp:283 rc.cpp:123 rc.cpp:384
 #, no-c-format
 msgid "Choose which sound to play when new messages are received."
 msgstr "Scegli quale suono riprodurre quando si ricevono messaggi nuovi"
 
 #. i18n: file prefs_base.ui line 374
-#: prefs_base.cpp:284 rc.cpp:126 rc.cpp:375
+#: prefs_base.cpp:284 rc.cpp:126 rc.cpp:387
 #, fuzzy, no-c-format
 msgid "Addi&tional external command"
 msgstr "Comando esterno addizionale"
 
 #. i18n: file prefs_base.ui line 377
-#: prefs_base.cpp:285 rc.cpp:129 rc.cpp:378
+#: prefs_base.cpp:285 rc.cpp:129 rc.cpp:390
 #, fuzzy, no-c-format
 msgid "Alt+T"
 msgstr "Alt+I"
 
-#. i18n: file prefs_base.ui line 392
-#: prefs_base.cpp:286 rc.cpp:132 rc.cpp:381
+#. i18n: file prefs_base.ui line 409
+#: prefs_base.cpp:286 rc.cpp:141 rc.cpp:402
+#, fuzzy, no-c-format
+msgid "Text for the autoreply message"
+msgstr "Azione per i messaggi nuovi"
+
+#. i18n: file prefs_base.ui line 412
+#: prefs_base.cpp:287 rc.cpp:144 rc.cpp:405
+#, no-c-format
+msgid "The text for the message sent when autoreply is on."
+msgstr ""
+
+#. i18n: file prefs_base.ui line 398
+#: prefs_base.cpp:288 rc.cpp:138 rc.cpp:399
 #, fuzzy, no-c-format
 msgid "Autoreply message"
 msgstr "Azione per i messaggi nuovi"
 
-#. i18n: file prefs_base.ui line 410
-#: prefs_base.cpp:287 rc.cpp:135 rc.cpp:384
+#. i18n: file prefs_base.ui line 422
+#: prefs_base.cpp:289 rc.cpp:147 rc.cpp:408
 #, no-c-format
 msgid "Message Creation"
 msgstr "Creazione del messaggio"
 
-#. i18n: file prefs_base.ui line 421
-#: prefs_base.cpp:288 rc.cpp:138 rc.cpp:387
+#. i18n: file prefs_base.ui line 433
+#: prefs_base.cpp:290 rc.cpp:150 rc.cpp:411
 #, no-c-format
 msgid "Viewmode:"
 msgstr "Vista:"
 
-#. i18n: file prefs_base.ui line 427
-#: prefs_base.cpp:290 rc.cpp:141 rc.cpp:390
+#. i18n: file prefs_base.ui line 439
+#: prefs_base.cpp:292 rc.cpp:153 rc.cpp:414
 #, no-c-format
 msgid "ClassicView"
 msgstr "Classica"
 
-#. i18n: file prefs_base.ui line 432
-#: prefs_base.cpp:291 rc.cpp:144 rc.cpp:393
+#. i18n: file prefs_base.ui line 444
+#: prefs_base.cpp:293 rc.cpp:156 rc.cpp:417
 #, no-c-format
 msgid "TreeView"
 msgstr "Ad albero"
 
-#. i18n: file prefs_base.ui line 439
-#: prefs_base.cpp:292 rc.cpp:147 rc.cpp:396
+#. i18n: file prefs_base.ui line 451
+#: prefs_base.cpp:294 rc.cpp:159 rc.cpp:420
 #, no-c-format
 msgid "View when writing a new message"
 msgstr "Quando si scrive un messaggio nuovo"
 
-#. i18n: file prefs_base.ui line 442
-#: prefs_base.cpp:293 rc.cpp:150 rc.cpp:399
+#. i18n: file prefs_base.ui line 454
+#: prefs_base.cpp:295 rc.cpp:162 rc.cpp:423
 #, no-c-format
 msgid "What viewmode should be used when writing new messages."
 msgstr "Quale vista usare quando si scrivono messaggi nuovi"
 
-#. i18n: file prefs_base.ui line 450
-#: prefs_base.cpp:294 rc.cpp:153 rc.cpp:402
+#. i18n: file prefs_base.ui line 462
+#: prefs_base.cpp:296 rc.cpp:165 rc.cpp:426
 #, no-c-format
 msgid "Encoding:"
 msgstr "Codifica:"
 
-#. i18n: file prefs_base.ui line 462
-#: prefs_base.cpp:298 rc.cpp:158 rc.cpp:407
+#. i18n: file prefs_base.ui line 474
+#: prefs_base.cpp:300 rc.cpp:170 rc.cpp:431
 #, no-c-format
 msgid "local8Bit"
 msgstr "local8Bit"
 
-#. i18n: file prefs_base.ui line 467
-#: prefs_base.cpp:299 rc.cpp:161 rc.cpp:410
+#. i18n: file prefs_base.ui line 479
+#: prefs_base.cpp:301 rc.cpp:173 rc.cpp:434
 #, no-c-format
 msgid "UTF-8"
 msgstr "UTF-8"
 
-#. i18n: file prefs_base.ui line 472
-#: prefs_base.cpp:300 rc.cpp:164 rc.cpp:413
+#. i18n: file prefs_base.ui line 484
+#: prefs_base.cpp:302 rc.cpp:176 rc.cpp:437
 #, no-c-format
 msgid "Latin1"
 msgstr "Latin1"
 
-#. i18n: file prefs_base.ui line 477
-#: prefs_base.cpp:301 rc.cpp:167 rc.cpp:416
+#. i18n: file prefs_base.ui line 489
+#: prefs_base.cpp:303 rc.cpp:179 rc.cpp:440
 #, no-c-format
 msgid "ASCII"
 msgstr "ASCII"
 
-#. i18n: file prefs_base.ui line 484
-#: prefs_base.cpp:302 rc.cpp:170 rc.cpp:419
+#. i18n: file prefs_base.ui line 496
+#: prefs_base.cpp:304 rc.cpp:182 rc.cpp:443
 #, no-c-format
 msgid "Character encoding for new messages"
 msgstr "Codifica caratteri per i messaggi nuovi"
 
-#. i18n: file prefs_base.ui line 487
-#: prefs_base.cpp:303 rc.cpp:173 rc.cpp:422
+#. i18n: file prefs_base.ui line 499
+#: prefs_base.cpp:305 rc.cpp:185 rc.cpp:446
 #, no-c-format
 msgid "Set the character encoding for new messages."
 msgstr "Imposta la codifica per i messaggi nuovi"
 
 #. i18n: file prefs_base.ui line 50
-#: prefs_base.cpp:304 rc.cpp:40 rc.cpp:289
+#: prefs_base.cpp:306 rc.cpp:40 rc.cpp:301
 #, no-c-format
 msgid "Messa&ges"
 msgstr "Messaggi"
 
-#. i18n: file prefs_base.ui line 535
-#: prefs_base.cpp:305 rc.cpp:179 rc.cpp:428
+#. i18n: file prefs_base.ui line 547
+#: prefs_base.cpp:307 rc.cpp:191 rc.cpp:452
 #, no-c-format
 msgid "General Options"
 msgstr "Preferenze generali"
 
-#. i18n: file prefs_base.ui line 574
-#: prefs_base.cpp:306 rc.cpp:182 rc.cpp:431
+#. i18n: file prefs_base.ui line 586
+#: prefs_base.cpp:308 rc.cpp:194 rc.cpp:455
 #, no-c-format
 msgid "Timer interval (in sec)"
 msgstr "Intervallo di tempo (in sec) "
 
-#. i18n: file prefs_base.ui line 602
-#: prefs_base.cpp:309 rc.cpp:187 rc.cpp:436
+#. i18n: file prefs_base.ui line 614
+#: prefs_base.cpp:311 rc.cpp:199 rc.cpp:460
 #, no-c-format
 msgid "Interval for new messages check"
 msgstr "Intervallo per il controllo di nuovi messaggi"
 
-#. i18n: file prefs_base.ui line 605
-#: prefs_base.cpp:310 rc.cpp:190 rc.cpp:439
+#. i18n: file prefs_base.ui line 617
+#: prefs_base.cpp:312 rc.cpp:202 rc.cpp:463
 #, no-c-format
 msgid "Duration for check intervall for incoming new messages in seconds."
 msgstr "Controlla l'arrivo di nuovi messaggi ogni (secondi)"
 
-#. i18n: file prefs_base.ui line 621
-#: prefs_base.cpp:311 rc.cpp:193 rc.cpp:442
+#. i18n: file prefs_base.ui line 633
+#: prefs_base.cpp:313 rc.cpp:205 rc.cpp:466
 #, no-c-format
 msgid "Run do&cked"
 msgstr "Avvia nel dock"
 
-#. i18n: file prefs_base.ui line 624
-#: prefs_base.cpp:312 rc.cpp:196 rc.cpp:445
+#. i18n: file prefs_base.ui line 636
+#: prefs_base.cpp:314 rc.cpp:208 rc.cpp:469
 #, no-c-format
 msgid "Start docked and hide main window when closing"
 msgstr "Avvia nel dock e nascondi la finestra principale alla chiusura"
 
-#. i18n: file prefs_base.ui line 627
-#: prefs_base.cpp:313 rc.cpp:199 rc.cpp:448
+#. i18n: file prefs_base.ui line 639
+#: prefs_base.cpp:315 rc.cpp:211 rc.cpp:472
 #, no-c-format
 msgid ""
 "If checked it starts docked only in the systemtray and only hides when "
@@ -603,122 +615,134 @@ msgstr ""
 "Se selezionato, avvia nel dock ma solo nel system tray e nasconde la "
 "finestra alla chiusura"
 
-#. i18n: file prefs_base.ui line 662
-#: prefs_base.cpp:314 rc.cpp:202 rc.cpp:451
+#. i18n: file prefs_base.ui line 674
+#: prefs_base.cpp:316 rc.cpp:214 rc.cpp:475
 #, no-c-format
 msgid "System"
 msgstr "Sistema"
 
-#. i18n: file prefs_base.ui line 676
-#: prefs_base.cpp:315 rc.cpp:205 rc.cpp:454
+#. i18n: file prefs_base.ui line 688
+#: prefs_base.cpp:317 rc.cpp:217 rc.cpp:478
 #, no-c-format
 msgid "smbclient-Bin:"
 msgstr "Eseguibile smbclient"
 
-#. i18n: file prefs_base.ui line 690
-#: prefs_base.cpp:318 rc.cpp:210 rc.cpp:459
+#. i18n: file prefs_base.ui line 702
+#: prefs_base.cpp:320 rc.cpp:222 rc.cpp:483
 #, no-c-format
 msgid "Path to smbclient"
 msgstr "Percorso di smbclient"
 
-#. i18n: file prefs_base.ui line 693
-#: prefs_base.cpp:319 rc.cpp:213 rc.cpp:462
+#. i18n: file prefs_base.ui line 705
+#: prefs_base.cpp:321 rc.cpp:225 rc.cpp:486
 #, no-c-format
 msgid "The Path to your smbclient binary."
 msgstr "Scivi il percorso dell'eseguibile smbclient"
 
-#. i18n: file prefs_base.ui line 516
-#: prefs_base.cpp:320 rc.cpp:176 rc.cpp:425
+#. i18n: file prefs_base.ui line 528
+#: prefs_base.cpp:322 rc.cpp:188 rc.cpp:449
 #, no-c-format
 msgid "S&ystem"
 msgstr "S&istema"
 
 #. i18n: file klinpopupui.rc line 10
-#: rc.cpp:6 rc.cpp:468
+#: rc.cpp:6 rc.cpp:492
 #, no-c-format
 msgid "&Messages"
 msgstr "&Messaggi"
 
+#. i18n: file prefs_base.ui line 385
+#: rc.cpp:132 rc.cpp:393
+#, no-c-format
+msgid "Command to execute"
+msgstr ""
+
+#. i18n: file prefs_base.ui line 388
+#: rc.cpp:135 rc.cpp:396
+#, fuzzy, no-c-format
+msgid "The URL and arguments for the external command."
+msgstr "URL del comando esterno"
+
 #. i18n: file klinpopup.kcfg line 7
-#: rc.cpp:216
+#: rc.cpp:228
 #, no-c-format
 msgid "Display sender name"
 msgstr "Visualizza nome del mittente"
 
 #. i18n: file klinpopup.kcfg line 11
-#: rc.cpp:219
+#: rc.cpp:231
 #, no-c-format
 msgid "Display sender machine"
 msgstr "Visualizza macchina del mittente"
 
 #. i18n: file klinpopup.kcfg line 15
-#: rc.cpp:222
+#: rc.cpp:234
 #, no-c-format
 msgid "Display sender IP"
 msgstr "Visualizza IP del mittente"
 
 #. i18n: file klinpopup.kcfg line 19
-#: rc.cpp:225
+#: rc.cpp:237
 #, no-c-format
 msgid "Displayed time format"
 msgstr "Visualizza formato ora"
 
 #. i18n: file klinpopup.kcfg line 23
-#: rc.cpp:228
+#: rc.cpp:240
 #, no-c-format
 msgid "Toggle Signaling"
 msgstr "Attiva/Disattiva Suono"
 
 #. i18n: file klinpopup.kcfg line 27
-#: rc.cpp:231
+#: rc.cpp:243
 #, no-c-format
 msgid "Sound URL"
 msgstr "URL del suono"
 
 #. i18n: file klinpopup.kcfg line 31
-#: rc.cpp:234
+#: rc.cpp:246
 #, no-c-format
 msgid "Additional external command"
 msgstr "Comando esterno addizionale"
 
 #. i18n: file klinpopup.kcfg line 35
-#: rc.cpp:237
+#: rc.cpp:249
 #, no-c-format
 msgid "URL of external command"
 msgstr "URL del comando esterno"
 
 #. i18n: file klinpopup.kcfg line 39
-#: rc.cpp:240
+#: rc.cpp:252
 #, fuzzy, no-c-format
 msgid "Message for autoreply"
 msgstr "Creazione del messaggio"
 
 #. i18n: file klinpopup.kcfg line 43
-#: rc.cpp:243
+#: rc.cpp:255
 #, no-c-format
 msgid "Run docked"
 msgstr "Avvia nel dock"
 
 #. i18n: file klinpopup.kcfg line 47
-#: rc.cpp:246
+#: rc.cpp:258
 #, no-c-format
 msgid "TimerInterval"
 msgstr "Intervallo del timer"
 
 #. i18n: file klinpopup.kcfg line 51
-#: rc.cpp:249
+#: rc.cpp:261
 #, no-c-format
 msgid "Viewmode for message creation"
 msgstr "Vista per la creazione di messaggi"
 
 #. i18n: file klinpopup.kcfg line 55
-#: rc.cpp:252
+#: rc.cpp:264
 #, no-c-format
 msgid "smbclient-Bin"
 msgstr "Eseguibile smbclient"
 
 #. i18n: file klinpopup.kcfg line 59
-#: rc.cpp:255
+#: rc.cpp:267
 #, no-c-format
 msgid "Encoding"
 msgstr "Codifica"
