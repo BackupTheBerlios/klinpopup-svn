@@ -39,7 +39,7 @@ Authors:
 %if %{DIST} == SuSE
 patch -p0 < suse_default-sound.diff
 . /etc/opt/kde3/common_options
-update_admin
+update_admin --no-unsermake
 %endif
 
 %build
