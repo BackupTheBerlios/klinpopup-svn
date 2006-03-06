@@ -1,23 +1,21 @@
-# translation of it.po to Deutsch
-# translation of it.po to
 # Traduzione italiana KLinpop
 # This file is distributed under the GNU General Public License Version 2
 # Copyright (C) Gerd Fleischer <gerdfleischer@web.de> 2005;
-# Daniele Bortoluzzi <digital.death@gmx.it>, 2005.
-# Gerd Fleischer <gerdfleischer@gmx.de>, 2005.
 #
+# Daniele Bortoluzzi <digital.death@gmx.it>, 2005.
+# Gerd Fleischer <gerdfleischer@gmx.de>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: it\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-25 17:04+0100\n"
-"PO-Revision-Date: 2005-12-17 20:25+0000\n"
+"PO-Revision-Date: 2006-03-06 20:47+0100\n"
 "Last-Translator: Daniele Bortoluzzi <digital.death@gmx.it>\n"
-"Language-Team: \n"
+"Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #: _translatorinfo.cpp:1
 msgid ""
@@ -33,12 +31,12 @@ msgstr "digital.death@gmx.it"
 
 #: klinpopup.cpp:168 klinpopup.cpp:726
 msgid "Autoreply off"
-msgstr ""
+msgstr "Risposta automatica off"
 
 #: klinpopup.cpp:239
 #, fuzzy
 msgid "&Autoreply"
-msgstr "&Rispondere"
+msgstr "&Risposta automatica"
 
 #: klinpopup.cpp:243
 msgid "&New"
@@ -65,21 +63,19 @@ msgid "&Unread"
 msgstr "Non letto"
 
 #: klinpopup.cpp:334
-#, fuzzy
 msgid ""
 "Working directory %1 does not exist!\n"
 "Shall I create it? (May need root password)"
 msgstr ""
-"La cartella /var/lib/klinpopup non esiste!\n"
+"La cartella %1 non esiste!\n"
 "La devo creare? (Può essere richiesta la password di root)"
 
 #: klinpopup.cpp:352
-#, fuzzy
 msgid ""
 "Permissions of the working directory %1 are wrong!\n"
 "Fix? (May need root password)"
 msgstr ""
-"I permessi della cartella /var/lib/klinpopup non sono corretti!\n"
+"I permessi della cartella %1 non sono corretti!\n"
 "Li aggiusto? (Può essere richiesta la password di root)"
 
 #: klinpopup.cpp:365
@@ -124,7 +120,7 @@ msgstr "Rispondere a %1"
 
 #: klinpopup.cpp:723
 msgid "Autoreply on"
-msgstr ""
+msgstr "Risposta automatica on"
 
 #: klinpopup.cpp:835
 msgid "Settings"
@@ -318,8 +314,7 @@ msgstr "Mostrare il nome del mittente?"
 #: prefs_base.cpp:256 rc.cpp:52 rc.cpp:313
 #, no-c-format
 msgid "Show sender name as part of sender string for incoming messages?"
-msgstr ""
-"Mostrare il nome del mittente nell'intestazione del messaggio in arrivo?"
+msgstr "Mostrare il nome del mittente nell'intestazione del messaggio in arrivo?"
 
 #. i18n: file prefs_base.ui line 130
 #: prefs_base.cpp:257 rc.cpp:55 rc.cpp:316
@@ -337,8 +332,7 @@ msgstr "Visualizzare il nome della macchina?"
 #: prefs_base.cpp:260 rc.cpp:64 rc.cpp:325
 #, no-c-format
 msgid "Show machine name as part of sender string for incoming messages?"
-msgstr ""
-"Visualizzare il nome della macchina come stringa dei messaggi in arrivo?"
+msgstr "Visualizzare il nome della macchina come stringa dei messaggi in arrivo?"
 
 #. i18n: file prefs_base.ui line 155
 #: prefs_base.cpp:261 rc.cpp:67 rc.cpp:328
@@ -356,8 +350,7 @@ msgstr "Visualizzare IP del mittente?"
 #: prefs_base.cpp:263 rc.cpp:73 rc.cpp:334
 #, no-c-format
 msgid "Show sender IP as part of sender string for incoming messages?"
-msgstr ""
-"Visualizzare IP del mittente come parte della stringa dei messaggi in arrivo?"
+msgstr "Visualizzare IP del mittente come parte della stringa dei messaggi in arrivo?"
 
 #. i18n: file prefs_base.ui line 179
 #: prefs_base.cpp:264 rc.cpp:76 rc.cpp:337
@@ -477,7 +470,7 @@ msgstr "Azione per i messaggi nuovi"
 #: prefs_base.cpp:287 rc.cpp:144 rc.cpp:405
 #, no-c-format
 msgid "The text for the message sent when autoreply is on."
-msgstr ""
+msgstr "Il testo da inviare quando si attiva la risposta automatica"
 
 #. i18n: file prefs_base.ui line 398
 #: prefs_base.cpp:288 rc.cpp:138 rc.cpp:399
@@ -655,7 +648,7 @@ msgstr "&Messaggi"
 #: rc.cpp:132 rc.cpp:393
 #, no-c-format
 msgid "Command to execute"
-msgstr ""
+msgstr "Comando da eseguire"
 
 #. i18n: file prefs_base.ui line 388
 #: rc.cpp:135 rc.cpp:396
@@ -749,8 +742,9 @@ msgstr "Codifica"
 
 #: settings.cpp:52
 msgid "Sorry, I'm away at the moment."
-msgstr ""
+msgstr "Sono momentaneamente assente."
 
 #: systemtray.cpp:39
 msgid "&New Message"
 msgstr "&Nuovo Messaggio"
+
