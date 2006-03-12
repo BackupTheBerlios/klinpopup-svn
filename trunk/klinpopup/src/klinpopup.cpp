@@ -701,13 +701,13 @@ void KLinPopup::popupHelper()
  */
 void KLinPopup::runExternalCommand()
 {
-	QString program = QString::null;
-	QString args = QString::null;
+	QString program = QString();
+	QString args = QString();
 	int pos = optExternalCommandURL.find(" ");
 	if (pos > 0) {
 		program = optExternalCommandURL.left(pos);
 		args = optExternalCommandURL.right(optExternalCommandURL.length() - pos - 1);
-		KApplication::kdeinitExec(program, QStringList(args)); // don't care about the result
+		KApplication::kdeinitExec(program, QStringList::split(" ", args)); // don't care about the result
 	} else if (!optExternalCommandURL.isEmpty()) {
 		KApplication::kdeinitExec(program); // don't care about the result
 	}
