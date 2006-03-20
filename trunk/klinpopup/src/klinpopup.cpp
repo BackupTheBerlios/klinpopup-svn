@@ -79,7 +79,7 @@ bool selectThread::openInotify()
 				break;
 		}
 	} else {
-		wd = inotify_add_watch (fd, POPUP_DIR, IN_MOVED_TO);
+		wd = inotify_add_watch (fd, POPUP_DIR, IN_CLOSE_WRITE);
 		if (wd < 0) {
 			inotifyErrorEvent *ie = new inotifyErrorEvent();
 			kapp->postEvent(owner, ie);
