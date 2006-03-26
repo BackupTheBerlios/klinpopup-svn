@@ -1,19 +1,8 @@
-klinpopup (0.3.3.99-0.2) unstable; urgency=low
+klinpopup (0.3.4-1) unstable; urgency=low
 
-  * NMU
-  * updated to r55
-  * Fixed type of (i)notifications
-  * Updated Brazilian Portuguese, Italian, Vietnamese, Norwegian translations
+  * updated to 0.3.4
 
- -- Damir R. Islamov <damir@trefle.ru>  Mon, 20 Mar 2006 17:30:15 +0600
-
-klinpopup (0.3.3.99-0.1) unstable; urgency=low
-
-  * non-maintainer upload
-  * updated to 0.3.4rc1 (SVN r48)
-  * updated Russian
-
- -- Damir R. Islamov <damir@trefle.ru>  Thu,  2 Mar 2006 05:51:24 +0600
+ -- Gerd Fleischer <gerdfleischer@web.de>  Sat, 25 Mar 2006 10:09:00 +0100
 
 klinpopup (0.3.3-1) unstable; urgency=low
 

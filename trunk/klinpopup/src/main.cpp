@@ -29,12 +29,12 @@
 static const char description[] =
 	I18N_NOOP("WinPopup-Client for KDE");
 
-static const char version[] = "0.3.4rc1";
+static const char version[] = "0.3.4";
 
 int main(int argc, char **argv)
 {
 	KAboutData about("klinpopup", I18N_NOOP("KLinPopup"), version, description,
-					KAboutData::License_GPL, "(C) 2004, 2005 Gerd Fleischer", 0, 0, "gerdfleischer@web.de");
+					KAboutData::License_GPL, "(C) 2004-2006 Gerd Fleischer", 0, 0, "gerdfleischer@web.de");
 	about.addAuthor( "Gerd Fleischer", 0, "gerdfleischer@web.de" );
 
 	KCmdLineArgs::init(argc, argv, &about);

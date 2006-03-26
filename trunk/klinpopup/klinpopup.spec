@@ -78,6 +78,8 @@ echo "I will not do this for you. Thanks."
 %{_docdir}/klinpopup/
 
 %changelog -n klinpopup
+* Sat Mar 25 2006 - gerdfleischer@web.de
+- updated to 0.3.4
 * Sat Dec 30 2005 - gerdfleischer@web.de
 - updated to 0.3.3
 * Sat Nov 26 2005 - gerdfleischer@web.de

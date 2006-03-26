@@ -74,7 +74,7 @@
       <hidenonlocation>false</hidenonlocation>
     </groups>
     <tree>
-      <hidenonprojectfiles>false</hidenonprojectfiles>
+      <hidenonprojectfiles>true</hidenonprojectfiles>
       <hidepatterns>*.o,*.lo,CVS</hidepatterns>
       <showvcsfields>false</showvcsfields>
     </tree>
