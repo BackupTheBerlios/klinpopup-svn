@@ -21,10 +21,10 @@
 #ifndef PREFS_H
 #define PREFS_H
 
-#include "prefs_base.h"
+#include "ui_prefs_base.h"
 
 
-class Prefs : public Prefs_base
+class Prefs : public Ui::Prefs_base
 {
 	Q_OBJECT
 

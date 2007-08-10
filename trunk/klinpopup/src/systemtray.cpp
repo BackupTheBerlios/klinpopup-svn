@@ -21,10 +21,10 @@
 #include <kdebug.h>
 
 #include <kapplication.h>
-#include <kpopupmenu.h>
+#include <kmenu.h>
 #include <kglobal.h>
 #include <kiconloader.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <klocale.h>
 
 #include "klinpopup.h"
@@ -35,10 +35,10 @@ SystemTray::SystemTray(QWidget *parent, const char *name) : KSystemTray(parent, 
 {
 	m_trayPix = loadIcon("klinpopup");
 	setPixmap(m_trayPix);
-	KPopupMenu *popupMenu = contextMenu();
-	popupMenu->insertItem(KGlobal::iconLoader()->loadIconSet("mail_new", KIcon::Small), i18n("&New Message"), parent, SLOT(newPopup()));
+	KMenu *popupMenu = contextMenu();
+	popupMenu->insertItem(KIconLoader::global()->loadIconSet("mail_new", KIcon::Small), i18n("&New Message"), parent, SLOT(newPopup()));
 	popupMenu->insertSeparator();
-	popupMenu->insertItem(KGlobal::iconLoader()->loadIconSet("configure", KIcon::Small), i18n("&Configure"), parent, SLOT(optionsPreferences()));
+	popupMenu->insertItem(KIconLoader::global()->loadIconSet("configure", KIcon::Small), i18n("&Configure"), parent, SLOT(optionsPreferences()));
 }
 
 SystemTray::~SystemTray()

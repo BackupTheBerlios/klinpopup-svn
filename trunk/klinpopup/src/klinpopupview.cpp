@@ -20,7 +20,7 @@
 
 #include <klocale.h>
 #include <ktextedit.h>
-#include <qlabel.h>
+#include <QLabel>
 
 #include "klinpopupview.h"
 #include "klinpopupview.moc"

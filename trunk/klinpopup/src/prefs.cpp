@@ -20,8 +20,8 @@
 
 #include <kdebug.h>
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
+#include <QCheckBox>
+#include <QComboBox>
 
 #include <kurlrequester.h>
 

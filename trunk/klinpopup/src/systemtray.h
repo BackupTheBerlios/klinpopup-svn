@@ -21,12 +21,12 @@
 #ifndef SYSTEMTRAY_H
 #define SYSTEMTRAY_H
 
-#include <qpixmap.h>
-#include <ksystemtray.h>
+#include <QPixmap>
+#include <ksystemtrayicon.h>
 
 class QTimer;
 
-class SystemTray : public KSystemTray
+class SystemTray : public KSystemTrayIcon
 {
 	Q_OBJECT
 

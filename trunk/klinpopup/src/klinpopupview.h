@@ -21,20 +21,20 @@
 #ifndef KLINPOPUPVIEW_H
 #define KLINPOPUPVIEW_H
 
-#include <qwidget.h>
-#include <qdatetime.h>
+#include <QWidget>
+#include <QDateTime>
 
 #include <klocale.h>
 #include <kglobal.h>
 
-#include "klinpopupview_base.h"
+#include "ui_klinpopupview_base.h"
 
 /**
  * @short Main view
  * @author Gerd Fleischer <gerdfleischer@web.de>
  * @version 0.3.4
  */
-class KLinPopupView : public KLinPopupview_base
+class KLinPopupView : public Ui::KLinPopupview_base
 {
 	Q_OBJECT
 public:

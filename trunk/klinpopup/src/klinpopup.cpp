@@ -38,12 +38,18 @@
 #include "inotify.h"
 #include "inotify-syscalls.h"
 
-#include <qtooltip.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qstringlist.h>
+#include <QToolTip>
+#include <QDir>
+#include <QFile>
+#include <QStringList>
+//Added by qt3to4:
+#include <QLabel>
+#include <QCustomEvent>
+#include <QPixmap>
+#include <QFocusEvent>
+#include <QEvent>
 
-#include <kwin.h>
+#include <kwindowsystem.h>
 #include <kconfigdialog.h>
 #include <kglobal.h>
 #include <klocale.h>
@@ -51,14 +57,16 @@
 #include <kdeversion.h>
 #include <kmenubar.h>
 #include <kstatusbar.h>
-#include <kaudioplayer.h>
+#include <phonon/audioplayer.h>
 #include <kmessagebox.h>
 #include <kedittoolbar.h>
 #include <kfileitem.h>
 #include <kstdaccel.h>
-#include <kstdaction.h>
+#include <kstandardaction.h>
 #include <kpixmap.h>
 #include <kstandarddirs.h>
+#include <ktoolinvocation.h>
+#include <krandom.h>
 
 #include "klinpopup.h"
 #include "klinpopup.moc"
@@ -66,78 +74,12 @@
 #include "prefs.h"
 #include "makepopup.h"
 
-bool selectThread::openInotify()
-{
-	fd = inotify_init();
-
-	if (fd < 0) {
-		switch (errno) {
-			case ENOSYS:
-				inotifyErrorEvent *ie = new inotifyErrorEvent();
-				kapp->postEvent(owner, ie);
-				return false;
-				break;
-		}
-	} else {
-		wd = inotify_add_watch (fd, POPUP_DIR, IN_CLOSE_WRITE);
-		if (wd < 0) {
-			inotifyErrorEvent *ie = new inotifyErrorEvent();
-			kapp->postEvent(owner, ie);
-			closeInotify();
-			return false;
-		}
-	}
-
-	kdDebug() << "Using inotify" << endl;
-	return true;
-}
-
-void selectThread::closeInotify()
-{
-	if (fd >=0) {
-		int c = ::close(fd);
-		if (c == 0) fd = -1;
-	}
-}
-
-void selectThread::watch()
-{
-	int pending;
-	int select_retval = 1;
-	fd_set read_fds;
-	struct timeval timeout;
-
-	while (select_retval >= 0 && restart) {
-		timeout.tv_sec = 2;
-		timeout.tv_usec = 0;
-		FD_ZERO (&read_fds);
-		FD_SET (fd, &read_fds);
-		select_retval = select(fd + 1, &read_fds, 0, 0, &timeout);
-		if (select_retval > 0) {
-			ioctl(fd, FIONREAD, &pending);
-			char *buffer = new char[pending];
-			read(fd, buffer, pending);
-			delete buffer;
-			newMessagesEvent *nm = new newMessagesEvent();
-			kapp->postEvent(owner, nm);
-		}
-	}
-}
-
-void selectThread::run()
-{
-	if (openInotify()) {
-		watch();
-		closeInotify();
-	}
-}
-
 KLinPopup::KLinPopup()
 	: KMainWindow( 0, "KLinPopup" ),
 	  m_view(new KLinPopupView(this)), watcher(0), unreadMessages(0),
 	  hasInotify(true), m_hostName(QString()), m_arLabel(new QLabel(this))
 {
-	setFocusPolicy(QWidget::StrongFocus);
+	setFocusPolicy(Qt::StrongFocus);
 
 	// tell the KMainWindow that this is indeed the main widget
 	setCentralWidget(m_view);
@@ -225,51 +167,51 @@ void KLinPopup::customEvent(QCustomEvent *e)
  */
 void KLinPopup::setupActions()
 {
-	KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
+	KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
 
 	setStandardToolBarMenuEnabled(true);
 	createStandardStatusBarAction();
 
-	m_menubarAction = KStdAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
+	m_menubarAction = KStandardAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
 
-	KStdAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
-	KStdAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
-	KStdAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
+	KStandardAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
+	KStandardAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
+	KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
 	autoReplyAction = new KToggleAction(i18n("&Autoreply"),
-										"mail_replyall", CTRL+Key_A,
+										"mail_replyall", CTRL+Qt::Key_A,
 								 		this, SLOT(statusAutoReply()),
 								 		actionCollection(), "auto_reply");
 	newPopupAction = new KAction(i18n("&New"),
-								 "mail_new", CTRL+Key_N,
+								 "mail_new", CTRL+Qt::Key_N,
 								 this, SLOT(newPopup()),
 								 actionCollection(), "new_popup");
 	replyPopupAction = new KAction(i18n("&Reply"),
-								   "mail_reply", CTRL+Key_R,
+								   "mail_reply", CTRL+Qt::Key_R,
 								   this, SLOT(replyPopup()),
 								   actionCollection(), "reply_popup");
 	firstPopupAction = new KAction(i18n("&First"),
-								   "start", CTRL+Key_B,
+								   "start", CTRL+Qt::Key_B,
 								   this, SLOT(firstPopup()),
 								   actionCollection(), "first_popup");
 	prevPopupAction = new KAction(i18n("&Previous"),
-								  "back", CTRL+Key_P,
+								  "back", CTRL+Qt::Key_P,
 								  this, SLOT(prevPopup()),
 								  actionCollection(), "previous_popup");
 	nextPopupAction = new KAction(i18n("&Next"),
-								  "forward", CTRL+Key_F,
+								  "forward", CTRL+Qt::Key_F,
 								  this, SLOT(nextPopup()),
 								  actionCollection(), "next_popup");
 	lastPopupAction = new KAction(i18n("&Last"),
-								  "finish", CTRL+Key_L,
+								  "finish", CTRL+Qt::Key_L,
 								  this, SLOT(lastPopup()),
 								  actionCollection(), "last_popup");
 	unreadPopupAction = new KAction(i18n("&Unread"),
-									"new_popup", CTRL+Key_U,
+									"new_popup", CTRL+Qt::Key_U,
 									this, SLOT(unreadPopup()),
 									actionCollection(), "unread_popup");
 	deletePopupAction = new KAction(i18n("&Delete"),
-									"mail_delete", CTRL+Key_D,
+									"mail_delete", CTRL+Qt::Key_D,
 									this, SLOT(deletePopup()),
 									actionCollection(), "delete_popup");
 	createGUI();
@@ -335,25 +277,25 @@ bool KLinPopup::checkPopupFileDirectory()
 															 "Shall I create it? (May need root password)").arg(POPUP_DIR));
 		if (tmpYesNo == KMessageBox::Yes) {
 			QStringList kdesuArgs = QStringList(QString("-c mkdir -p -m 0777 " + POPUP_DIR));
-			if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0) return true;
+			if (KToolInvocation::kdeinitExecWait("kdesu", kdesuArgs) == 0) return true;
 		}
 	} else {
 		KFileItem tmpFileItem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, POPUP_DIR);
 		mode_t tmpPerms = tmpFileItem.permissions();
 
 		#ifdef MY_EXTRA_DEBUG
-		kdDebug() << tmpPerms << endl;
+		kDebug() << tmpPerms << endl;
 		#endif
 
 		if (tmpPerms != 0777) {
 
-			kdDebug() << "Perms not ok!" << endl;
+			kDebug() << "Perms not ok!" << endl;
 
 			int tmpYesNo =  KMessageBox::warningYesNo(this, i18n("Permissions of the working directory %1 are wrong!\n"
 																 "Fix? (May need root password)").arg(POPUP_DIR));
 			if (tmpYesNo == KMessageBox::Yes) {
 				QStringList kdesuArgs = QStringList(QString("-c chmod 0777 " + POPUP_DIR));
-				if (KApplication::kdeinitExecWait("kdesu", kdesuArgs) == 0)
+				if (KToolInvocation::kdeinitExecWait("kdesu", kdesuArgs) == 0)
 					return true;
 			}
 		} else {
@@ -383,7 +325,7 @@ void KLinPopup::checkSmbclientBin()
 	QFile tmpSmbclientBin(optSmbclientBin);
 
 	#ifdef MY_EXTRA_DEBUG
-	kdDebug() << tmpSmbclientBin.exists() << endl;
+	kDebug() << tmpSmbclientBin.exists() << endl;
 	#endif
 
 	if (tmpSmbclientBin.exists()) {
@@ -421,10 +363,10 @@ void KLinPopup::popupFileTimerDone()
 
 					QFile popupFile(popupFilePath);
 
-					kdDebug() << "popupFile " << popupFileName << endl;
+					kDebug() << "popupFile " << popupFileName << endl;
 
-					if (popupFile.open(IO_ReadOnly)) {
-						QTextStream stream(&popupFile);
+					if (popupFile.open(QIODevice::ReadOnly)) {
+						Q3TextStream stream(&popupFile);
 						QString line;
 						QString sender;
 						QString machine;
@@ -463,7 +405,7 @@ void KLinPopup::popupFileTimerDone()
 
 						// delete file
 						if (! popupFile.remove())
-							kdDebug() << "Message file not removed - how that?" << endl;
+							kDebug() << "Message file not removed - how that?" << endl;
 
 						signalNewMessage(sender, machine, ip, time, text);
 					}
@@ -480,7 +422,7 @@ void KLinPopup::popupFileTimerDone()
 void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popupMachine, const QString &popupIp,
 								 const QString &popupTime, const QString &messageText)
 {
-	kdDebug() << "Popup received" << endl;
+	kDebug() << "Popup received" << endl;
 
 	int currentMessage = messageList.at();
 	QDateTime tmpDateTime = QDateTime::fromString(popupTime, Qt::ISODate);
@@ -514,7 +456,7 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 		case MS_ACTIVATE:    //activate Window
 			showPopup();
 			show();
-			KWin::forceActiveWindow(winId());
+			KWindowSystem::forceActiveWindow(winId());
 			unreadMessages--;
 			messageList.current()->setRead();
 			setTrayPixmap();
@@ -524,7 +466,7 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			showPopup();
 			KAudioPlayer::play(optNewPopupSound);
 			show();
-			KWin::forceActiveWindow(winId());
+			KWindowSystem::forceActiveWindow(winId());
 			unreadMessages--;
 			messageList.current()->setRead();
 			setTrayPixmap();
@@ -643,8 +585,8 @@ void KLinPopup::newPopup()
 
 	//some unnecessary fooling around, random window position
 	//but with a reasonable offset from parent
-	int tmpRandX = 70 + (KApplication::random() % 50);
-	int tmpRandY = 70 + (KApplication::random() % 70);
+	int tmpRandX = 70 + (KRandom::random() % 50);
+	int tmpRandY = 70 + (KRandom::random() % 70);
 	newPopupView->move(x() + tmpRandX, y() + tmpRandY);
 
 	newPopupView->show();
@@ -660,8 +602,8 @@ void KLinPopup::replyPopup()
 	makePopup *replyPopupView = new makePopup(this, "Reply message", sender, optSmbclientBin, optEncoding, 0);
 	replyPopupView->setCaption(i18n("Reply to %1").arg(sender.upper()));
 
-	int tmpRandX = 70 + (KApplication::random() % 50);
-	int tmpRandY = 70 + (KApplication::random() % 70);
+	int tmpRandX = 70 + (KRandom::random() % 50);
+	int tmpRandY = 70 + (KRandom::random() % 70);
 	replyPopupView->move(x() + tmpRandX, y() + tmpRandY);
 
 	replyPopupView->show();
@@ -707,9 +649,9 @@ void KLinPopup::runExternalCommand()
 	if (pos > 0) {
 		program = optExternalCommandURL.left(pos);
 		args = optExternalCommandURL.right(optExternalCommandURL.length() - pos - 1);
-		KApplication::kdeinitExec(program, QStringList::split(" ", args)); // don't care about the result
+		KToolInvocation::kdeinitExec(program, QStringList::split(" ", args)); // don't care about the result
 	} else if (!optExternalCommandURL.isEmpty()) {
-		KApplication::kdeinitExec(program); // don't care about the result
+		KToolInvocation::kdeinitExec(program); // don't care about the result
 	}
 }
 
@@ -744,13 +686,13 @@ void KLinPopup::autoReply(const QString &host)
 	}
 
 	if (host.upper() != "LOCALHOST" && host.upper() != m_hostName) { /// prevent endless loop
-		KProcess *p = new KProcess(this);
+		K3Process *p = new K3Process(this);
 		*p << optSmbclientBin << "-M" << host;
 		*p << "-N" << "-";
 
-		connect(p, SIGNAL(processExited(KProcess *)), this, SLOT(slotSendCmdExit(KProcess *)));
+		connect(p, SIGNAL(processExited(K3Process *)), this, SLOT(slotSendCmdExit(K3Process *)));
 
-		if (p->start(KProcess::NotifyOnExit, KProcess::Stdin)) {
+		if (p->start(K3Process::NotifyOnExit, K3Process::Stdin)) {
 
 			///@TODO: does local8Bit work for all environments?
 			switch (optEncoding)
@@ -781,7 +723,7 @@ void KLinPopup::autoReply(const QString &host)
 	}
 }
 
-void KLinPopup::slotSendCmdExit(KProcess *_p)
+void KLinPopup::slotSendCmdExit(K3Process *_p)
 {
 	delete _p;
 }
@@ -804,7 +746,7 @@ void KLinPopup::optionsConfigureToolbars()
 {
 	// use the standard toolbar editor
 	saveMainWindowSettings(KGlobal::config(), autoSaveGroup());
-	KEditToolbar dlg(actionCollection());
+	KEditToolBar dlg(actionCollection());
 	connect(&dlg, SIGNAL(newToolbarConfig()), this, SLOT(newToolbarConfig()));
 	dlg.exec();
 }
@@ -849,9 +791,9 @@ void KLinPopup::readConfig()
 	optDisplayIP = Settings::displayIP();
 	optTimeFormat = Settings::timeFormat();
 	optNewMessageSignaling = Settings::toggleSignaling();
-	optNewPopupSound = Settings::soundURL().stripWhiteSpace();
+	optNewPopupSound = Settings::soundURL().trimmed();
 	optExternalCommand = Settings::externalCommand();
-	optExternalCommandURL = Settings::externalCommandURL().simplifyWhiteSpace();
+	optExternalCommandURL = Settings::externalCommandURL().simplified();
 	optArMsg = Settings::arMsg();
 	optTimerInterval= Settings::timerInterval();
 	optMakePopupView = Settings::makePopupView();

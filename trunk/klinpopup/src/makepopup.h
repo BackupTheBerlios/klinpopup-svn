@@ -31,13 +31,17 @@
 
 #include <libsmbclient.h>
 
-#include <qhbox.h>
-#include <qvbox.h>
-#include <qlayout.h>
-#include <qthread.h>
+#include <q3hbox.h>
+#include <q3vbox.h>
+#include <QLayout>
+#include <QThread>
 #include <qmap.h>
-#include <qstringlist.h>
-#include <qlistview.h>
+#include <QStringList>
+#include <q3listview.h>
+//Added by qt3to4:
+#include <Q3GridLayout>
+#include <QEvent>
+#include <QCloseEvent>
 
 #include <kpushbutton.h>
 #include <kcombobox.h>
@@ -99,8 +103,8 @@ private slots:
 	void slotButtonSend();
 	void finished();
 	void slotGroupboxChanged(const QString &);
-	void slotSendCmdExit(KProcess *);
-	void slotTreeViewItemExpanded(QListViewItem *);
+	void slotSendCmdExit(K3Process *);
+	void slotTreeViewItemExpanded(Q3ListViewItem *);
 	void slotTreeViewSelectionChanged();
 
 private:
@@ -109,8 +113,8 @@ private:
 	void sendPopup();
 	void queryFinished();
 
-	QGridLayout* makePopupLayout;
-	QListView *groupTreeView;
+	Q3GridLayout* makePopupLayout;
+	Q3ListView *groupTreeView;
 	KComboBox *senderBox, *groupBox, *classicReceiverBox;
 	KLineEdit *treeViewReceiverBox;
 	KTextEdit *messageText;

@@ -32,18 +32,25 @@
 #define MS_ACTIVATE 2
 #define MS_ALL 3
 
-#include <qtimer.h>
-#include <qstring.h>
-#include <qptrlist.h>
-#include <qthread.h>
-#include <qevent.h>
+#include <QTimer>
+#include <QString>
+#include <q3ptrlist.h>
+#include <QThread>
+#include <QEvent>
+//Added by qt3to4:
+//#include <QCustomEvent>
+#include <QFocusEvent>
+#include <QLabel>
+#include <QHideEvent>
 
 #include <kuniqueapplication.h>
 #include <kmainwindow.h>
 #include <kaction.h>
+#include <ktoggleaction.h>
 #include <kconfig.h>
-#include <kkeydialog.h>
-#include <kprocess.h>
+//#include <kkeydialog.h>
+#include <k3process.h>
+//#include <KShortcutsDialog>
 
 #include "popupmessage.h"
 #include "klinpopupview.h"
@@ -52,36 +59,6 @@
 const QString POPUP_DIR = "/var/lib/klinpopup";
 
 class KLinPopup;
-
-class newMessagesEvent : public QCustomEvent
-{
-	public:
-		newMessagesEvent() : QCustomEvent(QEvent::User+1) {}
-};
-
-class inotifyErrorEvent : public QCustomEvent
-{
-	public:
-		inotifyErrorEvent() : QCustomEvent(QEvent::User+2) {}
-};
-
-class selectThread : public QThread
-{
-	public:
-		void setData( KLinPopup* parent) { owner = parent; fd = -1, restart = 1; }
-		void stop() { restart = 0; }
-
-	protected:
-		virtual void run();
-
-	private:
-		KLinPopup *owner;
-		int fd, wd, restart;
-
-		bool openInotify();
-		void closeInotify();
-		void watch();
-};
 
 /**
  * @short Main window class
@@ -100,7 +77,7 @@ public slots:
 protected:
 	void hideEvent(QHideEvent *) { hide(); }
 	void focusInEvent(QFocusEvent *);
-	void customEvent(QCustomEvent *);
+//	void customEvent(QCustomEvent *);
 
 private slots:
 	void slotQuit();
@@ -115,14 +92,14 @@ private slots:
 	void unreadPopup();
 	void deletePopup() { messageList.remove(); showPopup(); popupHelper(); }
 	void optionsShowMenubar();
-	void optionsConfigureKeys() { KKeyDialog::configure(actionCollection()); }
+//	void optionsConfigureKeys() { KShortcutsDialog::configure(actionCollection()); }
 	void optionsConfigureToolbars();
 	void optionsPreferences();
 	void newToolbarConfig();
 	void changeStatusbar(const QString &);
 	void changeCaption(const QString &text) { setCaption(text); }
 	void settingsChanged();
-	void slotSendCmdExit(KProcess *);
+	void slotSendCmdExit(K3Process *);
 	void updateStats();
 	void statusAutoReply();
 
@@ -145,7 +122,7 @@ private:
 	void setTrayPixmap();
 
 	KLinPopupView *m_view;
-	selectThread *watcher;
+//	selectThread *watcher;
 
 	//config and actions
 	KConfig *cfg;
@@ -166,7 +143,7 @@ private:
 	QTimer *popupFileTimer;
 	QString messageText, m_hostName, m_arOffPic, m_arOnPic;
 	QString popupFileDirectory;
-	QPtrList<popupMessage> messageList;
+	Q3PtrList<popupMessage> messageList;
 	QLabel *m_arLabel;
 
 	//option variables
