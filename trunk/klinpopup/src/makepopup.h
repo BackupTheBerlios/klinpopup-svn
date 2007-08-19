@@ -29,17 +29,11 @@
 #define ENC_LATIN1 2
 #define ENC_ASCII 3
 
-#include <libsmbclient.h>
+//#include <libsmbclient.h>
 
-#include <q3hbox.h>
-#include <q3vbox.h>
-#include <QLayout>
 #include <QThread>
-#include <qmap.h>
+#include <QMap>
 #include <QStringList>
-#include <q3listview.h>
-//Added by qt3to4:
-#include <Q3GridLayout>
 #include <QEvent>
 #include <QCloseEvent>
 
@@ -48,6 +42,9 @@
 #include <klineedit.h>
 #include <ktextedit.h>
 
+class QGridLayout;
+class QTreeWidget;
+class QTreeWidgetItem;
 class makePopup;
 
 class readGroupsThread : public QThread
@@ -85,15 +82,15 @@ class makePopup : public QWidget
 	Q_OBJECT
 
 public:
-	makePopup(QWidget *, const char *, const QString &, const QString &, int, int);
+	makePopup(QWidget *, const QString &, const QString &, int, int);
 	~makePopup();
 
 	void readGroupList();
 	void readHostList();
-	static void auth_smbc_get_data(const char *server,const char *share,
-								   char *workgroup, int wgmaxlen,
-								   char *username, int unmaxlen,
-								   char *password, int pwmaxlen);
+// 	static void auth_smbc_get_data(const char *server,const char *share,
+// 								   char *workgroup, int wgmaxlen,
+// 								   char *username, int unmaxlen,
+// 								   char *password, int pwmaxlen);
 
 protected:
 	void closeEvent(QCloseEvent *);
@@ -104,7 +101,7 @@ private slots:
 	void finished();
 	void slotGroupboxChanged(const QString &);
 	void slotSendCmdExit(K3Process *);
-	void slotTreeViewItemExpanded(Q3ListViewItem *);
+	void slotTreeViewItemExpanded(QTreeWidgetItem *);
 	void slotTreeViewSelectionChanged();
 
 private:
@@ -113,15 +110,15 @@ private:
 	void sendPopup();
 	void queryFinished();
 
-	Q3GridLayout* makePopupLayout;
-	Q3ListView *groupTreeView;
+	QGridLayout* makePopupLayout;
+	QTreeWidget *groupTreeView;
 	KComboBox *senderBox, *groupBox, *classicReceiverBox;
 	KLineEdit *treeViewReceiverBox;
 	KTextEdit *messageText;
 	KPushButton *buttonSend, *buttonCancel;
 	QString smbclientBin, messageReceiver, currentGroup;
 	int newMsgEncoding, viewMode, sendRefCount, sendError;
-	SMBCCTX *smbCtx;
+//	SMBCCTX *smbCtx;
 	bool allProcessesStarted, justSending;
 	QMap<QString, QString> errorHosts;
 	QStringList allGroupHosts;

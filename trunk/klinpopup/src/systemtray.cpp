@@ -31,14 +31,14 @@
 #include "systemtray.h"
 #include "systemtray.moc"
 
-SystemTray::SystemTray(QWidget *parent, const char *name) : KSystemTray(parent, name)
+SystemTray::SystemTray(QWidget *parent) : KSystemTrayIcon(parent)
 {
 	m_trayPix = loadIcon("klinpopup");
-	setPixmap(m_trayPix);
-	KMenu *popupMenu = contextMenu();
-	popupMenu->insertItem(KIconLoader::global()->loadIconSet("mail_new", KIcon::Small), i18n("&New Message"), parent, SLOT(newPopup()));
-	popupMenu->insertSeparator();
-	popupMenu->insertItem(KIconLoader::global()->loadIconSet("configure", KIcon::Small), i18n("&Configure"), parent, SLOT(optionsPreferences()));
+	setIcon(m_trayPix);
+	QMenu *popupMenu = contextMenu();
+	popupMenu->addAction(loadIcon("mail_new"), i18n("&New Message"), parent, SLOT(newPopup()));
+	popupMenu->addSeparator();
+	popupMenu->addAction(loadIcon("configure"), i18n("&Configure"), parent, SLOT(optionsPreferences()));
 }
 
 SystemTray::~SystemTray()
@@ -65,7 +65,7 @@ void SystemTray::changeTrayPixmap(int iconSwitch)
 			break;
 	}
 
-	setPixmap(newTrayPixmap);
+	setIcon(newTrayPixmap);
 }
 
 // kate: tab-width 4; indent-width 4; replace-trailing-space-save on;

@@ -14,13 +14,13 @@ set(klinpopup_SRCS
    makepopup.cpp 
    prefs.cpp )
 
-kde4_add_ui_files(klinpopup_SRCS klinpopupview_base.ui prefs_base.ui )
+kde4_add_ui_files(klinpopup_SRCS klinpopupview_base.ui prefs_base.ui)
 
 kde4_add_kcfg_files(klinpopup_SRCS settings.kcfgc )
 
 kde4_add_executable(klinpopup ${klinpopup_SRCS})
 
-target_link_libraries(klinpopup  ${KDE4_KDECORE_LIBS} smbclient )
+target_link_libraries(klinpopup  ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
 
 install(TARGETS klinpopup DESTINATION ${BIN_INSTALL_DIR})
 

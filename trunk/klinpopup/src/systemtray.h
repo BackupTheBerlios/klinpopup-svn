@@ -22,6 +22,7 @@
 #define SYSTEMTRAY_H
 
 #include <QPixmap>
+#include <QIcon>
 #include <ksystemtrayicon.h>
 
 class QTimer;
@@ -31,15 +32,14 @@ class SystemTray : public KSystemTrayIcon
 	Q_OBJECT
 
 public:
-	SystemTray(QWidget *parent = 0, const char *name = 0);
+	SystemTray(QWidget *parent = 0);
 	virtual ~SystemTray();
 
 	void changeTrayPixmap(int iconSwitch);
 
 private:
 	QWidget *parentWidget;
-	QPixmap m_trayPix;
-	QPixmap newTrayPixmap;
+	QIcon m_trayPix, newTrayPixmap;
 };
 
 #endif // SYSTEMTRAY_H

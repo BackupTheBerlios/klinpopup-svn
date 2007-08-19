@@ -34,7 +34,7 @@
 
 #include <QTimer>
 #include <QString>
-#include <q3ptrlist.h>
+#include <QList>
 #include <QThread>
 #include <QEvent>
 //Added by qt3to4:
@@ -51,6 +51,8 @@
 //#include <kkeydialog.h>
 #include <k3process.h>
 //#include <KShortcutsDialog>
+#include <kfileitem.h>
+#include <kxmlguiwindow.h>
 
 #include "popupmessage.h"
 #include "klinpopupview.h"
@@ -58,14 +60,14 @@
 
 const QString POPUP_DIR = "/var/lib/klinpopup";
 
-class KLinPopup;
+class KDirLister;
 
 /**
  * @short Main window class
  * @author Gerd Fleischer <gerdfleischer@web.de>
  * @version 0.3.4
  */
-class KLinPopup : public KMainWindow
+class KLinPopup : public KXmlGuiWindow
 {
 	Q_OBJECT
 public:
@@ -81,16 +83,16 @@ protected:
 
 private slots:
 	void slotQuit();
-	void startWatch();
-	void popupFileTimerDone();
+	void startDirLister();
+	void newMessages(const KFileItemList &);
 	void signalNewMessage(const QString &, const QString &, const QString &, const QString &, const QString &);
 	void replyPopup();
-	void firstPopup() {  messageList.first(); showPopup(); popupHelper(); }
-	void prevPopup() { messageList.prev(); showPopup(); popupHelper(); }
-	void nextPopup() { messageList.next(); showPopup(); popupHelper(); }
-	void lastPopup() { messageList.last(); showPopup(); popupHelper(); }
+	void firstPopup() { currentMessage = 1; showPopup(); popupHelper(); }
+	void prevPopup() { --currentMessage; showPopup(); popupHelper(); }
+	void nextPopup() { ++currentMessage; showPopup(); popupHelper(); }
+	void lastPopup() { currentMessage = messageList.count(); showPopup(); popupHelper(); }
 	void unreadPopup();
-	void deletePopup() { messageList.remove(); showPopup(); popupHelper(); }
+	void deletePopup();
 	void optionsShowMenubar();
 //	void optionsConfigureKeys() { KShortcutsDialog::configure(actionCollection()); }
 	void optionsConfigureToolbars();
@@ -108,8 +110,6 @@ private:
 	void setupAccel();
 	void setupActions();
 	void initSystemTray();
-	void initWatch();
-	void initTimer();
 	bool checkPopupFileDirectory();
 	void checkSmbclientBin();
 	void checkMessageMap();
@@ -138,13 +138,14 @@ private:
 	KAction *unreadPopupAction;
 	KAction *deletePopupAction;
 
-	int unreadMessages;
+	int currentMessage, unreadMessages;
 	bool hasInotify;
 	QTimer *popupFileTimer;
 	QString messageText, m_hostName, m_arOffPic, m_arOnPic;
 	QString popupFileDirectory;
-	Q3PtrList<popupMessage> messageList;
+	QList<popupMessage *> messageList;
 	QLabel *m_arLabel;
+	KDirLister *dirLister;
 
 	//option variables
 	bool optRunDocked;

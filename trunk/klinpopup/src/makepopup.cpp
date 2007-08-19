@@ -20,22 +20,21 @@
 
 //#define MY_EXTRA_DEBUG
 
-#include "config.h"
-
 #include <kdebug.h>
 
 #include <QFile>
 #include <QLabel>
 #include <QStringList>
 #include <QRegExp>
-#include <q3groupbox.h>
+#include <QGroupBox>
 #include <QToolTip>
 
 #include <QSplitter>
-//Added by qt3to4:
-#include <Q3HBoxLayout>
+#include <QTreeWidget>
 #include <QKeyEvent>
-#include <Q3GridLayout>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QEvent>
 #include <QCloseEvent>
 
@@ -59,15 +58,15 @@ void readHostsThread::run()
 	threadOwner->readHostList();
 }
 
-makePopup::makePopup(QWidget *parent, const char *name, const QString &paramSender,
+makePopup::makePopup(QWidget *parent, const QString &paramSender,
 					 const QString &paramSmbclient, int paramEncoding, int paramView)
-	: QWidget(parent, name, Qt::WType_TopLevel),
+	: QWidget(parent, Qt::Window),
 	  smbclientBin(paramSmbclient), messageReceiver(paramSender),
 	  newMsgEncoding(paramEncoding), viewMode(paramView),
 	  sendRefCount(0), sendError(0), justSending(false),
 	  readHosts(this), readGroups(this)
 {
-	initSmbCtx();
+//	initSmbCtx();
 	setupLayout();
 
 	connect(buttonSend, SIGNAL(clicked()), this, SLOT(slotButtonSend()));
@@ -76,26 +75,26 @@ makePopup::makePopup(QWidget *parent, const char *name, const QString &paramSend
 	if (viewMode == CLASSIC_VIEW) {
 		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged(const QString &)));
 	 } else {
-		connect(groupTreeView, SIGNAL(selectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
-		connect(groupTreeView, SIGNAL(expanded(Q3ListViewItem *)), this, SLOT(slotTreeViewItemExpanded(Q3ListViewItem *)));
+		connect(groupTreeView, SIGNAL(itemSelectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
+		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(Q3ListViewItem *)));
 	}
 
 	//initialize senderBox, groupBox and receiverBox
-	QString tmpHostName = smbCtx->netbios_name;
-	if (!tmpHostName.isEmpty()) senderBox->insertItem(tmpHostName);
+//	QString tmpHostName = smbCtx->netbios_name;
+//	if (!tmpHostName.isEmpty()) senderBox->addItem(QString("test"));
 
 	QString tmpLoginName = KUser().loginName();
-	if (!tmpLoginName.isEmpty()) senderBox->insertItem(tmpLoginName);
+	if (!tmpLoginName.isEmpty()) senderBox->addItem(tmpLoginName);
 
 	QString tmpFullName = KUser().fullName();
-	if (!tmpFullName.isEmpty()) senderBox->insertItem(tmpFullName);
+	if (!tmpFullName.isEmpty()) senderBox->addItem(tmpFullName);
 
 	if (messageReceiver.isEmpty()) {
-		if (viewMode == CLASSIC_VIEW) groupBox->insertItem(i18n("NO GROUP"), -1);
+		if (viewMode == CLASSIC_VIEW) groupBox->addItem(i18n("NO GROUP"), -1);
 		readGroups.start();
 	} else {
 		groupBox->setEnabled(false);
-		classicReceiverBox->insertItem(messageReceiver);
+		classicReceiverBox->addItem(messageReceiver);
 		classicReceiverBox->setEnabled(false);
 	}
 }
@@ -115,7 +114,7 @@ void makePopup::closeEvent(QCloseEvent *e)
  */
 bool makePopup::eventFilter(QObject *, QEvent *e)
 {
-	if (e->type() == QEvent::KeyPress) {
+/*	if (e->type() == QEvent::KeyPress) {
 		QKeyEvent *k = (QKeyEvent *)e;
 		// do funny things to figure out the bytes of the message and react accordingly
 		if ((k->key() >= Qt::Key_Space && k->key() <= Qt::Key_ydiaeresis) || k->key() == Qt::Key_Tab) {
@@ -125,47 +124,47 @@ bool makePopup::eventFilter(QObject *, QEvent *e)
 		}
 	}
 
-	return false;
+	return false;*/
 }
 
 void makePopup::setupLayout()
 {
-	setFocusPolicy(QWidget::WheelFocus);
+	setFocusPolicy(Qt::WheelFocus);
 
-	Q3GroupBox *messageTextBox;
+	QGroupBox *messageTextBox;
 
-	buttonSend = new KPushButton(this, "buttonSend");
-	buttonSend->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
+	buttonSend = new KPushButton(this);
+//	buttonSend->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
 
-	buttonCancel = new KPushButton(this, "buttonCancel");
-	buttonCancel->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
+	buttonCancel = new KPushButton(this);
+//	buttonCancel->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
 
 
 	if (viewMode == CLASSIC_VIEW) {
-		makePopupLayout = new Q3GridLayout(this, 5, 3, 11, 6, "makePopupLayout");
+		makePopupLayout = new QGridLayout(this);
 
 		QLabel *senderLabel = new QLabel(i18n("From:"), this);
 		senderBox = new KComboBox(this);
-		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
+//		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		senderBox->setEditable(true);
-		Q3BoxLayout *senderLayout = new Q3HBoxLayout(Q3BoxLayout::LeftToRight);
-		senderLayout->add(senderLabel);
-		senderLayout->add(senderBox);
+		QHBoxLayout *senderLayout = new QHBoxLayout();
+		senderLayout->addWidget(senderLabel);
+		senderLayout->addWidget(senderBox);
 
 		QLabel *groupLabel = new QLabel(i18n("Group:"), this);
 		groupBox = new KComboBox(this);
-		groupBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
-		Q3BoxLayout *groupLayout = new Q3HBoxLayout(Q3BoxLayout::LeftToRight);
-		groupLayout->add(groupLabel);
-		groupLayout->add(groupBox);
+//		groupBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
+		QHBoxLayout *groupLayout = new QHBoxLayout();
+		groupLayout->addWidget(groupLabel);
+		groupLayout->addWidget(groupBox);
 
 		QLabel *receiverLabel = new QLabel(i18n("To:"), this);
 		classicReceiverBox = new KComboBox(this);
-		classicReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
+//		classicReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		classicReceiverBox->setEditable(true);
-		Q3BoxLayout *receiverLayout = new Q3HBoxLayout(Q3BoxLayout::LeftToRight);
-		receiverLayout->add(receiverLabel);
-		receiverLayout->add(classicReceiverBox);
+		QHBoxLayout *receiverLayout = new QHBoxLayout();
+		receiverLayout->addWidget(receiverLabel);
+		receiverLayout->addWidget(classicReceiverBox);
 
 		int senderLabelWidth = senderLabel->sizeHint().width();
 		int groupLabelWidth = groupLabel->sizeHint().width();
@@ -182,65 +181,70 @@ void makePopup::setupLayout()
 			groupLabel->setFixedWidth(receiverLabelWidth);
 		}
 
-		messageTextBox = new Q3GroupBox(i18n("Message text"), this);
-		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-		messageTextBox->setLineWidth(1);
+		messageTextBox = new QGroupBox(i18n("Message text"), this);
+//		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
+/*		messageTextBox->setLineWidth(1);
 		messageTextBox->setColumnLayout(0, Qt::Vertical);
-		messageTextBox->setInsideMargin(4);
-		Q3GridLayout *messageTextBoxLayout = new Q3GridLayout(messageTextBox->layout());
+		messageTextBox->setInsideMargin(4);*/
+		QGridLayout *messageTextBoxLayout = new QGridLayout(messageTextBox);
 
 		messageText = new KTextEdit(messageTextBox);
-		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
+//		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
 		messageTextBoxLayout->addWidget(messageText, 0, 0);
 
-		makePopupLayout->addMultiCellLayout(senderLayout, 0, 0, 0, 2);
-		makePopupLayout->addMultiCellLayout(groupLayout, 1, 1, 0, 2);
-		makePopupLayout->addMultiCellLayout(receiverLayout, 2, 2, 0, 2);
-		makePopupLayout->addMultiCellWidget(messageTextBox, 3, 3, 0, 2);
+		makePopupLayout->addLayout(senderLayout, 0, 0, 0, 2);
+		makePopupLayout->addLayout(groupLayout, 1, 1, 0, 2);
+		makePopupLayout->addLayout(receiverLayout, 2, 2, 0, 2);
+		makePopupLayout->addWidget(messageTextBox, 3, 3, 0, 2);
 		makePopupLayout->addWidget( buttonSend, 4, 1);
 		makePopupLayout->addWidget( buttonCancel, 4, 2);
 		resize(QSize(375, 250).expandedTo(minimumSizeHint()));
 	} else {
-		makePopupLayout = new Q3GridLayout( this, 5, 5, 11, 6, "makePopupLayout");
+		makePopupLayout = new QGridLayout(this);
 		QSplitter *sp = new QSplitter(this);
 		sp->setOpaqueResize(true);
 
-		Q3VBox *rightSplitLayout = new Q3VBox(sp);
-		rightSplitLayout->setMargin(3);
-		groupTreeView = new Q3ListView(rightSplitLayout, "groupTreeView");
-		groupTreeView->addColumn(i18n("Groups/Hosts"));
-		groupTreeView->addColumn(i18n("Comment"));
-		groupTreeView->setEnabled(true);
-		groupTreeView->setRootIsDecorated(true);
-		groupTreeView->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
-		groupTreeView->setSelectionMode(Q3ListView::Extended);
-		groupTreeView->setLineWidth(1);
-		groupTreeView->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-		sp->setResizeMode(rightSplitLayout, QSplitter::FollowSizeHint);
+		QWidget *rightSplitLayout = new QWidget(sp);
+//		rightSplitLayout->setMargin(3);
+		groupTreeView = new QTreeWidget(rightSplitLayout);
+		groupTreeView->setColumnCount(2);
+//		groupTreeView->addColumn(i18n("Groups/Hosts"));
+//		groupTreeView->addColumn(i18n("Comment"));
+//		groupTreeView->setEnabled(true);
+//		groupTreeView->setRootIsDecorated(true);
+//		groupTreeView->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
+//		groupTreeView->setSelectionMode(Q3ListView::Extended);
+//		groupTreeView->setLineWidth(1);
+//		groupTreeView->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
+//		sp->setResizeMode(rightSplitLayout, QSplitter::FollowSizeHint);
 
-		Q3VBox *leftSplitLayout = new Q3VBox(sp);
-		leftSplitLayout->setSpacing(6);
-		leftSplitLayout->setMargin(3);
-		Q3HBox *senderHBox = new Q3HBox(leftSplitLayout);
-		QLabel *senderLabel = new QLabel(i18n("From:"), senderHBox);
-		senderBox = new KComboBox(senderHBox);
-		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
+		QWidget *leftSplitLayout = new QWidget(sp);
+// 		leftSplitLayout->setSpacing(6);
+// 		leftSplitLayout->setMargin(3);
+		QHBoxLayout *senderHBox = new QHBoxLayout(leftSplitLayout);
+		QLabel *senderLabel = new QLabel(i18n("From:"));
+		senderHBox->addWidget(senderLabel);
+		senderBox = new KComboBox();
+		senderHBox->addWidget(senderBox);
+//		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		senderBox->setEditable(true);
 
-		Q3HBox *receiverHBox = new Q3HBox(leftSplitLayout);
-		QLabel *receiverLabel = new QLabel(i18n("To:"), receiverHBox);
-		treeViewReceiverBox = new KLineEdit(receiverHBox);
-		treeViewReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
+		QHBoxLayout *receiverHBox = new QHBoxLayout(leftSplitLayout);
+		QLabel *receiverLabel = new QLabel(i18n("To:"));
+		receiverHBox->addWidget(receiverLabel);
+		treeViewReceiverBox = new KLineEdit();
+		receiverHBox->addWidget(treeViewReceiverBox);
+//		treeViewReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 
-		messageTextBox = new Q3GroupBox(i18n("Message text"), leftSplitLayout);
-		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-		messageTextBox->setLineWidth(1);
-		messageTextBox->setColumnLayout(0, Qt::Vertical);
-		messageTextBox->setInsideMargin(4);
-		Q3GridLayout *messageTextBoxLayout = new Q3GridLayout(messageTextBox->layout());
+		messageTextBox = new QGroupBox(i18n("Message text"), leftSplitLayout);
+//		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
+//		messageTextBox->setLineWidth(1);
+//		messageTextBox->setColumnLayout(0, Qt::Vertical);
+//		messageTextBox->setInsideMargin(4);
+		QGridLayout *messageTextBoxLayout = new QGridLayout(messageTextBox);
 
 		messageText = new KTextEdit(messageTextBox);
-		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, false));
+//		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, false));
 		messageTextBoxLayout->addWidget(messageText, 0, 0);
 
 		int senderLabelWidth = senderLabel->sizeHint().width();
@@ -251,19 +255,19 @@ void makePopup::setupLayout()
 		else
 			receiverLabel->setFixedWidth(senderLabelWidth);
 
-		makePopupLayout->addMultiCellWidget(sp, 0, 3, 0, 4);
+		makePopupLayout->addWidget(sp, 0, 3, 0, 4);
 		makePopupLayout->addWidget( buttonSend, 4, 3);
 		makePopupLayout->addWidget( buttonCancel, 4, 4);
 		resize(QSize(575, 250).expandedTo(minimumSizeHint()));
 	}
 
-	messageTextBox->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
-	messageTextBox->setAlignment(int(Q3GroupBox::Qt::AlignCenter));
+//	messageTextBox->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
+//	messageTextBox->setAlignment(int(Q3GroupBox::Qt::AlignCenter));
 
-	messageText->setFrameStyle(KTextEdit::LineEditPanel|KTextEdit::Sunken);
-	messageText->setResizePolicy(KTextEdit::Manual);
-	messageText->setTextFormat(KTextEdit::PlainText);
-	messageText->setAutoFormatting(int(KTextEdit::AutoAll));
+//	messageText->setFrameStyle(KTextEdit::LineEditPanel|KTextEdit::Sunken);
+//	messageText->setResizePolicy(KTextEdit::Manual);
+//	messageText->setTextFormat(KTextEdit::PlainText);
+//	messageText->setAutoFormatting(int(KTextEdit::AutoAll));
 
 	languageChange();
 
@@ -281,7 +285,7 @@ void makePopup::queryFinished()
 		QString errorHostsString;
 		QMap<QString, QString>::ConstIterator end = errorHosts.end();
 		for (QMap<QString, QString>::ConstIterator it = errorHosts.begin(); it != end; ++it) {
-			errorHostsString += it.data().upper();
+			errorHostsString += it.value().toUpper();
 			errorHostsString += ", ";
 		}
 		errorHostsString.truncate(errorHostsString.length() - 2);
@@ -307,13 +311,11 @@ void makePopup::finished()
 	hide();
 
 	// This should be safe here
-	if (readGroups.running()) readGroups.terminate();
-	if (readHosts.running()) readHosts.terminate();
+	if (readGroups.isRunning()) readGroups.terminate();
+	if (readHosts.isRunning()) readHosts.terminate();
 
 	readGroups.wait();
 	readHosts.wait();
-
-	smbc_free_context(smbCtx, 1);
 
 	deleteLater();
 }
@@ -355,12 +357,12 @@ void makePopup::sendPopup()
 	QStringList tmpReceiverList;
 	QRegExp hostComment("\\s\\(.*\\)"), whiteSpaces("\\s+");
 
-	if (tmpReceiverString.find(hostComment) > -1) {
-		tmpReceiverList += tmpReceiverString.left(tmpReceiverString.find(" ("));
+	if (tmpReceiverString.indexOf(hostComment) > -1) {
+		tmpReceiverList += tmpReceiverString.left(tmpReceiverString.indexOf(" ("));
 	} else if (tmpReceiverString == i18n("Whole workgroup")) {
 		tmpReceiverList = allGroupHosts;
 	} else {
-		tmpReceiverList = QStringList::split(whiteSpaces, tmpReceiverString, false);
+		tmpReceiverList = tmpReceiverString.split(whiteSpaces, QString::SkipEmptyParts);
 	}
 
 	allProcessesStarted = false;
@@ -378,27 +380,8 @@ void makePopup::sendPopup()
 		connect(p, SIGNAL(processExited(K3Process *)), this, SLOT(slotSendCmdExit(K3Process *)));
 
 		if (p->start(K3Process::NotifyOnExit, K3Process::Stdin)) {
-			QString tmpText = messageText->text();
-
-///@TODO: does local8Bit work for all environments?
-			switch (newMsgEncoding)
-			{
-				case ENC_LOCAL8BIT:
-					p->writeStdin(tmpText.local8Bit(), tmpText.local8Bit().length());
-					break;
-				case ENC_UTF8:
-					p->writeStdin(tmpText.utf8(), tmpText.utf8().length());
-					break;
-				case ENC_LATIN1:
-					p->writeStdin(tmpText.latin1(), tmpText.length());
-					break;
-				case ENC_ASCII:
-					p->writeStdin(tmpText.ascii(), tmpText.length());
-					break;
-				default:
-					p->writeStdin(tmpText.local8Bit(), tmpText.local8Bit().length());
-					break;
-			}
+			QString tmpText = messageText->document()->toPlainText();
+			p->writeStdin(tmpText.toUtf8(), tmpText.toUtf8().length());
 			if (!p->closeStdin()) {
 ///@TODO: does this work, how to test this?
 				delete p;
@@ -414,7 +397,7 @@ void makePopup::sendPopup()
 void makePopup::slotSendCmdExit(K3Process *_p)
 {
 	if (_p && _p->normalExit() && _p->exitStatus() == 0) {
-		errorHosts.erase(QString::number((unsigned long)(_p), 10));
+		errorHosts.remove(QString::number((unsigned long)(_p), 10));
 	}
 	delete _p;
 	sendRefCount--;
@@ -426,7 +409,7 @@ void makePopup::slotSendCmdExit(K3Process *_p)
  */
 void makePopup::initSmbCtx()
 {
-	smbCtx = smbc_new_context();
+/*	smbCtx = smbc_new_context();
 	if (smbCtx) {
 		smbCtx->callbacks.auth_fn = makePopup::auth_smbc_get_data;
 		smbCtx->timeout = 2000; // any effect?
@@ -437,7 +420,7 @@ void makePopup::initSmbCtx()
 //		smbc_set_context(smbCtx);
 	} else {
 		kDebug() << "Error getting new smbCtx!" << endl;
-	}
+	}*/
 }
 
 /**
@@ -445,7 +428,7 @@ void makePopup::initSmbCtx()
  */
 void makePopup::readGroupList()
 {
-	QString ownGroup = QString::null;
+/*	QString ownGroup = QString::null;
 
 	if (smbCtx != 0) {
 		// get own workgoup first
@@ -508,7 +491,7 @@ void makePopup::readGroupList()
 	} else if (viewMode == TREE_VIEW && groupTreeView->childCount() == 1) {
 		currentGroup = groupTreeView->firstChild()->text(0);
 		readHosts.start();
-	}
+	}*/
 }
 
 /**
@@ -516,48 +499,48 @@ void makePopup::readGroupList()
  */
 void makePopup::readHostList()
 {
-	if (smbCtx != 0) {
-
-		SMBCFILE *dirfd;
-		struct smbc_dirent *dirp = 0;
-
-		// next level should be the hosts
-		QString tmpGroup = "smb://";
-		tmpGroup.append(currentGroup);
-//		kDebug() << tmpGroup << endl;
-
-		dirfd = smbCtx->opendir(smbCtx, tmpGroup);
-//		kDebug() << dirfd << endl;
-
-		if (dirfd) {
-			do {
-				dirp = smbCtx->readdir(smbCtx, dirfd);
-				if (dirp == 0) break;
-
-				QString tmpHost = QString::fromUtf8(dirp->name);
-
-				if (dirp->smbc_type == SMBC_SERVER) {
-					allGroupHosts += tmpHost;
-					QString tmpComment = QString::fromUtf8(dirp->comment);
-
-					if (viewMode == TREE_VIEW) {
-						Q3ListViewItem *tmpGroupItem = groupTreeView->findItem(currentGroup, 0);
-						if (tmpGroupItem != 0) {
-							Q3ListViewItem *tmpHostItem = new Q3ListViewItem(tmpGroupItem, tmpHost, tmpComment);
-							tmpHostItem->setPixmap(0, SmallIcon("server"));
-							tmpHostItem->setExpandable(false);
-						}
-						tmpGroupItem->setOpen(true);
-					} else {
-						if (!tmpComment.isEmpty()) tmpHost.append(" (" + tmpComment + ")");
-						classicReceiverBox->insertItem(tmpHost, -1);
-					}
-				}
-			} while (dirp);
-		}
-		smbCtx->closedir(smbCtx, dirfd);
-		if (viewMode == CLASSIC_VIEW && allGroupHosts.count() > 1) classicReceiverBox->insertItem(i18n("Whole workgroup"), -1);
-	}
+// 	if (smbCtx != 0) {
+//
+// 		SMBCFILE *dirfd;
+// 		struct smbc_dirent *dirp = 0;
+//
+// 		// next level should be the hosts
+// 		QString tmpGroup = "smb://";
+// 		tmpGroup.append(currentGroup);
+// //		kDebug() << tmpGroup << endl;
+//
+// 		dirfd = smbCtx->opendir(smbCtx, tmpGroup);
+// //		kDebug() << dirfd << endl;
+//
+// 		if (dirfd) {
+// 			do {
+// 				dirp = smbCtx->readdir(smbCtx, dirfd);
+// 				if (dirp == 0) break;
+//
+// 				QString tmpHost = QString::fromUtf8(dirp->name);
+//
+// 				if (dirp->smbc_type == SMBC_SERVER) {
+// 					allGroupHosts += tmpHost;
+// 					QString tmpComment = QString::fromUtf8(dirp->comment);
+//
+// 					if (viewMode == TREE_VIEW) {
+// 						Q3ListViewItem *tmpGroupItem = groupTreeView->findItem(currentGroup, 0);
+// 						if (tmpGroupItem != 0) {
+// 							Q3ListViewItem *tmpHostItem = new Q3ListViewItem(tmpGroupItem, tmpHost, tmpComment);
+// 							tmpHostItem->setPixmap(0, SmallIcon("server"));
+// 							tmpHostItem->setExpandable(false);
+// 						}
+// 						tmpGroupItem->setOpen(true);
+// 					} else {
+// 						if (!tmpComment.isEmpty()) tmpHost.append(" (" + tmpComment + ")");
+// 						classicReceiverBox->insertItem(tmpHost, -1);
+// 					}
+// 				}
+// 			} while (dirp);
+// 		}
+// 		smbCtx->closedir(smbCtx, dirfd);
+// 		if (viewMode == CLASSIC_VIEW && allGroupHosts.count() > 1) classicReceiverBox->insertItem(i18n("Whole workgroup"), -1);
+// 	}
 }
 
 /**
@@ -569,66 +552,55 @@ void makePopup::slotGroupboxChanged(const QString &)
 	allGroupHosts.clear();
 	currentGroup = groupBox->currentText();
 	if (currentGroup == i18n("NO GROUP")) return;
-	if (currentGroup.find(" (") > 1) currentGroup = currentGroup.left(currentGroup.find(" ("));
+	if (currentGroup.indexOf(" (") > 1) currentGroup = currentGroup.left(currentGroup.indexOf(" ("));
 
-	if (readHosts.running()) readHosts.exit();
+	if (readHosts.isRunning()) readHosts.exit();
 	readHosts.start();
 }
 
-void makePopup::slotTreeViewItemExpanded(Q3ListViewItem *clickedItem)
+void makePopup::slotTreeViewItemExpanded(QTreeWidgetItem *clickedItem)
 {
-	if (clickedItem == 0 || clickedItem->isSelectable() || clickedItem->childCount() != 0) return;
+	if (clickedItem == 0 || clickedItem->childCount() != 0) return;
 
 	currentGroup = clickedItem->text(0);
 
-	if (readHosts.running()) readHosts.exit();
+	if (readHosts.isRunning()) readHosts.exit();
 	readHosts.start();
 }
 
 void makePopup::slotTreeViewSelectionChanged()
 {
-	QString selectedHosts;
-	Q3ListViewItemIterator it(groupTreeView, Q3ListViewItemIterator::Selected|Q3ListViewItemIterator::NotExpandable);
-	while (it.current()) {
-		selectedHosts += it.current()->text(0);
-		selectedHosts += " ";
-		++it;
-	}
-	treeViewReceiverBox->setText(selectedHosts.trimmed());
+// 	QString selectedHosts;
+// 	Q3ListViewItemIterator it(groupTreeView, Q3ListViewItemIterator::Selected|Q3ListViewItemIterator::NotExpandable);
+// 	while (it.current()) {
+// 		selectedHosts += it.current()->text(0);
+// 		selectedHosts += " ";
+// 		++it;
+// 	}
+// 	treeViewReceiverBox->setText(selectedHosts.trimmed());
 }
 
 void makePopup::languageChange()
 {
-	QToolTip::add(senderBox, i18n("Choose sender"));
+	senderBox->setToolTip(i18n("Choose sender"));
 	senderBox->setWhatsThis( i18n("This box lets you customize the sender value."));
 	if (viewMode == CLASSIC_VIEW) {
-		QToolTip::add(groupBox, i18n("Available workgroups"));
+		groupBox->setToolTip(i18n("Available workgroups"));
 		groupBox->setWhatsThis( i18n("Which workgroups are available in the network."));
-		QToolTip::add(classicReceiverBox, i18n("Addressee(s) of this message"));
+		classicReceiverBox->setToolTip(i18n("Addressee(s) of this message"));
 		classicReceiverBox->setWhatsThis( i18n("Which computer shall receive this message?"));
 	} else {
-		QToolTip::add(treeViewReceiverBox, i18n("Addressee(s) of this message"));
+		treeViewReceiverBox->setToolTip(i18n("Addressee(s) of this message"));
 		treeViewReceiverBox->setWhatsThis( i18n("Which computer shall receive this message?"));
 	}
 	buttonSend->setText( i18n("&Send"));
-	buttonSend->setAccel( QKeySequence( i18n("Alt+S")));
-	QToolTip::add( buttonSend, i18n("Send the message" ) );
+//	buttonSend->setAccel( QKeySequence( i18n("Alt+S")));
+	buttonSend->setToolTip(i18n("Send the message" ) );
 	buttonSend->setWhatsThis( i18n("Send the message and close the dialog."));
 	buttonCancel->setText( i18n("&Cancel"));
-	buttonCancel->setAccel( QKeySequence(i18n("Alt+C")));
-	QToolTip::add( buttonCancel, i18n("Cancel the message"));
+//	buttonCancel->setAccel( QKeySequence(i18n("Alt+C")));
+	buttonCancel->setToolTip(i18n("Cancel the message"));
 	buttonCancel->setWhatsThis( i18n("Cancel the dialog without sending the message."));
-}
-
-/**
- * method to get authentication data for smbc_init
- */
-void makePopup::auth_smbc_get_data(const char */*server*/,const char */*share*/,
-								char */*workgroup*/, int /*wgmaxlen*/,
-								char */*username*/, int /*unmaxlen*/,
-								char */*password*/, int /*pwmaxlen*/)
-{
-	// no need to really authenticate for the stuff we want
 }
 
 // kate: tab-width 4; indent-width 4; replace-trailing-space-save on;

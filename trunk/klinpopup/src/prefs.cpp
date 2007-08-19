@@ -31,13 +31,14 @@
 Prefs::Prefs()
 	: Prefs_base()
 {
+	setupUi(this);
 	connect(kcfg_ToggleSignaling, SIGNAL(activated(int)), this, SLOT(toggleSoundURL(int)));
 	connect(kcfg_ExternalCommand, SIGNAL(toggled(bool)), this, SLOT(toggleExternalCommandURL(bool)));
 }
 
 void Prefs::toggleURLs()
 {
-	if (kcfg_ToggleSignaling->currentItem() == 0 || kcfg_ToggleSignaling->currentItem() == 2)
+	if (kcfg_ToggleSignaling->currentIndex() == 0 || kcfg_ToggleSignaling->currentIndex() == 2)
 		kcfg_SoundURL->setDisabled(true);
 	else
 		kcfg_SoundURL->setDisabled(false);

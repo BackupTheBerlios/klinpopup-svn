@@ -40,8 +40,8 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::init(argc, argv, &about);
 	KUniqueApplication::addCmdLineOptions();
 
-    if (!KUniqueApplication::start())
-		return 0;
+     if (!KUniqueApplication::start())
+ 		return 0;
 
 	KUniqueApplication app;
 

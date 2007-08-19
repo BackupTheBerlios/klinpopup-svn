@@ -34,7 +34,7 @@
  * @author Gerd Fleischer <gerdfleischer@web.de>
  * @version 0.3.4
  */
-class KLinPopupView : public Ui::KLinPopupview_base
+class KLinPopupView : public QWidget, private Ui::KLinPopupview_base
 {
 	Q_OBJECT
 public:

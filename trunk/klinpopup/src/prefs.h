@@ -24,7 +24,7 @@
 #include "ui_prefs_base.h"
 
 
-class Prefs : public Ui::Prefs_base
+class Prefs : public QWidget, private Ui::Prefs_base
 {
 	Q_OBJECT
 

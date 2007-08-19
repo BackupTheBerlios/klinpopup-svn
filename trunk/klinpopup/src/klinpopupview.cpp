@@ -26,8 +26,9 @@
 #include "klinpopupview.moc"
 #include "settings.h"
 
-KLinPopupView::KLinPopupView(QWidget *parent) : KLinPopupview_base(parent)
+KLinPopupView::KLinPopupView(QWidget *parent) : QWidget(parent)
 {
+	setupUi(this);
 }
 
 KLinPopupView::~KLinPopupView()
@@ -41,13 +42,13 @@ void KLinPopupView::displayNewMessage(const QString &sender,const QDateTime &tim
 	if (time.isValid()) {
 		switch (paramTimeFormat) {
 			case 0:
-				tmpLocaleTime = KGlobal::locale()->formatDateTime(time, true, true);
+				tmpLocaleTime = KGlobal::locale()->formatDateTime(time);
 				break;
 			case 1:
-				tmpLocaleTime = KGlobal::locale()->formatTime(time.time(), true);
+				tmpLocaleTime = KGlobal::locale()->formatTime(time.time());
 				break;
 			case 2:
-				tmpLocaleTime = KGlobal::locale()->formatDate(time.date(), true);
+				tmpLocaleTime = KGlobal::locale()->formatDate(time.date(), KLocale::FancyLongDate);
 				break;
 			default:
 				break;
