@@ -22,28 +22,13 @@
 
 #include <kdebug.h>
 
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-#include <stdio.h>
-#include <errno.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/select.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <asm/unistd.h>
-#include "inotify.h"
-#include "inotify-syscalls.h"
 
 #include <QToolTip>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QStringList>
-//Added by qt3to4:
 #include <QLabel>
 #include <QCustomEvent>
 #include <QPixmap>
@@ -58,7 +43,7 @@
 #include <kdeversion.h>
 #include <kmenubar.h>
 #include <kstatusbar.h>
-#include <phonon/audioplayer.h>
+//#include <phonon/audioplayer.h>
 #include <kmessagebox.h>
 #include <kedittoolbar.h>
 #include <kfileitem.h>
@@ -66,12 +51,10 @@
 #include <kstandardaction.h>
 #include <kactioncollection.h>
 
-//#include <kpixmap.h>
 #include <kstandarddirs.h>
 #include <ktoolinvocation.h>
 #include <krandom.h>
 #include <kdirlister.h>
-#include <kguiitem.h>
 #include <kstdguiitem.h>
 
 #include "klinpopup.h"
@@ -83,13 +66,13 @@
 KLinPopup::KLinPopup()
 	: KXmlGuiWindow(),
 	  m_view(new KLinPopupView(this)), currentMessage(0), unreadMessages(0),
-	  hasInotify(true), m_hostName(QString()), m_arLabel(new QLabel(this))
+	  m_hostName(QString()), m_arLabel(new QLabel(this))
 {
-	setFocusPolicy(Qt::StrongFocus);
-
 	setCentralWidget(m_view);
+	setFocusPolicy(Qt::WheelFocus);
 	setupActions();
 	setAutoSaveSettings();
+	m_view->setFocus();
 
 	cfg = new KConfig("klinpopuprc");
 	readConfig();
@@ -97,19 +80,21 @@ KLinPopup::KLinPopup()
 	initSystemTray();
 
 	// allow the view to change the statusbar and caption
-// 	connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
-// 			this,   SLOT(changeStatusbar(const QString&)));
-// 	connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
-// 			this,   SLOT(changeCaption(const QString&)));
+	connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
+			this, SLOT(changeStatusbar(const QString&)));
+	connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
+			this, SLOT(setCaption(const QString&)));
 
 	statusBar()->insertItem(QString(), ID_STATUS_TEXT, 1);
 	m_arOffPic = KStandardDirs::locate("data", "klinpopup/ar_off.png");
 	m_arOnPic = KStandardDirs::locate("data", "klinpopup/ar_on.png");
 	m_arLabel->setPixmap(QPixmap(m_arOffPic));
 	m_arLabel->setToolTip(i18n("Autoreply off"));
-	statusBar()->addWidget(m_arLabel);
+	statusBar()->addPermanentWidget(m_arLabel);
 
-	updateStats();
+	readSavedMessages();
+	showPopup();
+	popupHelper();
 	checkSmbclientBin();
 
 	// use a timer to finish the constructor ASAP
@@ -125,44 +110,39 @@ bool KLinPopup::queryClose()
 		hide();
 		return false;
 	} else {
-		slotQuit();
+		exit();
 		return false;
 	}
 }
 
-/**
- * Reimplemented focusInEvent to check if we got the focus
- * and update the unreadMessages count.
- */
-void KLinPopup::focusInEvent(QFocusEvent *e)
+void KLinPopup::exit()
 {
-	if (e->gotFocus()) {
-		if (!messageList.isEmpty() && !messageList.at(currentMessage)->isRead()) {
-			--unreadMessages;
-			messageList.at(currentMessage)->setRead();
-		}
-		updateStats();
-		setTrayPixmap();
-	}
+	saveMessages();
+	kapp->quit();
 }
 
-// void KLinPopup::customEvent(QCustomEvent *e)
-// {
-// 	if (e->type() == QEvent::User+1) {
-// 		popupFileTimerDone();
-// 	} else if (e->type() == QEvent::User+2) {
-// 		hasInotify = false;
-// 		initTimer();
-// 		popupFileTimer->start(1, true);
-// 	}
-// }
+/**
+ * Reimplemented changeEvent to check if we got the focus
+ * and update the unreadMessages count.
+ */
+void KLinPopup::changeEvent(QEvent *e)
+{
+	if (isActiveWindow()) {
+		if (!messageList.isEmpty() && !messageList.at(currentMessage-1)->isRead()) {
+			--unreadMessages;
+			messageList.at(currentMessage-1)->setRead();
+		}
+	}
+	updateStats();
+	setTrayPixmap();
+}
 
 /**
  * setup menu, shortcuts, create GUI
  */
 void KLinPopup::setupActions()
 {
-	KStandardAction::quit(this, SLOT(slotQuit()), actionCollection());
+	KStandardAction::quit(this, SLOT(exit()), actionCollection());
 
 	setStandardToolBarMenuEnabled(true);
 	createStandardStatusBarAction();
@@ -173,37 +153,37 @@ void KLinPopup::setupActions()
 	KStandardAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 	KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
-	autoReplyAction = new KToggleAction(KIcon("mail_replyall"), i18n("&Autoreply"), this);
+	autoReplyAction = new KToggleAction(KIcon("mail-reply-all"), i18n("&Autoreply"), this);
 	autoReplyAction->setShortcut(Qt::CTRL+Qt::Key_A);
 	actionCollection()->addAction("auto_reply", autoReplyAction);
 	connect(autoReplyAction, SIGNAL(triggered(bool)), this, SLOT(statusAutoReply()));
 
-	newPopupAction = new KAction(KIcon("mail_new"), i18n("&New"), this);
+	newPopupAction = new KAction(KIcon("mail-new"), i18n("&New"), this);
 	newPopupAction->setShortcut(Qt::CTRL+Qt::Key_N);
 	actionCollection()->addAction("new_popup", newPopupAction);
 	connect(newPopupAction, SIGNAL(triggered(bool)), this, SLOT(newPopup()));
 
-	replyPopupAction = new KAction(KIcon("mail_reply"), i18n("&Reply"), this);
+	replyPopupAction = new KAction(KIcon("mail-reply-sender"), i18n("&Reply"), this);
 	replyPopupAction->setShortcut(Qt::CTRL+Qt::Key_R);
 	actionCollection()->addAction("reply_popup", replyPopupAction);
 	connect(replyPopupAction, SIGNAL(triggered(bool)), this, SLOT(replyPopup()));
 
-	firstPopupAction = new KAction(KIcon("start"), i18n("&First"), this);
+	firstPopupAction = new KAction(KIcon("arrow-left-double"), i18n("&First"), this);
 	firstPopupAction->setShortcut(Qt::CTRL+Qt::Key_B);
 	actionCollection()->addAction("first_popup", firstPopupAction);
 	connect(firstPopupAction, SIGNAL(triggered(bool)), this, SLOT(firstPopup()));
 
-	prevPopupAction = new KAction(KIcon("back"), i18n("&Previous"), this);
+	prevPopupAction = new KAction(KIcon("arrow-left"), i18n("&Previous"), this);
 	prevPopupAction->setShortcut(Qt::CTRL+Qt::Key_P);
 	actionCollection()->addAction("previous_popup", prevPopupAction);
 	connect(prevPopupAction, SIGNAL(triggered(bool)), this, SLOT(prevPopup()));
 
-	nextPopupAction = new KAction(KIcon("forward"), i18n("&Next"), this);
+	nextPopupAction = new KAction(KIcon("arrow-right"), i18n("&Next"), this);
 	nextPopupAction->setShortcut(Qt::CTRL+Qt::Key_F);
 	actionCollection()->addAction("next_popup", nextPopupAction);
 	connect(nextPopupAction, SIGNAL(triggered(bool)), this, SLOT(nextPopup()));
 
-	lastPopupAction = new KAction(KIcon("finish"), i18n("&Last"), this);
+	lastPopupAction = new KAction(KIcon("arrow-right-double"), i18n("&Last"), this);
 	lastPopupAction->setShortcut(Qt::CTRL+Qt::Key_L);
 	actionCollection()->addAction("last_popup", lastPopupAction);
 	connect(lastPopupAction, SIGNAL(triggered(bool)), this, SLOT(lastPopup()));
@@ -213,12 +193,12 @@ void KLinPopup::setupActions()
 	actionCollection()->addAction("unread_popup", unreadPopupAction);
 	connect(unreadPopupAction, SIGNAL(triggered(bool)), this, SLOT(unreadPopup()));
 
-	deletePopupAction = new KAction(KIcon("mail_delete"), i18n("&Delete"), this);
+	deletePopupAction = new KAction(KIcon("mail-delete"), i18n("&Delete"), this);
 	deletePopupAction->setShortcut(Qt::CTRL+Qt::Key_D);
 	actionCollection()->addAction("delete_popup", deletePopupAction);
 	connect(deletePopupAction, SIGNAL(triggered(bool)), this, SLOT(deletePopup()));
 
-	createGUI();
+	setupGUI();
 }
 
 /**
@@ -227,22 +207,75 @@ void KLinPopup::setupActions()
 void KLinPopup::initSystemTray()
 {
 	m_systemTray = new SystemTray(this);
-	connect(m_systemTray, SIGNAL(quitSelected()), this, SLOT(slotQuit()));
+	connect(m_systemTray, SIGNAL(quitSelected()), kapp, SLOT(quit()));
 	m_systemTray->show();
 }
 
-/**
- * save window settings etc. and exit
- */
-void KLinPopup::slotQuit()
+void KLinPopup::saveMessages()
 {
-	hide();
-	saveAutoSaveSettings();
-/*	if (watcher) {
-		watcher->stop();
-		watcher->wait();
-	}*/
-	kapp->quit();
+	messagesFile.seek(0);
+	QTextStream stream(&messagesFile);
+	foreach (popupMessage *msg, messageList) {
+		QString readStatus = msg->isRead() ? "r" : "u";
+		stream << msg->sender() << endl;
+		stream << msg->machine() << endl;
+		stream << msg->ip() << endl;
+		stream << msg->time().toString(Qt::ISODate) << endl;
+		stream << readStatus << endl;
+		stream << msg->text() << endl;
+		stream << "__next_message__" << endl;
+	}
+
+}
+
+void KLinPopup::readSavedMessages()
+{
+	messagesFile.setFileName(KStandardDirs::locateLocal("appdata", "messages"));
+	messagesFile.open(QIODevice::ReadWrite);
+	QTextStream stream(&messagesFile);
+	QString line, sender, machine, ip, time, status, text;
+	int i = 0;
+	while (!stream.atEnd()) {
+		line = stream.readLine();
+		if (line != QString("__next_message__")) {
+			++i;
+			if (i == 1)  {
+				sender = line;
+				continue;
+			}
+			if (i == 2) {
+				machine =line;
+				continue;
+			}
+			if (i == 3) {
+				ip = line;
+				continue;
+			}
+			if (i == 4) {
+				time = line;
+				continue;
+			}
+			if (i == 5) {
+				status = line;
+				continue;
+			}
+			if (i > 6) {
+				text.append('\n');
+			}
+			text.append(line);
+		} else {
+			QDateTime tmpDateTime = QDateTime::fromString(time, Qt::ISODate);
+			messageList.append(new popupMessage(sender, machine, ip, tmpDateTime, text.trimmed()));
+			text = QString();
+			++currentMessage;
+			if (status == "r") {
+				messageList.at(currentMessage-1)->setRead();
+			} else {
+				++unreadMessages;
+			}
+			i = 0;
+		}
+	}
 }
 
 /**
@@ -254,9 +287,15 @@ void KLinPopup::startDirLister()
 		dirLister = new KDirLister();
 		dirLister->setAutoUpdate(true);
 		connect(dirLister, SIGNAL(newItems(const KFileItemList &)), this, SLOT(newMessages(const KFileItemList &)));
-		connect(dirLister, SIGNAL(completed()), this, SLOT(slotListCompleted()));
+		connect(dirLister, SIGNAL(completed()), this, SLOT(listCompleted()));
 		dirLister->openUrl(KUrl(POPUP_DIR));
 	}
+}
+
+void KLinPopup::listCompleted()
+{
+	disconnect(dirLister, SIGNAL(completed()), this, SLOT(listCompleted()));
+	newMessages(dirLister->items());
 }
 
 
@@ -298,15 +337,15 @@ bool KLinPopup::checkPopupFileDirectory()
 		}
 	}
 
-// 	int tmpContinueQuit = KMessageBox::warningYesNo(this,
-// 													i18n("There is a serious problem with the working directory!\n"
-// 														 "Only sending messages will work, "
-// 														 "else you can manually fix and restart KLinPopup."),
-// 													i18n("Warning"),
-// 													KStdGuiItem::cont(),
-// 													KGuiItem::quit(),
-// 													"ShowWarningContinueQuit");
-// 	if (tmpContinueQuit != KMessageBox::Yes) slotQuit();
+	int tmpContinueQuit = KMessageBox::warningYesNo(this,
+													i18n("There is a serious problem with the working directory!\n"
+														 "Only sending messages will work, "
+														 "else you can manually fix and restart KLinPopup."),
+													i18n("Warning"),
+													KStandardGuiItem::cont(),
+													KStandardGuiItem::quit(),
+													"ShowWarningContinueQuit");
+	if (tmpContinueQuit != KMessageBox::Yes) kapp->quit();
 
 	return false;
 }
@@ -349,32 +388,27 @@ void KLinPopup::newMessages(const KFileItemList &items)
 
 			if (popupFile.open(QIODevice::ReadOnly)) {
 				QTextStream stream(&popupFile);
-				QString line;
-				QString sender;
-				QString machine;
-				QString ip;
-				QString time;
-				QString text;
+				QString line, sender, machine, ip, time, text;
 				int i = 0;
 
-				while (! stream.atEnd()) {
-					i++;
+				while (!stream.atEnd()) {
+					++i;
 					line = stream.readLine();
 
 					if (i == 1)  {
-						sender.append(line);
+						sender =line;
 						continue;
 					}
 					if (i == 2) {
-						machine.append(line);
+						machine =line;
 						continue;
 					}
 					if (i == 3) {
-						ip.append(line);
+						ip = line;
 						continue;
 					}
 					if (i == 4) {
-						time.append(line);
+						time = line;
 						continue;
 					}
 					if (i > 5) {
@@ -388,7 +422,7 @@ void KLinPopup::newMessages(const KFileItemList &items)
 				// delete file
 				if (! popupFile.remove())
 					kDebug() << "Message file not removed - how that?" << endl;
-					signalNewMessage(sender, machine, ip, time, text);
+					signalNewMessage(sender, machine, ip, time, text.trimmed());
 			}
 		}
 	}
@@ -406,17 +440,17 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 	QDateTime tmpDateTime = QDateTime::fromString(popupTime, Qt::ISODate);
 	if (!tmpDateTime.isValid()) tmpDateTime = QDateTime::currentDateTime();
 	messageList.append(new popupMessage(popupSender, popupMachine, popupIp, tmpDateTime, messageText));
-	unreadMessages++;
+	if (messageList.count() == 1) currentMessage = 1;
+	++unreadMessages;
 
 	switch (optNewMessageSignaling) {
 		case MS_NOTHING:    //nothing
-			if (currentMessage > -1) messageList.at(currentMessage);
 			//show it if it's the only one
 			if (messageList.count() == 1) {
 				showPopup();
 				if (isActiveWindow()) {
-					unreadMessages--;
-					messageList.at(currentMessage)->setRead();
+					--unreadMessages;
+					messageList.at(currentMessage-1)->setRead();
 				}
 			}
 			updateStats();
@@ -427,7 +461,7 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 //			KAudioPlayer::play(optNewPopupSound);
 			if (isActiveWindow()) {
 				--unreadMessages;
-				messageList.at(currentMessage)->setRead();
+				messageList.at(currentMessage-1)->setRead();
 			}
 			setTrayPixmap();
 			updateStats();
@@ -438,18 +472,20 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 			show();
 			KWindowSystem::forceActiveWindow(winId());
 			--unreadMessages;
-			messageList.at(currentMessage)->setRead();
+			messageList.at(currentMessage-1)->setRead();
 			setTrayPixmap();
 			updateStats();
 			break;
 		case MS_ALL:    //all
 			currentMessage = messageList.count();
 			showPopup();
-//			KAudioPlayer::play(optNewPopupSound);
+//			Phonon::AudioPlayer *player = new Phonon::AudioPlayer(Phonon::NotificationCategory);
+//			connect( player, SIGNAL( finished() ), player, SLOT( deleteLater() ) );
+//			player->play(KUrl::fromPath(optNewPopupSound));
 			show();
 			KWindowSystem::forceActiveWindow(winId());
 			--unreadMessages;
-			messageList.at(currentMessage)->setRead();
+			messageList.at(currentMessage-1)->setRead();
 			setTrayPixmap();
 			updateStats();
 			break;
@@ -457,6 +493,7 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 
 	if (optExternalCommand) runExternalCommand();
 	if (autoReplyAction->isChecked()) autoReply(popupMachine);
+	saveMessages();
 }
 
 /**
@@ -480,21 +517,21 @@ void KLinPopup::updateStats()
  */
 QString KLinPopup::createSenderText()
 {
-	QString tmpSenderText = "";
+	QString tmpSenderText = QString();
 	if (optDisplaySender == true) {
-		tmpSenderText.append(messageList.at(currentMessage)->sender());
+		tmpSenderText.append(messageList.at(currentMessage-1)->sender());
 	}
 	if (optDisplayMachine == true) {
 		if (!tmpSenderText.isEmpty()) {
 			tmpSenderText.append("/");
 		}
-		tmpSenderText.append(messageList.at(currentMessage)->machine());
+		tmpSenderText.append(messageList.at(currentMessage-1)->machine());
 	}
 	if (optDisplayIP == true) {
 		if (!tmpSenderText.isEmpty()) {
 			tmpSenderText.append("/");
 		}
-		tmpSenderText.append(messageList.at(currentMessage)->ip());
+		tmpSenderText.append(messageList.at(currentMessage-1)->ip());
 	}
 	return tmpSenderText;
 }
@@ -505,9 +542,11 @@ QString KLinPopup::createSenderText()
  */
 void KLinPopup::checkMessageMap()
 {
-	int popupCounter = messageList.count();
 
-	if (popupCounter != 0) {
+	int popupCounter = messageList.count();
+	kDebug() << currentMessage << " : " << popupCounter << " : " << unreadMessages << endl;
+
+	if (currentMessage > 0) {
 		replyPopupAction->setEnabled(true);
 		deletePopupAction->setEnabled(true);
 	} else {
@@ -515,7 +554,7 @@ void KLinPopup::checkMessageMap()
 		deletePopupAction->setEnabled(false);
 	}
 
-	if (popupCounter > 1 && currentMessage > 0) {
+	if (popupCounter > 1 && currentMessage > 1) {
 		prevPopupAction->setEnabled(true);
 		firstPopupAction->setEnabled(true);
 	} else {
@@ -523,7 +562,7 @@ void KLinPopup::checkMessageMap()
 		firstPopupAction->setEnabled(false);
 	}
 
-	if (popupCounter > 1 && currentMessage < (popupCounter - 1)) {
+	if (popupCounter > 1 && currentMessage < (popupCounter)) {
 		nextPopupAction->setEnabled(true);
 		lastPopupAction->setEnabled(true);
 	} else {
@@ -571,9 +610,9 @@ void KLinPopup::newPopup()
 
 void KLinPopup::deletePopup()
 {
-	delete messageList.at(currentMessage);
-	messageList.removeAt(currentMessage);
-	--currentMessage;
+	delete messageList.at(currentMessage-1);
+	messageList.removeAt(currentMessage-1);
+	if (currentMessage > 1 || messageList.isEmpty()) --currentMessage;
 	showPopup();
 	popupHelper();
 }
@@ -583,7 +622,7 @@ void KLinPopup::deletePopup()
  */
 void KLinPopup::replyPopup()
 {
-	QString sender = messageList.at(currentMessage)->machine();
+	QString sender = messageList.at(currentMessage-1)->machine();
 
 	makePopup *replyPopupView = new makePopup(this, sender, optSmbclientBin, optEncoding, 0);
 	replyPopupView->setWindowTitle(i18n("Reply to %1").arg(sender.toUpper()));
@@ -602,6 +641,7 @@ void KLinPopup::unreadPopup()
 {
 	for (int i = 0; i < messageList.count(); i++) {
 		if (messageList.at(i)->isRead() == false) {
+			currentMessage = i+1;
 			break;
 		}
 	}
@@ -615,9 +655,9 @@ void KLinPopup::unreadPopup()
  */
 void KLinPopup::popupHelper()
 {
-	if (!messageList.isEmpty() && !messageList.at(currentMessage)->isRead()) {
-		unreadMessages--;
-		messageList.at(currentMessage)->setRead();
+	if (!messageList.isEmpty() && !messageList.at(currentMessage-1)->isRead()) {
+		--unreadMessages;
+		messageList.at(currentMessage-1)->setRead();
 	}
 
 	setTrayPixmap();
@@ -660,7 +700,7 @@ void KLinPopup::statusAutoReply()
 void KLinPopup::autoReply(const QString &host)
 {
 	if (m_hostName.isEmpty()) {
-		QString theHostName = QString::null;
+		QString theHostName = QString();
 		char *tmp = new char[255];
 
 		if (tmp != 0) {
@@ -672,27 +712,14 @@ void KLinPopup::autoReply(const QString &host)
 	}
 
 	if (host.toUpper() != "LOCALHOST" && host.toUpper() != m_hostName) { /// prevent endless loop
-		K3Process *p = new K3Process(this);
-		*p << optSmbclientBin << "-M" << host;
-		*p << "-N" << "-";
+		QProcess *p = new QProcess(this);
+		QStringList args;
+		args << "-M" << host << "-N" << "-";
 
-		connect(p, SIGNAL(processExited(K3Process *)), this, SLOT(slotSendCmdExit(K3Process *)));
-
-		if (p->start(K3Process::NotifyOnExit, K3Process::Stdin)) {
-			p->writeStdin(optArMsg.toUtf8(), optArMsg.toUtf8().length());
-			if (!p->closeStdin()) {
-				///@TODO: does this work, how to test this?
-				delete p;
-			}
-		} else {
-			slotSendCmdExit(0);
-		}
+		p->start(optSmbclientBin, args);
+		p->write(optArMsg.toUtf8());
+		p->closeWriteChannel();
 	}
-}
-
-void KLinPopup::slotSendCmdExit(K3Process *_p)
-{
-	delete _p;
 }
 
 /**
@@ -781,7 +808,6 @@ void KLinPopup::settingsChanged()
 		setTrayPixmap();
 	}
 
-	if (!hasInotify) popupFileTimer->setInterval(optTimerInterval * 1000);
 	showPopup();
 	checkSmbclientBin();
 }

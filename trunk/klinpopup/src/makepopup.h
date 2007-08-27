@@ -29,8 +29,7 @@
 #define ENC_LATIN1 2
 #define ENC_ASCII 3
 
-//#include <libsmbclient.h>
-
+#include <QProcess>
 #include <QThread>
 #include <QMap>
 #include <QStringList>
@@ -46,6 +45,25 @@ class QGridLayout;
 class QTreeWidget;
 class QTreeWidgetItem;
 class makePopup;
+
+class NamedProcess : public QProcess
+{
+	Q_OBJECT
+
+	public:
+		NamedProcess(const QString &name, QObject *parent = 0)
+			: QProcess(parent), processName(name)
+		{
+			connect(this, SIGNAL(finished(int exitCode, QProcess::ExitStatus status)),
+					this, SLOT(namedFinished(int exitCode, QProcess::ExitStatus status, QString processName)));
+		}
+
+	private:
+		QString processName;
+
+	signals:
+		void namedFinished(int, QProcess::ExitStatus, QString);
+};
 
 class readGroupsThread : public QThread
 {
@@ -87,10 +105,6 @@ public:
 
 	void readGroupList();
 	void readHostList();
-// 	static void auth_smbc_get_data(const char *server,const char *share,
-// 								   char *workgroup, int wgmaxlen,
-// 								   char *username, int unmaxlen,
-// 								   char *password, int pwmaxlen);
 
 protected:
 	void closeEvent(QCloseEvent *);
@@ -100,7 +114,7 @@ private slots:
 	void slotButtonSend();
 	void finished();
 	void slotGroupboxChanged(const QString &);
-	void slotSendCmdExit(K3Process *);
+	void slotSendCmdExit(int, QProcess::ExitStatus, QString);
 	void slotTreeViewItemExpanded(QTreeWidgetItem *);
 	void slotTreeViewSelectionChanged();
 
@@ -118,10 +132,8 @@ private:
 	KPushButton *buttonSend, *buttonCancel;
 	QString smbclientBin, messageReceiver, currentGroup;
 	int newMsgEncoding, viewMode, sendRefCount, sendError;
-//	SMBCCTX *smbCtx;
 	bool allProcessesStarted, justSending;
-	QMap<QString, QString> errorHosts;
-	QStringList allGroupHosts;
+	QStringList allGroupHosts, sendFailedHosts;
 	readHostsThread readHosts;
 	readGroupsThread readGroups;
 

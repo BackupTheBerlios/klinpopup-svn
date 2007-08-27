@@ -37,13 +37,13 @@
 #include <QVBoxLayout>
 #include <QEvent>
 #include <QCloseEvent>
+#include <QProcess>
 
 #include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kuser.h>
 #include <kiconloader.h>
-#include <k3process.h>
 
 #include "makepopup.h"
 #include "makepopup.moc"
@@ -122,9 +122,9 @@ bool makePopup::eventFilter(QObject *, QEvent *e)
 		} else if (k->key() == Qt::Key_Return) {
 			if (((messageText->length() + 1) + messageText->lines()) > 1600) return true;
 		}
-	}
+	}*/
 
-	return false;*/
+	return false;
 }
 
 void makePopup::setupLayout()
@@ -279,20 +279,19 @@ void makePopup::queryFinished()
 {
 	if (!allProcessesStarted || sendRefCount != 0) return;
 
-	if (errorHosts.isEmpty()) {
+	if (sendFailedHosts.isEmpty()) {
 		KMessageBox::information(this, i18n("Message sent!"), i18n("Success"), "ShowMessageSentSuccess");
 	} else {
 		QString errorHostsString;
-		QMap<QString, QString>::ConstIterator end = errorHosts.end();
-		for (QMap<QString, QString>::ConstIterator it = errorHosts.begin(); it != end; ++it) {
-			errorHostsString += it.value().toUpper();
+		foreach (QString host, sendFailedHosts) {
+			errorHostsString += host.toUpper();
 			errorHostsString += ", ";
 		}
 		errorHostsString.truncate(errorHostsString.length() - 2);
 		int tmpYesNo = KMessageBox::warningYesNo(this, i18n("Message could not be sent to %1!\n"
 															"Edit/Try again?").arg(errorHostsString));
 		if (tmpYesNo == KMessageBox::Yes) {
-			errorHosts.clear();
+			sendFailedHosts.clear();
 			return;
 		}
 	}
@@ -371,35 +370,26 @@ void makePopup::sendPopup()
 	for (QStringList::ConstIterator it = tmpReceiverList.begin(); it != end; ++it) {
 		sendRefCount++;
 
-		K3Process *p = new K3Process(this);
-		*p << smbclientBin << "-M" << *it;
-		*p << "-N" << "-U" << senderBox->currentText() << "-";
+		NamedProcess *p = new NamedProcess(*it, this);
+		QStringList args;
+		args << "-M" << *it << "-N" << "-U" << senderBox->currentText() << "-";
 
-		errorHosts.insert(QString::number((unsigned long)(p), 10), *it);
+		connect(p, SIGNAL(namedFinished(int, QProcess::ExitStatus, QString)),
+				this, SLOT(slotSendCmdExit(int, QProcess::ExitStatus, QString)));
 
-		connect(p, SIGNAL(processExited(K3Process *)), this, SLOT(slotSendCmdExit(K3Process *)));
-
-		if (p->start(K3Process::NotifyOnExit, K3Process::Stdin)) {
-			QString tmpText = messageText->document()->toPlainText();
-			p->writeStdin(tmpText.toUtf8(), tmpText.toUtf8().length());
-			if (!p->closeStdin()) {
-///@TODO: does this work, how to test this?
-				delete p;
-			}
-		} else {
-			slotSendCmdExit(0);
-		}
+		p->start(smbclientBin);
+		QString tmpText = messageText->document()->toPlainText();
+		p->write(tmpText.toUtf8());
 	}
 	allProcessesStarted = true;
 	queryFinished();
 }
 
-void makePopup::slotSendCmdExit(K3Process *_p)
+void makePopup::slotSendCmdExit(int exitCode, QProcess::ExitStatus status, QString name)
 {
-	if (_p && _p->normalExit() && _p->exitStatus() == 0) {
-		errorHosts.remove(QString::number((unsigned long)(_p), 10));
+	if (exitCode > 0 && status != QProcess::NormalExit) {
+		sendFailedHosts.append(name);
 	}
-	delete _p;
 	sendRefCount--;
 	queryFinished();
 }

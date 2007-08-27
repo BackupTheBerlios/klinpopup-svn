@@ -37,19 +37,17 @@
 #include <QList>
 #include <QThread>
 #include <QEvent>
-//Added by qt3to4:
-//#include <QCustomEvent>
+#include <QProcess>
 #include <QFocusEvent>
 #include <QLabel>
 #include <QHideEvent>
+#include <QFile>
 
 #include <kuniqueapplication.h>
-#include <kmainwindow.h>
 #include <kaction.h>
 #include <ktoggleaction.h>
 #include <kconfig.h>
 //#include <kkeydialog.h>
-#include <k3process.h>
 //#include <KShortcutsDialog>
 #include <kfileitem.h>
 #include <kxmlguiwindow.h>
@@ -78,14 +76,14 @@ public slots:
 
 protected:
 	void hideEvent(QHideEvent *) { hide(); }
-	void focusInEvent(QFocusEvent *);
-//	void customEvent(QCustomEvent *);
+	void changeEvent(QEvent *);
 
 private slots:
-	void slotQuit();
 	void startDirLister();
 	void newMessages(const KFileItemList &);
+	void listCompleted();
 	void signalNewMessage(const QString &, const QString &, const QString &, const QString &, const QString &);
+	void exit();
 	void replyPopup();
 	void firstPopup() { currentMessage = 1; showPopup(); popupHelper(); }
 	void prevPopup() { --currentMessage; showPopup(); popupHelper(); }
@@ -99,9 +97,7 @@ private slots:
 	void optionsPreferences();
 	void newToolbarConfig();
 	void changeStatusbar(const QString &);
-	void changeCaption(const QString &text) { setCaption(text); }
 	void settingsChanged();
-	void slotSendCmdExit(K3Process *);
 	void updateStats();
 	void statusAutoReply();
 
@@ -110,6 +106,8 @@ private:
 	void setupAccel();
 	void setupActions();
 	void initSystemTray();
+	void saveMessages();
+	void readSavedMessages();
 	bool checkPopupFileDirectory();
 	void checkSmbclientBin();
 	void checkMessageMap();
@@ -122,7 +120,6 @@ private:
 	void setTrayPixmap();
 
 	KLinPopupView *m_view;
-//	selectThread *watcher;
 
 	//config and actions
 	KConfig *cfg;
@@ -139,8 +136,7 @@ private:
 	KAction *deletePopupAction;
 
 	int currentMessage, unreadMessages;
-	bool hasInotify;
-	QTimer *popupFileTimer;
+	QFile messagesFile;
 	QString messageText, m_hostName, m_arOffPic, m_arOnPic;
 	QString popupFileDirectory;
 	QList<popupMessage *> messageList;

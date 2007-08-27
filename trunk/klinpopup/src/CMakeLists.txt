@@ -20,7 +20,7 @@ kde4_add_kcfg_files(klinpopup_SRCS settings.kcfgc )
 
 kde4_add_executable(klinpopup ${klinpopup_SRCS})
 
-target_link_libraries(klinpopup  ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS})
+target_link_libraries(klinpopup  ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${KDE4_PHONON_LIBS})
 
 install(TARGETS klinpopup DESTINATION ${BIN_INSTALL_DIR})
 
