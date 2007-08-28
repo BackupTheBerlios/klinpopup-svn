@@ -54,12 +54,18 @@ class NamedProcess : public QProcess
 		NamedProcess(const QString &name, QObject *parent = 0)
 			: QProcess(parent), processName(name)
 		{
-			connect(this, SIGNAL(finished(int exitCode, QProcess::ExitStatus status)),
-					this, SLOT(namedFinished(int exitCode, QProcess::ExitStatus status, QString processName)));
+			connect(this, SIGNAL(finished(int, QProcess::ExitStatus)),
+					this, SLOT(processFinished(int, QProcess::ExitStatus)));
 		}
 
 	private:
 		QString processName;
+
+	private slots:
+		void processFinished(int exitCode, QProcess::ExitStatus status)
+		{
+			emit namedFinished(exitCode, status, processName);
+		}
 
 	signals:
 		void namedFinished(int, QProcess::ExitStatus, QString);

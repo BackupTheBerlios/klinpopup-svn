@@ -39,11 +39,11 @@
 #include <QCloseEvent>
 #include <QProcess>
 
-#include <kaction.h>
+//#include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kuser.h>
-#include <kiconloader.h>
+//#include <kiconloader.h>
 
 #include "makepopup.h"
 #include "makepopup.moc"
@@ -76,7 +76,7 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged(const QString &)));
 	 } else {
 		connect(groupTreeView, SIGNAL(itemSelectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
-		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(Q3ListViewItem *)));
+		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(QTreeWidgetItem *)));
 	}
 
 	//initialize senderBox, groupBox and receiverBox
@@ -133,11 +133,12 @@ void makePopup::setupLayout()
 
 	QGroupBox *messageTextBox;
 
+	QHBoxLayout *buttonLayout = new QHBoxLayout();
 	buttonSend = new KPushButton(this);
-//	buttonSend->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
-
 	buttonCancel = new KPushButton(this);
-//	buttonCancel->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, 0, 0, false));
+	buttonLayout->addItem(new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum));
+	buttonLayout->addWidget(buttonSend);
+	buttonLayout->addWidget(buttonCancel);
 
 
 	if (viewMode == CLASSIC_VIEW) {
@@ -145,69 +146,44 @@ void makePopup::setupLayout()
 
 		QLabel *senderLabel = new QLabel(i18n("From:"), this);
 		senderBox = new KComboBox(this);
-//		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		senderBox->setEditable(true);
-		QHBoxLayout *senderLayout = new QHBoxLayout();
-		senderLayout->addWidget(senderLabel);
-		senderLayout->addWidget(senderBox);
 
 		QLabel *groupLabel = new QLabel(i18n("Group:"), this);
 		groupBox = new KComboBox(this);
-//		groupBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
-		QHBoxLayout *groupLayout = new QHBoxLayout();
-		groupLayout->addWidget(groupLabel);
-		groupLayout->addWidget(groupBox);
 
 		QLabel *receiverLabel = new QLabel(i18n("To:"), this);
 		classicReceiverBox = new KComboBox(this);
-//		classicReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		classicReceiverBox->setEditable(true);
-		QHBoxLayout *receiverLayout = new QHBoxLayout();
-		receiverLayout->addWidget(receiverLabel);
-		receiverLayout->addWidget(classicReceiverBox);
-
-		int senderLabelWidth = senderLabel->sizeHint().width();
-		int groupLabelWidth = groupLabel->sizeHint().width();
-		int receiverLabelWidth = receiverLabel->sizeHint().width();
-
-		if (senderLabelWidth > groupLabelWidth && senderLabelWidth > receiverLabelWidth) {
-			groupLabel->setFixedWidth(senderLabelWidth);
-			receiverLabel->setFixedWidth(senderLabelWidth);
-		} else if (groupLabelWidth > senderLabelWidth && groupLabelWidth > receiverLabelWidth) {
-			senderLabel->setFixedWidth(groupLabelWidth);
-			receiverLabel->setFixedWidth(groupLabelWidth);
-		} else {
-			senderLabel->setFixedWidth(receiverLabelWidth);
-			groupLabel->setFixedWidth(receiverLabelWidth);
-		}
 
 		messageTextBox = new QGroupBox(i18n("Message text"), this);
-//		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-/*		messageTextBox->setLineWidth(1);
-		messageTextBox->setColumnLayout(0, Qt::Vertical);
-		messageTextBox->setInsideMargin(4);*/
 		QGridLayout *messageTextBoxLayout = new QGridLayout(messageTextBox);
 
 		messageText = new KTextEdit(messageTextBox);
-//		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
 		messageTextBoxLayout->addWidget(messageText, 0, 0);
 
-		makePopupLayout->addLayout(senderLayout, 0, 0, 0, 2);
-		makePopupLayout->addLayout(groupLayout, 1, 1, 0, 2);
-		makePopupLayout->addLayout(receiverLayout, 2, 2, 0, 2);
-		makePopupLayout->addWidget(messageTextBox, 3, 3, 0, 2);
-		makePopupLayout->addWidget( buttonSend, 4, 1);
-		makePopupLayout->addWidget( buttonCancel, 4, 2);
+		makePopupLayout->addWidget(senderLabel, 0, 0);
+		makePopupLayout->addWidget(senderBox, 0, 1);
+		makePopupLayout->addWidget(groupLabel, 1 , 0);
+		makePopupLayout->addWidget(groupBox, 1, 1);
+		makePopupLayout->addWidget(receiverLabel, 2, 0);
+		makePopupLayout->addWidget(classicReceiverBox, 2, 1);
+		makePopupLayout->addWidget(messageTextBox, 3, 0, 1, 2);
+		makePopupLayout->addLayout(buttonLayout, 4, 0, 1, 2);
+		makePopupLayout->setColumnStretch(1, 1);
 		resize(QSize(375, 250).expandedTo(minimumSizeHint()));
 	} else {
 		makePopupLayout = new QGridLayout(this);
 		QSplitter *sp = new QSplitter(this);
 		sp->setOpaqueResize(true);
 
-		QWidget *rightSplitLayout = new QWidget(sp);
-//		rightSplitLayout->setMargin(3);
-		groupTreeView = new QTreeWidget(rightSplitLayout);
+		QWidget *rightSplitWidget = new QWidget(sp);
+		QGridLayout *rightSplitLayout = new QGridLayout(rightSplitWidget);
+		groupTreeView = new QTreeWidget(rightSplitWidget);
 		groupTreeView->setColumnCount(2);
+		QStringList headers;
+		headers << i18n("Groups/Hosts") << i18n("Comment");
+		groupTreeView->setHeaderLabels(headers);
+		rightSplitLayout->addWidget(groupTreeView);
 //		groupTreeView->addColumn(i18n("Groups/Hosts"));
 //		groupTreeView->addColumn(i18n("Comment"));
 //		groupTreeView->setEnabled(true);
@@ -218,46 +194,32 @@ void makePopup::setupLayout()
 //		groupTreeView->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
 //		sp->setResizeMode(rightSplitLayout, QSplitter::FollowSizeHint);
 
-		QWidget *leftSplitLayout = new QWidget(sp);
+		QWidget *leftSplitWidget = new QWidget(sp);
 // 		leftSplitLayout->setSpacing(6);
 // 		leftSplitLayout->setMargin(3);
-		QHBoxLayout *senderHBox = new QHBoxLayout(leftSplitLayout);
+		QGridLayout *leftSplitLayout = new QGridLayout(leftSplitWidget);
 		QLabel *senderLabel = new QLabel(i18n("From:"));
-		senderHBox->addWidget(senderLabel);
 		senderBox = new KComboBox();
-		senderHBox->addWidget(senderBox);
-//		senderBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 		senderBox->setEditable(true);
 
-		QHBoxLayout *receiverHBox = new QHBoxLayout(leftSplitLayout);
 		QLabel *receiverLabel = new QLabel(i18n("To:"));
-		receiverHBox->addWidget(receiverLabel);
 		treeViewReceiverBox = new KLineEdit();
-		receiverHBox->addWidget(treeViewReceiverBox);
-//		treeViewReceiverBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)0, 0, 0, false));
 
-		messageTextBox = new QGroupBox(i18n("Message text"), leftSplitLayout);
-//		messageTextBox->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-//		messageTextBox->setLineWidth(1);
-//		messageTextBox->setColumnLayout(0, Qt::Vertical);
-//		messageTextBox->setInsideMargin(4);
+		messageTextBox = new QGroupBox(i18n("Message text"), leftSplitWidget);
 		QGridLayout *messageTextBoxLayout = new QGridLayout(messageTextBox);
 
 		messageText = new KTextEdit(messageTextBox);
-//		messageText->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, 0, 0, false));
 		messageTextBoxLayout->addWidget(messageText, 0, 0);
 
-		int senderLabelWidth = senderLabel->sizeHint().width();
-		int receiverLabelWidth = receiverLabel->sizeHint().width();
+		leftSplitLayout->addWidget(senderLabel, 0, 0);
+		leftSplitLayout->addWidget(senderBox, 0, 1);
+		leftSplitLayout->addWidget(receiverLabel, 1, 0);
+		leftSplitLayout->addWidget(treeViewReceiverBox, 1, 1);
+		leftSplitLayout->addWidget(messageTextBox, 2, 0, 1, 2);
 
-		if (senderLabelWidth < receiverLabelWidth)
-			senderLabel->setFixedWidth(receiverLabelWidth);
-		else
-			receiverLabel->setFixedWidth(senderLabelWidth);
-
-		makePopupLayout->addWidget(sp, 0, 3, 0, 4);
-		makePopupLayout->addWidget( buttonSend, 4, 3);
-		makePopupLayout->addWidget( buttonCancel, 4, 4);
+		makePopupLayout->addWidget(sp, 0, 0);
+		makePopupLayout->addLayout(buttonLayout, 1, 0);
+		makePopupLayout->setRowStretch(0, 1);
 		resize(QSize(575, 250).expandedTo(minimumSizeHint()));
 	}
 
@@ -277,7 +239,7 @@ void makePopup::setupLayout()
 
 void makePopup::queryFinished()
 {
-	if (!allProcessesStarted || sendRefCount != 0) return;
+	if (!allProcessesStarted || sendRefCount > 0) return;
 
 	if (sendFailedHosts.isEmpty()) {
 		KMessageBox::information(this, i18n("Message sent!"), i18n("Success"), "ShowMessageSentSuccess");
@@ -289,7 +251,7 @@ void makePopup::queryFinished()
 		}
 		errorHostsString.truncate(errorHostsString.length() - 2);
 		int tmpYesNo = KMessageBox::warningYesNo(this, i18n("Message could not be sent to %1!\n"
-															"Edit/Try again?").arg(errorHostsString));
+															"Edit/Try again?", errorHostsString));
 		if (tmpYesNo == KMessageBox::Yes) {
 			sendFailedHosts.clear();
 			return;
@@ -343,7 +305,7 @@ void makePopup::slotButtonSend()
 }
 
 /**
- * sends the messages with smbclient, opens a K3Process for each
+ * sends the messages with smbclient, opens a NamedProcess for each
  */
 void makePopup::sendPopup()
 {
@@ -366,20 +328,21 @@ void makePopup::sendPopup()
 
 	allProcessesStarted = false;
 	justSending = true;
-	QStringList::ConstIterator end = tmpReceiverList.end();
-	for (QStringList::ConstIterator it = tmpReceiverList.begin(); it != end; ++it) {
+	sendRefCount = 0;
+	foreach (QString receiver, tmpReceiverList) {
 		sendRefCount++;
 
-		NamedProcess *p = new NamedProcess(*it, this);
+		NamedProcess *p = new NamedProcess(receiver, this);
 		QStringList args;
-		args << "-M" << *it << "-N" << "-U" << senderBox->currentText() << "-";
+		args << "-M" << receiver << "-N" << "-U" << senderBox->currentText() << "-";
 
 		connect(p, SIGNAL(namedFinished(int, QProcess::ExitStatus, QString)),
 				this, SLOT(slotSendCmdExit(int, QProcess::ExitStatus, QString)));
 
-		p->start(smbclientBin);
+		p->start(smbclientBin, args);
 		QString tmpText = messageText->document()->toPlainText();
 		p->write(tmpText.toUtf8());
+		p->closeWriteChannel();
 	}
 	allProcessesStarted = true;
 	queryFinished();
@@ -387,7 +350,7 @@ void makePopup::sendPopup()
 
 void makePopup::slotSendCmdExit(int exitCode, QProcess::ExitStatus status, QString name)
 {
-	if (exitCode > 0 && status != QProcess::NormalExit) {
+	if (exitCode > 0 || status != QProcess::NormalExit) {
 		sendFailedHosts.append(name);
 	}
 	sendRefCount--;

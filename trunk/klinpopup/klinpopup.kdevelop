@@ -18,6 +18,7 @@
     <ignoreparts/>
     <secondaryLanguages/>
     <versioncontrol>kdevsubversion</versioncontrol>
+    <projectname>klinpopup</projectname>
   </general>
   <kdevautoproject>
     <general>
@@ -214,6 +215,11 @@
       <used>false</used>
       <version>3</version>
       <root>/usr/lib/qt3</root>
+      <includestyle>3</includestyle>
+      <designerintegration>EmbeddedKDevDesigner</designerintegration>
+      <qmake>/usr/lib/qt3/bin/qmake</qmake>
+      <designer>/usr/lib/qt3/bin/designer</designer>
+      <designerpluginpaths/>
     </qt>
   </kdevcppsupport>
   <ctagspart>

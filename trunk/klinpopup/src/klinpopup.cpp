@@ -213,7 +213,8 @@ void KLinPopup::initSystemTray()
 
 void KLinPopup::saveMessages()
 {
-	messagesFile.seek(0);
+	messagesFile.remove();
+	messagesFile.open(QIODevice::ReadWrite);
 	QTextStream stream(&messagesFile);
 	foreach (popupMessage *msg, messageList) {
 		QString readStatus = msg->isRead() ? "r" : "u";
@@ -276,6 +277,7 @@ void KLinPopup::readSavedMessages()
 			i = 0;
 		}
 	}
+	messagesFile.close();
 }
 
 /**
@@ -596,7 +598,7 @@ void KLinPopup::showPopup()
  */
 void KLinPopup::newPopup()
 {
-	makePopup *newPopupView = new makePopup(this, "", optSmbclientBin, optEncoding, optMakePopupView);
+	makePopup *newPopupView = new makePopup(this, QString(), optSmbclientBin, optEncoding, optMakePopupView);
 	newPopupView->setWindowTitle(i18n("New message"));
 
 	//some unnecessary fooling around, random window position
@@ -625,7 +627,7 @@ void KLinPopup::replyPopup()
 	QString sender = messageList.at(currentMessage-1)->machine();
 
 	makePopup *replyPopupView = new makePopup(this, sender, optSmbclientBin, optEncoding, 0);
-	replyPopupView->setWindowTitle(i18n("Reply to %1").arg(sender.toUpper()));
+	replyPopupView->setWindowTitle(i18n("Reply to %1", sender.toUpper()));
 
 	int tmpRandX = 70 + (KRandom::random() % 50);
 	int tmpRandY = 70 + (KRandom::random() % 70);
