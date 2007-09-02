@@ -22,13 +22,14 @@
 
 #include <kdebug.h>
 
+#include <unistd.h>
+
 #include <QFile>
 #include <QLabel>
 #include <QStringList>
 #include <QRegExp>
 #include <QGroupBox>
 #include <QToolTip>
-
 #include <QSplitter>
 #include <QTreeWidget>
 #include <QKeyEvent>
@@ -38,7 +39,7 @@
 #include <QEvent>
 #include <QCloseEvent>
 #include <QProcess>
-
+#include <QTimer>
 //#include <kaction.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -48,23 +49,13 @@
 #include "makepopup.h"
 #include "makepopup.moc"
 
-void readGroupsThread::run()
-{
-	threadOwner->readGroupList();
-}
-
-void readHostsThread::run()
-{
-	threadOwner->readHostList();
-}
-
 makePopup::makePopup(QWidget *parent, const QString &paramSender,
 					 const QString &paramSmbclient, int paramEncoding, int paramView)
 	: QWidget(parent, Qt::Window),
 	  smbclientBin(paramSmbclient), messageReceiver(paramSender),
 	  newMsgEncoding(paramEncoding), viewMode(paramView),
 	  sendRefCount(0), sendError(0), justSending(false),
-	  readHosts(this), readGroups(this)
+	  passedInitialHost(false)
 {
 //	initSmbCtx();
 	setupLayout();
@@ -80,8 +71,10 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 	}
 
 	//initialize senderBox, groupBox and receiverBox
-//	QString tmpHostName = smbCtx->netbios_name;
-//	if (!tmpHostName.isEmpty()) senderBox->addItem(QString("test"));
+	senderBox->addItem(getHostname());
+
+	ownGroup = QString();
+	currentHost = QString::fromLatin1("LOCALHOST");
 
 	QString tmpLoginName = KUser().loginName();
 	if (!tmpLoginName.isEmpty()) senderBox->addItem(tmpLoginName);
@@ -91,7 +84,7 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 
 	if (messageReceiver.isEmpty()) {
 		if (viewMode == CLASSIC_VIEW) groupBox->addItem(i18n("NO GROUP"), -1);
-		readGroups.start();
+		QTimer::singleShot(1, this, SLOT(startScan()));
 	} else {
 		groupBox->setEnabled(false);
 		classicReceiverBox->addItem(messageReceiver);
@@ -237,6 +230,21 @@ void makePopup::setupLayout()
 	messageText->setFocus();
 }
 
+/**
+ * read the hostname, no Qt/KDE function for this?
+ */
+QString makePopup::getHostname()
+{
+    char *tmp = new char[255];
+    gethostname(tmp, 255);
+    QString hostname = tmp;
+    if (hostname.contains('.')) {
+        hostname.remove(hostname.indexOf('.'), hostname.length());
+    }
+    hostname = hostname.toUpper();
+    return hostname;
+}
+
 void makePopup::queryFinished()
 {
 	if (!allProcessesStarted || sendRefCount > 0) return;
@@ -270,13 +278,6 @@ void makePopup::finished()
 	if (justSending) return;
 
 	hide();
-
-	// This should be safe here
-	if (readGroups.isRunning()) readGroups.terminate();
-	if (readHosts.isRunning()) readHosts.terminate();
-
-	readGroups.wait();
-	readHosts.wait();
 
 	deleteLater();
 }
@@ -357,142 +358,120 @@ void makePopup::slotSendCmdExit(int exitCode, QProcess::ExitStatus status, QStri
 	queryFinished();
 }
 
-/**
- * init the libsmbclient context
- */
-void makePopup::initSmbCtx()
+void makePopup::startScan()
 {
-/*	smbCtx = smbc_new_context();
-	if (smbCtx) {
-		smbCtx->callbacks.auth_fn = makePopup::auth_smbc_get_data;
-		smbCtx->timeout = 2000; // any effect?
-#ifdef HAVE_SMBCCTX_OPTIONS
-		smbCtx->options.urlencode_readdir_entries = 1;
-#endif
-		smbCtx = smbc_init_context(smbCtx);
-//		smbc_set_context(smbCtx);
-	} else {
-		kDebug() << "Error getting new smbCtx!" << endl;
-	}*/
+	currentHosts.clear();
+	currentGroups.clear();
+	currentGroup = QString();
+
+	scanProcess = new QProcess();
+	QStringList args;
+	args << "-N" << "-g" << "-L" << currentHost << "-";
+
+	connect(scanProcess, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(scanNetwork(int, QProcess::ExitStatus)));
+
+	scanProcess->setProcessChannelMode(QProcess::MergedChannels);
+	scanProcess->start(smbclientBin, args);
 }
 
 /**
- * read available groups with libsmbclient
+ * read available groups/hosts
  */
-void makePopup::readGroupList()
+void makePopup::scanNetwork(int i, QProcess::ExitStatus status)
 {
-/*	QString ownGroup = QString::null;
-
-	if (smbCtx != 0) {
-		// get own workgoup first
-		ownGroup = QString::fromUtf8(smbCtx->workgroup, -1);
-
-		kDebug() << "own group: " << ownGroup << endl;
-
-		if (ownGroup == "WORKGROUP") {
-			ownGroup = QString::null; // workaround for SAMBA 3.0.15pre2+
-			kDebug() << "If this is WORKGROUP and you use Samba >= 3.0.20 we may have a problem." << endl;
-			kDebug() << "Autodetection of own workgroup disabled." << endl;
+	if (i > 0 || status == QProcess::CrashExit) {
+		todo.removeAll(currentHost);
+		done += currentHost;
+		if (currentHost == QString::fromLatin1("LOCALHOST"))
+			KMessageBox::error(this, i18n("Connection to localhost failed. Is your samba server running?"),
+							   QString::fromLatin1("KLinPopup"));
+	} else {
+		QByteArray outputData = scanProcess->readAll();
+		if (!outputData.isEmpty()) {
+			QString outputString = QString::fromUtf8(outputData.data());
+			QStringList outputList = outputString.split('\n');
+			QRegExp group("Workgroup\\|(.[^\\|]+)\\|(.+)"), host("Server\\|(.[^\\|]+)\\|(.+)"),
+					info("Domain=\\[([^\\]]+)\\] OS=\\[([^\\]]+)\\] Server=\\[([^\\]]+)\\]"),
+					error("Connection.*failed");
+			foreach (QString line, outputList) {
+				if (info.indexIn(line) != -1) currentGroup = info.cap(1);
+				if (host.indexIn(line) != -1) currentHosts[host.cap(1)] = host.cap(2);
+				if (group.indexIn(line) != -1) currentGroups[group.cap(1)] = group.cap(2);
+				if (error.indexIn(line) != -1) currentGroup = QString::fromLatin1("failed");
+			}
 		}
 
-		SMBCFILE *dirfd;
-		struct smbc_dirent *dirp = 0;
+		delete scanProcess;
+		scanProcess = 0;
 
-		// first level should be the workgroups
-		dirfd = smbCtx->opendir(smbCtx, "smb://");
+		// Drop the first cycle - it's only the initial search host,
+		// the next round are the real masters. GF
 
-		if (dirfd) {
-			do {
-				dirp = smbCtx->readdir(smbCtx, dirfd);
-				if (dirp == 0) break;
-				QString tmpGroup = QString::fromUtf8( dirp->name );
-				if (dirp->smbc_type == SMBC_WORKGROUP) {
-					if (tmpGroup == ownGroup) {
-						if (viewMode == CLASSIC_VIEW) {
-							groupBox->insertItem(tmpGroup + " (" + i18n("own") + ")", -1);
-						} else {
-							Q3ListViewItem *tmpItem = new Q3ListViewItem(groupTreeView, tmpGroup, i18n("own"));
-							tmpItem->setPixmap(0, SmallIcon("network_local"));
-							tmpItem->setExpandable(true);
-							tmpItem->setSelectable(false);
-						}
-					} else {
-						if (viewMode == CLASSIC_VIEW) {
-							groupBox->insertItem(tmpGroup, -1);
-						} else {
-							Q3ListViewItem *tmpItem = new Q3ListViewItem(groupTreeView, tmpGroup);
-							tmpItem->setPixmap(0, SmallIcon("network_local"));
-							tmpItem->setExpandable(true);
-							tmpItem->setSelectable(false);
-						}
-					}
+		if (passedInitialHost) {
+
+			// move currentHost from todo to done
+			todo.removeAll(currentHost);
+			done += currentHost;
+
+			QTreeWidgetItem *tmpGroupItem = 0;
+			if (!currentGroup.isEmpty()) {
+				QStringList groupInfo;
+				groupInfo << currentGroup;
+				if (!ownGroup.isEmpty()) {
+					groupInfo << i18n("own");
+					ownGroup.clear();
 				}
-			} while (dirp);
+				tmpGroupItem = new QTreeWidgetItem(groupInfo);
+				tmpGroupItem->setFlags(Qt::ItemIsEnabled);
+				groupTreeView->addTopLevelItem(tmpGroupItem);
+			}
+
+			if (!currentGroups.isEmpty()) {
+				//loop through the read groups and check for new ones
+				foreach (QString groupMaster, currentGroups) {
+					if (!done.contains(groupMaster)) todo += groupMaster;
+				}
+			}
+
+			if (tmpGroupItem && !currentHosts.isEmpty()) {
+				QMap<QString, QString>::const_iterator i = currentHosts.constBegin();
+				while (i != currentHosts.constEnd()) {
+					QTreeWidgetItem *tmpHostItem = new QTreeWidgetItem(tmpGroupItem);
+					tmpHostItem->setText(0, i.key());
+					tmpHostItem->setText(1, i.value());
+					++i;
+				}
+			}
+
+		} else {
+			kDebug() << currentGroup << endl;
+			passedInitialHost = true;
+			ownGroup = currentGroup;
+			if (!currentGroups.isEmpty()) {
+				foreach (QString groupMaster, currentGroups) {
+					todo += groupMaster;
+				}
+			}
 		}
-		smbCtx->closedir(smbCtx, dirfd);
 	}
 
+	// maybe restart cycle
+	if (todo.count()) {
+		currentHost = todo.at(0);
+		startScan();
+	}
 	// initialize with own group if possible or if it's only one
-	if (!ownGroup.isEmpty()) {
-		if (viewMode == CLASSIC_VIEW) groupBox->setCurrentText(ownGroup + " (" + i18n("own") + ")");
-		currentGroup = ownGroup;
-		readHosts.start();
-	} else if (viewMode == CLASSIC_VIEW && groupBox->count() == 2) {
-		groupBox->setCurrentItem(1);
-		currentGroup = groupBox->currentText();
-		readHosts.start();
-	} else if (viewMode == TREE_VIEW && groupTreeView->childCount() == 1) {
-		currentGroup = groupTreeView->firstChild()->text(0);
-		readHosts.start();
-	}*/
-}
-
-/**
- * read available hosts from group with libsmbclient
- */
-void makePopup::readHostList()
-{
-// 	if (smbCtx != 0) {
-//
-// 		SMBCFILE *dirfd;
-// 		struct smbc_dirent *dirp = 0;
-//
-// 		// next level should be the hosts
-// 		QString tmpGroup = "smb://";
-// 		tmpGroup.append(currentGroup);
-// //		kDebug() << tmpGroup << endl;
-//
-// 		dirfd = smbCtx->opendir(smbCtx, tmpGroup);
-// //		kDebug() << dirfd << endl;
-//
-// 		if (dirfd) {
-// 			do {
-// 				dirp = smbCtx->readdir(smbCtx, dirfd);
-// 				if (dirp == 0) break;
-//
-// 				QString tmpHost = QString::fromUtf8(dirp->name);
-//
-// 				if (dirp->smbc_type == SMBC_SERVER) {
-// 					allGroupHosts += tmpHost;
-// 					QString tmpComment = QString::fromUtf8(dirp->comment);
-//
-// 					if (viewMode == TREE_VIEW) {
-// 						Q3ListViewItem *tmpGroupItem = groupTreeView->findItem(currentGroup, 0);
-// 						if (tmpGroupItem != 0) {
-// 							Q3ListViewItem *tmpHostItem = new Q3ListViewItem(tmpGroupItem, tmpHost, tmpComment);
-// 							tmpHostItem->setPixmap(0, SmallIcon("server"));
-// 							tmpHostItem->setExpandable(false);
-// 						}
-// 						tmpGroupItem->setOpen(true);
-// 					} else {
-// 						if (!tmpComment.isEmpty()) tmpHost.append(" (" + tmpComment + ")");
-// 						classicReceiverBox->insertItem(tmpHost, -1);
-// 					}
-// 				}
-// 			} while (dirp);
-// 		}
-// 		smbCtx->closedir(smbCtx, dirfd);
-// 		if (viewMode == CLASSIC_VIEW && allGroupHosts.count() > 1) classicReceiverBox->insertItem(i18n("Whole workgroup"), -1);
+// 	if (!ownGroup.isEmpty()) {
+// 		if (viewMode == CLASSIC_VIEW) groupBox->setCurrentText(ownGroup + " (" + i18n("own") + ")");
+// 		currentGroup = ownGroup;
+// 		readHosts.start();
+// 	} else if (viewMode == CLASSIC_VIEW && groupBox->count() == 2) {
+// 		groupBox->setCurrentItem(1);
+// 		currentGroup = groupBox->currentText();
+// 		readHosts.start();
+// 	} else if (viewMode == TREE_VIEW && groupTreeView->childCount() == 1) {
+// 		currentGroup = groupTreeView->firstChild()->text(0);
+// 		readHosts.start();
 // 	}
 }
 
@@ -501,24 +480,24 @@ void makePopup::readHostList()
  */
 void makePopup::slotGroupboxChanged(const QString &)
 {
-	classicReceiverBox->clear();
-	allGroupHosts.clear();
-	currentGroup = groupBox->currentText();
-	if (currentGroup == i18n("NO GROUP")) return;
-	if (currentGroup.indexOf(" (") > 1) currentGroup = currentGroup.left(currentGroup.indexOf(" ("));
-
-	if (readHosts.isRunning()) readHosts.exit();
-	readHosts.start();
+// 	classicReceiverBox->clear();
+// 	allGroupHosts.clear();
+// 	currentGroup = groupBox->currentText();
+// 	if (currentGroup == i18n("NO GROUP")) return;
+// 	if (currentGroup.indexOf(" (") > 1) currentGroup = currentGroup.left(currentGroup.indexOf(" ("));
+//
+// 	if (readHosts.isRunning()) readHosts.exit();
+// 	readHosts.start();
 }
 
 void makePopup::slotTreeViewItemExpanded(QTreeWidgetItem *clickedItem)
 {
-	if (clickedItem == 0 || clickedItem->childCount() != 0) return;
-
-	currentGroup = clickedItem->text(0);
-
-	if (readHosts.isRunning()) readHosts.exit();
-	readHosts.start();
+// 	if (clickedItem == 0 || clickedItem->childCount() != 0) return;
+//
+// 	currentGroup = clickedItem->text(0);
+//
+// 	if (readHosts.isRunning()) readHosts.exit();
+// 	readHosts.start();
 }
 
 void makePopup::slotTreeViewSelectionChanged()

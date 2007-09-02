@@ -54,7 +54,7 @@ void KLinPopupView::displayNewMessage(const QString &sender,const QDateTime &tim
 				break;
 		}
 	} else {
-		tmpLocaleTime = QString::null;
+		tmpLocaleTime = QString();
 	}
 
 	lblFromValue->setText(sender);

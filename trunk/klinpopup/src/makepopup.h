@@ -71,36 +71,6 @@ class NamedProcess : public QProcess
 		void namedFinished(int, QProcess::ExitStatus, QString);
 };
 
-class readGroupsThread : public QThread
-{
-	public:
-		readGroupsThread(makePopup *owner)
-			: threadOwner(owner) {}
-
-		// default destructor
-
-	protected:
-		void run();
-
-	private:
-		makePopup *threadOwner;
-};
-
-class readHostsThread : public QThread
-{
-	public:
-		readHostsThread(makePopup *owner)
-			: threadOwner(owner) {}
-
-		// default destructor
-
-	protected:
-		void run();
-
-	private:
-		makePopup *threadOwner;
-};
-
 class makePopup : public QWidget
 {
 	Q_OBJECT
@@ -108,9 +78,6 @@ class makePopup : public QWidget
 public:
 	makePopup(QWidget *, const QString &, const QString &, int, int);
 	~makePopup();
-
-	void readGroupList();
-	void readHostList();
 
 protected:
 	void closeEvent(QCloseEvent *);
@@ -121,12 +88,14 @@ private slots:
 	void finished();
 	void slotGroupboxChanged(const QString &);
 	void slotSendCmdExit(int, QProcess::ExitStatus, QString);
+	void startScan();
+	void scanNetwork(int, QProcess::ExitStatus);
 	void slotTreeViewItemExpanded(QTreeWidgetItem *);
 	void slotTreeViewSelectionChanged();
 
 private:
 	void setupLayout();
-	void initSmbCtx();
+	QString getHostname();
 	void sendPopup();
 	void queryFinished();
 
@@ -136,12 +105,12 @@ private:
 	KLineEdit *treeViewReceiverBox;
 	KTextEdit *messageText;
 	KPushButton *buttonSend, *buttonCancel;
-	QString smbclientBin, messageReceiver, currentGroup;
+	QString smbclientBin, messageReceiver, currentGroup, currentHost, ownGroup;
 	int newMsgEncoding, viewMode, sendRefCount, sendError;
-	bool allProcessesStarted, justSending;
-	QStringList allGroupHosts, sendFailedHosts;
-	readHostsThread readHosts;
-	readGroupsThread readGroups;
+	bool allProcessesStarted, justSending, passedInitialHost;
+	QStringList allGroupHosts, sendFailedHosts, todo, done;
+	QMap<QString, QString> currentHosts, currentGroups;
+	QProcess *scanProcess;
 
 protected slots:
     virtual void languageChange();
