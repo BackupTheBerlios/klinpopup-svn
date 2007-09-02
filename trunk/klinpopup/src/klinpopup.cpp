@@ -80,9 +80,9 @@ KLinPopup::KLinPopup()
 	initSystemTray();
 
 	// allow the view to change the statusbar and caption
-	connect(m_view, SIGNAL(signalChangeStatusbar(const QString&)),
+	connect(m_view, SIGNAL(signalChangeStatusbar(const QString &)),
 			this, SLOT(changeStatusbar(const QString&)));
-	connect(m_view, SIGNAL(signalChangeCaption(const QString&)),
+	connect(m_view, SIGNAL(signalChangeCaption(const QString &)),
 			this, SLOT(setCaption(const QString&)));
 
 	statusBar()->insertItem(QString(), ID_STATUS_TEXT, 1);
@@ -90,6 +90,7 @@ KLinPopup::KLinPopup()
 	m_arOnPic = KStandardDirs::locate("data", "klinpopup/ar_on.png");
 	m_arLabel->setPixmap(QPixmap(m_arOffPic));
 	m_arLabel->setToolTip(i18n("Autoreply off"));
+	m_arLabel->setFixedSize(30, 13);
 	statusBar()->addPermanentWidget(m_arLabel);
 
 	readSavedMessages();
