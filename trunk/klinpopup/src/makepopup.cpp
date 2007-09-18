@@ -57,14 +57,13 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 	  sendRefCount(0), sendError(0), justSending(false),
 	  passedInitialHost(false)
 {
-//	initSmbCtx();
 	setupLayout();
 
 	connect(buttonSend, SIGNAL(clicked()), this, SLOT(slotButtonSend()));
 	connect(buttonCancel, SIGNAL(clicked()), this, SLOT(finished()));
 
 	if (viewMode == CLASSIC_VIEW) {
-		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged(const QString &)));
+		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged()));
 	 } else {
 		connect(groupTreeView, SIGNAL(itemSelectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
 		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(QTreeWidgetItem *)));
@@ -177,19 +176,8 @@ void makePopup::setupLayout()
 		headers << i18n("Groups/Hosts") << i18n("Comment");
 		groupTreeView->setHeaderLabels(headers);
 		rightSplitLayout->addWidget(groupTreeView);
-//		groupTreeView->addColumn(i18n("Groups/Hosts"));
-//		groupTreeView->addColumn(i18n("Comment"));
-//		groupTreeView->setEnabled(true);
-//		groupTreeView->setRootIsDecorated(true);
-//		groupTreeView->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
-//		groupTreeView->setSelectionMode(Q3ListView::Extended);
-//		groupTreeView->setLineWidth(1);
-//		groupTreeView->setSizePolicy(QSizePolicy((QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3, 0, 0, false));
-//		sp->setResizeMode(rightSplitLayout, QSplitter::FollowSizeHint);
 
 		QWidget *leftSplitWidget = new QWidget(sp);
-// 		leftSplitLayout->setSpacing(6);
-// 		leftSplitLayout->setMargin(3);
 		QGridLayout *leftSplitLayout = new QGridLayout(leftSplitWidget);
 		QLabel *senderLabel = new QLabel(i18n("From:"));
 		senderBox = new KComboBox();
@@ -215,14 +203,6 @@ void makePopup::setupLayout()
 		makePopupLayout->setRowStretch(0, 1);
 		resize(QSize(575, 250).expandedTo(minimumSizeHint()));
 	}
-
-//	messageTextBox->setFrameStyle(Q3GroupBox::Box|Q3GroupBox::Plain);
-//	messageTextBox->setAlignment(int(Q3GroupBox::Qt::AlignCenter));
-
-//	messageText->setFrameStyle(KTextEdit::LineEditPanel|KTextEdit::Sunken);
-//	messageText->setResizePolicy(KTextEdit::Manual);
-//	messageText->setTextFormat(KTextEdit::PlainText);
-//	messageText->setAutoFormatting(int(KTextEdit::AutoAll));
 
 	languageChange();
 
@@ -413,17 +393,47 @@ void makePopup::scanNetwork(int i, QProcess::ExitStatus status)
 			todo.removeAll(currentHost);
 			done += currentHost;
 
-			QTreeWidgetItem *tmpGroupItem = 0;
-			if (!currentGroup.isEmpty()) {
-				QStringList groupInfo;
-				groupInfo << currentGroup;
-				if (!ownGroup.isEmpty()) {
-					groupInfo << i18n("own");
-					ownGroup.clear();
+			if (viewMode == CLASSIC_VIEW) {
+				if (!currentGroup.isEmpty()) {
+					QStringList tmpHostList;
+					QMap<QString, QString>::const_iterator i = currentHosts.constBegin();
+					while (i != currentHosts.constEnd()) {
+						tmpHostList << i.key();
+						++i;
+					}
+					allGroups[currentGroup] = tmpHostList;
+					if (currentGroup == ownGroup) {
+						currentGroup += QString(" (");
+						currentGroup += i18n("own");
+						currentGroup += QString(")");
+						groupBox->insertItem(0, currentGroup);
+					} else {
+						groupBox->addItem(currentGroup);
+					}
 				}
-				tmpGroupItem = new QTreeWidgetItem(groupInfo);
-				tmpGroupItem->setFlags(Qt::ItemIsEnabled);
-				groupTreeView->addTopLevelItem(tmpGroupItem);
+			} else {
+				QTreeWidgetItem *tmpGroupItem = 0;
+				if (!currentGroup.isEmpty()) {
+					QStringList groupInfo;
+					groupInfo << currentGroup;
+					tmpGroupItem = new QTreeWidgetItem(groupInfo);
+					tmpGroupItem->setFlags(Qt::ItemIsEnabled);
+					groupTreeView->addTopLevelItem(tmpGroupItem);
+					if (currentGroup == ownGroup) {
+						tmpGroupItem->setText(1, i18n("own"));
+						tmpGroupItem->setExpanded(true);
+					}
+				}
+
+				if (tmpGroupItem && !currentHosts.isEmpty()) {
+					QMap<QString, QString>::const_iterator i = currentHosts.constBegin();
+					while (i != currentHosts.constEnd()) {
+						QTreeWidgetItem *tmpHostItem = new QTreeWidgetItem(tmpGroupItem);
+						tmpHostItem->setText(0, i.key());
+						tmpHostItem->setText(1, i.value());
+						++i;
+					}
+				}
 			}
 
 			if (!currentGroups.isEmpty()) {
@@ -433,21 +443,12 @@ void makePopup::scanNetwork(int i, QProcess::ExitStatus status)
 				}
 			}
 
-			if (tmpGroupItem && !currentHosts.isEmpty()) {
-				QMap<QString, QString>::const_iterator i = currentHosts.constBegin();
-				while (i != currentHosts.constEnd()) {
-					QTreeWidgetItem *tmpHostItem = new QTreeWidgetItem(tmpGroupItem);
-					tmpHostItem->setText(0, i.key());
-					tmpHostItem->setText(1, i.value());
-					++i;
-				}
-			}
-
 		} else {
 			kDebug() << currentGroup << endl;
 			passedInitialHost = true;
 			ownGroup = currentGroup;
 			if (!currentGroups.isEmpty()) {
+				if (viewMode == CLASSIC_VIEW) groupBox->clear();
 				foreach (QString groupMaster, currentGroups) {
 					todo += groupMaster;
 				}
@@ -459,35 +460,33 @@ void makePopup::scanNetwork(int i, QProcess::ExitStatus status)
 	if (todo.count()) {
 		currentHost = todo.at(0);
 		startScan();
+	} else {
+		// initialize with own group if possible or if it's only one
+		if (viewMode == CLASSIC_VIEW) {
+			if (!ownGroup.isEmpty()) groupBox->setCurrentIndex(0);
+			slotGroupboxChanged();
+		} else if (viewMode == TREE_VIEW && groupTreeView->topLevelItemCount() == 1) {
+			groupTreeView->topLevelItem(0)->setExpanded(true);
+		}
 	}
-	// initialize with own group if possible or if it's only one
-// 	if (!ownGroup.isEmpty()) {
-// 		if (viewMode == CLASSIC_VIEW) groupBox->setCurrentText(ownGroup + " (" + i18n("own") + ")");
-// 		currentGroup = ownGroup;
-// 		readHosts.start();
-// 	} else if (viewMode == CLASSIC_VIEW && groupBox->count() == 2) {
-// 		groupBox->setCurrentItem(1);
-// 		currentGroup = groupBox->currentText();
-// 		readHosts.start();
-// 	} else if (viewMode == TREE_VIEW && groupTreeView->childCount() == 1) {
-// 		currentGroup = groupTreeView->firstChild()->text(0);
-// 		readHosts.start();
-// 	}
 }
 
 /**
  * will be called if groupbox is changed
  */
-void makePopup::slotGroupboxChanged(const QString &)
+void makePopup::slotGroupboxChanged()
 {
-// 	classicReceiverBox->clear();
-// 	allGroupHosts.clear();
-// 	currentGroup = groupBox->currentText();
-// 	if (currentGroup == i18n("NO GROUP")) return;
-// 	if (currentGroup.indexOf(" (") > 1) currentGroup = currentGroup.left(currentGroup.indexOf(" ("));
-//
-// 	if (readHosts.isRunning()) readHosts.exit();
-// 	readHosts.start();
+	classicReceiverBox->clear();
+	QString selectedGroup = groupBox->currentText();
+	if (selectedGroup == i18n("NO GROUP")) return;
+	if (selectedGroup.indexOf(" (") > 1) selectedGroup = selectedGroup.left(currentGroup.indexOf(" ("));
+
+	QStringList::const_iterator i = allGroups[selectedGroup].constBegin();
+	while (i != allGroups[selectedGroup].constEnd()) {
+		classicReceiverBox->addItem(*i);
+		++i;
+	}
+
 }
 
 void makePopup::slotTreeViewItemExpanded(QTreeWidgetItem *clickedItem)
@@ -502,14 +501,14 @@ void makePopup::slotTreeViewItemExpanded(QTreeWidgetItem *clickedItem)
 
 void makePopup::slotTreeViewSelectionChanged()
 {
-// 	QString selectedHosts;
-// 	Q3ListViewItemIterator it(groupTreeView, Q3ListViewItemIterator::Selected|Q3ListViewItemIterator::NotExpandable);
-// 	while (it.current()) {
-// 		selectedHosts += it.current()->text(0);
-// 		selectedHosts += " ";
-// 		++it;
-// 	}
-// 	treeViewReceiverBox->setText(selectedHosts.trimmed());
+	QString selectedHosts;
+	QTreeWidgetItemIterator it(groupTreeView, QTreeWidgetItemIterator::Selected);
+	while (*it) {
+		selectedHosts += (*it)->text(0);
+		selectedHosts += " ";
+		++it;
+	}
+	treeViewReceiverBox->setText(selectedHosts.trimmed());
 }
 
 void makePopup::languageChange()

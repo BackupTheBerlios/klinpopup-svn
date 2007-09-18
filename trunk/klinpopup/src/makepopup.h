@@ -30,7 +30,6 @@
 #define ENC_ASCII 3
 
 #include <QProcess>
-#include <QThread>
 #include <QMap>
 #include <QStringList>
 #include <QEvent>
@@ -86,7 +85,7 @@ protected:
 private slots:
 	void slotButtonSend();
 	void finished();
-	void slotGroupboxChanged(const QString &);
+	void slotGroupboxChanged();
 	void slotSendCmdExit(int, QProcess::ExitStatus, QString);
 	void startScan();
 	void scanNetwork(int, QProcess::ExitStatus);
@@ -110,6 +109,7 @@ private:
 	bool allProcessesStarted, justSending, passedInitialHost;
 	QStringList allGroupHosts, sendFailedHosts, todo, done;
 	QMap<QString, QString> currentHosts, currentGroups;
+	QMap<QString, QStringList> allGroups;
 	QProcess *scanProcess;
 
 protected slots:

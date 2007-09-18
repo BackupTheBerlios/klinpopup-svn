@@ -227,7 +227,6 @@ void KLinPopup::saveMessages()
 		stream << msg->text() << endl;
 		stream << "__next_message__" << endl;
 	}
-
 }
 
 void KLinPopup::readSavedMessages()
@@ -763,9 +762,10 @@ void KLinPopup::newToolbarConfig()
 void KLinPopup::optionsPreferences()
 {
 		KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
+		dialog->setFaceType(KPageDialog::Plain);
 		Prefs *prefs = new Prefs();
 		dialog->addPage(prefs, i18n("Settings"));
-		connect(dialog, SIGNAL(settingsChanged()), this, SLOT(settingsChanged()));
+		connect(dialog, SIGNAL(settingsChanged(const QString &)), this, SLOT(settingsChanged()));
 		dialog->show();
 		prefs->toggleURLs();
 }

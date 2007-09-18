@@ -2,6 +2,7 @@
 <!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
 <kcfg>
   <kcfgfile name="klinpopuprc"/>
+  <include>KStandardDirs</include>
   <group name="Preferences">
     <entry name="DisplaySender" type="Bool">
             <label>Display sender name</label>
@@ -53,7 +54,7 @@
     </entry>
     <entry name="SmbclientBin" type="String">
             <label>smbclient-Bin</label>
-            <default>/usr/bin/smbclient</default>
+            <default code="true">KStandardDirs::findExe("smbclient")</default>
     </entry>
     <entry name="Encoding" type="Int">
             <label>Encoding</label>

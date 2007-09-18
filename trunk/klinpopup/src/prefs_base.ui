@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>417</width>
-    <height>575</height>
+    <width>404</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -18,20 +18,8 @@
   <property name="windowTitle" >
    <string>Prefs_base</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="leftMargin" >
-    <number>0</number>
-   </property>
-   <property name="topMargin" >
-    <number>0</number>
-   </property>
-   <property name="rightMargin" >
-    <number>0</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>0</number>
-   </property>
-   <item>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" >
     <widget class="QTabWidget" name="tabWidget4" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
@@ -350,8 +338,8 @@
          <property name="title" >
           <string>Message Creation</string>
          </property>
-         <layout class="QGridLayout" >
-          <item row="0" column="0" >
+         <layout class="QHBoxLayout" >
+          <item>
            <widget class="QLabel" name="textLabel1" >
             <property name="text" >
              <string>Viewmode:</string>
@@ -361,43 +349,21 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1" >
-           <widget class="KComboBox" native="1" name="kcfg_MakePopupView" >
-            <property name="toolTip" >
-             <string>View when writing a new message</string>
-            </property>
-            <property name="whatsThis" >
-             <string>What viewmode should be used when writing new messages.</string>
-            </property>
+          <item>
+           <widget class="QComboBox" name="kcfg_MakePopupView" >
+            <item>
+             <property name="text" >
+              <string>ClassicView</string>
+             </property>
+            </item>
+            <item>
+             <property name="text" >
+              <string>TreeView</string>
+             </property>
+            </item>
            </widget>
           </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="textLabel2_2" >
-            <property name="toolTip" >
-             <string/>
-            </property>
-            <property name="whatsThis" >
-             <string/>
-            </property>
-            <property name="text" >
-             <string>Encoding:</string>
-            </property>
-            <property name="wordWrap" >
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="KComboBox" native="1" name="kcfg_Encoding" >
-            <property name="toolTip" >
-             <string>Character encoding for new messages</string>
-            </property>
-            <property name="whatsThis" >
-             <string>Set the character encoding for new messages.</string>
-            </property>
-           </widget>
-          </item>
-          <item rowspan="2" row="0" column="2" >
+          <item>
            <spacer>
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -407,8 +373,8 @@
             </property>
             <property name="sizeHint" >
              <size>
-              <width>179</width>
-              <height>60</height>
+              <width>91</width>
+              <height>21</height>
              </size>
             </property>
            </spacer>
@@ -422,8 +388,8 @@
       <attribute name="title" >
        <string>S&amp;ystem</string>
       </attribute>
-      <layout class="QGridLayout" >
-       <item row="0" column="0" >
+      <layout class="QVBoxLayout" >
+       <item>
         <widget class="QGroupBox" name="groupBox4" >
          <property name="sizePolicy" >
           <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
@@ -511,7 +477,7 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="0" >
+       <item>
         <widget class="QGroupBox" name="groupBox3" >
          <property name="sizePolicy" >
           <sizepolicy vsizetype="Minimum" hsizetype="Minimum" >
@@ -543,19 +509,12 @@
            </widget>
           </item>
           <item>
-           <widget class="KUrlRequester" native="1" name="kcfg_SmbclientBin" >
-            <property name="toolTip" >
-             <string>Path to smbclient</string>
-            </property>
-            <property name="whatsThis" >
-             <string>The Path to your smbclient binary.</string>
-            </property>
-           </widget>
+           <widget class="QLineEdit" name="kcfg_SmbclientBin" />
           </item>
          </layout>
         </widget>
        </item>
-       <item row="2" column="0" >
+       <item>
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -565,8 +524,8 @@
          </property>
          <property name="sizeHint" >
           <size>
-           <width>360</width>
-           <height>20</height>
+           <width>364</width>
+           <height>241</height>
           </size>
          </property>
         </spacer>
@@ -581,9 +540,6 @@
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-  </customwidget>
-  <customwidget>
    <class>KUrlRequester</class>
    <extends>QWidget</extends>
    <header>kurlrequester.h</header>
@@ -597,10 +553,7 @@
   <tabstop>kcfg_TimeFormat</tabstop>
   <tabstop>kcfg_ToggleSignaling</tabstop>
   <tabstop>kcfg_SoundURL</tabstop>
-  <tabstop>kcfg_MakePopupView</tabstop>
-  <tabstop>kcfg_Encoding</tabstop>
   <tabstop>kcfg_RunDocked</tabstop>
-  <tabstop>kcfg_SmbclientBin</tabstop>
  </tabstops>
  <includes>
   <include location="local" >kurlrequester.h</include>
