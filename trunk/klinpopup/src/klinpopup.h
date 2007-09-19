@@ -145,7 +145,6 @@ private:
 
 	//option variables
 	bool optRunDocked;
-	int optTimerInterval;
 	bool optDisplaySender;
 	bool optDisplayMachine;
 	bool optDisplayIP;

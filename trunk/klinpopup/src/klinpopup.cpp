@@ -785,7 +785,6 @@ void KLinPopup::readConfig()
 	optExternalCommand = Settings::externalCommand();
 	optExternalCommandURL = Settings::externalCommandURL().simplified();
 	optArMsg = Settings::arMsg();
-	optTimerInterval= Settings::timerInterval();
 	optMakePopupView = Settings::makePopupView();
 	optSmbclientBin=Settings::smbclientBin();
 	optEncoding=Settings::encoding();
