@@ -258,7 +258,6 @@ void makePopup::finished()
 	if (justSending) return;
 
 	hide();
-
 	deleteLater();
 }
 
@@ -487,16 +486,6 @@ void makePopup::slotGroupboxChanged()
 		++i;
 	}
 
-}
-
-void makePopup::slotTreeViewItemExpanded(QTreeWidgetItem *clickedItem)
-{
-// 	if (clickedItem == 0 || clickedItem->childCount() != 0) return;
-//
-// 	currentGroup = clickedItem->text(0);
-//
-// 	if (readHosts.isRunning()) readHosts.exit();
-// 	readHosts.start();
 }
 
 void makePopup::slotTreeViewSelectionChanged()

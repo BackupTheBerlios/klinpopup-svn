@@ -215,7 +215,10 @@ void KLinPopup::initSystemTray()
 void KLinPopup::saveMessages()
 {
 	messagesFile.remove();
-	messagesFile.open(QIODevice::ReadWrite);
+
+	if (!messagesFile.open(QIODevice::WriteOnly))
+		return;
+
 	QTextStream stream(&messagesFile);
 	foreach (popupMessage *msg, messageList) {
 		QString readStatus = msg->isRead() ? "r" : "u";
@@ -227,12 +230,17 @@ void KLinPopup::saveMessages()
 		stream << msg->text() << endl;
 		stream << "__next_message__" << endl;
 	}
+
+	messagesFile.close();
 }
 
 void KLinPopup::readSavedMessages()
 {
 	messagesFile.setFileName(KStandardDirs::locateLocal("appdata", "messages"));
-	messagesFile.open(QIODevice::ReadWrite);
+
+	if (!messagesFile.open(QIODevice::ReadOnly))
+		return;
+
 	QTextStream stream(&messagesFile);
 	QString line, sender, machine, ip, time, status, text;
 	int i = 0;
@@ -277,6 +285,7 @@ void KLinPopup::readSavedMessages()
 			i = 0;
 		}
 	}
+
 	messagesFile.close();
 }
 
@@ -378,7 +387,7 @@ void KLinPopup::checkSmbclientBin()
 }
 
 /**
- * called when popupFileTimer is done,
+ * called from dirLister,
  * looks for new messages and parses them
  */
 void KLinPopup::newMessages(const KFileItemList &items)
@@ -438,7 +447,6 @@ void KLinPopup::signalNewMessage(const QString &popupSender, const QString &popu
 {
 	kDebug() << "Popup received" << endl;
 
-//	int currentMessage = messageList.at();
 	QDateTime tmpDateTime = QDateTime::fromString(popupTime, Qt::ISODate);
 	if (!tmpDateTime.isValid()) tmpDateTime = QDateTime::currentDateTime();
 	messageList.append(new popupMessage(popupSender, popupMachine, popupIp, tmpDateTime, messageText));
@@ -546,7 +554,6 @@ void KLinPopup::checkMessageMap()
 {
 
 	int popupCounter = messageList.count();
-	kDebug() << currentMessage << " : " << popupCounter << " : " << unreadMessages << endl;
 
 	if (currentMessage > 0) {
 		replyPopupAction->setEnabled(true);
@@ -713,7 +720,7 @@ void KLinPopup::autoReply(const QString &host)
 		}
 	}
 
-	if (host.toUpper() != "LOCALHOST" && host.toUpper() != m_hostName) { /// prevent endless loop
+	if (host.toUpper() != "LOCALHOST" && host.toUpper() != m_hostName) { // prevent endless loop
 		QProcess *p = new QProcess(this);
 		QStringList args;
 		args << "-M" << host << "-N" << "-";

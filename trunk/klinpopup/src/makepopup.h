@@ -89,7 +89,6 @@ private slots:
 	void slotSendCmdExit(int, QProcess::ExitStatus, QString);
 	void startScan();
 	void scanNetwork(int, QProcess::ExitStatus);
-	void slotTreeViewItemExpanded(QTreeWidgetItem *);
 	void slotTreeViewSelectionChanged();
 
 private:
