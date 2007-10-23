@@ -24,10 +24,7 @@
 #define CLASSIC_VIEW 0
 #define TREE_VIEW 1
 
-#define ENC_LOCAL8BIT 0
-#define ENC_UTF8 1
-#define ENC_LATIN1 2
-#define ENC_ASCII 3
+#define ID_BYTES 1
 
 #include <QProcess>
 #include <QMap>

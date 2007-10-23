@@ -40,13 +40,13 @@
 #include <QTimer>
 
 #include <KStatusBar>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kuser.h>
-#include <kpushbutton.h>
-#include <kcombobox.h>
-#include <klineedit.h>
-#include <ktextedit.h>
+#include <KLocale>
+#include <KMessageBox>
+#include <KUser>
+#include <KPushButton>
+#include <KComboBox>
+#include <KLineEdit>
+#include <KTextEdit>
 
 #include "makepopup.h"
 #include "makepopup.moc"
@@ -68,7 +68,6 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged()));
 	 } else {
 		connect(groupTreeView, SIGNAL(itemSelectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
-//		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(QTreeWidgetItem *)));
 	}
 
 	//initialize senderBox, groupBox and receiverBox
@@ -118,7 +117,7 @@ void makePopup::setupLayout()
 
 	statusBar = new KStatusBar();
 	statusBar->setSizeGripEnabled(false);
-	statusBar->insertItem(i18n("0/1600 Bytes"), 1, 1);
+	statusBar->insertItem(i18n("0/1600 Bytes"), ID_BYTES, 1);
 
 
 	if (viewMode == CLASSIC_VIEW) {
@@ -205,9 +204,9 @@ void makePopup::changeStatusBar()
 	QString tmpText = messageText->document()->toPlainText();
 	int bytes = tmpText.toUtf8().size();
 	if (bytes < 1601)
-		statusBar->changeItem(i18n("%1/1600 Bytes", bytes), 1);
+		statusBar->changeItem(i18n("%1/1600 Bytes", bytes), ID_BYTES);
     else
-		statusBar->changeItem(i18n("%1/1600 Bytes - message will be truncated", bytes), 1);
+		statusBar->changeItem(i18n("%1/1600 Bytes - message will be truncated", bytes), ID_BYTES);
 }
 
 /**
@@ -292,13 +291,13 @@ void makePopup::sendPopup()
 {
 	QString tmpText = messageText->document()->toPlainText();
 	if (tmpText.toUtf8().size() > 1600) {
-		int tmpYesNo = KMessageBox::warningYesNo(this, i18n("Message too long, it will be truncated by samba!\n"
-															"Edit again?"),
+		int tmpYesNo = KMessageBox::warningYesNo(this, i18n("The message is too long, it will be truncated by samba!\n"
+															"Send anyway?"),
 												 i18n("Warning"),
 												 KStandardGuiItem::yes(),
 												 KStandardGuiItem::no(),
 												 "ShowEditAgain");
-		if (tmpYesNo == KMessageBox::Yes) {
+		if (tmpYesNo == KMessageBox::No) {
 			messageText->setFocus();
 			return;
 		}
@@ -527,12 +526,12 @@ void makePopup::languageChange()
 		treeViewReceiverBox->setToolTip(i18n("Addressee(s) of this message"));
 		treeViewReceiverBox->setWhatsThis( i18n("Which computer shall receive this message?"));
 	}
-	buttonSend->setText( i18n("&Send"));
-//	buttonSend->setAccel( QKeySequence( i18n("Alt+S")));
+	buttonSend->setText(i18n("&Send"));
+	buttonSend->setShortcut( QKeySequence(i18n("Alt+S")));
 	buttonSend->setToolTip(i18n("Send the message" ) );
 	buttonSend->setWhatsThis( i18n("Send the message and close the dialog."));
 	buttonCancel->setText( i18n("&Cancel"));
-//	buttonCancel->setAccel( QKeySequence(i18n("Alt+C")));
+	buttonCancel->setShortcut( QKeySequence(i18n("Alt+C")));
 	buttonCancel->setToolTip(i18n("Cancel the message"));
 	buttonCancel->setWhatsThis( i18n("Cancel the dialog without sending the message."));
 }

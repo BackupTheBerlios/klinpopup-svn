@@ -43,10 +43,7 @@
 #include <QHideEvent>
 #include <QFile>
 
-#include <kxmlguiwindow.h>
-#include <kuniqueapplication.h>
-#include <kconfig.h>
-#include <kfileitem.h>
+#include <KXmlGuiWindow>
 
 #include "popupmessage.h"
 #include "klinpopupview.h"
@@ -54,14 +51,16 @@
 
 const QString POPUP_DIR = "/var/lib/klinpopup";
 
+class KFileItemList;
 class KDirLister;
+class KConfig;
 class KAction;
 class KToggleAction;
 
 /**
  * @short Main window class
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.4
+ * @version 0.3.90
  */
 class KLinPopup : public KXmlGuiWindow
 {

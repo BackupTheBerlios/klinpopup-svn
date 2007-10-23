@@ -23,7 +23,8 @@
 
 #include <QPixmap>
 #include <QIcon>
-#include <ksystemtrayicon.h>
+
+#include <KSystemTrayIcon>
 
 class QTimer;
 

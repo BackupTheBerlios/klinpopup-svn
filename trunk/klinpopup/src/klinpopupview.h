@@ -22,17 +22,15 @@
 #define KLINPOPUPVIEW_H
 
 #include <QWidget>
-#include <QDateTime>
-
-#include <klocale.h>
-#include <kglobal.h>
 
 #include "ui_klinpopupview_base.h"
+
+class QDateTime;
 
 /**
  * @short Main view
  * @author Gerd Fleischer <gerdfleischer@web.de>
- * @version 0.3.4
+ * @version 0.3.90
  */
 class KLinPopupView : public QWidget, private Ui::KLinPopupview_base
 {

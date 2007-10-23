@@ -18,9 +18,12 @@
 *   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
-#include <klocale.h>
-#include <ktextedit.h>
 #include <QLabel>
+#include <QDateTime>
+
+#include <KLocale>
+#include <KGlobal>
+#include <KTextEdit>
 
 #include "klinpopupview.h"
 #include "klinpopupview.moc"
