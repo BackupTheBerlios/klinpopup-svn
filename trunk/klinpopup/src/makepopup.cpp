@@ -18,8 +18,6 @@
 *   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
-//#define MY_EXTRA_DEBUG
-
 #include <kdebug.h>
 
 #include <unistd.h>
@@ -40,11 +38,15 @@
 #include <QCloseEvent>
 #include <QProcess>
 #include <QTimer>
-//#include <kaction.h>
+
+#include <KStatusBar>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kuser.h>
-//#include <kiconloader.h>
+#include <kpushbutton.h>
+#include <kcombobox.h>
+#include <klineedit.h>
+#include <ktextedit.h>
 
 #include "makepopup.h"
 #include "makepopup.moc"
@@ -66,7 +68,7 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 		connect(groupBox, SIGNAL(activated(const QString &)), this, SLOT(slotGroupboxChanged()));
 	 } else {
 		connect(groupTreeView, SIGNAL(itemSelectionChanged()), this, SLOT(slotTreeViewSelectionChanged()));
-		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(QTreeWidgetItem *)));
+//		connect(groupTreeView, SIGNAL(expanded(QTreeWidgetItem *)), this, SLOT(slotTreeViewItemExpanded(QTreeWidgetItem *)));
 	}
 
 	//initialize senderBox, groupBox and receiverBox
@@ -78,7 +80,7 @@ makePopup::makePopup(QWidget *parent, const QString &paramSender,
 	QString tmpLoginName = KUser().loginName();
 	if (!tmpLoginName.isEmpty()) senderBox->addItem(tmpLoginName);
 
-	QString tmpFullName = KUser().fullName();
+	QString tmpFullName = KUser().property(KUser::FullName).toString();
 	if (!tmpFullName.isEmpty()) senderBox->addItem(tmpFullName);
 
 	if (messageReceiver.isEmpty()) {
@@ -101,24 +103,6 @@ void makePopup::closeEvent(QCloseEvent *e)
 	finished();
 }
 
-/**
- * filter keypresses and restrict message size to 1600 bytes
- */
-bool makePopup::eventFilter(QObject *, QEvent *e)
-{
-/*	if (e->type() == QEvent::KeyPress) {
-		QKeyEvent *k = (QKeyEvent *)e;
-		// do funny things to figure out the bytes of the message and react accordingly
-		if ((k->key() >= Qt::Key_Space && k->key() <= Qt::Key_ydiaeresis) || k->key() == Qt::Key_Tab) {
-			if ((messageText->length() + messageText->lines()) > 1600) return true;
-		} else if (k->key() == Qt::Key_Return) {
-			if (((messageText->length() + 1) + messageText->lines()) > 1600) return true;
-		}
-	}*/
-
-	return false;
-}
-
 void makePopup::setupLayout()
 {
 	setFocusPolicy(Qt::WheelFocus);
@@ -131,6 +115,10 @@ void makePopup::setupLayout()
 	buttonLayout->addItem(new QSpacerItem(1, 1, QSizePolicy::Expanding, QSizePolicy::Minimum));
 	buttonLayout->addWidget(buttonSend);
 	buttonLayout->addWidget(buttonCancel);
+
+	statusBar = new KStatusBar();
+	statusBar->setSizeGripEnabled(false);
+	statusBar->insertItem(i18n("0/1600 Bytes"), 1, 1);
 
 
 	if (viewMode == CLASSIC_VIEW) {
@@ -161,6 +149,7 @@ void makePopup::setupLayout()
 		makePopupLayout->addWidget(classicReceiverBox, 2, 1);
 		makePopupLayout->addWidget(messageTextBox, 3, 0, 1, 2);
 		makePopupLayout->addLayout(buttonLayout, 4, 0, 1, 2);
+		makePopupLayout->addWidget(statusBar, 5, 0, 1, 2);
 		makePopupLayout->setColumnStretch(1, 1);
 		resize(QSize(375, 250).expandedTo(minimumSizeHint()));
 	} else {
@@ -200,14 +189,25 @@ void makePopup::setupLayout()
 
 		makePopupLayout->addWidget(sp, 0, 0);
 		makePopupLayout->addLayout(buttonLayout, 1, 0);
+		makePopupLayout->addWidget(statusBar, 2, 0);
 		makePopupLayout->setRowStretch(0, 1);
 		resize(QSize(575, 250).expandedTo(minimumSizeHint()));
 	}
 
 	languageChange();
 
-	messageText->installEventFilter(this);
+	connect(messageText, SIGNAL(textChanged()), this, SLOT(changeStatusBar()));
 	messageText->setFocus();
+}
+
+void makePopup::changeStatusBar()
+{
+	QString tmpText = messageText->document()->toPlainText();
+	int bytes = tmpText.toUtf8().size();
+	if (bytes < 1601)
+		statusBar->changeItem(i18n("%1/1600 Bytes", bytes), 1);
+    else
+		statusBar->changeItem(i18n("%1/1600 Bytes - message will be truncated", bytes), 1);
 }
 
 /**
@@ -242,6 +242,7 @@ void makePopup::queryFinished()
 															"Edit/Try again?", errorHostsString));
 		if (tmpYesNo == KMessageBox::Yes) {
 			sendFailedHosts.clear();
+			justSending = false;
 			return;
 		}
 	}
@@ -289,6 +290,20 @@ void makePopup::slotButtonSend()
  */
 void makePopup::sendPopup()
 {
+	QString tmpText = messageText->document()->toPlainText();
+	if (tmpText.toUtf8().size() > 1600) {
+		int tmpYesNo = KMessageBox::warningYesNo(this, i18n("Message too long, it will be truncated by samba!\n"
+															"Edit again?"),
+												 i18n("Warning"),
+												 KStandardGuiItem::yes(),
+												 KStandardGuiItem::no(),
+												 "ShowEditAgain");
+		if (tmpYesNo == KMessageBox::Yes) {
+			messageText->setFocus();
+			return;
+		}
+	}
+
 	QString tmpReceiverString;
 	if (viewMode == CLASSIC_VIEW)
 		tmpReceiverString = classicReceiverBox->currentText();
@@ -320,7 +335,6 @@ void makePopup::sendPopup()
 				this, SLOT(slotSendCmdExit(int, QProcess::ExitStatus, QString)));
 
 		p->start(smbclientBin, args);
-		QString tmpText = messageText->document()->toPlainText();
 		p->write(tmpText.toUtf8());
 		p->closeWriteChannel();
 	}

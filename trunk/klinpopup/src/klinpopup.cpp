@@ -18,8 +18,6 @@
 *   51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA.             *
 ***************************************************************************/
 
-//#define MY_EXTRA_DEBUG
-
 #include <kdebug.h>
 
 #include <unistd.h>
@@ -48,6 +46,8 @@
 #include <kedittoolbar.h>
 #include <kfileitem.h>
 #include <kstdaccel.h>
+#include <kaction.h>
+#include <ktoggleaction.h>
 #include <kstandardaction.h>
 #include <kactioncollection.h>
 
@@ -107,7 +107,7 @@ KLinPopup::KLinPopup()
  */
 bool KLinPopup::queryClose()
 {
-	if (optRunDocked && !kapp->sessionSaving() && m_systemTray) {
+	if (optRunDocked && !kapp->sessionSaving() && systemTray) {
 		hide();
 		return false;
 	} else {
@@ -126,7 +126,7 @@ void KLinPopup::exit()
  * Reimplemented changeEvent to check if we got the focus
  * and update the unreadMessages count.
  */
-void KLinPopup::changeEvent(QEvent *e)
+void KLinPopup::changeEvent(QEvent *)
 {
 	if (isActiveWindow()) {
 		if (!messageList.isEmpty() && !messageList.at(currentMessage-1)->isRead()) {
@@ -148,10 +148,9 @@ void KLinPopup::setupActions()
 	setStandardToolBarMenuEnabled(true);
 	createStandardStatusBarAction();
 
-	m_menubarAction = KStandardAction::showMenubar(this, SLOT(optionsShowMenubar()), actionCollection());
+	menubarAction = KStandardAction::showMenubar(this, SLOT(optionsShowMenubar(bool)), actionCollection());
+	menubarAction->setChecked(!menuBar()->isHidden());
 
-	KStandardAction::keyBindings(this, SLOT(optionsConfigureKeys()), actionCollection());
-	KStandardAction::configureToolbars(this, SLOT(optionsConfigureToolbars()), actionCollection());
 	KStandardAction::preferences(this, SLOT(optionsPreferences()), actionCollection());
 
 	autoReplyAction = new KToggleAction(KIcon("mail-reply-all"), i18n("&Autoreply"), this);
@@ -207,9 +206,9 @@ void KLinPopup::setupActions()
  */
 void KLinPopup::initSystemTray()
 {
-	m_systemTray = new SystemTray(this);
-	connect(m_systemTray, SIGNAL(quitSelected()), kapp, SLOT(quit()));
-	m_systemTray->show();
+	systemTray = new SystemTray(this);
+	connect(systemTray, SIGNAL(quitSelected()), kapp, SLOT(quit()));
+	systemTray->show();
 }
 
 void KLinPopup::saveMessages()
@@ -328,10 +327,6 @@ bool KLinPopup::checkPopupFileDirectory()
 		KFileItem tmpFileItem = KFileItem(KFileItem::Unknown, KFileItem::Unknown, POPUP_DIR);
 		mode_t tmpPerms = tmpFileItem.permissions();
 
-		#ifdef MY_EXTRA_DEBUG
-		kDebug() << tmpPerms << endl;
-		#endif
-
 		if (tmpPerms != 0777) {
 
 			kDebug() << "Perms not ok!" << endl;
@@ -369,10 +364,6 @@ void KLinPopup::checkSmbclientBin()
 ///@TODO: check execution permission?
 	QFile tmpSmbclientBin(optSmbclientBin);
 
-	#ifdef MY_EXTRA_DEBUG
-	kDebug() << tmpSmbclientBin.exists() << endl;
-	#endif
-
 	if (tmpSmbclientBin.exists()) {
 		newPopupAction->setEnabled(true);
 		replyPopupAction->setEnabled(true);
@@ -392,10 +383,10 @@ void KLinPopup::checkSmbclientBin()
  */
 void KLinPopup::newMessages(const KFileItemList &items)
 {
-	KFileItem *tmpItem;
-	foreach (tmpItem, items) {
-		if (tmpItem->isFile()) {
-			QFile popupFile(tmpItem->url().path());
+	KFileItemList::const_iterator it;
+	for (it = items.constBegin(); it != items.constEnd(); ++it) {
+		if (it->isFile()) {
+			QFile popupFile(it->url().path());
 
 			if (popupFile.open(QIODevice::ReadOnly)) {
 				QTextStream stream(&popupFile);
@@ -519,7 +510,7 @@ void KLinPopup::updateStats()
 							messageList.count(),
 							unreadMessages);
 	changeStatusbar(statText);
-	m_systemTray->setToolTip(statText);
+	systemTray->setToolTip(statText);
 }
 
 /**
@@ -734,33 +725,13 @@ void KLinPopup::autoReply(const QString &host)
 /**
  * toggle Menubar
  */
-void KLinPopup::optionsShowMenubar()
+void KLinPopup::optionsShowMenubar(bool)
 {
-	if (menuBar()->isHidden())
+	kDebug() << "Test" << endl;
+	if (menubarAction->isChecked())
 		menuBar()->show();
 	else
 		menuBar()->hide();
-}
-
-/**
- * show toolbar config dialog
- */
-void KLinPopup::optionsConfigureToolbars()
-{
-	// use the standard toolbar editor
-	saveMainWindowSettings(KConfigGroup(KGlobal::config(), autoSaveGroup()));
-	KEditToolBar dlg(actionCollection());
-	connect(&dlg, SIGNAL(newToolbarConfig()), this, SLOT(newToolbarConfig()));
-	dlg.exec();
-}
-
-/**
- * rebuild GUI after toolbar change
- */
-void KLinPopup::newToolbarConfig()
-{
-	setupGUI();
-	applyMainWindowSettings(KConfigGroup(KGlobal::config(), autoSaveGroup()));
 }
 
 /**
@@ -833,14 +804,14 @@ void KLinPopup::setTrayPixmap()
 {
 	if (unreadMessages == 0) {
 		if (autoReplyAction->isChecked())
-			m_systemTray->changeTrayPixmap(NORMAL_ICON_AR);
+			systemTray->changeTrayPixmap(NORMAL_ICON_AR);
 		else
-			m_systemTray->changeTrayPixmap(NORMAL_ICON);
+			systemTray->changeTrayPixmap(NORMAL_ICON);
 	} else {
 		if (autoReplyAction->isChecked())
-			m_systemTray->changeTrayPixmap(NEW_ICON_AR);
+			systemTray->changeTrayPixmap(NEW_ICON_AR);
 		else
-			m_systemTray->changeTrayPixmap(NEW_ICON);
+			systemTray->changeTrayPixmap(NEW_ICON);
 	}
 }
 

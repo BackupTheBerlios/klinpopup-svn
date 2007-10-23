@@ -30,7 +30,6 @@ install(TARGETS klinpopup DESTINATION ${BIN_INSTALL_DIR})
 install( FILES  klinpopup.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} )
 install( FILES  klinpopup.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
 install( FILES  klinpopupui.rc DESTINATION ${DATA_INSTALL_DIR}/klinpopup )
-install( FILES  klinpopup.desktop DESTINATION ${APPLNK_INSTALL_DIR}/Internet )
 #install( FILES  receivepopup.sh DESTINATION  )
 install( FILES  ar_on.png ar_off.png DESTINATION ${DATA_INSTALL_DIR}/klinpopup )
 

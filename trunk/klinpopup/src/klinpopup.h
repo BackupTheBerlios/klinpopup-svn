@@ -43,14 +43,10 @@
 #include <QHideEvent>
 #include <QFile>
 
-#include <kuniqueapplication.h>
-#include <kaction.h>
-#include <ktoggleaction.h>
-#include <kconfig.h>
-//#include <kkeydialog.h>
-//#include <KShortcutsDialog>
-#include <kfileitem.h>
 #include <kxmlguiwindow.h>
+#include <kuniqueapplication.h>
+#include <kconfig.h>
+#include <kfileitem.h>
 
 #include "popupmessage.h"
 #include "klinpopupview.h"
@@ -59,6 +55,8 @@
 const QString POPUP_DIR = "/var/lib/klinpopup";
 
 class KDirLister;
+class KAction;
+class KToggleAction;
 
 /**
  * @short Main window class
@@ -91,11 +89,8 @@ private slots:
 	void lastPopup() { currentMessage = messageList.count(); showPopup(); popupHelper(); }
 	void unreadPopup();
 	void deletePopup();
-	void optionsShowMenubar();
-//	void optionsConfigureKeys() { KShortcutsDialog::configure(actionCollection()); }
-	void optionsConfigureToolbars();
+	void optionsShowMenubar(bool);
 	void optionsPreferences();
-	void newToolbarConfig();
 	void changeStatusbar(const QString &);
 	void settingsChanged();
 	void updateStats();
@@ -123,8 +118,8 @@ private:
 
 	//config and actions
 	KConfig *cfg;
-	SystemTray *m_systemTray;
-	KToggleAction *m_menubarAction;
+	SystemTray *systemTray;
+	KToggleAction *menubarAction;
 	KToggleAction *autoReplyAction;
 	KAction *newPopupAction;
 	KAction *replyPopupAction;

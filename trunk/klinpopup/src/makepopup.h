@@ -35,15 +35,14 @@
 #include <QEvent>
 #include <QCloseEvent>
 
-#include <kpushbutton.h>
-#include <kcombobox.h>
-#include <klineedit.h>
-#include <ktextedit.h>
-
 class QGridLayout;
 class QTreeWidget;
 class QTreeWidgetItem;
-class makePopup;
+class KStatusBar;
+class KPushButton;
+class KComboBox;
+class KLineEdit;
+class KTextEdit;
 
 class NamedProcess : public QProcess
 {
@@ -80,7 +79,6 @@ public:
 
 protected:
 	void closeEvent(QCloseEvent *);
-	bool eventFilter(QObject *, QEvent *);
 
 private slots:
 	void slotButtonSend();
@@ -90,6 +88,7 @@ private slots:
 	void startScan();
 	void scanNetwork(int, QProcess::ExitStatus);
 	void slotTreeViewSelectionChanged();
+	void changeStatusBar();
 
 private:
 	void setupLayout();
@@ -97,6 +96,7 @@ private:
 	void sendPopup();
 	void queryFinished();
 
+	KStatusBar *statusBar;
 	QGridLayout* makePopupLayout;
 	QTreeWidget *groupTreeView;
 	KComboBox *senderBox, *groupBox, *classicReceiverBox;
